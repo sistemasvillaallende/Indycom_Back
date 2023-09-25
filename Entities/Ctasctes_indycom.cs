@@ -1385,8 +1385,8 @@ namespace Web_Api_IyC.Entities
                     {
                         if (item.cod_tipo_per == 1) //Periodo Mensual
                         {
-                            auxmonto_original = sp_RECALCULO_INDYCOM_2023(cn, item.legajo, item.periodo, item.cod_tipo_per);
-                            auxdebe = auxmonto_original + Calcula_Interes(cn, auxmonto_original, item.vencimiento);
+                            auxmonto_original = sp_RECALCULO_INDYCOM(item.legajo, item.periodo, item.cod_tipo_per);
+                            auxdebe = auxmonto_original + Calcula_Interes(auxmonto_original, item.vencimiento);
                             item.monto_original = Convert.ToDecimal(auxmonto_original);
                             item.debe = Convert.ToDecimal(auxdebe);
                         }
@@ -1399,19 +1399,22 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        private static double Calcula_Interes(SqlConnection cn, double auxmonto_original, DateTime? vencimiento)
+        private static double Calcula_Interes( double auxmonto_original, DateTime? vencimiento)
         {
             try
             {
                 DateTimeFormatInfo culturaFecArgentina = new CultureInfo("es-AR", false).DateTimeFormat;
                 double interes = 0;
-                SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "dbo.Calculo_Interes_4";
-                cmd.Connection.OpenAsync();
-                cmd.Parameters.AddWithValue("@monto_original", auxmonto_original);
-                cmd.Parameters.AddWithValue("@vencimiento", Convert.ToDateTime(vencimiento, culturaFecArgentina));
-                interes = Convert.ToDouble(cmd.ExecuteScalarAsync());
+                using (SqlConnection cn = GetConnectionSIIMVA())
+                {
+                    SqlCommand cmd = cn.CreateCommand();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "dbo.Calculo_Interes_4";
+                    cmd.Connection.Open();
+                    cmd.Parameters.AddWithValue("@monto_original", auxmonto_original);
+                    cmd.Parameters.AddWithValue("@vencimiento", Convert.ToDateTime(vencimiento, culturaFecArgentina));
+                    interes = Convert.ToDouble(cmd.ExecuteScalarAsync());
+                }
                 return interes;
             }
             catch (Exception)
@@ -1447,20 +1450,23 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        private static double sp_RECALCULO_INDYCOM_2023(SqlConnection cn, int legajo, string periodo, int tipo_per)
+        private static double sp_RECALCULO_INDYCOM(int legajo, string periodo, int tipo_per)
         {
             try
             {
                 double total = 0;
-                //SqlCommand cmd = cn.CreateCommand();
-                //cmd.CommandType = CommandType.StoredProcedure;
-                //cmd.CommandText = "sp_RECALCULO_IYC_2023";
-                //cmd.Connection.OpenAsync();
-                //cmd.Parameters.AddWithValue("@legajo", legajo);
-                //cmd.Parameters.AddWithValue("@periodo", periodo);
-                //cmd.Parameters.AddWithValue("@cod_tipo_liquidacion", tipo_per);
-                //cmd.ExecuteNonQueryAsync();
-                //total = Convert.ToDouble(cmd.ExecuteScalarAsync());
+                using (SqlConnection cn = GetConnectionSIIMVA())
+                {
+                    SqlCommand cmd = cn.CreateCommand();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "sp_RECALCULO_IYC_2020";
+                    cmd.Connection.Open();
+                    cmd.Parameters.AddWithValue("@legajo", legajo);
+                    cmd.Parameters.AddWithValue("@periodo", periodo);
+                    cmd.Parameters.AddWithValue("@cod_tipo_liquidacion", tipo_per);
+                    cmd.ExecuteNonQuery();
+                    total = Convert.ToDouble(cmd.ExecuteScalar());
+                }
                 return total;
             }
             catch (Exception)
