@@ -1,6 +1,4 @@
 ﻿using System.Data.SqlClient;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Transactions;
 using Web_Api_IyC.Entities;
 using Web_Api_IyC.Entities.AUDITORIA;
@@ -21,18 +19,17 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-        public List<Ctasctes_indycom> PeriodosRecalculo(int legajo)
-        {
-            try
-            {
-                return Ctasctes_indycom.PeriodosRecalculo(legajo);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+        //public List<Ctasctes_indycom> PeriodosRecalculo(int legajo)
+        //{
+        //    try
+        //    {
+        //        return Ctasctes_indycom.PeriodosRecalculo(legajo);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
         public List<Ctasctes_indycom> ListarCtacte(int legajo, int tipo_consulta,
                                                         int cate_deuda_desde, int cate_deuda_hasta)
         {
@@ -67,6 +64,35 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
+        public void Confirma_cancelacion_ctasctes(int tipo_transaccion, int legajo, List<Ctasctes_indycom> lst, Auditoria objA)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    string
+                    string_detalle = "Se Elimino total o parcial: ";
+                    objA.identificacion = legajo.ToString();
+                    objA.proceso = "CANCELACION CUENTA CORRIENTE";
+                    objA.detalle = "";
+                    objA.observaciones += string.Format(" Fecha auditoria: {0}", DateTime.Now);
+                    Ctasctes_indycom.InsertCancelacioMasiva(tipo_transaccion, legajo, lst);
+                    Ctasctes_indycom.MarcopagadalaCtacte(legajo, lst);
+                    foreach (var item in lst)
+                    {
+                        string_detalle += string.Format("Periodo {0} : ", item.periodo);
+                    }
+                    objA.detalle = string_detalle;
+                    AuditoriaD.InsertAuditoria(objA);
+                    scope.Complete();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<Ctasctes_indycom> Listar_Periodos_cancelados(int legajo)
         {
             try
@@ -86,39 +112,13 @@ namespace Web_Api_IyC.Services
                 {
                     string string_detalle = "Se cancelo total o parcial: ";
                     objA.identificacion = legajo.ToString();
-                    objA.proceso = "CANCELACION CUENTA CORRIENTE";
-                    objA.detalle = "";
-                    objA.observaciones += string.Format(" Fecha auditoria: {0}", DateTime.Now);
-                    foreach (var item in lst)
-                    {
-                        Ctasctes_indycom.Confirma_elimina_cancelacion(item.legajo, item.nro_transaccion);
-                        string_detalle += string.Format("Periodo {0} : ", item.periodo);
-                    }
-                    objA.detalle = string_detalle;
-                    AuditoriaD.InsertAuditoria(objA);
-                    scope.Complete();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        public void Confirma_cancelacion_ctasctes(int tipo_transaccion, int legajo, List<Ctasctes_indycom> lst, Auditoria objA)
-        {
-            try
-            {
-                using (TransactionScope scope = new TransactionScope())
-                {
-                    string
-                    string_detalle = "Se Elimino total o parcial: ";
-                    objA.identificacion = legajo.ToString();
                     objA.proceso = "ELIMINA CANCELACION OPERATIVA";
                     objA.detalle = "";
                     objA.observaciones += string.Format(" Fecha auditoria: {0}", DateTime.Now);
+                    Ctasctes_indycom.Confirma_elimina_cancelacion(legajo, lst);
+                    Ctasctes_indycom.MarconopagadalaCtacte(legajo, lst);
                     foreach (var item in lst)
                     {
-                        Ctasctes_indycom.Confirma_cancelacion_ctasctes(tipo_transaccion, item);
                         string_detalle += string.Format("Periodo {0} : ", item.periodo);
                     }
                     objA.detalle = string_detalle;
@@ -128,7 +128,6 @@ namespace Web_Api_IyC.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -144,37 +143,33 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-        public void Confirma_reliquidacion(int legajo, List<Ctasctes_indycom> lst, Auditoria objA)
+        public void Confirma_reliquidacion(int legajo, int tipo_liquidacion, List<Ctasctes_indycom> lst, Auditoria objA)
         {
-            SqlTransaction? trx = null;
             try
             {
-                using (SqlConnection cn = DALBase.GetConnectionSIIMVA())
+                using (TransactionScope scope = new TransactionScope())
                 {
                     string string_detalle = "Se Reliquido los : ";
                     objA.identificacion = legajo.ToString();
                     objA.proceso = "RECALCULO DEUDA IYC";
                     objA.detalle = "";
                     objA.observaciones += string.Format(" Fecha auditoria: {0}", DateTime.Now);
-                    cn.Open();
-                    trx = cn.BeginTransaction();
-                    Ctasctes_indycom.Confirma_reliquidacion(cn, trx, legajo, lst);
+                    Ctasctes_indycom.Confirma_reliquidacion(legajo, tipo_liquidacion, lst);
                     foreach (var item in lst)
                     {
                         string_detalle += string.Format("Periodo {0} : ", item.periodo);
                     }
                     objA.detalle = string_detalle;
-                    AuditoriaD.InsertAuditoria(cn, trx, objA);
-                    trx.Commit();
+                    AuditoriaD.InsertAuditoria(objA);
+                    scope.Complete();
                 }
             }
             catch (Exception)
             {
-                trx.Rollback();
                 throw;
             }
         }
-        public List<Ctasctes_indycom> Reliquidar_periodos(int legajo, List<Ctasctes_indycom> lst, Auditoria objA)
+        public List<Ctasctes_indycom> Reliquidar_periodos(int legajo, List<Ctasctes_indycom> lst)
         {
             try
             {
@@ -195,14 +190,11 @@ namespace Web_Api_IyC.Services
         }
         public void Confirma_iniciar_ctacte(int legajo, List<Ctasctes_indycom> lst, Auditoria objA)
         {
-            SqlTransaction? trx = null;
             try
             {
                 string string_detalle = " Periodos incluidos : ";
-                using (SqlConnection cn = DALBase.GetConnectionSIIMVA())
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    cn.Open();
-                    trx = cn.BeginTransaction();
                     objA.identificacion = legajo.ToString();
                     objA.proceso = "INICIALIZACION CUENTA IYC";
                     objA.detalle = "";
@@ -212,14 +204,13 @@ namespace Web_Api_IyC.Services
                         string_detalle += string.Format("Periodo {0} : ", item.periodo);
                     }
                     objA.detalle += string_detalle;
-                    Ctasctes_indycom.Confirma_iniciar_ctacte(cn, trx, legajo, lst);
-                    AuditoriaD.InsertAuditoria(cn, trx, objA);
-                    trx.Commit();
+                    Ctasctes_indycom.Confirma_iniciar_ctacte(legajo, lst);
+                    AuditoriaD.InsertAuditoria(objA);
+                    scope.Complete();
                 }
             }
             catch (Exception)
             {
-                trx.Rollback();
                 throw;
             }
 

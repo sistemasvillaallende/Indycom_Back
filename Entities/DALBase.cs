@@ -69,7 +69,7 @@ namespace Web_Api_IyC.Entities
             }
         }
 
-        public static int GetNroTransaccion(SqlConnection cn, SqlTransaction trx, int subsistema)
+        public static int GetNroTransaccion(int subsistema)
         {
             try
             {
@@ -93,11 +93,14 @@ namespace Web_Api_IyC.Entities
                         break;
                 }
                 //
-                SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = strSQL;
-                cmd.Transaction = trx;
-                nro_transaccion = Convert.ToInt32(cmd.ExecuteScalar());
+                using (SqlConnection cn = GetConnectionSIIMVA())
+                {
+                    SqlCommand cmd = cn.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = strSQL;
+                    cmd.Connection.Open();
+                    nro_transaccion = Convert.ToInt32(cmd.ExecuteScalar());
+                }
                 return nro_transaccion + 1;
 
             }
@@ -108,7 +111,7 @@ namespace Web_Api_IyC.Entities
             }
         }
 
-        public static void UpdateNroTransaccion(SqlConnection cn, SqlTransaction trx, int subsistema, int nro_transaccion)
+        public static void UpdateNroTransaccion(int subsistema, int nro_transaccion)
         {
             try
             {
@@ -133,12 +136,15 @@ namespace Web_Api_IyC.Entities
                         break;
                 }
                 //
-                SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = strSQL;
-                cmd.Transaction = trx;
-                cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
-                cmd.ExecuteNonQuery();
+                using (SqlConnection cn = GetConnectionSIIMVA())
+                {
+                    SqlCommand cmd = cn.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = strSQL;
+                    cmd.Connection.Open();
+                    cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
+                    cmd.ExecuteNonQuery();
+                }
 
             }
             catch (Exception)

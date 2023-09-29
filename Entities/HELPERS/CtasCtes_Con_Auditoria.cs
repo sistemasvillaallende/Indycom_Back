@@ -2,13 +2,13 @@
 {
     public class CtasCtes_Con_Auditoria
     {
-        public string dominio { get; set; }
-        public List<Ctasctes_indycom> lstCtasTes { get; set; }
-        public AUDITORIA.Auditoria auditoria { get; set; }  
-
-        public CtasCtes_Con_Auditoria() { 
-            dominio = string.Empty;
-            lstCtasTes = new List<Ctasctes_indycom>();
+        public int legajo { get; set; }
+        public List<Ctasctes_indycom> lstCtastes { get; set; }
+        public AUDITORIA.Auditoria auditoria { get; set; }
+        public CtasCtes_Con_Auditoria()
+        {
+            legajo = 0;
+            lstCtastes = new List<Ctasctes_indycom>();
             auditoria = new AUDITORIA.Auditoria();
         }
     }
