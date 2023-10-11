@@ -188,11 +188,11 @@ namespace Web_Api_IyC.Services
             }
 
         }
-        public async Task<int> Count()
+        public int Count()
         {
             try
             {
-                return await INDYCOM.Count();
+                return INDYCOM.Count();
             }
             catch (Exception)
             {
@@ -200,11 +200,11 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-        public async Task<List<INDYCOM>> GetIndycomPaginado(string buscarPor, string strParametro, int registro_desde, int registro_hasta)
+        public List<INDYCOM> GetIndycomPaginado(string buscarPor, string strParametro, int registro_desde, int registro_hasta)
         {
             try
             {
-                return await INDYCOM.GetIndycomPaginado(buscarPor, strParametro, registro_desde, registro_hasta);
+                return INDYCOM.GetIndycomPaginado(buscarPor, strParametro, registro_desde, registro_hasta);
             }
             catch (Exception)
             {

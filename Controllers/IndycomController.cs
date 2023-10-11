@@ -161,7 +161,7 @@ namespace Web_Api_IyC.Controllers
         }
         //
         [HttpGet]
-        public async Task<ActionResult<PaginadorGenerico<Entities.INDYCOM>>> GetIndycomPaginado(
+        public ActionResult<PaginadorGenerico<Entities.INDYCOM>> GetIndycomPaginado(
            string buscarPor = "0", string strParametro = "0", int pagina = 1, int registros_por_pagina = 10)
         {
             List<Entities.INDYCOM> _Indycom;
@@ -172,7 +172,7 @@ namespace Web_Api_IyC.Controllers
             int _TotalRegistros = 0;
             int _TotalPaginas = 0;
             // Número total de registros de la tabla Vehiculos
-            _TotalRegistros = await _iindycomService.Count();
+            _TotalRegistros = _iindycomService.Count();
             // Número total de páginas de la tabla Vehiculo
             _TotalPaginas = (int)Math.Ceiling((double)_TotalRegistros / registros_por_pagina);
             //Filtramos el resultado por el 'texto de búqueda'
@@ -182,10 +182,10 @@ namespace Web_Api_IyC.Controllers
             //Cuit
             if (!string.IsNullOrEmpty(buscarPor) && buscarPor != "0" && strParametro != "0")
             {
-                _Indycom = await _iindycomService.GetIndycomPaginado(buscarPor, strParametro, 0, _TotalRegistros);
+                _Indycom = _iindycomService.GetIndycomPaginado(buscarPor, strParametro, 0, _TotalRegistros);
             }
             else
-                _Indycom = await _iindycomService.GetIndycomPaginado(buscarPor, strParametro, (pagina * registros_por_pagina) - registros_por_pagina + 1,
+                _Indycom = _iindycomService.GetIndycomPaginado(buscarPor, strParametro, (pagina * registros_por_pagina) - registros_por_pagina + 1,
                                                                             pagina * registros_por_pagina);
             //Instanciamos la 'Clase de paginación' y asignamos los nuevos valores
             _PaginadorIndycom = new PaginadorGenerico<Entities.INDYCOM>()
@@ -209,7 +209,7 @@ namespace Web_Api_IyC.Controllers
 
 
         [HttpGet]
-        private async Task<ActionResult<PaginadorGenerico<Entities.INDYCOM>>> PaginacionConParamRequestForm()
+        private ActionResult<PaginadorGenerico<Entities.INDYCOM>> PaginacionConParamRequestForm()
         {
             string buscarPor = Convert.ToString(Request.Form["buscarPor"]);
             string strParametro = Convert.ToString(Request.Form["strParametro"]);
@@ -228,7 +228,7 @@ namespace Web_Api_IyC.Controllers
             int _TotalRegistros = 0;
             int _TotalPaginas = 0;
             // Número total de registros de la tabla Vehiculos
-            _TotalRegistros = await _iindycomService.Count();
+            _TotalRegistros = _iindycomService.Count();
             // Número total de páginas de la tabla Vehiculo
             _TotalPaginas = (int)Math.Ceiling((double)_TotalRegistros / registros_por_pagina);
             //Filtramos el resultado por el 'texto de búqueda'
@@ -238,10 +238,10 @@ namespace Web_Api_IyC.Controllers
             //Cuit
             if (!string.IsNullOrEmpty(buscarPor) && buscarPor != "0" && strParametro != "0")
             {
-                _Indycom = await _iindycomService.GetIndycomPaginado(buscarPor, strParametro, 0, _TotalRegistros);
+                _Indycom = _iindycomService.GetIndycomPaginado(buscarPor, strParametro, 0, _TotalRegistros);
             }
             else
-                _Indycom = await _iindycomService.GetIndycomPaginado(buscarPor, strParametro, (pagina * registros_por_pagina) - registros_por_pagina + 1,
+                _Indycom = _iindycomService.GetIndycomPaginado(buscarPor, strParametro, (pagina * registros_por_pagina) - registros_por_pagina + 1,
                                                                             pagina * registros_por_pagina);
             //Instanciamos la 'Clase de paginación' y asignamos los nuevos valores
             _PaginadorIndycom = new PaginadorGenerico<Entities.INDYCOM>()

@@ -1205,7 +1205,7 @@ namespace Web_Api_IyC.Entities
                 throw ex;
             }
         }
-        public async static Task<int> Count()
+        public static int Count()
         {
             try
             {
@@ -1219,8 +1219,8 @@ namespace Web_Api_IyC.Entities
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = sql;
                     //cmd.Parameters.AddWithValue("@baja", baja);
-                    await cmd.Connection.OpenAsync();
-                    count = Convert.ToInt32(await cmd.ExecuteScalarAsync());
+                    cmd.Connection.Open();
+                    count = Convert.ToInt32(cmd.ExecuteScalar());
                     return count;
                 }
             }
@@ -1229,7 +1229,7 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        public async static Task<List<INDYCOM>> GetIndycomPaginado(string buscarPor, string strParametro, int registro_desde, int registro_hasta)
+        public static List<INDYCOM> GetIndycomPaginado(string buscarPor, string strParametro, int registro_desde, int registro_hasta)
         {
             bool busquedaSi = false;
             try
@@ -1295,8 +1295,8 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@hasta", registro_hasta);
                     if (busquedaSi)
                         cmd.Parameters.AddWithValue("@parametro", strParametro);
-                    await cmd.Connection.OpenAsync();
-                    SqlDataReader dr = await cmd.ExecuteReaderAsync();
+                    cmd.Connection.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
                     lst = mapeo(dr);
                     return lst;
                 }

@@ -25,8 +25,8 @@ namespace Web_Api_IyC.Services
         public void UpdateDatosDomPostal(Entities.INDYCOM obj);
         public void SaveDatosAfip(Entities.INDYCOM obj);
         public void SaveDatosLiquidacion(Entities.INDYCOM obj);
-        public Task<int> Count();
-        public Task<List<Entities.INDYCOM>> GetIndycomPaginado(string buscarPor, string strParametro, int registro_desde, int registro_hasta);
+        public int Count();
+        public List<Entities.INDYCOM> GetIndycomPaginado(string buscarPor, string strParametro, int registro_desde, int registro_hasta);
         public List<Buscador> GetConvenios(string nom_convenio);
         public List<Buscador> GetMinimos_indycom(string nom_convenio);
         public void BajaComercial(int legajo, string fecha_baja, Auditoria obj);
