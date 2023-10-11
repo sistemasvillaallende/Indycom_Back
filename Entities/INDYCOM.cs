@@ -58,7 +58,7 @@ namespace Web_Api_IyC.Entities
         public string pais_dom_esp { get; set; }
         public string cod_postal_dom_esp { get; set; }
         public DateTime? fecha_cambio_domicilio { get; set; }
-        public bool Emite_cedulon { get; set; }
+        public bool emite_cedulon { get; set; }
         public int cod_situacion_judicial { get; set; }
         public string Telefono1 { get; set; }
         public string Telefono2 { get; set; }
@@ -142,7 +142,7 @@ namespace Web_Api_IyC.Entities
             pais_dom_esp = string.Empty;
             cod_postal_dom_esp = string.Empty;
             fecha_cambio_domicilio = DateTime.Now;
-            Emite_cedulon = false;
+            emite_cedulon = false;
             cod_situacion_judicial = 1;
             Telefono1 = string.Empty;
             Telefono2 = string.Empty;
@@ -229,7 +229,7 @@ namespace Web_Api_IyC.Entities
                 int pais_dom_esp = dr.GetOrdinal("pais_dom_esp");
                 int cod_postal_dom_esp = dr.GetOrdinal("cod_postal_dom_esp");
                 int fecha_cambio_domicilio = dr.GetOrdinal("fecha_cambio_domicilio");
-                int Emite_cedulon = dr.GetOrdinal("Emite_cedulon");
+                int emite_cedulon = dr.GetOrdinal("emite_cedulon");
                 int cod_situacion_judicial = dr.GetOrdinal("cod_situacion_judicial");
                 int Telefono1 = dr.GetOrdinal("Telefono1");
                 int Telefono2 = dr.GetOrdinal("Telefono2");
@@ -310,7 +310,7 @@ namespace Web_Api_IyC.Entities
                     if (!dr.IsDBNull(pais_dom_esp)) { obj.pais_dom_esp = dr.GetString(pais_dom_esp); }
                     if (!dr.IsDBNull(cod_postal_dom_esp)) { obj.cod_postal_dom_esp = dr.GetString(cod_postal_dom_esp); }
                     if (!dr.IsDBNull(fecha_cambio_domicilio)) { obj.fecha_cambio_domicilio = dr.GetDateTime(fecha_cambio_domicilio); }
-                    if (!dr.IsDBNull(Emite_cedulon)) { obj.Emite_cedulon = dr.GetBoolean(Emite_cedulon); }
+                    if (!dr.IsDBNull(emite_cedulon)) { obj.emite_cedulon = dr.GetBoolean(emite_cedulon); }
                     if (!dr.IsDBNull(cod_situacion_judicial)) { obj.cod_situacion_judicial = dr.GetInt32(cod_situacion_judicial); }
                     if (!dr.IsDBNull(Telefono1)) { obj.Telefono1 = dr.GetString(Telefono1); }
                     if (!dr.IsDBNull(Telefono2)) { obj.Telefono2 = dr.GetString(Telefono2); }
@@ -613,7 +613,7 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@pais_dom_esp", obj.pais_dom_esp);
                     cmd.Parameters.AddWithValue("@cod_postal_dom_esp", obj.cod_postal_dom_esp);
                     cmd.Parameters.AddWithValue("@fecha_cambio_domicilio", obj.fecha_cambio_domicilio);
-                    cmd.Parameters.AddWithValue("@Emite_cedulon", obj.Emite_cedulon);
+                    cmd.Parameters.AddWithValue("@emite_cedulon", obj.emite_cedulon);
                     cmd.Parameters.AddWithValue("@cod_situacion_judicial", obj.cod_situacion_judicial);
                     cmd.Parameters.AddWithValue("@Telefono1", obj.Telefono1);
                     cmd.Parameters.AddWithValue("@Telefono2", obj.Telefono2);
@@ -657,7 +657,6 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-
         public static void Update(INDYCOM obj)
         {
             try
@@ -792,7 +791,7 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@pais_dom_esp", obj.pais_dom_esp);
                     cmd.Parameters.AddWithValue("@cod_postal_dom_esp", obj.cod_postal_dom_esp);
                     cmd.Parameters.AddWithValue("@fecha_cambio_domicilio", obj.fecha_cambio_domicilio);
-                    cmd.Parameters.AddWithValue("@Emite_cedulon", obj.Emite_cedulon);
+                    cmd.Parameters.AddWithValue("@emite_cedulon", obj.emite_cedulon);
                     cmd.Parameters.AddWithValue("@cod_situacion_judicial", obj.cod_situacion_judicial);
                     cmd.Parameters.AddWithValue("@Telefono1", obj.Telefono1);
                     cmd.Parameters.AddWithValue("@Telefono2", obj.Telefono2);
@@ -857,8 +856,8 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", nom_calle");
                 sql.AppendLine(", cod_calle");
                 sql.AppendLine(", nro_dom");
-                sql.AppendLine(", Nro_local");
-                sql.AppendLine(", Piso_dpto");
+                sql.AppendLine(", nro_local");
+                sql.AppendLine(", piso_dpto");
                 sql.AppendLine(", nom_barrio");
                 sql.AppendLine(", cod_barrio");
                 sql.AppendLine(", ciudad");
@@ -869,7 +868,6 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", cod_situacion_judicial");
                 sql.AppendLine(", telefono");
                 sql.AppendLine(", celular");
-                sql.AppendLine(", transporte");
                 sql.AppendLine(", ocupacion_vereda");
                 sql.AppendLine(", emite_cedulon");
                 //sql.AppendLine(", clave_pago");
@@ -892,12 +890,12 @@ namespace Web_Api_IyC.Entities
                 //sql.AppendLine(", Fecha_empadronado");
                 //sql.AppendLine(", Es_agencia");
                 //sql.AppendLine(", Cedulon_digital");
-                //sql.AppendLine(", cod_cond_ante_iva");
-                //sql.AppendLine(", cod_caracter");
-                //sql.AppendLine(", Categoria_iva");
-                //sql.AppendLine(", otra_entidad");
-                //sql.AppendLine(", convenio_uni");
-                //sql.AppendLine(", Cod_nueva_zona");
+                sql.AppendLine(", cod_cond_ante_iva");
+                sql.AppendLine(", cod_caracter");
+                sql.AppendLine(", categoria_iva");
+                sql.AppendLine(", otra_entidad");
+                sql.AppendLine(", convenio_uni");
+                sql.AppendLine(", cod_nueva_zona");
                 //sql.AppendLine(", FECHA_VECINO_DIGITAL");
                 //sql.AppendLine(", CUIT_VECINO_DIGITAL");
 
@@ -919,8 +917,8 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", @nom_calle");
                 sql.AppendLine(", @cod_calle");
                 sql.AppendLine(", @nro_dom");
-                sql.AppendLine(", @Nro_local");
-                sql.AppendLine(", @Piso_dpto");
+                sql.AppendLine(", @nro_local");
+                sql.AppendLine(", @piso_dpto");
                 sql.AppendLine(", @nom_barrio");
                 sql.AppendLine(", @cod_barrio");
                 sql.AppendLine(", @ciudad");
@@ -931,12 +929,17 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", @cod_situacion_judicial");
                 sql.AppendLine(", @telefono");
                 sql.AppendLine(", @celular");
-                sql.AppendLine(", @transporte");
                 sql.AppendLine(", @ocupacion_vereda");
                 //sql.AppendLine(", @clave_pago");
                 //sql.AppendLine(", @clave_gestion");
                 sql.AppendLine(", @emite_cedulon");
                 sql.AppendLine(", @vto_inscripcion");
+                sql.AppendLine(", @cod_cond_ante_iva");
+                sql.AppendLine(", @cod_caracter");
+                sql.AppendLine(", @categoria_iva");
+                sql.AppendLine(", @otra_entidad");
+                sql.AppendLine(", @convenio_uni");
+                sql.AppendLine(", @cod_nueva_zona");
                 sql.AppendLine(")");
                 //sql.AppendLine("SELECT SCOPE_IDENTITY()");
                 using (SqlConnection con = GetConnectionSIIMVA())
@@ -966,16 +969,21 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@provincia", obj.provincia);
                     cmd.Parameters.AddWithValue("@pais", obj.pais);
                     cmd.Parameters.AddWithValue("@cod_postal", obj.cod_postal);
-                    cmd.Parameters.AddWithValue("@emite_cedulon", obj.Emite_cedulon);
+                    cmd.Parameters.AddWithValue("@emite_cedulon", obj.emite_cedulon);
                     cmd.Parameters.AddWithValue("@cod_situacion_judicial", obj.cod_situacion_judicial);
                     cmd.Parameters.AddWithValue("@telefono", obj.telefono);
                     cmd.Parameters.AddWithValue("@celular", obj.celular);
-                    cmd.Parameters.AddWithValue("@transporte", obj.transporte);
                     cmd.Parameters.AddWithValue("@ocupacion_vereda", obj.Ocupacion_vereda);
                     //cmd.Parameters.AddWithValue("@clave_pago", obj.clave_pago);
                     //cmd.Parameters.AddWithValue("@clave_gestion", obj.clave_gestion);
-                    cmd.Parameters.AddWithValue("@emite_cedulon", obj.Emite_cedulon);
                     cmd.Parameters.AddWithValue("@vto_inscripcion", Convert.ToDateTime(obj.vto_inscripcion, culturaFecArgentina).AddDays(90));
+                    //
+                    cmd.Parameters.AddWithValue("@cod_cond_ante_iva", obj.cod_cond_ante_iva);
+                    cmd.Parameters.AddWithValue("@cod_caracter", obj.cod_caracter);
+                    cmd.Parameters.AddWithValue("@categoria_iva", obj.categoria_iva);
+                    cmd.Parameters.AddWithValue("@otra_entidad", obj.otra_entidad);
+                    cmd.Parameters.AddWithValue("@convenio_uni", obj.convenio_uni);
+                    cmd.Parameters.AddWithValue("@cod_nueva_zona", obj.cod_nueva_zona);
                     cmd.Connection.Open();
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
@@ -1042,8 +1050,15 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", transporte=@transporte");
                 sql.AppendLine(", ocupacion_vereda=@ocupacion_vereda");
                 sql.AppendLine(", emite_cedulon=@emite_cedulon");
-                sql.AppendLine(", clave_pago=@clave_pago");
-                sql.AppendLine(", clave_gestion=@clave_gestion");
+                //sql.AppendLine(", clave_pago=@clave_pago");
+                //sql.AppendLine(", clave_gestion=@clave_gestion");
+                //
+                sql.AppendLine(", cod_cond_ante_iva");
+                sql.AppendLine(", cod_caracter");
+                sql.AppendLine(", categoria_iva");
+                sql.AppendLine(", otra_entidad");
+                sql.AppendLine(", convenio_uni");
+                sql.AppendLine(", cod_nueva_zona");
                 //sql.AppendLine(", vto_inscripcion=@vto_inscripcion");
                 sql.AppendLine("WHERE");
                 sql.AppendLine("legajo=@legajo");
@@ -1069,7 +1084,7 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@nom_calle", obj.nom_calle);
                     cmd.Parameters.AddWithValue("@cod_calle", obj.cod_calle);
                     cmd.Parameters.AddWithValue("@nro_dom", obj.nro_dom);
-                    cmd.Parameters.AddWithValue("@Nro_local", obj.nro_local);
+                    cmd.Parameters.AddWithValue("@nro_local", obj.nro_local);
                     cmd.Parameters.AddWithValue("@piso_dpto", obj.piso_dpto);
                     cmd.Parameters.AddWithValue("@nom_barrio", obj.nom_barrio);
                     cmd.Parameters.AddWithValue("@cod_barrio", obj.cod_barrio);
@@ -1077,7 +1092,7 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@provincia", obj.provincia);
                     cmd.Parameters.AddWithValue("@pais", obj.pais);
                     cmd.Parameters.AddWithValue("@cod_postal", obj.cod_postal);
-                    cmd.Parameters.AddWithValue("@emite_cedulon", obj.Emite_cedulon);
+                    cmd.Parameters.AddWithValue("@emite_cedulon", obj.emite_cedulon);
                     cmd.Parameters.AddWithValue("@cod_situacion_judicial", obj.cod_situacion_judicial);
                     cmd.Parameters.AddWithValue("@telefono", obj.telefono);
                     cmd.Parameters.AddWithValue("@celular", obj.celular);
@@ -1085,7 +1100,13 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@ocupacion_vereda", obj.Ocupacion_vereda);
                     //cmd.Parameters.AddWithValue("@clave_pago", obj.clave_pago);
                     //cmd.Parameters.AddWithValue("@clave_gestion", obj.clave_gestion);
-                    cmd.Parameters.AddWithValue("@emite_cedulon", obj.Emite_cedulon);
+                    //
+                    cmd.Parameters.AddWithValue("@cod_cond_ante_iva", obj.cod_cond_ante_iva);
+                    cmd.Parameters.AddWithValue("@cod_caracter", obj.cod_caracter);
+                    cmd.Parameters.AddWithValue("@categoria_iva", obj.categoria_iva);
+                    cmd.Parameters.AddWithValue("@otra_entidad", obj.otra_entidad);
+                    cmd.Parameters.AddWithValue("@convenio_uni", obj.convenio_uni);
+                    cmd.Parameters.AddWithValue("@cod_nueva_zona", obj.cod_nueva_zona);
                     //cmd.Parameters.AddWithValue("@vto_inscripcion", obj.Vto_inscripcion.AddDays(90));
                     cmd.Connection.Open();
                 }
@@ -1256,15 +1277,20 @@ namespace Web_Api_IyC.Entities
                             break;
                         case "cuit":
                             sqlWhere = @" WHERE
-                                cuit=Convert(varchar(11),@parametro) AND
-                                RowNum BETWEEN @desde AND @hasta
-                                ORDER By Dominio";
-                            break;
-                        case "titular":
-                            sqlWhere = @" WHERE
-                                nombre like @parametro + '%' AND
+                                nro_cuit=Convert(varchar(11),@parametro) AND
                                 RowNum BETWEEN @desde AND @hasta
                                 ORDER By legajo";
+                            break;
+                        case "titular":
+                            if (strParametro != string.Empty)
+                            {
+                                sqlWhere = @" WHERE
+                                nro_bad in (SELECT nro_bad
+					                        FROM badec	
+					                        WHERE badec.nombre like @parametro + '%')  AND 
+                                RowNum BETWEEN @desde AND @hasta
+                                ORDER By legajo";
+                            }
                             break;
                         case "nom_fantasia":
                             sqlWhere = @" WHERE
@@ -1509,7 +1535,7 @@ namespace Web_Api_IyC.Entities
                                   Nombre=CONVERT(VARCHAR(40),nom_convenio)
                                   FROM CONVENIOS_IYC
                                   WHERE  nom_convenio LIKE @nombre_aproximado
-                                  ORDER BY nom_convenio";
+                                  ORDER BY cod_convenio";
                 List<Buscador> lst = new List<Buscador>();
                 Buscador obj;
                 using (SqlConnection cn = GetConnectionSIIMVA())
@@ -1548,7 +1574,7 @@ namespace Web_Api_IyC.Entities
                                     Descripción=CONVERT(VARCHAR(40),des_minimo)
                                     FROM MINIMOS_INDYCOM
                                     WHERE  des_minimo LIKE @nombre_aproximado
-                                    ORDER BY des_minimo";
+                                    ORDER BY cod_minimo";
                 List<Buscador> lst = new List<Buscador>();
                 Buscador obj;
                 using (SqlConnection cn = GetConnectionSIIMVA())
@@ -1597,7 +1623,7 @@ namespace Web_Api_IyC.Entities
                     cmd.CommandText = sql.ToString();
                     cmd.Parameters.AddWithValue("@legajo", legajo);
                     //cmd.Parameters.AddWithValue("@dado_baja", 1);
-                    cmd.Parameters.AddWithValue("@fecha_baja", Convert.ToDateTime(fecha_baja, culturaFecArgentina).ToString());                    
+                    cmd.Parameters.AddWithValue("@fecha_baja", Convert.ToDateTime(fecha_baja, culturaFecArgentina).ToString());
                     cmd.Connection.Open();
                 }
             }

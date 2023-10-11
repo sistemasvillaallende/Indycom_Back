@@ -152,6 +152,17 @@ namespace Web_Api_IyC.Services
                 throw ex;
             }
         }
+        public void UpdateDatosGenerales(INDYCOM obj)
+        {
+            try
+            {
+                Entities.INDYCOM.UpdateDatosGenerales(obj);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public void UpdateDatosDomPostal(INDYCOM obj)
         {
             try

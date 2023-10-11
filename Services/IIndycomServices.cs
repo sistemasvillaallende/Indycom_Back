@@ -22,6 +22,7 @@ namespace Web_Api_IyC.Services
         public List<Combo> Zonasiyc();
         public List<Combo> Situacion_judicial();
         public void InsertDatosGeneral(Entities.INDYCOM obj);
+        public void UpdateDatosGenerales(INDYCOM obj);
         public void UpdateDatosDomPostal(Entities.INDYCOM obj);
         public void SaveDatosAfip(Entities.INDYCOM obj);
         public void SaveDatosLiquidacion(Entities.INDYCOM obj);

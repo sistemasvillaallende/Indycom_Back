@@ -139,6 +139,21 @@ namespace Web_Api_IyC.Controllers
             return Ok(indycom);
         }
         [HttpPost]
+        public IActionResult UpdateDatosGenerales(INDYCOM obj)
+        {
+            var indycom = _iindycomService.GetByPk(obj.legajo);
+            if (indycom.legajo > 0)
+            {
+                _iindycomService.UpdateDatosGenerales(obj);
+            }
+            else
+            {
+                return BadRequest(new { message = "No se encontraron el Legajo del Comercio..." });
+
+            }
+            return Ok(indycom);
+        }
+        [HttpPost]
         public IActionResult UpdateDatosDomPostal(Entities.INDYCOM obj)
         {
             _iindycomService.UpdateDatosDomPostal(obj);
@@ -177,9 +192,10 @@ namespace Web_Api_IyC.Controllers
             _TotalPaginas = (int)Math.Ceiling((double)_TotalRegistros / registros_por_pagina);
             //Filtramos el resultado por el 'texto de búqueda'
             //Los Tipos de Busqueda son
-            //Dominio,
+            //Legajo,
             //Titular
             //Cuit
+            //Nom_fantasia
             if (!string.IsNullOrEmpty(buscarPor) && buscarPor != "0" && strParametro != "0")
             {
                 _Indycom = _iindycomService.GetIndycomPaginado(buscarPor, strParametro, 0, _TotalRegistros);
@@ -207,7 +223,6 @@ namespace Web_Api_IyC.Controllers
             return _PaginadorIndycom;
         }
 
-
         [HttpGet]
         private ActionResult<PaginadorGenerico<Entities.INDYCOM>> PaginacionConParamRequestForm()
         {
@@ -233,9 +248,10 @@ namespace Web_Api_IyC.Controllers
             _TotalPaginas = (int)Math.Ceiling((double)_TotalRegistros / registros_por_pagina);
             //Filtramos el resultado por el 'texto de búqueda'
             //Los Tipos de Busqueda son
-            //Dominio,
+            //Legajo,
             //Titular
             //Cuit
+            //Nom_fantasia
             if (!string.IsNullOrEmpty(buscarPor) && buscarPor != "0" && strParametro != "0")
             {
                 _Indycom = _iindycomService.GetIndycomPaginado(buscarPor, strParametro, 0, _TotalRegistros);
