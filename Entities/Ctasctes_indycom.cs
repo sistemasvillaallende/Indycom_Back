@@ -422,7 +422,7 @@ namespace Web_Api_IyC.Entities
                 DateTimeFormatInfo culturaFecArgentina = new CultureInfo("es-AR", false).DateTimeFormat;
                 string sql = string.Empty;
                 sql = @"SELECT periodo, vencimiento_1 as vencimiento, 0 as sel
-                        FROM VENCIMIENTOS_PERIODOS2 V (NOLOCK)
+                        FROM Vencimientos_IyC V (NOLOCK)
                         WHERE
                         v.cod_tipo_per<>4 AND
                         v.periodo>='2021/00' AND
@@ -431,7 +431,6 @@ namespace Web_Api_IyC.Entities
                             WHERE C.tipo_transaccion=1 
                                 AND C.legajo=@legajo
                                 AND C.periodo=V.periodo)
-                                AND V.subsistema=3
                         ORDER BY V.periodo";
                 List<Periodos> lst = new();
                 Periodos? obj = null;
@@ -1128,7 +1127,7 @@ namespace Web_Api_IyC.Entities
                 sql = @"SELECT
                           C.tipo_transaccion,
                           C.nro_transaccion,
-                          C.dominio,
+                          C.legajo,
                           C.periodo, 
                           C.monto_original,
                           C.debe,
@@ -1151,7 +1150,7 @@ namespace Web_Api_IyC.Entities
                 DateTimeFormatInfo culturaFecArgentina = new CultureInfo("es-AR", false).DateTimeFormat;
                 List<Ctasctes_indycom> lst = new();
                 Ctasctes_indycom? obj;
-                using (SqlConnection con = GetConnection())
+                using (SqlConnection con = GetConnectionSIIMVA())
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
@@ -1217,7 +1216,8 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", vencimiento");
                 sql.AppendLine(", cod_cate_deuda");
                 sql.AppendLine(", monto_pagado");
-                sql.AppendLine(", deuda_activa");
+                sql.AppendLine(", declaracion_jurada");
+                sql.AppendLine(", liquidacion_especial");
                 sql.AppendLine(")");
                 sql.AppendLine("VALUES");
                 sql.AppendLine("(");
@@ -1235,6 +1235,8 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", @vencimiento");
                 sql.AppendLine(", @cod_cate_deuda");
                 sql.AppendLine(", @monto_pagado");
+                sql.AppendLine(", @declaracion_jurada");
+                sql.AppendLine(", @liquidacion_especial");
                 sql.AppendLine(")");
                 using (SqlConnection con = GetConnectionSIIMVA())
                 {
@@ -1255,6 +1257,8 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@vencimiento", string.Empty);
                     cmd.Parameters.AddWithValue("@cod_cate_deuda", 0);
                     cmd.Parameters.AddWithValue("@monto_pagado", 0);
+                    cmd.Parameters.AddWithValue("@declaracion_jurada", 0);
+                    cmd.Parameters.AddWithValue("@liquidacion_especial", 0);
                     cmd.Connection.Open();
                     foreach (var item in lst)
                     {
@@ -1268,6 +1272,8 @@ namespace Web_Api_IyC.Entities
                         cmd.Parameters["@pago_parcial"].Value = item.pago_parcial;
                         cmd.Parameters["@vencimiento"].Value = item.vencimiento;
                         cmd.Parameters["@cod_cate_deuda"].Value = item.cod_cate_deuda;
+                        cmd.Parameters["@declaracion_jurada"].Value = item.declaracion_jurada;
+                        cmd.Parameters["@liquidacion_especial"].Value = item.liquidacion_especial;
                         cmd.ExecuteNonQuery();
                     }
                 }

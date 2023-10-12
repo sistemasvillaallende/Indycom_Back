@@ -31,6 +31,7 @@ namespace Web_Api_IyC
             // configure DI for application services
             //services.AddScoped<IBadecServices, BadecServices>();
             services.AddScoped<IIndycomServices, IndycomServices>();
+            services.AddScoped<ICtasctes_indycomServices, Ctasctes_indycomServices>();
 
         }
 

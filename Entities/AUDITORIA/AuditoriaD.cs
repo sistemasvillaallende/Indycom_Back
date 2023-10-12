@@ -40,7 +40,7 @@ namespace Web_Api_IyC.Entities.AUDITORIA
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandText = "AUDITOR_V2";
                     cmd.Parameters.Add(new SqlParameter("@usuario", oAudita.usuario));
-                    cmd.Parameters.Add(new SqlParameter("@fecha", Convert.ToDateTime(oAudita.fecha, culturaFecArgentina).ToString()));
+                    //cmd.Parameters.Add(new SqlParameter("@fecha", Convert.ToDateTime(oAudita.fecha, culturaFecArgentina).ToString()));
                     cmd.Parameters.Add(new SqlParameter("@autorizacion", string.Empty));
                     cmd.Parameters.Add(new SqlParameter("@proceso", oAudita.proceso.ToString().ToUpper()));
                     cmd.Parameters.Add(new SqlParameter("@identificacion", oAudita.identificacion));
