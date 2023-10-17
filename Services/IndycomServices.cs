@@ -287,6 +287,17 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
+        public List<Bases_imponibles> GetBasesImponibles(int legajo, string periodo_desde, string periodo_hasta)
+        {
+            try
+            {
+                return Bases_imponibles.GetBasesImponibles(legajo, periodo_desde, periodo_hasta);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
     }
 }

@@ -32,6 +32,7 @@ namespace Web_Api_IyC.Services
         public List<Buscador> GetMinimos_indycom(string nom_convenio);
         public void BajaComercial(int legajo, string fecha_baja, Auditoria obj);
         public void BajaSucursal(int legajo, int nro_sucursal, string fecha_baja, Auditoria obj);
+        public List<Bases_imponibles> GetBasesImponibles(int legajo, string periodo_desde, string periodo_hasta);
 
     }
 }

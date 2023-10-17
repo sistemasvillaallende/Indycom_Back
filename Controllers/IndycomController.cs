@@ -278,7 +278,7 @@ namespace Web_Api_IyC.Controllers
             }
             return _PaginadorIndycom;
         }
-      
+
         [HttpGet]
         public IActionResult GetConvenios(string nom_convenio)
         {
@@ -324,6 +324,20 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(indycom);
         }
+
+        [HttpGet]
+        public IActionResult GetBasesImponibles(int legajo, string periodo_desde, string periodo_hasta)
+        {
+            var bases = _iindycomService.GetBasesImponibles(legajo, periodo_desde, periodo_hasta);
+
+            if (bases.Count == 0)
+            {
+                return BadRequest(new { message = "No se encontraron Bases Imponibles para este Legajo...!" });
+            }
+            return Ok(bases);
+        }
+
+
 
     }
 }
