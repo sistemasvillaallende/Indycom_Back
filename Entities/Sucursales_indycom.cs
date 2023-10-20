@@ -61,7 +61,6 @@ namespace Web_Api_IyC.Entities
             Piso_dpto = string.Empty;
             Vto_inscripcion = null; //DateTime.Now;
         }
-
         private static List<Sucursales_indycom> mapeo(SqlDataReader dr)
         {
             List<Sucursales_indycom> lst = new List<Sucursales_indycom>();

@@ -134,6 +134,7 @@ namespace Web_Api_IyC.Controllers
         [HttpPost]
         public IActionResult InsertDatosGeneral(Entities.INDYCOM obj)
         {
+            //obj.objAuditoria.usuario = usuario;
             _iindycomService.InsertDatosGeneral(obj);
             var indycom = _iindycomService.Read();
             return Ok(indycom);
@@ -141,6 +142,7 @@ namespace Web_Api_IyC.Controllers
         [HttpPost]
         public IActionResult UpdateDatosGenerales(INDYCOM obj)
         {
+            //obj.objAuditoria.usuario = usuario;
             var indycom = _iindycomService.GetByPk(obj.legajo);
             if (indycom.legajo > 0)
             {
@@ -149,13 +151,13 @@ namespace Web_Api_IyC.Controllers
             else
             {
                 return BadRequest(new { message = "No se encontraron el Legajo del Comercio..." });
-
             }
             return Ok(indycom);
         }
         [HttpPost]
         public IActionResult UpdateDatosDomPostal(Entities.INDYCOM obj)
         {
+            //obj.objAuditoria.usuario = usuario;
             _iindycomService.UpdateDatosDomPostal(obj);
             var indycom = _iindycomService.Read();
             return Ok(indycom);
@@ -163,6 +165,7 @@ namespace Web_Api_IyC.Controllers
         [HttpPost]
         public IActionResult SaveDatosAfip(Entities.INDYCOM obj)
         {
+            //obj.objAuditoria.usuario = usuario;
             _iindycomService.SaveDatosAfip(obj);
             var indycom = _iindycomService.Read();
             return Ok(indycom);
@@ -170,6 +173,7 @@ namespace Web_Api_IyC.Controllers
         [HttpPost]
         public IActionResult SaveDatosLiquidacion(Entities.INDYCOM obj)
         {
+            //obj.objAuditoria.usuario = usuario;
             _iindycomService.SaveDatosLiquidacion(obj);
             var indycom = _iindycomService.Read();
             return Ok(indycom);
@@ -335,6 +339,46 @@ namespace Web_Api_IyC.Controllers
                 return BadRequest(new { message = "No se encontraron Bases Imponibles para este Legajo...!" });
             }
             return Ok(bases);
+        }
+
+        [HttpGet]
+        public IActionResult GetRubros_x_iyc(int legajo)
+        {
+            var rubros = _iindycomService.GetRubros_x_iyc(legajo);
+
+            if (rubros.Count == 0)
+            {
+                return BadRequest(new { message = "No se encontraron Rubros para este Legajo...!" });
+            }
+            return Ok(rubros);
+        }
+
+        [HttpGet]
+        public IActionResult GetSucuralByLegajo(int legajo, int nro_sucursal)
+        {
+            var sucursales = _iindycomService.GetSucuralByLegajo(legajo, nro_sucursal);
+            string des_com = string.Empty;
+
+            if (sucursales.Nro_sucursal > 0)
+            {
+                des_com = sucursales.Des_com;
+            }
+            else
+            {
+                des_com = _iindycomService.GetByPk(legajo).des_com;
+            }
+            return Ok(des_com);
+        }
+
+        [HttpGet]
+        public IActionResult BuscarRubroxDescripcion(string descripcion)
+        {
+            var rubros = _iindycomService.BuscarRubroxDescripcion(descripcion);
+            if (rubros.Count == 0)
+            {
+                return BadRequest(new { message = "No se encontraron Rubros para esta Descripción...!" });
+            }
+            return Ok(rubros);
         }
 
 

@@ -33,6 +33,12 @@ namespace Web_Api_IyC.Services
         public void BajaComercial(int legajo, string fecha_baja, Auditoria obj);
         public void BajaSucursal(int legajo, int nro_sucursal, string fecha_baja, Auditoria obj);
         public List<Bases_imponibles> GetBasesImponibles(int legajo, string periodo_desde, string periodo_hasta);
+        public List<Rubros_x_iyc> GetRubros_x_iyc(int legajo);
+        public Sucursales_indycom GetSucuralByLegajo(int legajo, int nro_sucursal);
+        public List<RUBROS> BuscarRubroxDescripcion(string descripcion);
+
+
+
 
     }
 }

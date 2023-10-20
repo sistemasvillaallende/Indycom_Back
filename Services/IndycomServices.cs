@@ -145,7 +145,16 @@ namespace Web_Api_IyC.Services
         {
             try
             {
-                Entities.INDYCOM.InsertDatosGeneral(obj);
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    obj.objAuditoria.identificacion = obj.legajo.ToString();
+                    obj.objAuditoria.proceso = "NUEVO INDYCOM";
+                    obj.objAuditoria.detalle = "";
+                    obj.objAuditoria.observaciones += string.Format("Fecha auditoria: {0}", DateTime.Now);
+                    Entities.INDYCOM.InsertDatosGeneral(obj);
+                    AuditoriaD.InsertAuditoria(obj.objAuditoria);
+                    scope.Complete();
+                }
             }
             catch (Exception ex)
             {
@@ -156,7 +165,16 @@ namespace Web_Api_IyC.Services
         {
             try
             {
-                Entities.INDYCOM.UpdateDatosGenerales(obj);
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    obj.objAuditoria.identificacion = obj.legajo.ToString();
+                    obj.objAuditoria.proceso = "MODIFICACION INDYCOM";
+                    obj.objAuditoria.detalle = JsonConvert.SerializeObject(INDYCOM.GetByPk(obj.legajo));
+                    obj.objAuditoria.observaciones += string.Format("Fecha auditoria: {0}", DateTime.Now);
+                    INDYCOM.UpdateDatosGenerales(obj);
+                    AuditoriaD.InsertAuditoria(obj.objAuditoria);
+                    scope.Complete();
+                }
             }
             catch (Exception ex)
             {
@@ -167,7 +185,16 @@ namespace Web_Api_IyC.Services
         {
             try
             {
-                Entities.INDYCOM.UpdateDatosDomPostal(obj);
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    obj.objAuditoria.identificacion = obj.legajo.ToString();
+                    obj.objAuditoria.proceso = "CAMBIO DOMIC. POSTAL INDYCOM";
+                    obj.objAuditoria.detalle = JsonConvert.SerializeObject(INDYCOM.GetByPk(obj.legajo));
+                    obj.objAuditoria.observaciones += string.Format("Fecha auditoria: {0}", DateTime.Now);
+                    Entities.INDYCOM.UpdateDatosDomPostal(obj);
+                    AuditoriaD.InsertAuditoria(obj.objAuditoria);
+                    scope.Complete();
+                }
             }
             catch (Exception ex)
             {
@@ -178,7 +205,16 @@ namespace Web_Api_IyC.Services
         {
             try
             {
-                Entities.INDYCOM.SaveDatosAfip(obj);
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    obj.objAuditoria.identificacion = obj.legajo.ToString();
+                    obj.objAuditoria.proceso = "GUARDAR DATOS AFIP EN IYC";
+                    obj.objAuditoria.detalle = JsonConvert.SerializeObject(INDYCOM.GetByPk(obj.legajo));
+                    obj.objAuditoria.observaciones += string.Format("Fecha auditoria: {0}", DateTime.Now);
+                    Entities.INDYCOM.SaveDatosAfip(obj);
+                    AuditoriaD.InsertAuditoria(obj.objAuditoria);
+                    scope.Complete();
+                }
             }
             catch (Exception ex)
             {
@@ -190,7 +226,16 @@ namespace Web_Api_IyC.Services
         {
             try
             {
-                Entities.INDYCOM.SaveDatosLiquidacion(obj);
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    obj.objAuditoria.identificacion = obj.legajo.ToString();
+                    obj.objAuditoria.proceso = "GUARDAR DATOS LIQUIDACION EN IYC";
+                    obj.objAuditoria.detalle = JsonConvert.SerializeObject(INDYCOM.GetByPk(obj.legajo));
+                    obj.objAuditoria.observaciones += string.Format("Fecha auditoria: {0}", DateTime.Now);
+                    Entities.INDYCOM.SaveDatosLiquidacion(obj);
+                    AuditoriaD.InsertAuditoria(obj.objAuditoria);
+                    scope.Complete();
+                }
             }
             catch (Exception)
             {
@@ -298,6 +343,45 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
+        public List<Rubros_x_iyc> GetRubros_x_iyc(int legajo)
+        {
+            try
+            {
+                return Rubros_x_iyc.GetRubros_x_iyc(legajo);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Sucursales_indycom GetSucuralByLegajo(int legajo, int nro_sucursal)
+        {
+            try
+            {
+                return Sucursales_indycom.GetSucuralByLegajo(legajo, nro_sucursal);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<RUBROS> BuscarRubroxDescripcion(string descripcion)
+        {
+            try
+            {
+                return RUBROS.BuscarRubroxDescripcion(descripcion);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
     }
 }

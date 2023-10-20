@@ -22,7 +22,7 @@ namespace Web_Api_IyC.Entities
         public decimal alicuota_sys { get; set; }
         public decimal minimo_oim { get; set; }
         public decimal minimo_sys { get; set; }
-        public int incluido_en_oim { get; set; }
+        public short incluido_en_oim { get; set; }
 
         public Bases_imponibles()
         {

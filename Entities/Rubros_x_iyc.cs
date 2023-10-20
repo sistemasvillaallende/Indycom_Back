@@ -120,7 +120,8 @@ public class Rubros_x_iyc : DALBase
         {
             string sql = @"SELECT * 
                            FROM RUBROS_X_IYC 
-                           WHERE legajo = @legajo";
+                           WHERE legajo = @legajo
+                           ORDER BY  nro_sucursal";
             List<Rubros_x_iyc> lst = new List<Rubros_x_iyc>();
             using (SqlConnection con = GetConnectionSIIMVA())
             {
@@ -257,6 +258,6 @@ public class Rubros_x_iyc : DALBase
             throw;
         }
     }
-
+    
 }
 

@@ -1109,6 +1109,7 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@cod_nueva_zona", obj.cod_nueva_zona);
                     //cmd.Parameters.AddWithValue("@vto_inscripcion", obj.Vto_inscripcion.AddDays(90));
                     cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
@@ -1660,6 +1661,10 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
+
+        //SELECT des_com FROM sucursales_indycom  WHERE legajo= :legajo  and nro_sucursal= :nro_sucursal and dado_baja=0 
+
+
 
 
     }
