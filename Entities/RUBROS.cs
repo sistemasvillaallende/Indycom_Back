@@ -65,9 +65,9 @@ namespace Web_Api_IyC.Entities
                     if (!dr.IsDBNull(9)) { obj.activo = dr.GetBoolean(9); }
                     if (!dr.IsDBNull(10)) { obj.cod_tipo_riesgo = dr.GetInt32(10); }
                     if (!dr.IsDBNull(11)) { obj.cod_tipo_actividad = dr.GetInt32(11); }
-                    if (!dr.IsDBNull(12)) { obj.riesgo = dr.GetString(12); }
-                    if (!dr.IsDBNull(13)) { obj.actividad = dr.GetString(13); }
-                    if (!dr.IsDBNull(14)) { obj.valor_riesgo = dr.GetInt32(14); }
+                    if (!dr.IsDBNull(13)) { obj.riesgo = dr.GetString(13); }
+                    if (!dr.IsDBNull(14)) { obj.actividad = dr.GetString(14); }
+                    if (!dr.IsDBNull(15)) { obj.valor_riesgo = dr.GetInt32(15); }
                     lst.Add(obj);
                 }
             }
