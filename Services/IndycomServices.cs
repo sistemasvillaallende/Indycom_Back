@@ -7,6 +7,7 @@ using System.Transactions;
 using Web_Api_IyC.Entities;
 using Web_Api_IyC.Entities.AUDITORIA;
 using Web_Api_IyC.Entities.HELPERS;
+using Web_Api_IyC.Entities.IYC;
 
 namespace Web_Api_IyC.Services
 {
@@ -382,6 +383,46 @@ namespace Web_Api_IyC.Services
             }
         }
 
+        public List<Informes> InformeCtaCteSoloDeuda(int legajo, int categoria_deuda, int categoria_deuda2, string per, Auditoria objA)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    objA.identificacion = legajo.ToString();
+                    objA.proceso = "IMPRIME_DEUDA_IYC";
+                    objA.observaciones += string.Format(" Fecha auditoria: {0}", DateTime.Now);
+                    AuditoriaD.InsertAuditoria(objA);
+                    scope.Complete();
+                }
+                return Informes.InformeCtaCteSoloDeuda(legajo, categoria_deuda, categoria_deuda2, per);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public List<Informes> InformeCtaCteCompleto(int legajo, string per, Auditoria objA)
+        {
+            try
+            {
+
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    objA.identificacion = legajo.ToString();
+                    objA.proceso = "IMPRIME_DEUDA_IYC";
+                    objA.observaciones += string.Format(" Fecha auditoria: {0}", DateTime.Now);
+                    AuditoriaD.InsertAuditoria(objA);
+                    scope.Complete();
+                }
+                return Informes.InformeCtaCteCompleto(legajo, per);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
     }
 }

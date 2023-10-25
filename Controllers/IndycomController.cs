@@ -381,7 +381,27 @@ namespace Web_Api_IyC.Controllers
             return Ok(rubros);
         }
 
+        [HttpPost]
+        public IActionResult InformeCtaCteCompleto(int legajo, string per, Auditoria objA)
+        {
+            var reporte = _iindycomService.InformeCtaCteCompleto(legajo, per, objA);
+            if (reporte.Count == 0)
+            {
+                return BadRequest(new { message = @"Información, no se encontraron Datos para este Legajo " + legajo });
+            }
+            return Ok(reporte);
+        }
 
+        [HttpPost]
+        public IActionResult InformeCtaCteSolodeuda(int legajo, int categoria_deuda, int categoria_deuda2, string per, Auditoria objA)
+        {
+            var reporte = _iindycomService.InformeCtaCteSoloDeuda(legajo, categoria_deuda, categoria_deuda2, per, objA);
+            if (reporte.Count == 0)
+            {
+                return BadRequest(new { message = @"Información, no se encontraron Datos para este Legajo " + legajo });
+            }
+            return Ok(reporte);
+        }
 
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Web_Api_IyC.Entities;
 using Web_Api_IyC.Entities.AUDITORIA;
 using Web_Api_IyC.Entities.HELPERS;
+using Web_Api_IyC.Entities.IYC;
 
 namespace Web_Api_IyC.Services
 {
@@ -36,6 +37,8 @@ namespace Web_Api_IyC.Services
         public List<Rubros_x_iyc> GetRubros_x_iyc(int legajo);
         public Sucursales_indycom GetSucuralByLegajo(int legajo, int nro_sucursal);
         public List<RUBROS> BuscarRubroxDescripcion(string descripcion);
+        public List<Informes> InformeCtaCteSoloDeuda(int legajo, int categoria_deuda, int categoria_deuda2, string per, Auditoria objA);
+        public List<Informes> InformeCtaCteCompleto(int legajo, string per, Auditoria objA);
 
 
 
