@@ -424,6 +424,18 @@ namespace Web_Api_IyC.Services
             }
         }
 
+        public List<Combo> ListarCategoriasIyc()
+        {
+            try
+            {
+                return INDYCOM.ListarCategoriasIyc();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
 
