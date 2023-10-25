@@ -131,5 +131,84 @@ namespace Web_Api_IyC.Controllers
 
         }
 
+
+
+        public ActionResult<List<Ctasctes_indycom>> ListarCtacte(string dominio, int tipo_consulta, int cate_deuda_desde, int cate_deuda_hasta)
+        {
+            var Ctasctes = _Ctasctes_indycomServices.ListarCtacte(dominio, tipo_consulta, cate_deuda_desde, cate_deuda_hasta);
+
+            return Ok(Ctasctes);
+        }
+        [HttpGet]
+        public ActionResult<List<Ctasctes_indycom>> DetalleDeuda(int nro_transaccion)
+        {
+            var Ctasctes = _Ctasctes_indycomServices.DetalleDeuda(nro_transaccion);
+
+            return Ok(Ctasctes);
+        }
+        [HttpGet]
+        public ActionResult DetalleProcuracion(int nro_proc)
+        {
+            var Ctasctes = _Ctasctes_indycomServices.DetalleProcuracion(nro_proc);
+
+            return Ok(Ctasctes);
+        }
+        [HttpGet]
+        public ActionResult DetallePlan(int nro_plan)
+        {
+            var Ctasctes = _Ctasctes_indycomServices.DetPlanPago(nro_plan);
+
+            return Ok(Ctasctes);
+        }
+        [HttpGet]
+        public ActionResult<string> Datos_transaccion(int tipo_transaccion, int nro_transaccion)
+        {
+            var Transaccion = _Ctasctes_indycomServices.Datos_transaccion(tipo_transaccion, nro_transaccion);
+            if (Transaccion == null)
+            {
+                return BadRequest(new { message = "No se encontraron datos!" });
+            }
+            return Ok(Transaccion);
+        }
+        [HttpGet]
+        public ActionResult DetallePago(int nro_cedulon, int nro_transaccion)
+        {
+            var Transaccion = _Ctasctes_indycomServices.DetallePago(nro_cedulon, nro_transaccion);
+            if (Transaccion == null)
+            {
+                return BadRequest(new { message = "No se encontraron datos!" });
+            }
+            return Ok(Transaccion);
+        }
+        [HttpGet]
+        public ActionResult getListDeudaAuto(string dominio)
+        {
+            var lstDeuda = _Ctasctes_indycomServices.getListDeudaAuto(dominio);
+            if (lstDeuda == null)
+            {
+                return BadRequest(new { message = "No se encontraron datos!" });
+            }
+            return Ok(lstDeuda);
+        }
+        [HttpGet]
+        public ActionResult getListDeudaAutoNoVencida(string dominio)
+        {
+            var lstDeuda = _Ctasctes_indycomServices.getListDeudaAutoNoVencida(dominio);
+            if (lstDeuda == null)
+            {
+                return BadRequest(new { message = "No se encontraron datos!" });
+            }
+            return Ok(lstDeuda);
+        }
+        [HttpGet]
+        public ActionResult getListDeudaAutoProcurada(string dominio)
+        {
+            var lstDeuda = _Ctasctes_indycomServices.getListDeudaAutoProcurada(dominio);
+            if (lstDeuda == null)
+            {
+                return BadRequest(new { message = "No se encontraron datos!" });
+            }
+            return Ok(lstDeuda);
+        }
     }
 }

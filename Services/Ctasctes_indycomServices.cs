@@ -263,18 +263,36 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
+
         public List<LstDeudaIyC> getListDeudaIyC(int legajo)
         {
             try
             {
-                List<LstDeudaIyC> lst = LstDeudaIyC.getListDeudaIyC(legajo);
-
-                return lst;
+                return Entities.IYC.LstDeudaIyC.getListDeudaIndyCom(legajo);
             }
             catch (Exception)
             {
+
                 throw;
             }
+        }
+
+        public List<LstDeudaIyC> getListDeudaIyCProcurada(int legajo)
+        {
+            try
+            {
+                return Entities.IYC.LstDeudaIyC.getListDeudaAutoProcurada(legajo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<LstDeudaIyC> getListDeudaIyCNoVencida(int legajo)
+        {
+            throw new NotImplementedException();
         }
     }
 }

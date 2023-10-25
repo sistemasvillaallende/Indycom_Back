@@ -37,3 +37,10 @@ D:\Dev\NET2022\Web_Api_IyC\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTa
 D:\Dev\NET2022\Web_Api_IyC\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Web_Api_IyC.props
 D:\Dev\NET2022\Web_Api_IyC\obj\Debug\net6.0\staticwebassets.pack.json
 D:\Dev\NET2022\Web_Api_IyC\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\Municipalidad\Indycom_Back\obj\Debug\net6.0\Web_Api_IyC.csproj.AssemblyReference.cache
+D:\Municipalidad\Indycom_Back\obj\Debug\net6.0\Web_Api_IyC.GeneratedMSBuildEditorConfig.editorconfig
+D:\Municipalidad\Indycom_Back\obj\Debug\net6.0\Web_Api_IyC.AssemblyInfoInputs.cache
+D:\Municipalidad\Indycom_Back\obj\Debug\net6.0\Web_Api_IyC.AssemblyInfo.cs
+D:\Municipalidad\Indycom_Back\obj\Debug\net6.0\Web_Api_IyC.csproj.CoreCompileInputs.cache
+D:\Municipalidad\Indycom_Back\obj\Debug\net6.0\Web_Api_IyC.MvcApplicationPartsAssemblyInfo.cs
+D:\Municipalidad\Indycom_Back\obj\Debug\net6.0\Web_Api_IyC.MvcApplicationPartsAssemblyInfo.cache

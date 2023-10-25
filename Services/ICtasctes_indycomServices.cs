@@ -24,6 +24,9 @@ namespace Web_Api_IyC.Services
         public List<DETALLE_DEUDA> DetalleDeuda(int nroTransaccion);
         public GrillaIyC DetalleProcuracion(int nro_proc);
         public PlanPago DetPlanPago(int nro_plan);
+
         public List<LstDeudaIyC> getListDeudaIyC(int legajo);
+        public List<LstDeudaIyC> getListDeudaIyCProcurada(int legajo);
+        public List<LstDeudaIyC> getListDeudaIyCNoVencida(int legajo);
     }
 }
