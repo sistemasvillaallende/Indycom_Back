@@ -132,10 +132,10 @@ namespace Web_Api_IyC.Controllers
         }
 
 
-
-        public ActionResult<List<Ctasctes_indycom>> ListarCtacte(string dominio, int tipo_consulta, int cate_deuda_desde, int cate_deuda_hasta)
+        [HttpGet]
+        public ActionResult<List<Ctasctes_indycom>> ListarCtacte(int legajo, int tipo_consulta, int cate_deuda_desde, int cate_deuda_hasta)
         {
-            var Ctasctes = _Ctasctes_indycomServices.ListarCtacte(dominio, tipo_consulta, cate_deuda_desde, cate_deuda_hasta);
+            var Ctasctes = _Ctasctes_indycomServices.ListarCtacte(legajo, tipo_consulta, cate_deuda_desde, cate_deuda_hasta);
 
             return Ok(Ctasctes);
         }
@@ -181,9 +181,9 @@ namespace Web_Api_IyC.Controllers
             return Ok(Transaccion);
         }
         [HttpGet]
-        public ActionResult getListDeudaAuto(string dominio)
+        public ActionResult getListDeudaIyC(int legajo)
         {
-            var lstDeuda = _Ctasctes_indycomServices.getListDeudaAuto(dominio);
+            var lstDeuda = _Ctasctes_indycomServices.getListDeudaIyC(legajo);
             if (lstDeuda == null)
             {
                 return BadRequest(new { message = "No se encontraron datos!" });
@@ -191,9 +191,9 @@ namespace Web_Api_IyC.Controllers
             return Ok(lstDeuda);
         }
         [HttpGet]
-        public ActionResult getListDeudaAutoNoVencida(string dominio)
+        public ActionResult getListDeudaIyCNoVencida(int legajo)
         {
-            var lstDeuda = _Ctasctes_indycomServices.getListDeudaAutoNoVencida(dominio);
+            var lstDeuda = _Ctasctes_indycomServices.getListDeudaIyCNoVencida(legajo);
             if (lstDeuda == null)
             {
                 return BadRequest(new { message = "No se encontraron datos!" });
@@ -201,9 +201,9 @@ namespace Web_Api_IyC.Controllers
             return Ok(lstDeuda);
         }
         [HttpGet]
-        public ActionResult getListDeudaAutoProcurada(string dominio)
+        public ActionResult getListDeudaIyCProcurada(int legajo)
         {
-            var lstDeuda = _Ctasctes_indycomServices.getListDeudaAutoProcurada(dominio);
+            var lstDeuda = _Ctasctes_indycomServices.getListDeudaIyCProcurada(legajo);
             if (lstDeuda == null)
             {
                 return BadRequest(new { message = "No se encontraron datos!" });

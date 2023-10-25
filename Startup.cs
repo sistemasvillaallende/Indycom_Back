@@ -1,15 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using Web_Api_IyC.Services;
 
 namespace Web_Api_IyC
@@ -27,11 +17,18 @@ namespace Web_Api_IyC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mi API", Version = "v1" });
+
+            });
+
             // configure DI for application services
-            //services.AddScoped<IBadecServices, BadecServices>();
             services.AddScoped<IIndycomServices, IndycomServices>();
             services.AddScoped<ICtasctes_indycomServices, Ctasctes_indycomServices>();
+
+            //
+            services.AddCors();
 
         }
 
@@ -42,25 +39,44 @@ namespace Web_Api_IyC
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mi API V1");
+                });
                 app.UseStaticFiles();
+                app.UseStaticFiles(new StaticFileOptions()
+                {
+                    OnPrepareResponse = ctx =>
+                    {
+                        ctx.Context.Response.Headers
+                           .Add("X-Copyright", "Copyright 2016 - JMA");
+                    }
+                });
             }
+
+            //app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Taskman API V1"); });
+
             app.UseRouting();
+            // if (env.EnvironmentName == "Development")
+            // {
+
             app.UseCors(x => x
                .AllowAnyOrigin()
                .AllowAnyMethod()
                .AllowAnyHeader());
             Console.WriteLine(env.EnvironmentName);
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
         }
+
     }
 }
+
