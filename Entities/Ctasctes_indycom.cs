@@ -49,7 +49,7 @@ namespace Web_Api_IyC.Entities
         public string des_rubro { get; set; }
         public int cod_tipo_per { get; set; }
         public decimal sub_total { get; set; }
-
+        public int deuda_activa { get; set; }
 
         public Ctasctes_indycom()
         {
@@ -87,6 +87,7 @@ namespace Web_Api_IyC.Entities
             costo_financiero = 0;
             des_rubro = string.Empty;
             cod_tipo_per = 0;
+            deuda_activa = 0;
         }
 
         private static List<Ctasctes_indycom> mapeo(SqlDataReader dr)
@@ -121,6 +122,7 @@ namespace Web_Api_IyC.Entities
                 int decreto = dr.GetOrdinal("decreto");
                 int observaciones = dr.GetOrdinal("observaciones");
                 int nro_cedulon_paypertic = dr.GetOrdinal("nro_cedulon_paypertic");
+                int deuda_activa = dr.GetOrdinal("deuda_activa");
                 while (dr.Read())
                 {
                     obj = new Ctasctes_indycom();
@@ -150,6 +152,8 @@ namespace Web_Api_IyC.Entities
                     if (!dr.IsDBNull(decreto)) { obj.decreto = dr.GetString(decreto); }
                     if (!dr.IsDBNull(observaciones)) { obj.observaciones = dr.GetString(observaciones); }
                     if (!dr.IsDBNull(nro_cedulon_paypertic)) { obj.nro_cedulon_paypertic = dr.GetInt64(nro_cedulon_paypertic); }
+                    if (!dr.IsDBNull(deuda_activa)) { obj.deuda_activa = dr.GetInt32(deuda_activa); }
+
                     lst.Add(obj);
                 }
             }

@@ -18,7 +18,7 @@ namespace Web_Api_IyC.Entities.IYC
         public decimal recargo { get; set; }
         public bool pago_parcial { get; set; }
         public decimal pago_a_cuenta { get; set; }
-
+        public int nro_proc { get; set; }
         public LstDeudaIyC()
         {
             periodo = string.Empty;
@@ -33,35 +33,36 @@ namespace Web_Api_IyC.Entities.IYC
             recargo = 0;
             pago_parcial = false;
             pago_a_cuenta = 0;
+            nro_proc = 0;
         }
-        public static List<LstDeudaIyC> getListDeudaIyC(int legajo)
+        public static List<LstDeudaIyC> getListDeudaIndyCom(int legajo)
         {
-            List<LstDeudaIyC> oLstIyC = new List<LstDeudaIyC>();
+            List<LstDeudaIyC> oLstAuto = new List<LstDeudaIyC>();
             SqlCommand cmd;
             SqlDataReader dr;
-            SqlConnection? cn = null;
-            StringBuilder strSQL = new StringBuilder();
+            SqlConnection cn = null;
 
-            strSQL.AppendLine("SELECT C.periodo, C.monto_original, C.debe -");
-            strSQL.AppendLine("(SELECT SUM(haber) FROM CTASCTES_INDYCOM C2 WHERE");
-            strSQL.AppendLine("C2.nro_transaccion=C.nro_transaccion  AND");
-            strSQL.AppendLine("C2.legajo = C.legajo) as debe,");
-            strSQL.AppendLine("vencimiento, b.des_categoria,");
-            strSQL.AppendLine("c.pagado, c.nro_transaccion, c.cod_cate_deuda, c.nro_cedulon_paypertic,");
-            strSQL.AppendLine("c.recargo,");
-            strSQL.AppendLine("C.pago_parcial,");
-            strSQL.AppendLine("(SELECT SUM(haber) FROM CTASCTES_INDYCOM C2 WHERE");
-            strSQL.AppendLine("C2.nro_transaccion=C.nro_transaccion  AND");
-            strSQL.AppendLine("C2.legajo = C.legajo) as pago_a_cuenta");
-            strSQL.AppendLine("FROM CTASCTES_INDYCOM C");
-            strSQL.AppendLine("inner join CATE_DEUDA_INDYCOM b on c.cod_cate_deuda = b.cod_categoria");
-            strSQL.AppendLine("WHERE");
-            strSQL.AppendLine("c.pagado = 0");
-            strSQL.AppendLine("AND c.tipo_transaccion = 1");
-            strSQL.AppendLine("AND c.deuda_activa = 1");
-            strSQL.AppendLine("AND c.nro_plan IS NULL");
-            strSQL.AppendLine("AND c.nro_procuracion IS NULL");
-            strSQL.AppendLine("AND c.legajo = @legajo");
+            string sql = 
+                    @"SELECT C.periodo, C.monto_original, C.debe -
+                    (SELECT SUM(haber) FROM CTASCTES_INDYCOM C2 WHERE
+                    C2.nro_transaccion=C.nro_transaccion  AND
+                    C2.legajo = C.legajo) as debe,
+                    vencimiento, b.des_categoria,
+                    c.pagado, c.nro_transaccion, c.cod_cate_deuda, c.nro_cedulon_paypertic,
+                    c.recargo,
+                    C.pago_parcial, 
+                    (SELECT SUM(haber) FROM CTASCTES_INDYCOM C2 WHERE
+                    C2.nro_transaccion=C.nro_transaccion  AND
+                    C2.legajo = C.legajo) as pago_a_cuenta, C.NRO_PROCURACION
+                    FROM CTASCTES_INDYCOM C
+                    inner join CATE_DEUDA_INDYCOM b on c.cod_cate_deuda = b.cod_categoria
+                    WHERE
+                    c.pagado = 0
+                    AND c.tipo_transaccion = 1
+                    AND c.nro_plan IS NULL
+                    AND c.nro_procuracion IS NULL
+                    AND c.legajo = @legajo AND vencimiento <= GETDATE() ORDER BY C.periodo ASC";
+
 
             cmd = new SqlCommand();
 
@@ -69,55 +70,239 @@ namespace Web_Api_IyC.Entities.IYC
 
             try
             {
-                cn = DALBase.GetConnectionSIIMVA();
+                cn = DALBase.GetConnection();
+
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = strSQL.ToString();
+                cmd.CommandText = sql;
                 cmd.CommandTimeout = 900000;
                 cmd.Connection.Open();
+
                 dr = cmd.ExecuteReader();
+
                 while (dr.Read())
                 {
-                    LstDeudaIyC oIyC = new LstDeudaIyC();
+                    LstDeudaIyC oIndyCom = new LstDeudaIyC();
                     if (!dr.IsDBNull(dr.GetOrdinal("periodo")))
-                    { oIyC.periodo = dr.GetString(dr.GetOrdinal("periodo")); }
+                    { oIndyCom.periodo = dr.GetString(dr.GetOrdinal("periodo")); }
                     if (!dr.IsDBNull(dr.GetOrdinal("monto_original")))
-                    { oIyC.monto_original = dr.GetDecimal(dr.GetOrdinal("monto_original")); }
+                    { oIndyCom.monto_original = dr.GetDecimal(dr.GetOrdinal("monto_original")); }
                     if (!dr.IsDBNull(dr.GetOrdinal("debe")))
-                    { oIyC.debe = dr.GetDecimal(dr.GetOrdinal("debe")); }
+                    { oIndyCom.debe = dr.GetDecimal(dr.GetOrdinal("debe")); }
                     if (!dr.IsDBNull(dr.GetOrdinal("vencimiento")))
                     {
-                        oIyC.vencimiento = dr.GetDateTime(
+                        oIndyCom.vencimiento = dr.GetDateTime(
                         dr.GetOrdinal("vencimiento")).ToShortDateString();
                     }
                     if (!dr.IsDBNull(dr.GetOrdinal("des_categoria")))
-                    { oIyC.desCategoria = dr.GetString(dr.GetOrdinal("des_categoria")); }
+                    { oIndyCom.desCategoria = dr.GetString(dr.GetOrdinal("des_categoria")); }
                     if (!dr.IsDBNull(dr.GetOrdinal("pagado")))
-                    { oIyC.pagado = 0; }//Convert.ToInt32(dr.GetSqlBinary(dr.GetOrdinal("pagado"))); }
+                    { oIndyCom.pagado = 0; }//Convert.ToInt32(dr.GetSqlBinary(dr.GetOrdinal("pagado"))); }
                     if (!dr.IsDBNull(dr.GetOrdinal("nro_transaccion")))
-                    { oIyC.nroTtransaccion = dr.GetInt32(dr.GetOrdinal("nro_transaccion")); }
+                    { oIndyCom.nroTtransaccion = dr.GetInt32(dr.GetOrdinal("nro_transaccion")); }
                     if (!dr.IsDBNull(dr.GetOrdinal("cod_cate_deuda")))
-                    { oIyC.categoriaDeuda = dr.GetInt32(dr.GetOrdinal("cod_cate_deuda")); }
+                    { oIndyCom.categoriaDeuda = dr.GetInt32(dr.GetOrdinal("cod_cate_deuda")); }
                     if (!dr.IsDBNull(dr.GetOrdinal("recargo")))
-                    { oIyC.recargo = dr.GetDecimal(dr.GetOrdinal("recargo")); }
+                    { oIndyCom.recargo = dr.GetDecimal(dr.GetOrdinal("recargo")); }
                     if (!dr.IsDBNull(dr.GetOrdinal("nro_cedulon_paypertic")))
-                    { oIyC.nro_cedulon_paypertic = dr.GetInt32(dr.GetOrdinal("nro_cedulon_paypertic")); }
+                    { oIndyCom.nro_cedulon_paypertic = dr.GetInt32(dr.GetOrdinal("nro_cedulon_paypertic")); }
 
                     if (!dr.IsDBNull(dr.GetOrdinal("pago_parcial")))
-                    { oIyC.pago_parcial = dr.GetBoolean(dr.GetOrdinal("pago_parcial")); }
+                    { oIndyCom.pago_parcial = dr.GetBoolean(dr.GetOrdinal("pago_parcial")); }
                     if (!dr.IsDBNull(dr.GetOrdinal("pago_a_cuenta")))
-                    { oIyC.pago_a_cuenta = dr.GetDecimal(dr.GetOrdinal("pago_a_cuenta")); }
+                    { oIndyCom.pago_a_cuenta = dr.GetDecimal(dr.GetOrdinal("pago_a_cuenta")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("NRO_PROCURACION")))
+                    { oIndyCom.nro_proc = dr.GetInt32(dr.GetOrdinal("NRO_PROCURACION")); }
 
-                    oLstIyC.Add(oIyC);
+                    oLstAuto.Add(oIndyCom);
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error in query!" + e.ToString());
-                throw;
+                throw e;
             }
             finally { cn.Close(); }
-            return oLstIyC;
+            return oLstAuto;
+        }
+        public static List<LstDeudaIyC> getListDeudaIndyComNoVencida(int legajo)
+        {
+            List<LstDeudaIyC> oLstAuto = new List<LstDeudaIyC>();
+            SqlCommand cmd;
+            SqlDataReader dr;
+            SqlConnection cn = null;
+
+            string sql =
+                @"SELECT C.periodo, C.monto_original, C.debe -
+                    (SELECT SUM(haber) FROM CTASCTES_INDYCOM C2 WHERE
+                    C2.nro_transaccion=C.nro_transaccion  AND
+                    C2.legajo = C.legajo) as debe,
+                    C.vencimiento, b.des_categoria,
+                    c.pagado, c.nro_transaccion, b.cod_categoria, c.nro_cedulon_paypertic,
+                    c.recargo,
+                    C.pago_parcial,
+                    (SELECT SUM(haber) FROM CTASCTES_INDYCOM C2 WHERE
+                    C2.nro_transaccion=C.nro_transaccion  AND
+                    C2.legajo = C.legajo) as pago_a_cuenta, C.NRO_PROCURACION
+                    FROM CTASCTES_INDYCOM C
+                    inner join CATE_DEUDA_INDYCOM b on c.cod_cate_deuda = b.cod_categoria
+                    WHERE
+                    c.pagado = 0
+                    AND c.tipo_transaccion = 1
+                    AND c.nro_plan IS NULL
+                    AND c.nro_procuracion IS NULL
+                    AND c.legajo = @legajo AND c.vencimiento > GETDATE() ORDER BY C.periodo ASC
+                ";
+
+
+            cmd = new SqlCommand();
+
+            cmd.Parameters.Add(new SqlParameter("@legajo", legajo));
+
+            try
+            {
+                cn = DALBase.GetConnection();
+
+                cmd.Connection = cn;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                cmd.CommandTimeout = 900000;
+                cmd.Connection.Open();
+
+                dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    LstDeudaIyC oAuto = new LstDeudaIyC();
+                    if (!dr.IsDBNull(dr.GetOrdinal("periodo")))
+                    { oAuto.periodo = dr.GetString(dr.GetOrdinal("periodo")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("monto_original")))
+                    { oAuto.monto_original = dr.GetDecimal(dr.GetOrdinal("monto_original")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("debe")))
+                    { oAuto.debe = dr.GetDecimal(dr.GetOrdinal("debe")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("vencimiento")))
+                    {
+                        oAuto.vencimiento = dr.GetDateTime(
+                        dr.GetOrdinal("vencimiento")).ToShortDateString();
+                    }
+                    if (!dr.IsDBNull(dr.GetOrdinal("des_categoria")))
+                    { oAuto.desCategoria = dr.GetString(dr.GetOrdinal("des_categoria")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("pagado")))
+                    { oAuto.pagado = 0; }//Convert.ToInt32(dr.GetSqlBinary(dr.GetOrdinal("pagado"))); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("nro_transaccion")))
+                    { oAuto.nroTtransaccion = dr.GetInt32(dr.GetOrdinal("nro_transaccion")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("categoria_deuda")))
+                    { oAuto.categoriaDeuda = dr.GetInt32(dr.GetOrdinal("categoria_deuda")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("recargo")))
+                    { oAuto.recargo = dr.GetDecimal(dr.GetOrdinal("recargo")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("nro_cedulon_paypertic")))
+                    { oAuto.nro_cedulon_paypertic = dr.GetInt32(dr.GetOrdinal("nro_cedulon_paypertic")); }
+
+                    if (!dr.IsDBNull(dr.GetOrdinal("pago_parcial")))
+                    { oAuto.pago_parcial = dr.GetBoolean(dr.GetOrdinal("pago_parcial")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("pago_a_cuenta")))
+                    { oAuto.pago_a_cuenta = dr.GetDecimal(dr.GetOrdinal("pago_a_cuenta")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("NRO_PROCURACION")))
+                    { oAuto.nro_proc = dr.GetInt32(dr.GetOrdinal("NRO_PROCURACION")); }
+                    oLstAuto.Add(oAuto);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error in query!" + e.ToString());
+                throw e;
+            }
+            finally { cn.Close(); }
+            return oLstAuto;
+        }
+        public static List<LstDeudaIyC> getListDeudaIYCProcurada(int legajo)
+        {
+            List<LstDeudaIyC> oLstAuto = new List<LstDeudaIyC>();
+            SqlCommand cmd;
+            SqlDataReader dr;
+            SqlConnection cn = null;
+            StringBuilder strSQL = new StringBuilder();
+
+             string sql = @"SELECT C.periodo, C.monto_original, C.debe -
+                (SELECT SUM(haber) FROM CTASCTES_INDYCOM C2 WHERE
+                C2.nro_transaccion=C.nro_transaccion  AND
+                C2.legajo = C.legajo) as debe,
+                vencimiento, b.des_categoria,
+                c.pagado, c.nro_transaccion, c.cod_cate_deuda, c.nro_cedulon_paypertic,
+                c.recargo,
+                C.pago_parcial,
+                (SELECT SUM(haber) FROM CTASCTES_INDYCOM C2 WHERE
+                C2.nro_transaccion=C.nro_transaccion  AND
+                C2.legajo = C.legajo) as pago_a_cuenta, C.NRO_PROCURACION
+                FROM CTASCTES_INDYCOM C
+                inner join CATE_DEUDA_INDYCOM b on c.cod_cate_deuda = b.cod_categoria
+                WHERE
+                c.pagado = 0
+                AND c.tipo_transaccion = 1
+                AND c.nro_plan IS NULL
+                AND c.nro_procuracion IS NOT NULL
+                AND c.legajo = @legajo ORDER BY C.periodo ASC";
+
+
+            cmd = new SqlCommand();
+
+            cmd.Parameters.Add(new SqlParameter("@legajo", legajo));
+
+            try
+            {
+                cn = DALBase.GetConnection();
+
+                cmd.Connection = cn;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                cmd.CommandTimeout = 900000;
+                cmd.Connection.Open();
+
+                dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    LstDeudaIyC oAuto = new LstDeudaIyC();
+                    if (!dr.IsDBNull(dr.GetOrdinal("periodo")))
+                    { oAuto.periodo = dr.GetString(dr.GetOrdinal("periodo")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("monto_original")))
+                    { oAuto.monto_original = dr.GetDecimal(dr.GetOrdinal("monto_original")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("debe")))
+                    { oAuto.debe = dr.GetDecimal(dr.GetOrdinal("debe")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("vencimiento")))
+                    {
+                        oAuto.vencimiento = dr.GetDateTime(
+                        dr.GetOrdinal("vencimiento")).ToShortDateString();
+                    }
+                    if (!dr.IsDBNull(dr.GetOrdinal("des_categoria")))
+                    { oAuto.desCategoria = dr.GetString(dr.GetOrdinal("des_categoria")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("pagado")))
+                    { oAuto.pagado = 0; }//Convert.ToInt32(dr.GetSqlBinary(dr.GetOrdinal("pagado"))); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("nro_transaccion")))
+                    { oAuto.nroTtransaccion = dr.GetInt32(dr.GetOrdinal("nro_transaccion")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("categoria_deuda")))
+                    { oAuto.categoriaDeuda = dr.GetInt32(dr.GetOrdinal("categoria_deuda")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("recargo")))
+                    { oAuto.recargo = dr.GetDecimal(dr.GetOrdinal("recargo")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("nro_cedulon_paypertic")))
+                    { oAuto.nro_cedulon_paypertic = dr.GetInt32(dr.GetOrdinal("nro_cedulon_paypertic")); }
+
+                    if (!dr.IsDBNull(dr.GetOrdinal("pago_parcial")))
+                    { oAuto.pago_parcial = dr.GetBoolean(dr.GetOrdinal("pago_parcial")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("pago_a_cuenta")))
+                    { oAuto.pago_a_cuenta = dr.GetDecimal(dr.GetOrdinal("pago_a_cuenta")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("NRO_PROCURACION")))
+                    { oAuto.nro_proc = dr.GetInt32(dr.GetOrdinal("NRO_PROCURACION")); }
+                    oLstAuto.Add(oAuto);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error in query!" + e.ToString());
+                throw e;
+            }
+            finally { cn.Close(); }
+            return oLstAuto;
         }
     }
 }

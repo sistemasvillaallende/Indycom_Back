@@ -1779,19 +1779,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mandres\\.nuget\\packages\\": {}
+    "C:\\Users\\Martin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Dev\\NET2022\\Web_Api_IyC\\Web_Api_IyC.csproj",
+      "projectUniqueName": "D:\\Municipalidad\\Indycom_Back\\Web_Api_IyC.csproj",
       "projectName": "Web_Api_IyC",
-      "projectPath": "D:\\Dev\\NET2022\\Web_Api_IyC\\Web_Api_IyC.csproj",
-      "packagesPath": "C:\\Users\\mandres\\.nuget\\packages\\",
-      "outputPath": "D:\\Dev\\NET2022\\Web_Api_IyC\\obj\\",
+      "projectPath": "D:\\Municipalidad\\Indycom_Back\\Web_Api_IyC.csproj",
+      "packagesPath": "C:\\Users\\Martin\\.nuget\\packages\\",
+      "outputPath": "D:\\Municipalidad\\Indycom_Back\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\mandres\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Martin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1799,7 +1799,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+        "D:\\packages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1854,7 +1854,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
