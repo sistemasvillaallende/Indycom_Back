@@ -39,6 +39,7 @@ namespace Web_Api_IyC.Services
         public List<RUBROS> BuscarRubroxDescripcion(string descripcion);
         public List<Informes> InformeCtaCteSoloDeuda(int legajo, int categoria_deuda, int categoria_deuda2, string per, Auditoria objA);
         public List<Informes> InformeCtaCteCompleto(int legajo, string per, Auditoria objA);
+        public List<Combo> ListarCategoriasIyc();
 
 
 

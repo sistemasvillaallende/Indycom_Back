@@ -1663,6 +1663,41 @@ namespace Web_Api_IyC.Entities
         }
 
         //SELECT des_com FROM sucursales_indycom  WHERE legajo= :legajo  and nro_sucursal= :nro_sucursal and dado_baja=0 
+        public static List<Combo> ListarCategoriasIyc()
+        {
+            try
+            {
+                List<Combo> lst = new List<Combo>();
+                using (SqlConnection con = GetConnectionSIIMVA())
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT * FROM CATE_DEUDA_INDYCOM";
+                    cmd.Connection.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    Combo? obj;
+                    obj = new Combo();
+                    obj.text = "TODAS LAS DEUDAS";
+                    obj.value = "0";
+                    lst.Add(obj);
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            obj = new();
+                            if (!dr.IsDBNull(0)) { obj.value = Convert.ToString(dr.GetInt32(0)); }
+                            if (!dr.IsDBNull(1)) { obj.text = dr.GetString(1); }
+                            lst.Add(obj);
+                        }
+                    }
+                    return lst;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
 
 

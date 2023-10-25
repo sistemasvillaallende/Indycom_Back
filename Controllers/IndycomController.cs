@@ -403,5 +403,11 @@ namespace Web_Api_IyC.Controllers
             return Ok(reporte);
         }
 
+        [HttpGet]
+        public ActionResult<List<Combo>> ListarCategoriasIyc()
+        {
+            var categorias = _iindycomService.ListarCategoriasIyc();
+            return Ok(categorias);
+        }
     }
 }
