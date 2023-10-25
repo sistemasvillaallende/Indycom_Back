@@ -281,7 +281,7 @@ namespace Web_Api_IyC.Services
         {
             try
             {
-                return Entities.IYC.LstDeudaIyC.getListDeudaAutoProcurada(legajo);
+                return Entities.IYC.LstDeudaIyC.getListDeudaIYCProcurada(legajo);
             }
             catch (Exception)
             {

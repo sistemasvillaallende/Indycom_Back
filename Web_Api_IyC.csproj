@@ -7,15 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
-    <PackageReference Include="System.Linq" Version="4.3.0" />
+    <Compile Remove="Entities\LOGIN\**" />
+    <Compile Remove="Entities\PERSONA\**" />
+    <Content Remove="Entities\LOGIN\**" />
+    <Content Remove="Entities\PERSONA\**" />
+    <EmbeddedResource Remove="Entities\LOGIN\**" />
+    <EmbeddedResource Remove="Entities\PERSONA\**" />
+    <None Remove="Entities\LOGIN\**" />
+    <None Remove="Entities\PERSONA\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\LOGIN\" />
-    <Folder Include="Entities\PERSONA\" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+    <PackageReference Include="System.Linq" Version="4.3.0" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
