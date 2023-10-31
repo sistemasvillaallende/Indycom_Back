@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Web_Api_IyC.Entities;
 using Web_Api_IyC.Entities.AUDITORIA;
 using Web_Api_IyC.Entities.HELPERS;
+using Web_Api_IyC.Entities.IYC;
 using Web_Api_IyC.Helpers;
 using Web_Api_IyC.Services;
 
@@ -408,6 +409,39 @@ namespace Web_Api_IyC.Controllers
         {
             var categorias = _iindycomService.ListarCategoriasIyc();
             return Ok(categorias);
+        }
+
+        [HttpPost]
+        public IActionResult Resumendeuda(int legajo, int tipo_consulta, string periodo, int cate_deuda_desde, int cate_deuda_hasta, Auditoria objA)
+        {
+            var resumen = _iindycomService.Resumendeuda(legajo, tipo_consulta, periodo, cate_deuda_hasta, cate_deuda_hasta, objA);
+            if (resumen.Count == 0)
+            {
+                return BadRequest(new { message = @"Información, no se encontraron Datos para este legajo " + legajo });
+            }
+            return Ok(resumen);
+        }
+
+        [HttpGet]
+        public IActionResult GetCalle(string nomcalle)
+        {
+            var calles = _iindycomService.GetCalle(nomcalle);
+            if (calles.Count == 0)
+            {
+                return BadRequest(new { message = @"Información, no se encontraron Calles " });
+            }
+            return Ok(calles);
+        }
+
+        [HttpGet]
+        public IActionResult ConsultaIyc_x_calles(string calledesde, string callehasta)
+        {
+            var consulta = _iindycomService.ConsultaIyc_x_calles(calledesde, callehasta);
+            if (consulta.Count == 0)
+            {
+                return BadRequest(new { message = @"Información,La Consulta no Contiene Datos...! " });
+            }
+            return Ok(consulta);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
 using System.Transactions;
 using Web_Api_IyC.Entities;
@@ -435,6 +436,53 @@ namespace Web_Api_IyC.Services
 
                 throw;
             }
+        }
+
+        public List<Informes> Resumendeuda(int legajo, int tipo_consulta, string periodo, int cate_deuda_desde, int cate_deuda_hasta, Auditoria objA)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    objA.identificacion = legajo.ToString();
+                    objA.proceso = "IMPRIME_DEUDA_IYC";
+                    objA.observaciones += string.Format(" Fecha auditoria: {0}", DateTime.Now);
+                    AuditoriaD.InsertAuditoria(objA);
+                    scope.Complete();
+                }
+                return Informes.Resumendeuda(legajo, tipo_consulta, periodo, cate_deuda_desde, cate_deuda_hasta);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Combo> GetCalle(string nomcalle)
+        {
+            try
+            {
+                return INDYCOM.GetCalle(nomcalle);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Indycomxcalle> ConsultaIyc_x_calles(string calledesde, string callehasta)
+        {
+            try
+            {
+                return Indycomxcalle.ConsultaIyc_x_calles(calledesde, callehasta);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
     }
 }

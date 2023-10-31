@@ -40,7 +40,9 @@ namespace Web_Api_IyC.Services
         public List<Informes> InformeCtaCteSoloDeuda(int legajo, int categoria_deuda, int categoria_deuda2, string per, Auditoria objA);
         public List<Informes> InformeCtaCteCompleto(int legajo, string per, Auditoria objA);
         public List<Combo> ListarCategoriasIyc();
-
+        public List<Informes> Resumendeuda(int legajo, int tipo_consulta, string periodo, int cate_deuda_desde, int cate_deuda_hasta, Auditoria objA);
+        public List<Combo> GetCalle(string nomcalle);
+        public List<Indycomxcalle> ConsultaIyc_x_calles(string calledesde, string callehasta);
 
 
 

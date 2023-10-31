@@ -1605,6 +1605,53 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
+        public static List<Combo> GetCalle(string nomcalle)
+        {
+            try
+            {
+                string strSQL = @"SELECT
+                                    cod_calle,
+                                    nom_calle
+                                  FROM Calles
+                                  WHERE
+                                     nom_calle Like @nomcalle
+                                  ORDER BY
+                                      nom_calle";
+                List<Combo> lst = new List<Combo>();
+                using (SqlConnection con = GetConnectionSIIMVA())
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = strSQL;
+                    cmd.Parameters.AddWithValue("@nomcalle", nomcalle + "%");
+                    cmd.Connection.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    Combo? obj;
+                    obj = new Combo();
+                    obj.text = "TODAS LAS CALLES";
+                    obj.value = "0";
+                    lst.Add(obj);
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            obj = new();
+                            if (!dr.IsDBNull(0)) { obj.value = Convert.ToString(dr.GetInt32(0)); }
+                            if (!dr.IsDBNull(1)) { obj.text = Convert.ToString(dr.GetString(1)); }
+                            lst.Add(obj);
+                        }
+                    }
+                    return lst;
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         #endregion
         public static void BajaComercial(int legajo, string fecha_baja)
         {
@@ -1698,9 +1745,6 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-
-
-
 
     }
 }
