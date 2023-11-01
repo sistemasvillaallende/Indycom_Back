@@ -62,9 +62,18 @@ namespace Web_Api_IyC.Services
         {
             try
             {
-                INDYCOM.Update(obj);
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    obj.objAuditoria.identificacion = obj.legajo.ToString();
+                    obj.objAuditoria.proceso = "MODIFICACION INDYCOM";
+                    obj.objAuditoria.detalle = JsonConvert.SerializeObject(INDYCOM.GetByPk(obj.legajo));
+                    obj.objAuditoria.observaciones += string.Format(" Fecha auditoria: {0}", DateTime.Now);
+                    INDYCOM.Update(obj);
+                    AuditoriaD.InsertAuditoria(obj.objAuditoria);
+                    scope.Complete();
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
