@@ -14,7 +14,6 @@ namespace Web_Api_IyC.Services
         public List<Entities.BADEC> read();
         public List<Entities.BADEC> read2();
         public Entities.BADEC getByPk(int nro_bad);
-        public Entities.BADEC getByPk2(int nro_bad);
-        public List<Entities.BADEC> GetByNombre(string nombre);
+        public Entities.BADEC getByPk2(int nro_bad);        
     }
 }

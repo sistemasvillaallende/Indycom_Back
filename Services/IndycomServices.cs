@@ -365,7 +365,6 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-
         public Sucursales_indycom GetSucuralByLegajo(int legajo, int nro_sucursal)
         {
             try
@@ -378,7 +377,6 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-
         public List<RUBROS> BuscarRubroxDescripcion(string descripcion)
         {
             try
@@ -392,7 +390,6 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-
         public List<Informes> InformeCtaCteSoloDeuda(int legajo, int categoria_deuda, int categoria_deuda2, string per, Auditoria objA)
         {
             try
@@ -433,7 +430,6 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-
         public List<Combo> ListarCategoriasIyc()
         {
             try
@@ -446,7 +442,6 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-
         public List<Informes> Resumendeuda(int legajo, int tipo_consulta, string periodo, int cate_deuda_desde, int cate_deuda_hasta, Auditoria objA)
         {
             try
@@ -466,7 +461,6 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-
         public List<Combo> GetCalle(string nomcalle)
         {
             try
@@ -478,7 +472,6 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-
         public List<Indycomxcalle> ConsultaIyc_x_calles(string calledesde, string callehasta)
         {
             try
@@ -493,6 +486,30 @@ namespace Web_Api_IyC.Services
             }
 
         }
+        public List<BADEC> GetBadecByNombre(string nombre)
+        {
+            try
+            {
+                return BADEC.GetBadecByNombre(nombre);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public List<BADEC> GetBadecByCuit(string cuit)
+        {
+            try
+            {
+                return BADEC.GetBadecByCuit(cuit);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }
 

@@ -39,7 +39,7 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine("FULL JOIN MOVIM_CAJA_V2 B ON A.nro_movimiento=B.nro_movimiento");
                 sql.AppendLine("FULL JOIN ENTIDAD_RECAUDADORA C ON B.cod_forma_pago=C.Id_entidad");
                 sql.AppendLine("FULL JOIN CEDULONES2 D ON A.nro_cedulon=D.nro_cedulon");
-                sql.AppendLine("FULL JOIN CTASCTES_AUTOMOTORES E ON A.nro_cedulon=E.nro_cedulon AND E.TIPO_TRANSACCION=2");
+                sql.AppendLine("FULL JOIN CTASCTES_INDYCOM E ON A.nro_cedulon=E.nro_cedulon AND E.TIPO_TRANSACCION=2");
                 sql.AppendLine("FULL JOIN PAGOS_PAYPERTIC F ON A.nro_cedulon=F.NRO_CEDULON");
                 sql.AppendLine("FULL JOIN TARJETAS_DEBITOS G ON F.COD_TARJETA_INTERNO=G.cod_tarjeta");
                 sql.AppendLine("WHERE A.nro_cedulon=@nro_cedulon AND E.NRO_TRANSACCION=@nro_transaccion");

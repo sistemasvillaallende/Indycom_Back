@@ -289,10 +289,17 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-
         public List<LstDeudaIyC> getListDeudaIyCNoVencida(int legajo)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                return LstDeudaIyC.getListDeudaIndyComNoVencida(legajo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }       
     }
 }

@@ -243,7 +243,6 @@ namespace Web_Api_IyC.Entities.IYC
                 AND c.nro_procuracion IS NOT NULL
                 AND c.legajo = @legajo ORDER BY C.periodo ASC";
 
-
             cmd = new SqlCommand();
 
             cmd.Parameters.Add(new SqlParameter("@legajo", legajo));
@@ -280,8 +279,8 @@ namespace Web_Api_IyC.Entities.IYC
                     { oAuto.pagado = 0; }//Convert.ToInt32(dr.GetSqlBinary(dr.GetOrdinal("pagado"))); }
                     if (!dr.IsDBNull(dr.GetOrdinal("nro_transaccion")))
                     { oAuto.nroTtransaccion = dr.GetInt32(dr.GetOrdinal("nro_transaccion")); }
-                    if (!dr.IsDBNull(dr.GetOrdinal("categoria_deuda")))
-                    { oAuto.categoriaDeuda = dr.GetInt32(dr.GetOrdinal("categoria_deuda")); }
+                    if (!dr.IsDBNull(dr.GetOrdinal("cod_cate_deuda")))
+                    { oAuto.categoriaDeuda = dr.GetInt32(dr.GetOrdinal("cod_cate_deuda")); }
                     if (!dr.IsDBNull(dr.GetOrdinal("recargo")))
                     { oAuto.recargo = dr.GetDecimal(dr.GetOrdinal("recargo")); }
                     if (!dr.IsDBNull(dr.GetOrdinal("nro_cedulon_paypertic")))

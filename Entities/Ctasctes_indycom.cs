@@ -786,7 +786,7 @@ namespace Web_Api_IyC.Entities
                                     a.nro_cedulon
                                     FROM CTASCTES_INDYCOM A WITH (NOLOCK) 
                                     WHERE  
-                                      A.legajo=@legajo");
+                                      A.legajo=@legajo AND");
                 if (tipo_consulta == 1)// toda la cuenta corriente
                 {
                     if (cate_deuda_desde == cate_deuda_hasta)

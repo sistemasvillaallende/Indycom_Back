@@ -42,21 +42,7 @@ namespace Web_Api_IyC.Services
                 throw ex;
             }
         }
-
-        public List<BADEC> GetByNombre(string nombre)
-        {
-            try
-            {
-                return Entities.BADEC.GetByNombre(nombre);
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
+       
         public int insert(BADEC obj)
         {
             try

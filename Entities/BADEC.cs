@@ -12,7 +12,7 @@ namespace Web_Api_IyC.Entities
         public int nro_bad { get; set; }
         public bool interno { get; set; }
         public bool persona { get; set; }
-        public bool CONTRIBUYENTE { get; set; }
+        public bool contribuyente { get; set; }
         public string tipo_instit { get; set; }
         public string nombre { get; set; }
         public string tip_doc { get; set; }
@@ -39,11 +39,11 @@ namespace Web_Api_IyC.Entities
         public DateTime fecha_alta { get; set; }
         public int id_tip_doc { get; set; }
         public string cod_postal_arg { get; set; }
-        public string CELULAR { get; set; }
-        public string USUARIO { get; set; }
-        public string SUBSISTEMA { get; set; }
+        public string celular { get; set; }
+        public string usuario { get; set; }
+        public string subsistema { get; set; }
         public Int64 cuit_afip { get; set; }
-        public bool CIUDADANO_DIGITAL { get; set; }
+        public bool ciudadano_digital { get; set; }
         public DateTime fecha_nacimiento { get; set; }
 
         public BADEC()
@@ -51,7 +51,7 @@ namespace Web_Api_IyC.Entities
             nro_bad = 0;
             interno = false;
             persona = false;
-            CONTRIBUYENTE = false;
+            contribuyente = false;
             tipo_instit = string.Empty;
             nombre = string.Empty;
             tip_doc = string.Empty;
@@ -78,11 +78,11 @@ namespace Web_Api_IyC.Entities
             fecha_alta = DateTime.Now;
             id_tip_doc = 0;
             cod_postal_arg = string.Empty;
-            CELULAR = string.Empty;
-            USUARIO = string.Empty;
-            SUBSISTEMA = string.Empty;
+            celular = string.Empty;
+            usuario = string.Empty;
+            subsistema = string.Empty;
             cuit_afip = 0;
-            CIUDADANO_DIGITAL = false;
+            ciudadano_digital = false;
             fecha_nacimiento = DateTime.Now;
         }
 
@@ -93,7 +93,7 @@ namespace Web_Api_IyC.Entities
             if (dr.HasRows)
             {
                 int nro_bad = dr.GetOrdinal("nro_bad");
-                int NOMBRE = dr.GetOrdinal("NOMBRE");
+                int nombre = dr.GetOrdinal("nombre");
                 int tip_doc = dr.GetOrdinal("tip_doc");
                 int nro_doc = dr.GetOrdinal("nro_doc");
                 int e_mail = dr.GetOrdinal("e_mail");
@@ -101,7 +101,7 @@ namespace Web_Api_IyC.Entities
                 {
                     obj = new BADEC();
                     if (!dr.IsDBNull(nro_bad)) { obj.nro_bad = dr.GetInt32(nro_bad); }
-                    if (!dr.IsDBNull(NOMBRE)) { obj.nombre = dr.GetString(NOMBRE); }
+                    if (!dr.IsDBNull(nombre)) { obj.nombre = dr.GetString(nombre); }
                     if (!dr.IsDBNull(tip_doc)) { obj.tip_doc = dr.GetString(tip_doc); }
                     if (!dr.IsDBNull(nro_doc)) { obj.nro_doc = dr.GetString(nro_doc); }
                     if (!dr.IsDBNull(e_mail)) { obj.e_mail = dr.GetString(e_mail); }
@@ -133,6 +133,8 @@ namespace Web_Api_IyC.Entities
                     if (!dr.IsDBNull(10)) { obj.cod_postal = dr.GetInt32(10); }
                     if (!dr.IsDBNull(11)) { obj.cuit = dr.GetString(11); }
                     if (!dr.IsDBNull(12)) { obj.e_mail = dr.GetString(12); }
+                    if (!dr.IsDBNull(13)) { obj.celular = dr.GetString(13); }
+                    if (!dr.IsDBNull(14)) { obj.sexo = dr.GetString(14); }
                     lst.Add(obj);
                 }
             }
@@ -151,7 +153,7 @@ namespace Web_Api_IyC.Entities
                     if (!dr.IsDBNull(0)) { obj.nro_bad = dr.GetInt32(0); }
                     if (!dr.IsDBNull(1)) { obj.interno = dr.GetBoolean(1); }
                     if (!dr.IsDBNull(2)) { obj.persona = dr.GetBoolean(2); }
-                    if (!dr.IsDBNull(3)) { obj.CONTRIBUYENTE = dr.GetBoolean(3); }
+                    if (!dr.IsDBNull(3)) { obj.contribuyente = dr.GetBoolean(3); }
                     if (!dr.IsDBNull(4)) { obj.tipo_instit = dr.GetString(4); }
                     if (!dr.IsDBNull(5)) { obj.nombre = dr.GetString(5); }
                     if (!dr.IsDBNull(6)) { obj.tip_doc = dr.GetString(6); }
@@ -178,11 +180,11 @@ namespace Web_Api_IyC.Entities
                     if (!dr.IsDBNull(27)) { obj.fecha_alta = dr.GetDateTime(27); }
                     if (!dr.IsDBNull(28)) { obj.id_tip_doc = dr.GetInt32(28); }
                     if (!dr.IsDBNull(29)) { obj.cod_postal_arg = dr.GetString(29); }
-                    if (!dr.IsDBNull(30)) { obj.CELULAR = dr.GetString(30); }
-                    if (!dr.IsDBNull(31)) { obj.USUARIO = dr.GetString(31); }
-                    if (!dr.IsDBNull(32)) { obj.SUBSISTEMA = dr.GetString(32); }
+                    if (!dr.IsDBNull(30)) { obj.celular = dr.GetString(30); }
+                    if (!dr.IsDBNull(31)) { obj.usuario = dr.GetString(31); }
+                    if (!dr.IsDBNull(32)) { obj.subsistema = dr.GetString(32); }
                     if (!dr.IsDBNull(33)) { obj.cuit_afip = dr.GetInt64(33); }
-                    if (!dr.IsDBNull(34)) { obj.CIUDADANO_DIGITAL = dr.GetBoolean(34); }
+                    if (!dr.IsDBNull(34)) { obj.ciudadano_digital = dr.GetBoolean(34); }
                     if (!dr.IsDBNull(35)) { obj.fecha_nacimiento = dr.GetDateTime(35); }
                     lst.Add(obj);
                 }
@@ -272,21 +274,21 @@ namespace Web_Api_IyC.Entities
                 throw ex;
             }
         }
-        public static BADEC getByPk2(int NRO_BAD)
+        public static BADEC getByPk2(int nro_bad)
         {
             try
             {
                 string sql = string.Empty;
                 sql = @" SELECT  NRO_BAD,NOMBRE,TIP_DOC,NRO_DOC,E_MAIL=ISNULL(E_MAIL,'') 
                         FROM BADEC  
-                        WHERE NRO_BAD = @NRO_BAD";
+                        WHERE nro_bad = @nro_bad";
                 BADEC? obj = null;
                 using (SqlConnection con = GetConnectionSIIMVA())
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = sql.ToString();
-                    cmd.Parameters.AddWithValue("@NRO_BAD", NRO_BAD);
+                    cmd.Parameters.AddWithValue("@nro_bad", nro_bad);
                     cmd.Connection.Open();
                     SqlDataReader dr = cmd.ExecuteReader();
                     List<BADEC> lst = mapeo2(dr);
@@ -300,23 +302,20 @@ namespace Web_Api_IyC.Entities
                 throw ex;
             }
         }
-
-        public static List<BADEC> GetByNombre(string nombre)
+        public static List<BADEC> GetBadecByNombre(string nombre)
         {
             try
             {
                 string sql = string.Empty;
-                //sql = @"SELECT  NRO_BAD, NOMBRE, TIP_DOC, NRO_DOC, 
-                //        E_MAIL=ISNULL(E_MAIL,'') 
-                //        FROM BADEC  
-                //        WHERE nombre like @nombre + '%' ";
                 sql = @"SELECT
                         NRO_BAD, NOMBRE, COD_CALLE, NOMBRE_CALLE,
                         COD_BARRIO, NOMBRE_BARRIO, NRO_DOM,
                         PISO_DPTO = ISNULL(PISO_DPTO, ''),
                         Localidad, PROVINCIA, COD_POSTAl=isnull(COD_POSTAl,0),
                         CUIT=ISNULL(CUIT,''),
-                        E_MAIL = ISNULL(E_MAIL, '')
+                        E_MAIL = ISNULL(E_MAIL, ''),
+                        celular,
+                        sexo
                         FROM BADEC  
                         WHERE nombre like @nombre +'%' ";
                 List<BADEC> lst = new List<BADEC>();
@@ -330,15 +329,45 @@ namespace Web_Api_IyC.Entities
                     SqlDataReader dr = cmd.ExecuteReader();
                     lst = mapeo3(dr);
                     return lst;
-                    //List<BADEC> lst = mapeo2(dr);
-                    //if (lst.Count != 0)
-                    //    obj = lst[0];
                 }
-                //return obj;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
+            }
+        }
+        public static List<BADEC> GetBadecByCuit(string cuit)
+        {
+            try
+            {
+                string sql = string.Empty;
+                sql = @"SELECT
+                        NRO_BAD, NOMBRE, COD_CALLE, NOMBRE_CALLE,
+                        COD_BARRIO, NOMBRE_BARRIO, NRO_DOM,
+                        PISO_DPTO = ISNULL(PISO_DPTO, ''),
+                        Localidad, PROVINCIA, COD_POSTAl=isnull(COD_POSTAl,0),
+                        CUIT=ISNULL(CUIT,''),
+                        E_MAIL = ISNULL(E_MAIL, ''),                        
+                        celular,
+                        sexo
+                        FROM BADEC  
+                        WHERE cuit=@cuit";
+                List<BADEC> lst = new List<BADEC>();
+                using (SqlConnection con = GetConnectionSIIMVA())
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = sql.ToString();
+                    cmd.Parameters.AddWithValue("@cuit", cuit);
+                    cmd.Connection.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    lst = mapeo3(dr);
+                    return lst;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
         public static int insert(BADEC obj)
@@ -429,7 +458,7 @@ namespace Web_Api_IyC.Entities
                     cmd.CommandText = sql.ToString();
                     cmd.Parameters.AddWithValue("@INTERNO", obj.interno);
                     cmd.Parameters.AddWithValue("@PERSONA", obj.persona);
-                    cmd.Parameters.AddWithValue("@CONTRIBUYENTE", obj.CONTRIBUYENTE);
+                    cmd.Parameters.AddWithValue("@CONTRIBUYENTE", obj.contribuyente);
                     cmd.Parameters.AddWithValue("@TIPO_INSTIT", obj.tipo_instit);
                     cmd.Parameters.AddWithValue("@NOMBRE", obj.nombre);
                     cmd.Parameters.AddWithValue("@TIP_DOC", obj.tip_doc);
@@ -456,11 +485,11 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@FECHA_ALTA", obj.fecha_alta);
                     cmd.Parameters.AddWithValue("@ID_TIP_DOC", obj.id_tip_doc);
                     cmd.Parameters.AddWithValue("@COD_POSTAL_ARG", obj.cod_postal_arg);
-                    cmd.Parameters.AddWithValue("@CELULAR", obj.CELULAR);
-                    cmd.Parameters.AddWithValue("@USUARIO", obj.USUARIO);
-                    cmd.Parameters.AddWithValue("@SUBSISTEMA", obj.SUBSISTEMA);
+                    cmd.Parameters.AddWithValue("@CELULAR", obj.celular);
+                    cmd.Parameters.AddWithValue("@USUARIO", obj.usuario);
+                    cmd.Parameters.AddWithValue("@SUBSISTEMA", obj.subsistema);
                     cmd.Parameters.AddWithValue("@CUIT_AFIP", obj.cuit_afip);
-                    cmd.Parameters.AddWithValue("@CIUDADANO_DIGITAL", obj.CIUDADANO_DIGITAL);
+                    cmd.Parameters.AddWithValue("@CIUDADANO_DIGITAL", obj.ciudadano_digital);
                     cmd.Parameters.AddWithValue("@FECHA_NACIMIENTO", obj.fecha_nacimiento);
                     cmd.Connection.Open();
                     return Convert.ToInt32(cmd.ExecuteScalar());
@@ -523,7 +552,7 @@ namespace Web_Api_IyC.Entities
                     cmd.CommandText = sql.ToString();
                     cmd.Parameters.AddWithValue("@INTERNO", obj.interno);
                     cmd.Parameters.AddWithValue("@PERSONA", obj.persona);
-                    cmd.Parameters.AddWithValue("@CONTRIBUYENTE", obj.CONTRIBUYENTE);
+                    cmd.Parameters.AddWithValue("@CONTRIBUYENTE", obj.contribuyente);
                     cmd.Parameters.AddWithValue("@TIPO_INSTIT", obj.tipo_instit);
                     cmd.Parameters.AddWithValue("@NOMBRE", obj.nombre);
                     cmd.Parameters.AddWithValue("@TIP_DOC", obj.tip_doc);
@@ -550,11 +579,11 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@FECHA_ALTA", obj.fecha_alta);
                     cmd.Parameters.AddWithValue("@ID_TIP_DOC", obj.id_tip_doc);
                     cmd.Parameters.AddWithValue("@COD_POSTAL_ARG", obj.cod_postal_arg);
-                    cmd.Parameters.AddWithValue("@CELULAR", obj.CELULAR);
-                    cmd.Parameters.AddWithValue("@USUARIO", obj.USUARIO);
-                    cmd.Parameters.AddWithValue("@SUBSISTEMA", obj.SUBSISTEMA);
+                    cmd.Parameters.AddWithValue("@CELULAR", obj.celular);
+                    cmd.Parameters.AddWithValue("@USUARIO", obj.usuario);
+                    cmd.Parameters.AddWithValue("@SUBSISTEMA", obj.subsistema);
                     cmd.Parameters.AddWithValue("@CUIT_AFIP", obj.cuit_afip);
-                    cmd.Parameters.AddWithValue("@CIUDADANO_DIGITAL", obj.CIUDADANO_DIGITAL);
+                    cmd.Parameters.AddWithValue("@CIUDADANO_DIGITAL", obj.ciudadano_digital);
                     cmd.Parameters.AddWithValue("@FECHA_NACIMIENTO", obj.fecha_nacimiento);
                     cmd.Parameters.AddWithValue("@NRO_BAD", obj.nro_bad);
                     cmd.Connection.Open();
@@ -578,7 +607,7 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", NRO_DOC=@NRO_DOC");
                 sql.AppendLine(", E_MAIL=@E_MAIL ");
                 sql.AppendLine(" WHERE ");
-                sql.AppendLine("NRO_BAD=@NRO_BAD");
+                sql.AppendLine("NRO_BAD=@nro_bad");
                 using (SqlConnection con = GetConnectionSIIMVA())
                 {
                     SqlCommand cmd = con.CreateCommand();
@@ -599,7 +628,7 @@ namespace Web_Api_IyC.Entities
             }
         }
 
-        public static void delete(int NRO_BAD)
+        public static void delete(int nro_bad)
         {
             try
             {
@@ -612,17 +641,18 @@ namespace Web_Api_IyC.Entities
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = sql.ToString();
-                    cmd.Parameters.AddWithValue("@NRO_BAD", NRO_BAD);
+                    cmd.Parameters.AddWithValue("@nro_bad", nro_bad);
                     cmd.Connection.Open();
                     cmd.ExecuteNonQuery();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
     }
 }
+
 

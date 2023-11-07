@@ -14,7 +14,9 @@ namespace Web_Api_IyC.Entities
         {
             try
             {
-                return new SqlConnection("Data Source=10.0.1.52;Initial Catalog=SIIMVA;User ID=general");
+                //return new SqlConnection("Data Source=10.0.1.52;Initial Catalog=SIIMVA;User ID=general");
+                //return new SqlConnection("Data Source=10.0.0.8;Initial Catalog=SIIMVA;Persist Security Info=True;User ID=general");
+                return new SqlConnection("Data Source=10.11.15.107;Initial Catalog=SIIMVA;User ID=general");
             }
             catch (Exception ex)
             {
@@ -25,7 +27,9 @@ namespace Web_Api_IyC.Entities
         {
             try
             {
-                return new SqlConnection("Data Source=10.0.1.52;Initial Catalog=SIIMVA;User ID=general");
+                //return new SqlConnection("Data Source=10.0.1.52;Initial Catalog=SIIMVA;User ID=general");
+                //return new SqlConnection("Data Source=10.0.0.8;Initial Catalog=SIIMVA;Persist Security Info=True;User ID=general");
+                return new SqlConnection("Data Source=10.11.15.107;Initial Catalog=SIIMVA;User ID=general");
             }
             catch (Exception ex)
             {

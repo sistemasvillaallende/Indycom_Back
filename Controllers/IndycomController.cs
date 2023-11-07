@@ -443,5 +443,28 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(consulta);
         }
+
+        [HttpGet]
+        public IActionResult GetBadecByNombre(string nombre)
+        {
+            var badec = _iindycomService.GetBadecByNombre(nombre);
+            if (badec.Count == 0)
+            {
+                return BadRequest(new { message = @"Información, no se encontraron Contribuyentes " });
+            }
+            return Ok(badec);
+        }
+
+
+        [HttpGet]
+        public IActionResult GetBadecByCuit(string cuit)
+        {
+            var badec = _iindycomService.GetBadecByCuit(cuit);
+            if (badec.Count == 0)
+            {
+                return BadRequest(new { message = @"Información, no se encontraron Contribuyentes " });
+            }
+            return Ok(badec);
+        }
     }
 }
