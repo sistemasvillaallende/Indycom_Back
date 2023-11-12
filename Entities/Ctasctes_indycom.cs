@@ -456,8 +456,7 @@ namespace Web_Api_IyC.Entities
                             if (!dr.IsDBNull(periodo)) { obj.periodo = dr.GetString(periodo); }
                             if (!dr.IsDBNull(vencimiento))
                             {
-                                obj.vencimiento = Convert.ToDateTime(dr.GetDateTime(vencimiento),
-                                culturaFecArgentina).ToString();
+                                obj.vencimiento = Convert.ToDateTime(dr.GetDateTime(vencimiento), culturaFecArgentina).ToString();
                             }
                             lst.Add(obj);
                         }
@@ -484,11 +483,11 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", fecha_transaccion");
                 sql.AppendLine(", periodo");
                 sql.AppendLine(", monto_original");
-                sql.AppendLine(", nro_plan");
+                //sql.AppendLine(", nro_plan");
                 sql.AppendLine(", pagado");
                 sql.AppendLine(", debe");
                 sql.AppendLine(", haber");
-                sql.AppendLine(", nro_procuracion");
+                //sql.AppendLine(", nro_procuracion");
                 sql.AppendLine(", pago_parcial");
                 sql.AppendLine(", vencimiento");
                 sql.AppendLine(", nro_cedulon");
@@ -513,11 +512,11 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", @fecha_transaccion");
                 sql.AppendLine(", @periodo");
                 sql.AppendLine(", @monto_original");
-                sql.AppendLine(", @nro_plan");
+                //sql.AppendLine(", @nro_plan");
                 sql.AppendLine(", @pagado");
                 sql.AppendLine(", @debe");
                 sql.AppendLine(", @haber");
-                sql.AppendLine(", @nro_procuracion");
+                //sql.AppendLine(", @nro_procuracion");
                 sql.AppendLine(", @pago_parcial");
                 sql.AppendLine(", @vencimiento");
                 sql.AppendLine(", @nro_cedulon");
@@ -547,11 +546,11 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@fecha_transaccion", DateTime.Now);
                     cmd.Parameters.AddWithValue("@periodo", string.Empty);
                     cmd.Parameters.AddWithValue("@monto_original", 0);
-                    cmd.Parameters.AddWithValue("@nro_plan", null);
+                    //cmd.Parameters.AddWithValue("@nro_plan", null);
                     cmd.Parameters.AddWithValue("@pagado", 0);
                     cmd.Parameters.AddWithValue("@debe", 0);
                     cmd.Parameters.AddWithValue("@haber", 0);
-                    cmd.Parameters.AddWithValue("@nro_procuracion", null);
+                    //cmd.Parameters.AddWithValue("@nro_procuracion", null);
                     cmd.Parameters.AddWithValue("@pago_parcial", 0);
                     cmd.Parameters.AddWithValue("@vencimiento", null);
                     cmd.Parameters.AddWithValue("@nro_cedulon", 0);
@@ -568,9 +567,10 @@ namespace Web_Api_IyC.Entities
                     foreach (var item in lst)
                     {
                         nro_transaccion += 1;
-                        cmd.Parameters["@tipo_transaccion"].Value = item.tipo_transaccion;
-                        cmd.Parameters["periodo"].Value = item.periodo;
-                        cmd.Parameters["@nro_transaccion"].Value = item.nro_transaccion;
+                        cmd.Parameters["@tipo_transaccion"].Value = 1;
+                        cmd.Parameters["@periodo"].Value = item.periodo;
+                        cmd.Parameters["@nro_transaccion"].Value = nro_transaccion;
+                        cmd.Parameters["@nro_pago_parcial"].Value = 0;
                         cmd.Parameters["@legajo"].Value = legajo;
                         cmd.Parameters["@vencimiento"].Value = item.vencimiento;
                         cmd.ExecuteNonQuery();

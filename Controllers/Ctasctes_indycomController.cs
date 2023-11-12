@@ -62,7 +62,7 @@ namespace Web_Api_IyC.Controllers
             }
             else
             {
-                return BadRequest(new { message = "No se pudo Confirmar la Cancelacion Operativa!" });
+                return BadRequest(new { message = "Hubo Error, no se pudo Confirmar la Cancelacion Operativa!" });
 
             }
             return Ok(obj.lstCtastes);
@@ -88,7 +88,7 @@ namespace Web_Api_IyC.Controllers
             }
             else
             {
-                return BadRequest(new { message = "No se pudo Cancelar porque no hay Datos!" });
+                return BadRequest(new { message = "Hubo Error, no se pudo Cancelar porque no hay Datos!" });
             }
             return Ok(obj.lstCtastes);
         }
