@@ -494,14 +494,14 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", declaracion_jurada");
                 sql.AppendLine(", liquidacion_especial");
                 sql.AppendLine(", cod_cate_deuda");
-                sql.AppendLine(", monto_pagado");
-                sql.AppendLine(", recargo");
-                sql.AppendLine(", honorarios");
-                sql.AppendLine(", iva_hons");
+                //sql.AppendLine(", monto_pagado");
+                //sql.AppendLine(", recargo");
+                //sql.AppendLine(", honorarios");
+                //sql.AppendLine(", iva_hons");
                 sql.AppendLine(", tipo_deuda");
-                sql.AppendLine(", decreto");
-                sql.AppendLine(", observaciones");
-                sql.AppendLine(", nro_cedulon_paypertic");
+                //sql.AppendLine(", decreto");
+                //sql.AppendLine(", observaciones");
+                //sql.AppendLine(", nro_cedulon_paypertic");
                 sql.AppendLine(")");
                 sql.AppendLine("VALUES");
                 sql.AppendLine("(");
@@ -523,14 +523,14 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", @declaracion_jurada");
                 sql.AppendLine(", @liquidacion_especial");
                 sql.AppendLine(", @cod_cate_deuda");
-                sql.AppendLine(", @monto_pagado");
-                sql.AppendLine(", @recargo");
-                sql.AppendLine(", @honorarios");
-                sql.AppendLine(", @iva_hons");
+                //sql.AppendLine(", @monto_pagado");
+                //sql.AppendLine(", @recargo");
+                //sql.AppendLine(", @honorarios");
+                //sql.AppendLine(", @iva_hons");
                 sql.AppendLine(", @tipo_deuda");
-                sql.AppendLine(", @decreto");
-                sql.AppendLine(", @observaciones");
-                sql.AppendLine(", @nro_cedulon_paypertic");
+                //sql.AppendLine(", @decreto");
+                //sql.AppendLine(", @observaciones");
+                //sql.AppendLine(", @nro_cedulon_paypertic");
                 sql.AppendLine(")");
                 using (SqlConnection cn = GetConnectionSIIMVA())
                 {
@@ -556,13 +556,13 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@nro_cedulon", 0);
                     cmd.Parameters.AddWithValue("@declaracion_jurada", 1);
                     cmd.Parameters.AddWithValue("@liquidacion_especial", 0);
-                    cmd.Parameters.AddWithValue("@cod_cate_deuda", 0);
-                    cmd.Parameters.AddWithValue("@honorarios", 0);
-                    cmd.Parameters.AddWithValue("@iva_hons", 0);
+                    cmd.Parameters.AddWithValue("@cod_cate_deuda", 1);
+                    //cmd.Parameters.AddWithValue("@honorarios", 0);
+                    //cmd.Parameters.AddWithValue("@iva_hons", 0);
                     cmd.Parameters.AddWithValue("@tipo_deuda", 1);
-                    cmd.Parameters.AddWithValue("@decreto", 0);
-                    cmd.Parameters.AddWithValue("@observaciones", string.Empty);
-                    cmd.Parameters.AddWithValue("@nro_cedulon_paypertic", 0);
+                    //cmd.Parameters.AddWithValue("@decreto", 0);
+                    //cmd.Parameters.AddWithValue("@observaciones", string.Empty);
+                    //cmd.Parameters.AddWithValue("@nro_cedulon_paypertic", 0);
                     cmd.Connection.Open();
                     foreach (var item in lst)
                     {

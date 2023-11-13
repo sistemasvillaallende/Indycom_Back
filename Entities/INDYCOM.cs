@@ -417,7 +417,7 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", pri_periodo");
                 sql.AppendLine(", tipo_liquidacion");
                 sql.AppendLine(", dado_baja");
-                sql.AppendLine(", fecha_baja");
+                //sql.AppendLine(", fecha_baja");
                 sql.AppendLine(", exento");
                 sql.AppendLine(", vencimiento_eximido");
                 sql.AppendLine(", per_ult");
@@ -498,7 +498,7 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", @pri_periodo");
                 sql.AppendLine(", @tipo_liquidacion");
                 sql.AppendLine(", @dado_baja");
-                sql.AppendLine(", @fecha_baja");
+                //sql.AppendLine(", @fecha_baja");
                 sql.AppendLine(", @exento");
                 sql.AppendLine(", @vencimiento_eximido");
                 sql.AppendLine(", @per_ult");
@@ -564,7 +564,7 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", @CUIT_VECINO_DIGITAL");
                 sql.AppendLine(", @Vto_inscripcion");
                 sql.AppendLine(")");
-                sql.AppendLine("SELECT SCOPE_IDENTITY()");
+                //sql.AppendLine("SELECT SCOPE_IDENTITY()");
                 using (SqlConnection con = GetConnectionSIIMVA())
                 {
                     SqlCommand cmd = con.CreateCommand();
@@ -582,8 +582,8 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@cod_zona", obj.cod_zona);
                     cmd.Parameters.AddWithValue("@pri_periodo", obj.pri_periodo);
                     cmd.Parameters.AddWithValue("@tipo_liquidacion", obj.tipo_liquidacion);
-                    cmd.Parameters.AddWithValue("@dado_baja", obj.dado_baja);
-                    cmd.Parameters.AddWithValue("@fecha_baja", obj.fecha_baja);
+                    cmd.Parameters.AddWithValue("@dado_baja", false); //obj.dado_baja
+                    //cmd.Parameters.AddWithValue("@fecha_baja", obj.fecha_baja);
                     cmd.Parameters.AddWithValue("@exento", obj.exento);
                     cmd.Parameters.AddWithValue("@vencimiento_eximido", obj.vencimiento_eximido);
                     cmd.Parameters.AddWithValue("@per_ult", obj.per_ult);
@@ -649,7 +649,8 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@CUIT_VECINO_DIGITAL", obj.cuit_vecino_digital);
                     cmd.Parameters.AddWithValue("@Vto_inscripcion", obj.vto_inscripcion);
                     cmd.Connection.Open();
-                    return Convert.ToInt32(cmd.ExecuteScalar());
+                    cmd.ExecuteNonQuery();
+                    return obj.legajo;//Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
             catch (Exception)
@@ -657,7 +658,7 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        public static void Update(INDYCOM obj)
+        public static void UpdateDatosGenerales(INDYCOM obj)
         {
             try
             {
@@ -1016,21 +1017,20 @@ namespace Web_Api_IyC.Entities
                 throw ex;
             }
         }
-        public static void UpdateDatosGenerales(INDYCOM obj)
+        public static void Update(INDYCOM obj)
         {
             try
             {
                 DateTimeFormatInfo culturaFecArgentina = new CultureInfo("es-AR", false).DateTimeFormat;
                 StringBuilder sql = new StringBuilder();
                 sql.AppendLine("UPDATE  INDYCOM SET");
-                sql.AppendLine(", nro_bad=@nro_bad");
+                sql.AppendLine(" nro_bad=@nro_bad");
                 sql.AppendLine(", des_com=@des_com");
-                sql.AppendLine(", nom_fantasia=@nom_fansasia");
+                sql.AppendLine(", nom_fantasia=@nom_fantasia");
                 //sql.AppendLine(", dado_baja");
                 //sql.AppendLine(", fecha_baja");
                 sql.AppendLine(", exento=@exento");
                 sql.AppendLine(", nro_cuit=@nro_cuit");
-                sql.AppendLine(", transporte=@trasnporte");
                 sql.AppendLine(", fecha_alta=@fecha_alta");
                 sql.AppendLine(", nom_calle=@nom_calle");
                 sql.AppendLine(", cod_calle=@cod_calle");
@@ -1044,21 +1044,21 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", pais=@pais");
                 sql.AppendLine(", cod_postal=@cod_postal");
                 sql.AppendLine(", emite_cedulon=@emite_cedulon");
+                //
                 sql.AppendLine(", cod_situacion_judicial=@cod_situacion_judicial");
-                sql.AppendLine(", telefono=@teleono");
+                sql.AppendLine(", telefono=@telefono");
                 sql.AppendLine(", celular=@celular");
                 sql.AppendLine(", transporte=@transporte");
                 sql.AppendLine(", ocupacion_vereda=@ocupacion_vereda");
-                sql.AppendLine(", emite_cedulon=@emite_cedulon");
                 //sql.AppendLine(", clave_pago=@clave_pago");
                 //sql.AppendLine(", clave_gestion=@clave_gestion");
                 //
-                sql.AppendLine(", cod_cond_ante_iva");
-                sql.AppendLine(", cod_caracter");
-                sql.AppendLine(", categoria_iva");
-                sql.AppendLine(", otra_entidad");
-                sql.AppendLine(", convenio_uni");
-                sql.AppendLine(", cod_nueva_zona");
+                sql.AppendLine(", cod_cond_ante_iva=@cod_cond_ante_iva");
+                sql.AppendLine(", cod_caracter=@cod_caracter");
+                sql.AppendLine(", categoria_iva=@categoria_iva");
+                sql.AppendLine(", otra_entidad=@otra_entidad");
+                sql.AppendLine(", convenio_uni=@convenio_uni");
+                sql.AppendLine(", cod_nueva_zona=@cod_nueva_zona");
                 //sql.AppendLine(", vto_inscripcion=@vto_inscripcion");
                 sql.AppendLine("WHERE");
                 sql.AppendLine("legajo=@legajo");
@@ -1072,11 +1072,8 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@nro_contrib", obj.nro_contrib);
                     cmd.Parameters.AddWithValue("@des_com", obj.des_com);
                     cmd.Parameters.AddWithValue("@nom_fantasia", obj.nom_fantasia);
-                    cmd.Parameters.AddWithValue("@cod_calle", obj.cod_calle);
-                    cmd.Parameters.AddWithValue("@nro_dom", obj.nro_dom);
-                    cmd.Parameters.AddWithValue("@cod_barrio", obj.cod_barrio);
-                    cmd.Parameters.AddWithValue("@dado_baja", obj.dado_baja);
-                    cmd.Parameters.AddWithValue("@fecha_baja", obj.fecha_baja);
+                    //cmd.Parameters.AddWithValue("@dado_baja", obj.dado_baja);
+                    //cmd.Parameters.AddWithValue("@fecha_baja", obj.fecha_baja);
                     cmd.Parameters.AddWithValue("@exento", obj.exento);
                     cmd.Parameters.AddWithValue("@nro_cuit", obj.nro_cuit);
                     cmd.Parameters.AddWithValue("@transporte", obj.transporte);
@@ -1093,14 +1090,13 @@ namespace Web_Api_IyC.Entities
                     cmd.Parameters.AddWithValue("@pais", obj.pais);
                     cmd.Parameters.AddWithValue("@cod_postal", obj.cod_postal);
                     cmd.Parameters.AddWithValue("@emite_cedulon", obj.emite_cedulon);
+                    //
                     cmd.Parameters.AddWithValue("@cod_situacion_judicial", obj.cod_situacion_judicial);
                     cmd.Parameters.AddWithValue("@telefono", obj.telefono);
                     cmd.Parameters.AddWithValue("@celular", obj.celular);
-                    cmd.Parameters.AddWithValue("@transporte", obj.transporte);
                     cmd.Parameters.AddWithValue("@ocupacion_vereda", obj.Ocupacion_vereda);
                     //cmd.Parameters.AddWithValue("@clave_pago", obj.clave_pago);
                     //cmd.Parameters.AddWithValue("@clave_gestion", obj.clave_gestion);
-                    //
                     cmd.Parameters.AddWithValue("@cod_cond_ante_iva", obj.cod_cond_ante_iva);
                     cmd.Parameters.AddWithValue("@cod_caracter", obj.cod_caracter);
                     cmd.Parameters.AddWithValue("@categoria_iva", obj.categoria_iva);
