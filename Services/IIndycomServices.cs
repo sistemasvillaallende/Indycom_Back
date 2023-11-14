@@ -11,7 +11,7 @@ namespace Web_Api_IyC.Services
 {
     public interface IIndycomServices
     {
-        public int Insert(Entities.INDYCOM obj);
+        //public int Insert(Entities.INDYCOM obj);
         public void Update(Entities.INDYCOM obj);
         public void Delete(int nro_bad);
         public List<Entities.INDYCOM> Read();

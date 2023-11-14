@@ -36,17 +36,17 @@ namespace Web_Api_IyC.Services
                 throw ex;
             }
         }
-        public int Insert(INDYCOM obj)
-        {
-            try
-            {
-                return Entities.INDYCOM.Insert(obj);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //public int Insert(INDYCOM obj)
+        //{
+        //    try
+        //    {
+        //        return Entities.INDYCOM.Insert(obj);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
         public List<INDYCOM> Read()
         {
             try

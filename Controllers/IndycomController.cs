@@ -24,13 +24,6 @@ namespace Web_Api_IyC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Insert(Entities.INDYCOM obj)
-        {
-            _iindycomService.Insert(obj);
-            var indycom = _iindycomService.Read();
-            return Ok(indycom);
-        }
-        [HttpPost]
         public IActionResult Update(Entities.INDYCOM obj)
         {
             _iindycomService.Update(obj);
@@ -135,7 +128,6 @@ namespace Web_Api_IyC.Controllers
         [HttpPost]
         public IActionResult InsertDatosGeneral(Entities.INDYCOM obj)
         {
-            //obj.objAuditoria.usuario = usuario;
             _iindycomService.InsertDatosGeneral(obj);
             var indycom = _iindycomService.Read();
             return Ok(indycom);
