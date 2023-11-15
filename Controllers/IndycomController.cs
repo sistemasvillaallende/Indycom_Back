@@ -129,7 +129,11 @@ namespace Web_Api_IyC.Controllers
         public IActionResult InsertDatosGeneral(Entities.INDYCOM obj)
         {
             _iindycomService.InsertDatosGeneral(obj);
-            var indycom = _iindycomService.Read();
+            var indycom = _iindycomService.GetByPk(obj.legajo);
+            if (indycom == null)
+            {
+                return Ok(new { message = "Error, no se pudo dar de Alta el Comercio." });
+            }
             return Ok(indycom);
         }
         [HttpPost]
