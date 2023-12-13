@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "YkiIGlpO5NJkZxZ+5JdnT1WP+6SF6nkfOtOxUY94JL+Tkjp7xdB5KgYaZtgmqI2HnKGjjSLTctKPfO22S5eG+g==",
+  "dgSpecHash": "GdiV8StVjQNMZCM5z5ChgEtU5z9CoHV5gS2I5r8G/EgeUAUrU+a/bS1meTikhbegCOKUuT3ebTwxw+nvZeZMow==",
   "success": true,
   "projectFilePath": "D:\\Dev\\NET2022\\Web_Api_IyC\\Web_Api_IyC.csproj",
   "expectedPackageFiles": [
@@ -34,12 +34,5 @@
     "C:\\Users\\mandres\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\mandres\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problema al leer el archivo de caché D:\\Dev\\NET2022\\Web_Api_IyC\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }
