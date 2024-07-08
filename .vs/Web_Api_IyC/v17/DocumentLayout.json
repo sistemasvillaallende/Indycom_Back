@@ -118,8 +118,7 @@
               "RelativeToolTip": "Controllers\\IndycomController.cs",
               "ViewState": "AQIAABcAAAAAAAAAAAAEwCAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-08T01:03:37.271Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-08T01:03:37.271Z"
             },
             {
               "$type": "Document",
@@ -131,8 +130,7 @@
               "RelativeToolTip": "Entities\\INDYCOM.cs",
               "ViewState": "AQIAAOgGAAAAAAAAAAAmwAkHAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-08T00:23:41.258Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-08T00:23:41.258Z"
             },
             {
               "$type": "Document",
@@ -142,7 +140,7 @@
               "RelativeDocumentMoniker": "Services\\IndycomServices.cs",
               "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Services\\IndycomServices.cs",
               "RelativeToolTip": "Services\\IndycomServices.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAowDMAAAAIAAAA",
+              "ViewState": "AQIAAAACAAAAAAAAAAAYwFsAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-07T22:25:25.51Z",
               "EditorCaption": ""
@@ -157,8 +155,7 @@
               "RelativeToolTip": "Services\\IIndycomServices.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAA0wBcAAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-08T01:00:03.74Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-08T01:00:03.74Z"
             },
             {
               "$type": "Document",
@@ -170,8 +167,7 @@
               "RelativeToolTip": "Entities\\DALBase.cs",
               "ViewState": "AQIAAHcAAAAAAAAAAAAYwJUAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-07T22:14:06.69Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-07T22:14:06.69Z"
             },
             {
               "$type": "Document",
@@ -183,8 +179,7 @@
               "RelativeToolTip": "Services\\Ctasctes_indycomServices.cs",
               "ViewState": "AQIAAEgAAAAAAAAAAAAawGEAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-07T20:30:35.925Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-07T20:30:35.925Z"
             },
             {
               "$type": "Document",
@@ -196,8 +191,7 @@
               "RelativeToolTip": "Entities\\AUDITORIA\\AuditoriaD.cs",
               "ViewState": "AQIAAAwAAAAAAAAAAAAUwAgAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-07T20:38:30.026Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-07T20:38:30.026Z"
             },
             {
               "$type": "Document",
@@ -209,8 +203,7 @@
               "RelativeToolTip": "Entities\\Ctasctes_indycom.cs",
               "ViewState": "AQIAAJQFAAAAAAAAAAAEwKAFAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-07T20:34:06.502Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-07T20:34:06.502Z"
             }
           ]
         }
