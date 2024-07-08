@@ -24,11 +24,11 @@ namespace Web_Api_IyC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(Entities.INDYCOM obj)
+        public IActionResult Update(INDYCOM obj)
         {
-            _iindycomService.Update(obj);
-            var indycom = _iindycomService.GetByPk(obj.legajo);
-            return Ok(indycom);
+            var objOriginal = _iindycomService.GetByPk(obj.legajo);
+            _iindycomService.Update(obj, objOriginal);
+            return Ok(objOriginal);
         }
 
         [HttpPost]
@@ -43,7 +43,6 @@ namespace Web_Api_IyC.Controllers
         public IActionResult Read()
         {
             var indycom = _iindycomService.Read();
-
             return Ok(indycom);
         }
 
@@ -59,7 +58,6 @@ namespace Web_Api_IyC.Controllers
         public IActionResult saludo()
         {
             var msg = "hola putoooo";
-
             return Ok(msg);
         }
 
@@ -143,7 +141,7 @@ namespace Web_Api_IyC.Controllers
             var indycom = _iindycomService.GetByPk(obj.legajo);
             if (indycom.legajo > 0)
             {
-                _iindycomService.UpdateDatosGenerales(obj);
+                _iindycomService.UpdateDatosGenerales(obj, indycom);
             }
             else
             {
@@ -152,26 +150,29 @@ namespace Web_Api_IyC.Controllers
             return Ok(indycom);
         }
         [HttpPost]
-        public IActionResult UpdateDatosDomPostal(Entities.INDYCOM obj)
+        public IActionResult UpdateDatosDomPostal(INDYCOM obj)
         {
             //obj.objAuditoria.usuario = usuario;
-            _iindycomService.UpdateDatosDomPostal(obj);
+            var objOriginal = _iindycomService.GetByPk(obj.legajo);
+            _iindycomService.UpdateDatosDomPostal(obj, objOriginal);
             var indycom = _iindycomService.Read();
             return Ok(indycom);
         }
         [HttpPost]
-        public IActionResult SaveDatosAfip(Entities.INDYCOM obj)
+        public IActionResult SaveDatosAfip(INDYCOM obj)
         {
             //obj.objAuditoria.usuario = usuario;
-            _iindycomService.SaveDatosAfip(obj);
+            var objOriginal = _iindycomService.GetByPk(obj.legajo);
+            _iindycomService.SaveDatosAfip(obj, objOriginal);
             var indycom = _iindycomService.Read();
             return Ok(indycom);
         }
         [HttpPost]
-        public IActionResult SaveDatosLiquidacion(Entities.INDYCOM obj)
+        public IActionResult SaveDatosLiquidacion(INDYCOM obj)
         {
             //obj.objAuditoria.usuario = usuario;
-            _iindycomService.SaveDatosLiquidacion(obj);
+            var objOriginal = _iindycomService.GetByPk(obj.legajo);
+            _iindycomService.SaveDatosLiquidacion(obj, objOriginal);
             var indycom = _iindycomService.Read();
             return Ok(indycom);
         }
@@ -303,9 +304,10 @@ namespace Web_Api_IyC.Controllers
         }
 
         [HttpPost]
-        public ActionResult BajaComercial(int legajo, string fecha_baja, Auditoria obj)
+        public ActionResult BajaComercial(int legajo, string fecha_baja, Auditoria objAuditoria)
         {
-            _iindycomService.BajaComercial(legajo, fecha_baja, obj);
+            var objOriginal = _iindycomService.GetByPk(legajo);
+            _iindycomService.BajaComercial(legajo, fecha_baja, objOriginal, objAuditoria);
             var indycom = _iindycomService.GetByPk(legajo);
             if (indycom.fecha_baja == null)
             {
@@ -315,9 +317,10 @@ namespace Web_Api_IyC.Controllers
         }
 
         [HttpPost]
-        public ActionResult BajaSucursal(int legajo, int nro_sucursal, string fecha_baja, Auditoria obj)
+        public ActionResult BajaSucursal(int legajo, int nro_sucursal, string fecha_baja, Auditoria objAuditoria)
         {
-            _iindycomService.BajaSucursal(legajo, nro_sucursal, fecha_baja, obj);
+            var objOriginal = _iindycomService.GetByPk(legajo);
+            _iindycomService.BajaSucursal(legajo, nro_sucursal, fecha_baja, objOriginal, objAuditoria);
             var indycom = _iindycomService.GetByPk(legajo);
             if (indycom.fecha_baja == null)
             {

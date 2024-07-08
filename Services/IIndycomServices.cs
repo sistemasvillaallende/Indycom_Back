@@ -12,7 +12,7 @@ namespace Web_Api_IyC.Services
     public interface IIndycomServices
     {
         //public int Insert(Entities.INDYCOM obj);
-        public void Update(Entities.INDYCOM obj);
+        public void Update(Entities.INDYCOM obj, INDYCOM objOriginal);
         public void Delete(int nro_bad);
         public List<Entities.INDYCOM> Read();
         public Entities.INDYCOM GetByPk(int nro_bad);
@@ -23,16 +23,16 @@ namespace Web_Api_IyC.Services
         public List<Combo> Zonasiyc();
         public List<Combo> Situacion_judicial();
         public void InsertDatosGeneral(Entities.INDYCOM obj);
-        public void UpdateDatosGenerales(INDYCOM obj);
-        public void UpdateDatosDomPostal(Entities.INDYCOM obj);
-        public void SaveDatosAfip(Entities.INDYCOM obj);
-        public void SaveDatosLiquidacion(Entities.INDYCOM obj);
+        public void UpdateDatosGenerales(INDYCOM obj, INDYCOM objOriginal);
+        public void UpdateDatosDomPostal(Entities.INDYCOM obj, INDYCOM objOriginal);
+        public void SaveDatosAfip(Entities.INDYCOM obj, INDYCOM objOriginal);
+        public void SaveDatosLiquidacion(Entities.INDYCOM obj, INDYCOM objOriginal);
         public int Count();
         public List<Entities.INDYCOM> GetIndycomPaginado(string buscarPor, string strParametro, int registro_desde, int registro_hasta);
         public List<Buscador> GetConvenios(string nom_convenio);
         public List<Buscador> GetMinimos_indycom(string nom_convenio);
-        public void BajaComercial(int legajo, string fecha_baja, Auditoria obj);
-        public void BajaSucursal(int legajo, int nro_sucursal, string fecha_baja, Auditoria obj);
+        public void BajaComercial(int legajo, string fecha_baja, INDYCOM objOriginal, Auditoria obj);
+        public void BajaSucursal(int legajo, int nro_sucursal, string fecha_baja, INDYCOM objOriginal, Auditoria obj);
         public List<Bases_imponibles> GetBasesImponibles(int legajo, string periodo_desde, string periodo_hasta);
         public List<Rubros_x_iyc> GetRubros_x_iyc(int legajo);
         public Sucursales_indycom GetSucuralByLegajo(int legajo, int nro_sucursal);
