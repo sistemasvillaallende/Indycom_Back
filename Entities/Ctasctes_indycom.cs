@@ -182,8 +182,7 @@ namespace Web_Api_IyC.Entities
             }
         }
 
-        public static Ctasctes_indycom getByPk(
-        int tipo_transaccion, int nro_transaccion, int nro_pago_parcial)
+        public static Ctasctes_indycom getByPk(int tipo_transaccion, int nro_transaccion, int nro_pago_parcial)
         {
             try
             {
@@ -469,7 +468,8 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        public static void Confirma_iniciar_ctacte(int legajo, List<Ctasctes_indycom> lst)
+        public static void Confirma_iniciar_ctacte(int legajo, List<Ctasctes_indycom> lst,
+            SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -532,49 +532,48 @@ namespace Web_Api_IyC.Entities
                 //sql.AppendLine(", @observaciones");
                 //sql.AppendLine(", @nro_cedulon_paypertic");
                 sql.AppendLine(")");
-                using (SqlConnection cn = GetConnectionSIIMVA())
+
+                nro_transaccion = GetNroTransaccion(3, con, trx);
+                UpdateNroTransaccion(3, (nro_transaccion + lst.Count), con, trx);
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql.ToString();
+                cmd.Parameters.AddWithValue("@tipo_transaccion", 1);
+                cmd.Parameters.AddWithValue("@nro_transaccion", 0);
+                cmd.Parameters.AddWithValue("@nro_pago_parcial", 0);
+                cmd.Parameters.AddWithValue("@legajo", legajo);
+                cmd.Parameters.AddWithValue("@fecha_transaccion", DateTime.Now);
+                cmd.Parameters.AddWithValue("@periodo", string.Empty);
+                cmd.Parameters.AddWithValue("@monto_original", 0);
+                //cmd.Parameters.AddWithValue("@nro_plan", null);
+                cmd.Parameters.AddWithValue("@pagado", 0);
+                cmd.Parameters.AddWithValue("@debe", 0);
+                cmd.Parameters.AddWithValue("@haber", 0);
+                //cmd.Parameters.AddWithValue("@nro_procuracion", null);
+                cmd.Parameters.AddWithValue("@pago_parcial", 0);
+                cmd.Parameters.AddWithValue("@vencimiento", null);
+                cmd.Parameters.AddWithValue("@nro_cedulon", 0);
+                cmd.Parameters.AddWithValue("@declaracion_jurada", 1);
+                cmd.Parameters.AddWithValue("@liquidacion_especial", 0);
+                cmd.Parameters.AddWithValue("@cod_cate_deuda", 1);
+                //cmd.Parameters.AddWithValue("@honorarios", 0);
+                //cmd.Parameters.AddWithValue("@iva_hons", 0);
+                cmd.Parameters.AddWithValue("@tipo_deuda", 1);
+                //cmd.Parameters.AddWithValue("@decreto", 0);
+                //cmd.Parameters.AddWithValue("@observaciones", string.Empty);
+                //cmd.Parameters.AddWithValue("@nro_cedulon_paypertic", 0);
+                //cmd.Connection.Open();
+                foreach (var item in lst)
                 {
-                    nro_transaccion = GetNroTransaccion(3);
-                    UpdateNroTransaccion(3, (nro_transaccion + lst.Count));
-                    SqlCommand cmd = cn.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = sql.ToString();
-                    cmd.Parameters.AddWithValue("@tipo_transaccion", 1);
-                    cmd.Parameters.AddWithValue("@nro_transaccion", 0);
-                    cmd.Parameters.AddWithValue("@nro_pago_parcial", 0);
-                    cmd.Parameters.AddWithValue("@legajo", legajo);
-                    cmd.Parameters.AddWithValue("@fecha_transaccion", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@periodo", string.Empty);
-                    cmd.Parameters.AddWithValue("@monto_original", 0);
-                    //cmd.Parameters.AddWithValue("@nro_plan", null);
-                    cmd.Parameters.AddWithValue("@pagado", 0);
-                    cmd.Parameters.AddWithValue("@debe", 0);
-                    cmd.Parameters.AddWithValue("@haber", 0);
-                    //cmd.Parameters.AddWithValue("@nro_procuracion", null);
-                    cmd.Parameters.AddWithValue("@pago_parcial", 0);
-                    cmd.Parameters.AddWithValue("@vencimiento", null);
-                    cmd.Parameters.AddWithValue("@nro_cedulon", 0);
-                    cmd.Parameters.AddWithValue("@declaracion_jurada", 1);
-                    cmd.Parameters.AddWithValue("@liquidacion_especial", 0);
-                    cmd.Parameters.AddWithValue("@cod_cate_deuda", 1);
-                    //cmd.Parameters.AddWithValue("@honorarios", 0);
-                    //cmd.Parameters.AddWithValue("@iva_hons", 0);
-                    cmd.Parameters.AddWithValue("@tipo_deuda", 1);
-                    //cmd.Parameters.AddWithValue("@decreto", 0);
-                    //cmd.Parameters.AddWithValue("@observaciones", string.Empty);
-                    //cmd.Parameters.AddWithValue("@nro_cedulon_paypertic", 0);
-                    cmd.Connection.Open();
-                    foreach (var item in lst)
-                    {
-                        nro_transaccion += 1;
-                        cmd.Parameters["@tipo_transaccion"].Value = 1;
-                        cmd.Parameters["@periodo"].Value = item.periodo;
-                        cmd.Parameters["@nro_transaccion"].Value = nro_transaccion;
-                        cmd.Parameters["@nro_pago_parcial"].Value = 0;
-                        cmd.Parameters["@legajo"].Value = legajo;
-                        cmd.Parameters["@vencimiento"].Value = item.vencimiento;
-                        cmd.ExecuteNonQuery();
-                    }
+                    nro_transaccion += 1;
+                    cmd.Parameters["@tipo_transaccion"].Value = 1;
+                    cmd.Parameters["@periodo"].Value = item.periodo;
+                    cmd.Parameters["@nro_transaccion"].Value = nro_transaccion;
+                    cmd.Parameters["@nro_pago_parcial"].Value = 0;
+                    cmd.Parameters["@legajo"].Value = legajo;
+                    cmd.Parameters["@vencimiento"].Value = item.vencimiento;
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception)
@@ -582,6 +581,7 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
+
         //public static List<Ctasctes_indycom> PeriodosRecalculo(int legajo)
         //{
         //    try
@@ -1200,7 +1200,8 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        public static void InsertCancelacioMasiva(int tipo_transaccion, int legajo, List<Ctasctes_indycom> lst)
+        public static void InsertCancelacioMasiva(int tipo_transaccion, int legajo, List<Ctasctes_indycom> lst,
+            SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -1242,44 +1243,43 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", @declaracion_jurada");
                 sql.AppendLine(", @liquidacion_especial");
                 sql.AppendLine(")");
-                using (SqlConnection con = GetConnectionSIIMVA())
+                //
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql.ToString();
+                cmd.Parameters.AddWithValue("@tipo_transaccion", tipo_transaccion);
+                cmd.Parameters.AddWithValue("@nro_transaccion", 0);
+                cmd.Parameters.AddWithValue("@nro_pago_parcial", 0);
+                cmd.Parameters.AddWithValue("@legajo", string.Empty);
+                cmd.Parameters.AddWithValue("@fecha_transaccion", DateTime.Now);
+                cmd.Parameters.AddWithValue("@periodo", string.Empty);
+                cmd.Parameters.AddWithValue("@monto_original", 0);
+                cmd.Parameters.AddWithValue("@pagado", 1);
+                cmd.Parameters.AddWithValue("@debe", 0);
+                cmd.Parameters.AddWithValue("@haber", 0);
+                cmd.Parameters.AddWithValue("@pago_parcial", 0);
+                cmd.Parameters.AddWithValue("@vencimiento", string.Empty);
+                cmd.Parameters.AddWithValue("@cod_cate_deuda", 0);
+                cmd.Parameters.AddWithValue("@monto_pagado", 0);
+                cmd.Parameters.AddWithValue("@declaracion_jurada", 0);
+                cmd.Parameters.AddWithValue("@liquidacion_especial", 0);
+                //cmd.Connection.Open();
+                foreach (var item in lst)
                 {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = sql.ToString();
-                    cmd.Parameters.AddWithValue("@tipo_transaccion", tipo_transaccion);
-                    cmd.Parameters.AddWithValue("@nro_transaccion", 0);
-                    cmd.Parameters.AddWithValue("@nro_pago_parcial", 0);
-                    cmd.Parameters.AddWithValue("@legajo", string.Empty);
-                    cmd.Parameters.AddWithValue("@fecha_transaccion", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@periodo", string.Empty);
-                    cmd.Parameters.AddWithValue("@monto_original", 0);
-                    cmd.Parameters.AddWithValue("@pagado", 1);
-                    cmd.Parameters.AddWithValue("@debe", 0);
-                    cmd.Parameters.AddWithValue("@haber", 0);
-                    cmd.Parameters.AddWithValue("@pago_parcial", 0);
-                    cmd.Parameters.AddWithValue("@vencimiento", string.Empty);
-                    cmd.Parameters.AddWithValue("@cod_cate_deuda", 0);
-                    cmd.Parameters.AddWithValue("@monto_pagado", 0);
-                    cmd.Parameters.AddWithValue("@declaracion_jurada", 0);
-                    cmd.Parameters.AddWithValue("@liquidacion_especial", 0);
-                    cmd.Connection.Open();
-                    foreach (var item in lst)
-                    {
-                        cmd.Parameters["@nro_transaccion"].Value = item.nro_transaccion;
-                        cmd.Parameters["@tipo_transaccion"].Value = tipo_transaccion;
-                        cmd.Parameters["@nro_pago_parcial"].Value = item.nro_pago_parcial;
-                        cmd.Parameters["@legajo"].Value = legajo;
-                        cmd.Parameters["@fecha_transaccion"].Value = DateTime.Now;
-                        cmd.Parameters["@periodo"].Value = item.periodo;
-                        cmd.Parameters["@haber"].Value = item.debe;
-                        cmd.Parameters["@pago_parcial"].Value = item.pago_parcial;
-                        cmd.Parameters["@vencimiento"].Value = item.vencimiento;
-                        cmd.Parameters["@cod_cate_deuda"].Value = item.cod_cate_deuda;
-                        cmd.Parameters["@declaracion_jurada"].Value = item.declaracion_jurada;
-                        cmd.Parameters["@liquidacion_especial"].Value = item.liquidacion_especial;
-                        cmd.ExecuteNonQuery();
-                    }
+                    cmd.Parameters["@nro_transaccion"].Value = item.nro_transaccion;
+                    cmd.Parameters["@tipo_transaccion"].Value = tipo_transaccion;
+                    cmd.Parameters["@nro_pago_parcial"].Value = item.nro_pago_parcial;
+                    cmd.Parameters["@legajo"].Value = legajo;
+                    cmd.Parameters["@fecha_transaccion"].Value = DateTime.Now;
+                    cmd.Parameters["@periodo"].Value = item.periodo;
+                    cmd.Parameters["@haber"].Value = item.debe;
+                    cmd.Parameters["@pago_parcial"].Value = item.pago_parcial;
+                    cmd.Parameters["@vencimiento"].Value = item.vencimiento;
+                    cmd.Parameters["@cod_cate_deuda"].Value = item.cod_cate_deuda;
+                    cmd.Parameters["@declaracion_jurada"].Value = item.declaracion_jurada;
+                    cmd.Parameters["@liquidacion_especial"].Value = item.liquidacion_especial;
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (SqlException ex)
@@ -1335,7 +1335,8 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        public static void Confirma_elimina_cancelacion(int legajo, List<Ctasctes_indycom> lst)
+        public static void Confirma_elimina_cancelacion(int legajo, List<Ctasctes_indycom> lst,
+            SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -1345,21 +1346,18 @@ namespace Web_Api_IyC.Entities
                                       legajo=@legajo AND
                                       nro_transaccion=@nro_transaccion and
                                       legajo=@legajo";
-
-                using (SqlConnection con = GetConnectionSIIMVA())
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSQL;
+                //cmd.Connection.Open();
+                cmd.Parameters.AddWithValue("@legajo", legajo);
+                cmd.Parameters.AddWithValue("@nro_transaccion", 0);
+                foreach (var item in lst)
                 {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = strSQL;
-                    cmd.Connection.Open();
-                    cmd.Parameters.AddWithValue("@legajo", legajo);
-                    cmd.Parameters.AddWithValue("@nro_transaccion", 0);
-                    foreach (var item in lst)
-                    {
-                        cmd.Parameters["@legajo"].Value = legajo;
-                        cmd.Parameters["@nro_transaccion"].Value = item.nro_transaccion;
-                        cmd.ExecuteNonQuery();
-                    }
+                    cmd.Parameters["@legajo"].Value = legajo;
+                    cmd.Parameters["@nro_transaccion"].Value = item.nro_transaccion;
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception)
@@ -1429,7 +1427,8 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        public static List<Ctasctes_indycom> Reliquidar_periodos(int legajo, List<Ctasctes_indycom> lst)
+        public static List<Ctasctes_indycom> Reliquidar_periodos(int legajo, List<Ctasctes_indycom> lst,
+            SqlConnection con, SqlTransaction trx)
         {
             //Parametros que vienen como item en la la lst
             //string periodo, int nro_transaccion, int tipo_per
@@ -1443,8 +1442,8 @@ namespace Web_Api_IyC.Entities
                     anio = Convert.ToInt32(item.periodo.Substring(0, 4));
                     if (anio >= 2020)
                     {
-                        auxmonto_original = sp_RECALCULO_INDYCOM(item.legajo, item.periodo, item.cod_tipo_per);
-                        auxdebe = auxmonto_original + Calcula_Interes(auxmonto_original, item.vencimiento);
+                        auxmonto_original = sp_RECALCULO_INDYCOM(item.legajo, item.periodo, item.cod_tipo_per, con, trx);
+                        auxdebe = auxmonto_original + Calcula_Interes(auxmonto_original, item.vencimiento, con, trx);
                         item.monto_original = Convert.ToDecimal(auxmonto_original);
                         item.debe = Convert.ToDecimal(auxdebe);
 
@@ -1457,7 +1456,8 @@ namespace Web_Api_IyC.Entities
                 throw new Exception(string.Format("{0}", "{1}", "Error en el Proceso de Reliquidar la Deuda del Legajo ", legajo), ex);
             }
         }
-        public static void Confirma_reliquidacion(int legajo, int tipo_liquidacion, List<Ctasctes_indycom> lst)
+        public static void Confirma_reliquidacion(int legajo, int tipo_liquidacion, List<Ctasctes_indycom> lst,
+           SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -1467,12 +1467,12 @@ namespace Web_Api_IyC.Entities
                     anio = Convert.ToInt32(item.periodo.Substring(0, 4));
                     if (anio >= 2020)
                     {
-                        SqlUpdate_Ctasctes(legajo, item.monto_original, item.debe, item.nro_transaccion, item.periodo);
+                        SqlUpdate_Ctasctes(legajo, item.monto_original, item.debe, item.nro_transaccion, item.periodo, con, trx);
                         if (tipo_liquidacion == 1)
-                            sqlDelete_Detalle_Mensual(item.nro_transaccion);
+                            sqlDelete_Detalle_Mensual(item.nro_transaccion, con, trx);
                         else
-                            sqlDelete_Detalle_MensualConDJJ(item.nro_transaccion);
-                        sqlInsert_Detalle_Mensual(item.nro_transaccion);
+                            sqlDelete_Detalle_MensualConDJJ(item.nro_transaccion, con, trx);
+                        sqlInsert_Detalle_Mensual(item.nro_transaccion, con, trx);
                     }
                 }
             }
@@ -1481,7 +1481,8 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        public static void MarcopagadalaCtacte(int legajo, List<Ctasctes_indycom> lst)
+        public static void MarcopagadalaCtacte(int legajo, List<Ctasctes_indycom> lst,
+            SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -1489,30 +1490,31 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine("UPDATE Ctasctes_indycom");
                 sql.AppendLine("set pagado=1");
                 sql.AppendLine("WHERE legajo=@legajo AND ");
-                sql.AppendLine("      tipo_transaccion=1 AND ");
-                sql.AppendLine("      nro_transaccion=@nro_transaccion");
-                using (SqlConnection con = GetConnectionSIIMVA())
+                sql.AppendLine("   tipo_transaccion=1 AND ");
+                sql.AppendLine("   nro_transaccion=@nro_transaccion");
+                //
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql.ToString();
+                cmd.Parameters.AddWithValue("@legajo", 0);
+                cmd.Parameters.AddWithValue("@nro_transaccion", 0);
+                //cmd.Connection.Open();
+                foreach (var item in lst)
                 {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = sql.ToString();
-                    cmd.Parameters.AddWithValue("@legajo", 0);
-                    cmd.Parameters.AddWithValue("@nro_transaccion", 0);
-                    cmd.Connection.Open();
-                    foreach (var item in lst)
-                    {
-                        cmd.Parameters["@legajo"].Value = legajo;
-                        cmd.Parameters["@nro_transaccion"].Value = item.nro_transaccion;
-                        cmd.ExecuteNonQuery();
-                    }
+                    cmd.Parameters["@legajo"].Value = legajo;
+                    cmd.Parameters["@nro_transaccion"].Value = item.nro_transaccion;
+                    cmd.ExecuteNonQuery();
                 }
+                //
             }
             catch (SqlException ex)
             {
                 throw new Exception("Error en la marca de la CtaCte del Legajo " + legajo);
             }
         }
-        public static void MarconopagadalaCtacte(int legajo, List<Ctasctes_indycom> lst)
+        public static void MarconopagadalaCtacte(int legajo, List<Ctasctes_indycom> lst,
+            SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -1522,21 +1524,21 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine("WHERE legajo=@legajo AND ");
                 sql.AppendLine("      tipo_transaccion=1 AND ");
                 sql.AppendLine("      nro_transaccion=@nro_transaccion");
-                using (SqlConnection con = GetConnectionSIIMVA())
+                //
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql.ToString();
+                cmd.Parameters.AddWithValue("@legajo", 0);
+                cmd.Parameters.AddWithValue("@nro_transaccion", 0);
+                //cmd.Connection.Open();
+                foreach (var item in lst)
                 {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = sql.ToString();
-                    cmd.Parameters.AddWithValue("@legajo", 0);
-                    cmd.Parameters.AddWithValue("@nro_transaccion", 0);
-                    cmd.Connection.Open();
-                    foreach (var item in lst)
-                    {
-                        cmd.Parameters["@legajo"].Value = legajo;
-                        cmd.Parameters["@nro_transaccion"].Value = item.nro_transaccion;
-                        cmd.ExecuteNonQuery();
-                    }
+                    cmd.Parameters["@legajo"].Value = legajo;
+                    cmd.Parameters["@nro_transaccion"].Value = item.nro_transaccion;
+                    cmd.ExecuteNonQuery();
                 }
+                //
             }
             catch (SqlException ex)
             {
@@ -1544,52 +1546,51 @@ namespace Web_Api_IyC.Entities
             }
         }
         ////////////////////
-        public static List<Ctasctes_indycom> Reliquidar_periodos(SqlConnection cn, int legajo, List<Ctasctes_indycom> lst)
-        {
-            //Parametros que vienen como item en la la lst
-            //string periodo, int nro_transaccion, int tipo_per
-            try
-            {
-                int anio = 0;
-                double auxmonto_original = 0;
-                double auxdebe = 0;
-                foreach (var item in lst)
-                {
-                    anio = Convert.ToInt32(item.periodo.Substring(0, 4));
-                    if (anio >= 2020)
-                    {
-                        if (item.cod_tipo_per == 1) //Periodo Mensual
-                        {
-                            auxmonto_original = sp_RECALCULO_INDYCOM(item.legajo, item.periodo, item.cod_tipo_per);
-                            auxdebe = auxmonto_original + Calcula_Interes(auxmonto_original, item.vencimiento);
-                            item.monto_original = Convert.ToDecimal(auxmonto_original);
-                            item.debe = Convert.ToDecimal(auxdebe);
-                        }
-                    }
-                }
-                return lst;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        private static double Calcula_Interes(double auxmonto_original, DateTime? vencimiento)
+        //public static List<Ctasctes_indycom> Reliquidar_periodos(int legajo, List<Ctasctes_indycom> lst, SqlConnection con, SqlTransaction trx)
+        //{
+        //    //Parametros que vienen como item en la la lst
+        //    //string periodo, int nro_transaccion, int tipo_per
+        //    try
+        //    {
+        //        int anio = 0;
+        //        double auxmonto_original = 0;
+        //        double auxdebe = 0;
+        //        foreach (var item in lst)
+        //        {
+        //            anio = Convert.ToInt32(item.periodo.Substring(0, 4));
+        //            if (anio >= 2020)
+        //            {
+        //                if (item.cod_tipo_per == 1) //Periodo Mensual
+        //                {
+        //                    auxmonto_original = sp_RECALCULO_INDYCOM(item.legajo, item.periodo, item.cod_tipo_per, con, trx);
+        //                    auxdebe = auxmonto_original + Calcula_Interes(auxmonto_original, item.vencimiento, con, trx);
+        //                    item.monto_original = Convert.ToDecimal(auxmonto_original);
+        //                    item.debe = Convert.ToDecimal(auxdebe);
+        //                }
+        //            }
+        //        }
+        //        return lst;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+        private static double Calcula_Interes(double auxmonto_original, DateTime? vencimiento, 
+            SqlConnection con, SqlTransaction trx)
         {
             try
             {
                 DateTimeFormatInfo culturaFecArgentina = new CultureInfo("es-AR", false).DateTimeFormat;
                 double interes = 0;
-                using (SqlConnection cn = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = cn.CreateCommand();
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "dbo.Calculo_Interes_4";
-                    cmd.Connection.Open();
-                    cmd.Parameters.AddWithValue("@monto_original", auxmonto_original);
-                    cmd.Parameters.AddWithValue("@vencimiento", Convert.ToDateTime(vencimiento, culturaFecArgentina));
-                    interes = Convert.ToDouble(cmd.ExecuteScalarAsync());
-                }
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "dbo.Calculo_Interes_4";
+                //cmd.Connection.Open();
+                cmd.Parameters.AddWithValue("@monto_original", auxmonto_original);
+                cmd.Parameters.AddWithValue("@vencimiento", Convert.ToDateTime(vencimiento, culturaFecArgentina));
+                interes = Convert.ToDouble(cmd.ExecuteScalarAsync());
                 return interes;
             }
             catch (Exception)
@@ -1603,7 +1604,7 @@ namespace Web_Api_IyC.Entities
             try
             {
                 string strSQL = @"UPDATE CTASCTES_INDYCOM
-                                  set monto_original=0, debe=0
+                                    set monto_original=0, debe=0
                                   WHERE
                                     tipo_transaccion=1 AND
                                     nro_pago_parcial=0 AND
@@ -1625,7 +1626,8 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        private static void SqlUpdate_Ctasctes(int legajo, decimal monto_original, decimal debe, int nro_transaccion, string periodo)
+        private static void SqlUpdate_Ctasctes(int legajo, decimal monto_original, decimal debe, int nro_transaccion,
+            string periodo, SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -1635,41 +1637,40 @@ namespace Web_Api_IyC.Entities
                                     AND tipo_transaccion=1
                                     AND legajo=@legajo
                                     AND periodo=@periodo";
-                using (SqlConnection cn = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = cn.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = strSQL;
-                    cmd.Parameters.AddWithValue("@legajo", legajo);
-                    cmd.Parameters.AddWithValue("@periodo", periodo);
-                    cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
-                    cmd.Parameters.AddWithValue("@monto_1", monto_original);
-                    cmd.Parameters.AddWithValue("@monto_2", debe);
-                    cmd.Connection.Open();
-                    cmd.ExecuteNonQuery();
-                }
+                //
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSQL;
+                cmd.Parameters.AddWithValue("@legajo", legajo);
+                cmd.Parameters.AddWithValue("@periodo", periodo);
+                cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
+                cmd.Parameters.AddWithValue("@monto_1", monto_original);
+                cmd.Parameters.AddWithValue("@monto_2", debe);
+                //cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
+                //}
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        private static void sqlDelete_Detalle_Mensual(int nro_transaccion)
+        private static void sqlDelete_Detalle_Mensual(int nro_transaccion, SqlConnection con, SqlTransaction trx)
         {
             try
             {
                 string strSQL = @"DELETE
                                   FROM DETALLE_DEUDA_IYC
                                   WHERE nro_transaccion =@nro_transaccion";
-                using (SqlConnection cn = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = cn.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = strSQL;
-                    cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
-                    cmd.Connection.Open();
-                    cmd.ExecuteNonQuery();
-                }
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSQL;
+                cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
+                //cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
@@ -1677,7 +1678,7 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        private static void sqlDelete_Detalle_MensualConDJJ(int nro_transaccion)
+        private static void sqlDelete_Detalle_MensualConDJJ(int nro_transaccion, SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -1686,15 +1687,15 @@ namespace Web_Api_IyC.Entities
                                   WHERE 
                                     cod_concepto_iyc<>1 and
                                     nro_transaccion =@nro_transaccion";
-                using (SqlConnection cn = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = cn.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = strSQL;
-                    cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
-                    cmd.Connection.Open();
-                    cmd.ExecuteNonQuery();
-                }
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSQL;
+                cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
+                //cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
+
             }
             catch (Exception)
             {
@@ -1702,7 +1703,7 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        private static void sqlInsert_Detalle_Mensual(int nro_transaccion)
+        private static void sqlInsert_Detalle_Mensual(int nro_transaccion, SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -1710,15 +1711,14 @@ namespace Web_Api_IyC.Entities
                                   SELECT *
                                   FROM AUX_DETALLE_DEUDA_AUTO_RECALCULO
                                   WHERE nro_transaccion=@nro_transaccion";
-                using (SqlConnection cn = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = cn.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = strSQL;
-                    cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
-                    cmd.Connection.Open();
-                    cmd.ExecuteNonQuery();
-                }
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSQL;
+                cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
+                //cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
@@ -1726,23 +1726,23 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        private static double sp_RECALCULO_INDYCOM(int legajo, string periodo, int tipo_per)
+        private static double sp_RECALCULO_INDYCOM(int legajo, string periodo, int tipo_per,
+            SqlConnection con, SqlTransaction trx)
         {
             try
             {
                 double total = 0;
-                using (SqlConnection cn = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = cn.CreateCommand();
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "sp_RECALCULO_IYC_2020";
-                    cmd.Connection.Open();
-                    cmd.Parameters.AddWithValue("@legajo", legajo);
-                    cmd.Parameters.AddWithValue("@periodo", periodo);
-                    cmd.Parameters.AddWithValue("@cod_tipo_liquidacion", tipo_per);
-                    cmd.ExecuteNonQuery();
-                    total = Convert.ToDouble(cmd.ExecuteScalar());
-                }
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "sp_RECALCULO_IYC_2020";
+                //cmd.Connection.Open();
+                cmd.Parameters.AddWithValue("@legajo", legajo);
+                cmd.Parameters.AddWithValue("@periodo", periodo);
+                cmd.Parameters.AddWithValue("@cod_tipo_liquidacion", tipo_per);
+                cmd.ExecuteNonQuery();
+                total = Convert.ToDouble(cmd.ExecuteScalar());
                 return total;
             }
             catch (Exception)

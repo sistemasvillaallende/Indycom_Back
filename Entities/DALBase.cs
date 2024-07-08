@@ -16,7 +16,7 @@ namespace Web_Api_IyC.Entities
             {
                 //return new SqlConnection("Data Source=10.0.1.52;Initial Catalog=SIIMVA;User ID=general");
                 //return new SqlConnection("Data Source=10.0.0.8;Initial Catalog=SIIMVA;Persist Security Info=True;User ID=general");
-                return new SqlConnection("Data Source=10.11.15.107;Initial Catalog=SIIMVA;User ID=general");
+                return new SqlConnection("Data Source=10.0.0.23;Initial Catalog=SIIMVA;Persist Security Info=True;User ID=general");
             }
             catch (Exception ex)
             {
@@ -29,7 +29,7 @@ namespace Web_Api_IyC.Entities
             {
                 //return new SqlConnection("Data Source=10.0.1.52;Initial Catalog=SIIMVA;User ID=general");
                 //return new SqlConnection("Data Source=10.0.0.8;Initial Catalog=SIIMVA;Persist Security Info=True;User ID=general");
-                return new SqlConnection("Data Source=10.11.15.107;Initial Catalog=SIIMVA;User ID=general");
+                return new SqlConnection("Data Source=10.0.0.23;Initial Catalog=SIIMVA;User ID=general");
             }
             catch (Exception ex)
             {
@@ -73,7 +73,7 @@ namespace Web_Api_IyC.Entities
             }
         }
 
-        public static int GetNroTransaccion(int subsistema)
+        public static int GetNroTransaccion(int subsistema, SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -97,14 +97,13 @@ namespace Web_Api_IyC.Entities
                         break;
                 }
                 //
-                using (SqlConnection cn = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = cn.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = strSQL;
-                    cmd.Connection.Open();
-                    nro_transaccion = Convert.ToInt32(cmd.ExecuteScalar());
-                }
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSQL;
+                //cmd.Connection.Open();
+                nro_transaccion = Convert.ToInt32(cmd.ExecuteScalar());
                 return nro_transaccion + 1;
 
             }
@@ -115,7 +114,7 @@ namespace Web_Api_IyC.Entities
             }
         }
 
-        public static void UpdateNroTransaccion(int subsistema, int nro_transaccion)
+        public static void UpdateNroTransaccion(int subsistema, int nro_transaccion, SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -140,16 +139,14 @@ namespace Web_Api_IyC.Entities
                         break;
                 }
                 //
-                using (SqlConnection cn = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = cn.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = strSQL;
-                    cmd.Connection.Open();
-                    cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
-                    cmd.ExecuteNonQuery();
-                }
 
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSQL;
+                //cmd.Connection.Open();
+                cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {

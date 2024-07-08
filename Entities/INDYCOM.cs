@@ -658,7 +658,7 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        public static int InsertDatosGeneral(INDYCOM obj)
+        public static int InsertDatosGeneral(INDYCOM obj, SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -826,100 +826,100 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", @Vto_inscripcion");
                 sql.AppendLine(")");
                 //sql.AppendLine("SELECT SCOPE_IDENTITY()");
-                using (SqlConnection con = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = sql.ToString();
-                    cmd.Parameters.AddWithValue("@legajo", obj.legajo);
-                    cmd.Parameters.AddWithValue("@nro_bad", obj.nro_bad);
-                    cmd.Parameters.AddWithValue("@nro_contrib", obj.nro_contrib);
-                    cmd.Parameters.AddWithValue("@des_com", obj.des_com);
-                    cmd.Parameters.AddWithValue("@nom_fantasia", obj.nom_fantasia);
-                    cmd.Parameters.AddWithValue("@cod_calle", obj.cod_calle);
-                    cmd.Parameters.AddWithValue("@nro_dom", obj.nro_dom);
-                    cmd.Parameters.AddWithValue("@cod_barrio", obj.cod_barrio);
-                    cmd.Parameters.AddWithValue("@cod_tipo_per", obj.cod_tipo_per);
-                    cmd.Parameters.AddWithValue("@cod_zona", obj.cod_zona);
-                    cmd.Parameters.AddWithValue("@pri_periodo", obj.pri_periodo);
-                    cmd.Parameters.AddWithValue("@tipo_liquidacion", obj.tipo_liquidacion);
-                    cmd.Parameters.AddWithValue("@dado_baja", false); //obj.dado_baja
-                    //cmd.Parameters.AddWithValue("@fecha_baja", obj.fecha_baja);
-                    cmd.Parameters.AddWithValue("@exento", obj.exento);
-                    cmd.Parameters.AddWithValue("@vencimiento_eximido", obj.vencimiento_eximido);
-                    cmd.Parameters.AddWithValue("@per_ult", obj.per_ult);
-                    cmd.Parameters.AddWithValue("@fecha_inicio", obj.fecha_inicio);
-                    cmd.Parameters.AddWithValue("@fecha_hab", obj.fecha_hab);
-                    cmd.Parameters.AddWithValue("@nro_res", obj.nro_res);
-                    cmd.Parameters.AddWithValue("@nro_exp_mesa_ent", obj.nro_exp_mesa_ent);
-                    cmd.Parameters.AddWithValue("@nro_ing_bruto", obj.nro_ing_bruto);
-                    cmd.Parameters.AddWithValue("@nro_cuit", obj.nro_cuit);
-                    cmd.Parameters.AddWithValue("@transporte", obj.transporte);
-                    cmd.Parameters.AddWithValue("@fecha_alta", obj.fecha_alta);
-                    cmd.Parameters.AddWithValue("@nom_calle", obj.nom_calle);
-                    cmd.Parameters.AddWithValue("@nom_barrio", obj.nom_barrio);
-                    cmd.Parameters.AddWithValue("@ciudad", obj.ciudad);
-                    cmd.Parameters.AddWithValue("@provincia", obj.provincia);
-                    cmd.Parameters.AddWithValue("@pais", obj.pais);
-                    cmd.Parameters.AddWithValue("@cod_postal", obj.cod_postal);
-                    cmd.Parameters.AddWithValue("@cod_calle_dom_esp", obj.cod_calle_dom_esp);
-                    cmd.Parameters.AddWithValue("@nom_calle_dom_esp", obj.nom_calle_dom_esp);
-                    cmd.Parameters.AddWithValue("@nro_dom_esp", obj.nro_dom_esp);
-                    cmd.Parameters.AddWithValue("@piso_dpto_esp", obj.piso_dpto_esp);
-                    cmd.Parameters.AddWithValue("@local_esp", obj.local_esp);
-                    cmd.Parameters.AddWithValue("@cod_barrio_dom_esp", obj.cod_barrio_dom_esp);
-                    cmd.Parameters.AddWithValue("@nom_barrio_dom_esp", obj.nom_barrio_dom_esp);
-                    cmd.Parameters.AddWithValue("@ciudad_dom_esp", obj.ciudad_dom_esp);
-                    cmd.Parameters.AddWithValue("@provincia_dom_esp", obj.provincia_dom_esp);
-                    cmd.Parameters.AddWithValue("@pais_dom_esp", obj.pais_dom_esp);
-                    cmd.Parameters.AddWithValue("@cod_postal_dom_esp", obj.cod_postal_dom_esp);
-                    //cmd.Parameters.AddWithValue("@fecha_cambio_domicilio", obj.fecha_cambio_domicilio);
-                    cmd.Parameters.AddWithValue("@emite_cedulon", obj.emite_cedulon);
-                    cmd.Parameters.AddWithValue("@cod_situacion_judicial", obj.cod_situacion_judicial);
-                    cmd.Parameters.AddWithValue("@Telefono1", obj.Telefono1);
-                    cmd.Parameters.AddWithValue("@Telefono2", obj.Telefono2);
-                    cmd.Parameters.AddWithValue("@Celular1", obj.Celular1);
-                    cmd.Parameters.AddWithValue("@Celular2", obj.Celular2);
-                    cmd.Parameters.AddWithValue("@Ocupacion_vereda", obj.Ocupacion_vereda);
-                    //cmd.Parameters.AddWithValue("@Con_sucursal", obj.Con_sucursal);
-                    //cmd.Parameters.AddWithValue("@Nro_sucursal", obj.nro_sucursal);
-                    //cmd.Parameters.AddWithValue("@es_transferido", obj.es_transferido);
-                    //cmd.Parameters.AddWithValue("@Con_DDJJ_anual", obj.con_ddjj_anual);
-                    cmd.Parameters.AddWithValue("@cod_zona_liquidacion", obj.cod_zona_liquidacion);
-                    //cmd.Parameters.AddWithValue("@debito_automatico", obj.debito_automatico);
-                    //cmd.Parameters.AddWithValue("@clave_pago", obj.clave_pago);
-                    //cmd.Parameters.AddWithValue("@fecha_DDJJ_Anual", obj.fecha_ddjj_anual);
-                    cmd.Parameters.AddWithValue("@email_envio_cedulon", obj.email_envio_cedulon);
-                    cmd.Parameters.AddWithValue("@telefono", obj.telefono);
-                    cmd.Parameters.AddWithValue("@celular", obj.celular);
-                    //cmd.Parameters.AddWithValue("@Reempadronamiento", obj.Reempadronamiento);
-                    //cmd.Parameters.AddWithValue("@Empadronado", obj.empadronado);
-                    //cmd.Parameters.AddWithValue("@Fecha_empadronado", obj.fecha_empadronado);
-                    cmd.Parameters.AddWithValue("@es_agencia", obj.es_agencia);
-                    //cmd.Parameters.AddWithValue("@clave_gestion", obj.clave_gestion);
-                    cmd.Parameters.AddWithValue("@nro_local", obj.nro_local);
-                    //cmd.Parameters.AddWithValue("@Cedulon_digital", obj.cedulon_digital);
-                    cmd.Parameters.AddWithValue("@Piso_dpto", obj.piso_dpto);
-                    cmd.Parameters.AddWithValue("@cod_cond_ante_iva", obj.cod_cond_ante_iva);
-                    cmd.Parameters.AddWithValue("@cod_caracter", obj.cod_caracter);
-                    cmd.Parameters.AddWithValue("@categoria_iva", obj.categoria_iva);
-                    cmd.Parameters.AddWithValue("@otra_entidad", obj.otra_entidad);
-                    cmd.Parameters.AddWithValue("@convenio_uni", obj.convenio_uni);
-                    cmd.Parameters.AddWithValue("@cod_nueva_zona", obj.cod_nueva_zona);
-                    //cmd.Parameters.AddWithValue("@FECHA_VECINO_DIGITAL", obj.fecha_vecino_digital);
-                    //cmd.Parameters.AddWithValue("@CUIT_VECINO_DIGITAL", obj.cuit_vecino_digital);
-                    cmd.Parameters.AddWithValue("@vto_inscripcion", Convert.ToDateTime(obj.vto_inscripcion, culturaFecArgentina).AddDays(90));
-                    cmd.Connection.Open();
-                    cmd.ExecuteNonQuery();
-                    return obj.legajo;//Convert.ToInt32(cmd.ExecuteScalar());
-                }
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql.ToString();
+                cmd.Parameters.AddWithValue("@legajo", obj.legajo);
+                cmd.Parameters.AddWithValue("@nro_bad", obj.nro_bad);
+                cmd.Parameters.AddWithValue("@nro_contrib", obj.nro_contrib);
+                cmd.Parameters.AddWithValue("@des_com", obj.des_com);
+                cmd.Parameters.AddWithValue("@nom_fantasia", obj.nom_fantasia);
+                cmd.Parameters.AddWithValue("@cod_calle", obj.cod_calle);
+                cmd.Parameters.AddWithValue("@nro_dom", obj.nro_dom);
+                cmd.Parameters.AddWithValue("@cod_barrio", obj.cod_barrio);
+                cmd.Parameters.AddWithValue("@cod_tipo_per", obj.cod_tipo_per);
+                cmd.Parameters.AddWithValue("@cod_zona", obj.cod_zona);
+                cmd.Parameters.AddWithValue("@pri_periodo", obj.pri_periodo);
+                cmd.Parameters.AddWithValue("@tipo_liquidacion", obj.tipo_liquidacion);
+                cmd.Parameters.AddWithValue("@dado_baja", false);
+                //obj.dado_baja
+                //cmd.Parameters.AddWithValue("@fecha_baja", obj.fecha_baja);
+                cmd.Parameters.AddWithValue("@exento", obj.exento);
+                cmd.Parameters.AddWithValue("@vencimiento_eximido", obj.vencimiento_eximido);
+                cmd.Parameters.AddWithValue("@per_ult", obj.per_ult);
+                cmd.Parameters.AddWithValue("@fecha_inicio", obj.fecha_inicio);
+                cmd.Parameters.AddWithValue("@fecha_hab", obj.fecha_hab);
+                cmd.Parameters.AddWithValue("@nro_res", obj.nro_res);
+                cmd.Parameters.AddWithValue("@nro_exp_mesa_ent", obj.nro_exp_mesa_ent);
+                cmd.Parameters.AddWithValue("@nro_ing_bruto", obj.nro_ing_bruto);
+                cmd.Parameters.AddWithValue("@nro_cuit", obj.nro_cuit);
+                cmd.Parameters.AddWithValue("@transporte", obj.transporte);
+                cmd.Parameters.AddWithValue("@fecha_alta", obj.fecha_alta);
+                cmd.Parameters.AddWithValue("@nom_calle", obj.nom_calle);
+                cmd.Parameters.AddWithValue("@nom_barrio", obj.nom_barrio);
+                cmd.Parameters.AddWithValue("@ciudad", obj.ciudad);
+                cmd.Parameters.AddWithValue("@provincia", obj.provincia);
+                cmd.Parameters.AddWithValue("@pais", obj.pais);
+                cmd.Parameters.AddWithValue("@cod_postal", obj.cod_postal);
+                cmd.Parameters.AddWithValue("@cod_calle_dom_esp", obj.cod_calle_dom_esp);
+                cmd.Parameters.AddWithValue("@nom_calle_dom_esp", obj.nom_calle_dom_esp);
+                cmd.Parameters.AddWithValue("@nro_dom_esp", obj.nro_dom_esp);
+                cmd.Parameters.AddWithValue("@piso_dpto_esp", obj.piso_dpto_esp);
+                cmd.Parameters.AddWithValue("@local_esp", obj.local_esp);
+                cmd.Parameters.AddWithValue("@cod_barrio_dom_esp", obj.cod_barrio_dom_esp);
+                cmd.Parameters.AddWithValue("@nom_barrio_dom_esp", obj.nom_barrio_dom_esp);
+                cmd.Parameters.AddWithValue("@ciudad_dom_esp", obj.ciudad_dom_esp);
+                cmd.Parameters.AddWithValue("@provincia_dom_esp", obj.provincia_dom_esp);
+                cmd.Parameters.AddWithValue("@pais_dom_esp", obj.pais_dom_esp);
+                cmd.Parameters.AddWithValue("@cod_postal_dom_esp", obj.cod_postal_dom_esp);
+                //cmd.Parameters.AddWithValue("@fecha_cambio_domicilio", obj.fecha_cambio_domicilio);
+                cmd.Parameters.AddWithValue("@emite_cedulon", obj.emite_cedulon);
+                cmd.Parameters.AddWithValue("@cod_situacion_judicial", obj.cod_situacion_judicial);
+                cmd.Parameters.AddWithValue("@Telefono1", obj.Telefono1);
+                cmd.Parameters.AddWithValue("@Telefono2", obj.Telefono2);
+                cmd.Parameters.AddWithValue("@Celular1", obj.Celular1);
+                cmd.Parameters.AddWithValue("@Celular2", obj.Celular2);
+                cmd.Parameters.AddWithValue("@Ocupacion_vereda", obj.Ocupacion_vereda);
+                //cmd.Parameters.AddWithValue("@Con_sucursal", obj.Con_sucursal);
+                //cmd.Parameters.AddWithValue("@Nro_sucursal", obj.nro_sucursal);
+                //cmd.Parameters.AddWithValue("@es_transferido", obj.es_transferido);
+                //cmd.Parameters.AddWithValue("@Con_DDJJ_anual", obj.con_ddjj_anual);
+                cmd.Parameters.AddWithValue("@cod_zona_liquidacion", obj.cod_zona_liquidacion);
+                //cmd.Parameters.AddWithValue("@debito_automatico", obj.debito_automatico);
+                //cmd.Parameters.AddWithValue("@clave_pago", obj.clave_pago);
+                //cmd.Parameters.AddWithValue("@fecha_DDJJ_Anual", obj.fecha_ddjj_anual);
+                cmd.Parameters.AddWithValue("@email_envio_cedulon", obj.email_envio_cedulon);
+                cmd.Parameters.AddWithValue("@telefono", obj.telefono);
+                cmd.Parameters.AddWithValue("@celular", obj.celular);
+                //cmd.Parameters.AddWithValue("@Reempadronamiento", obj.Reempadronamiento);
+                //cmd.Parameters.AddWithValue("@Empadronado", obj.empadronado);
+                //cmd.Parameters.AddWithValue("@Fecha_empadronado", obj.fecha_empadronado);
+                cmd.Parameters.AddWithValue("@es_agencia", obj.es_agencia);
+                //cmd.Parameters.AddWithValue("@clave_gestion", obj.clave_gestion);
+                cmd.Parameters.AddWithValue("@nro_local", obj.nro_local);
+                //cmd.Parameters.AddWithValue("@Cedulon_digital", obj.cedulon_digital);
+                cmd.Parameters.AddWithValue("@Piso_dpto", obj.piso_dpto);
+                cmd.Parameters.AddWithValue("@cod_cond_ante_iva", obj.cod_cond_ante_iva);
+                cmd.Parameters.AddWithValue("@cod_caracter", obj.cod_caracter);
+                cmd.Parameters.AddWithValue("@categoria_iva", obj.categoria_iva);
+                cmd.Parameters.AddWithValue("@otra_entidad", obj.otra_entidad);
+                cmd.Parameters.AddWithValue("@convenio_uni", obj.convenio_uni);
+                cmd.Parameters.AddWithValue("@cod_nueva_zona", obj.cod_nueva_zona);
+                //cmd.Parameters.AddWithValue("@FECHA_VECINO_DIGITAL", obj.fecha_vecino_digital);
+                //cmd.Parameters.AddWithValue("@CUIT_VECINO_DIGITAL", obj.cuit_vecino_digital);
+                cmd.Parameters.AddWithValue("@vto_inscripcion", Convert.ToDateTime(obj.vto_inscripcion, culturaFecArgentina).AddDays(90));
+                //cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
+                return obj.legajo;//Convert.ToInt32(cmd.ExecuteScalar());
+
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        public static void UpdateDatosGenerales(INDYCOM obj)
+        public static void UpdateDatosGenerales(INDYCOM obj, SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -1005,92 +1005,92 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", Vto_inscripcion=@Vto_inscripcion");
                 sql.AppendLine("WHERE");
                 sql.AppendLine("legajo=@legajo");
-                using (SqlConnection con = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = sql.ToString();
-                    cmd.Parameters.AddWithValue("@legajo", obj.legajo);
-                    cmd.Parameters.AddWithValue("@nro_bad", obj.nro_bad);
-                    cmd.Parameters.AddWithValue("@nro_contrib", obj.nro_contrib);
-                    cmd.Parameters.AddWithValue("@des_com", obj.des_com);
-                    cmd.Parameters.AddWithValue("@nom_fantasia", obj.nom_fantasia);
-                    cmd.Parameters.AddWithValue("@cod_calle", obj.cod_calle);
-                    cmd.Parameters.AddWithValue("@nro_dom", obj.nro_dom);
-                    cmd.Parameters.AddWithValue("@cod_barrio", obj.cod_barrio);
-                    cmd.Parameters.AddWithValue("@cod_tipo_per", obj.cod_tipo_per);
-                    cmd.Parameters.AddWithValue("@cod_zona", obj.cod_zona);
-                    cmd.Parameters.AddWithValue("@pri_periodo", obj.pri_periodo);
-                    cmd.Parameters.AddWithValue("@tipo_liquidacion", obj.tipo_liquidacion);
-                    cmd.Parameters.AddWithValue("@dado_baja", obj.dado_baja);
-                    cmd.Parameters.AddWithValue("@fecha_baja", obj.fecha_baja);
-                    cmd.Parameters.AddWithValue("@exento", obj.exento);
-                    cmd.Parameters.AddWithValue("@vencimiento_eximido", obj.vencimiento_eximido);
-                    cmd.Parameters.AddWithValue("@per_ult", obj.per_ult);
-                    cmd.Parameters.AddWithValue("@fecha_inicio", obj.fecha_inicio);
-                    cmd.Parameters.AddWithValue("@fecha_hab", obj.fecha_hab);
-                    cmd.Parameters.AddWithValue("@nro_res", obj.nro_res);
-                    cmd.Parameters.AddWithValue("@nro_exp_mesa_ent", obj.nro_exp_mesa_ent);
-                    cmd.Parameters.AddWithValue("@nro_ing_bruto", obj.nro_ing_bruto);
-                    cmd.Parameters.AddWithValue("@nro_cuit", obj.nro_cuit);
-                    cmd.Parameters.AddWithValue("@transporte", obj.transporte);
-                    cmd.Parameters.AddWithValue("@fecha_alta", obj.fecha_alta);
-                    cmd.Parameters.AddWithValue("@nom_calle", obj.nom_calle);
-                    cmd.Parameters.AddWithValue("@nom_barrio", obj.nom_barrio);
-                    cmd.Parameters.AddWithValue("@ciudad", obj.ciudad);
-                    cmd.Parameters.AddWithValue("@provincia", obj.provincia);
-                    cmd.Parameters.AddWithValue("@pais", obj.pais);
-                    cmd.Parameters.AddWithValue("@cod_postal", obj.cod_postal);
-                    cmd.Parameters.AddWithValue("@cod_calle_dom_esp", obj.cod_calle_dom_esp);
-                    cmd.Parameters.AddWithValue("@nom_calle_dom_esp", obj.nom_calle_dom_esp);
-                    cmd.Parameters.AddWithValue("@nro_dom_esp", obj.nro_dom_esp);
-                    cmd.Parameters.AddWithValue("@piso_dpto_esp", obj.piso_dpto_esp);
-                    cmd.Parameters.AddWithValue("@local_esp", obj.local_esp);
-                    cmd.Parameters.AddWithValue("@cod_barrio_dom_esp", obj.cod_barrio_dom_esp);
-                    cmd.Parameters.AddWithValue("@nom_barrio_dom_esp", obj.nom_barrio_dom_esp);
-                    cmd.Parameters.AddWithValue("@ciudad_dom_esp", obj.ciudad_dom_esp);
-                    cmd.Parameters.AddWithValue("@provincia_dom_esp", obj.provincia_dom_esp);
-                    cmd.Parameters.AddWithValue("@pais_dom_esp", obj.pais_dom_esp);
-                    cmd.Parameters.AddWithValue("@cod_postal_dom_esp", obj.cod_postal_dom_esp);
-                    cmd.Parameters.AddWithValue("@fecha_cambio_domicilio", obj.fecha_cambio_domicilio);
-                    cmd.Parameters.AddWithValue("@emite_cedulon", obj.emite_cedulon);
-                    cmd.Parameters.AddWithValue("@cod_situacion_judicial", obj.cod_situacion_judicial);
-                    cmd.Parameters.AddWithValue("@Telefono1", obj.Telefono1);
-                    cmd.Parameters.AddWithValue("@Telefono2", obj.Telefono2);
-                    cmd.Parameters.AddWithValue("@Celular1", obj.Celular1);
-                    cmd.Parameters.AddWithValue("@Celular2", obj.Celular2);
-                    cmd.Parameters.AddWithValue("@Ocupacion_vereda", obj.Ocupacion_vereda);
-                    cmd.Parameters.AddWithValue("@Con_sucursal", obj.Con_sucursal);
-                    cmd.Parameters.AddWithValue("@Nro_sucursal", obj.nro_sucursal);
-                    cmd.Parameters.AddWithValue("@es_transferido", obj.es_transferido);
-                    cmd.Parameters.AddWithValue("@Con_DDJJ_anual", obj.con_ddjj_anual);
-                    cmd.Parameters.AddWithValue("@cod_zona_liquidacion", obj.cod_zona_liquidacion);
-                    cmd.Parameters.AddWithValue("@debito_automatico", obj.debito_automatico);
-                    cmd.Parameters.AddWithValue("@clave_pago", obj.clave_pago);
-                    cmd.Parameters.AddWithValue("@fecha_DDJJ_Anual", obj.fecha_ddjj_anual);
-                    cmd.Parameters.AddWithValue("@email_envio_cedulon", obj.email_envio_cedulon);
-                    cmd.Parameters.AddWithValue("@telefono", obj.telefono);
-                    cmd.Parameters.AddWithValue("@celular", obj.celular);
-                    cmd.Parameters.AddWithValue("@Reempadronamiento", obj.Reempadronamiento);
-                    cmd.Parameters.AddWithValue("@Empadronado", obj.empadronado);
-                    cmd.Parameters.AddWithValue("@Fecha_empadronado", obj.fecha_empadronado);
-                    cmd.Parameters.AddWithValue("@Es_agencia", obj.es_agencia);
-                    cmd.Parameters.AddWithValue("@clave_gestion", obj.clave_gestion);
-                    cmd.Parameters.AddWithValue("@Nro_local", obj.nro_local);
-                    cmd.Parameters.AddWithValue("@Cedulon_digital", obj.cedulon_digital);
-                    cmd.Parameters.AddWithValue("@Piso_dpto", obj.piso_dpto);
-                    cmd.Parameters.AddWithValue("@cod_cond_ante_iva", obj.cod_cond_ante_iva);
-                    cmd.Parameters.AddWithValue("@cod_caracter", obj.cod_caracter);
-                    cmd.Parameters.AddWithValue("@Categoria_iva", obj.categoria_iva);
-                    cmd.Parameters.AddWithValue("@otra_entidad", obj.otra_entidad);
-                    cmd.Parameters.AddWithValue("@convenio_uni", obj.convenio_uni);
-                    cmd.Parameters.AddWithValue("@cod_nueva_zona", obj.cod_nueva_zona);
-                    cmd.Parameters.AddWithValue("@FECHA_VECINO_DIGITAL", obj.fecha_vecino_digital);
-                    cmd.Parameters.AddWithValue("@CUIT_VECINO_DIGITAL", obj.cuit_vecino_digital);
-                    cmd.Parameters.AddWithValue("@vto_inscripcion", Convert.ToDateTime(obj.vto_inscripcion, culturaFecArgentina).AddDays(90));
-                    cmd.Connection.Open();
-                    cmd.ExecuteNonQuery();
-                }
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql.ToString();
+                cmd.Parameters.AddWithValue("@legajo", obj.legajo);
+                cmd.Parameters.AddWithValue("@nro_bad", obj.nro_bad);
+                cmd.Parameters.AddWithValue("@nro_contrib", obj.nro_contrib);
+                cmd.Parameters.AddWithValue("@des_com", obj.des_com);
+                cmd.Parameters.AddWithValue("@nom_fantasia", obj.nom_fantasia);
+                cmd.Parameters.AddWithValue("@cod_calle", obj.cod_calle);
+                cmd.Parameters.AddWithValue("@nro_dom", obj.nro_dom);
+                cmd.Parameters.AddWithValue("@cod_barrio", obj.cod_barrio);
+                cmd.Parameters.AddWithValue("@cod_tipo_per", obj.cod_tipo_per);
+                cmd.Parameters.AddWithValue("@cod_zona", obj.cod_zona);
+                cmd.Parameters.AddWithValue("@pri_periodo", obj.pri_periodo);
+                cmd.Parameters.AddWithValue("@tipo_liquidacion", obj.tipo_liquidacion);
+                cmd.Parameters.AddWithValue("@dado_baja", obj.dado_baja);
+                cmd.Parameters.AddWithValue("@fecha_baja", obj.fecha_baja);
+                cmd.Parameters.AddWithValue("@exento", obj.exento);
+                cmd.Parameters.AddWithValue("@vencimiento_eximido", obj.vencimiento_eximido);
+                cmd.Parameters.AddWithValue("@per_ult", obj.per_ult);
+                cmd.Parameters.AddWithValue("@fecha_inicio", obj.fecha_inicio);
+                cmd.Parameters.AddWithValue("@fecha_hab", obj.fecha_hab);
+                cmd.Parameters.AddWithValue("@nro_res", obj.nro_res);
+                cmd.Parameters.AddWithValue("@nro_exp_mesa_ent", obj.nro_exp_mesa_ent);
+                cmd.Parameters.AddWithValue("@nro_ing_bruto", obj.nro_ing_bruto);
+                cmd.Parameters.AddWithValue("@nro_cuit", obj.nro_cuit);
+                cmd.Parameters.AddWithValue("@transporte", obj.transporte);
+                cmd.Parameters.AddWithValue("@fecha_alta", obj.fecha_alta);
+                cmd.Parameters.AddWithValue("@nom_calle", obj.nom_calle);
+                cmd.Parameters.AddWithValue("@nom_barrio", obj.nom_barrio);
+                cmd.Parameters.AddWithValue("@ciudad", obj.ciudad);
+                cmd.Parameters.AddWithValue("@provincia", obj.provincia);
+                cmd.Parameters.AddWithValue("@pais", obj.pais);
+                cmd.Parameters.AddWithValue("@cod_postal", obj.cod_postal);
+                cmd.Parameters.AddWithValue("@cod_calle_dom_esp", obj.cod_calle_dom_esp);
+                cmd.Parameters.AddWithValue("@nom_calle_dom_esp", obj.nom_calle_dom_esp);
+                cmd.Parameters.AddWithValue("@nro_dom_esp", obj.nro_dom_esp);
+                cmd.Parameters.AddWithValue("@piso_dpto_esp", obj.piso_dpto_esp);
+                cmd.Parameters.AddWithValue("@local_esp", obj.local_esp);
+                cmd.Parameters.AddWithValue("@cod_barrio_dom_esp", obj.cod_barrio_dom_esp);
+                cmd.Parameters.AddWithValue("@nom_barrio_dom_esp", obj.nom_barrio_dom_esp);
+                cmd.Parameters.AddWithValue("@ciudad_dom_esp", obj.ciudad_dom_esp);
+                cmd.Parameters.AddWithValue("@provincia_dom_esp", obj.provincia_dom_esp);
+                cmd.Parameters.AddWithValue("@pais_dom_esp", obj.pais_dom_esp);
+                cmd.Parameters.AddWithValue("@cod_postal_dom_esp", obj.cod_postal_dom_esp);
+                cmd.Parameters.AddWithValue("@fecha_cambio_domicilio", obj.fecha_cambio_domicilio);
+                cmd.Parameters.AddWithValue("@emite_cedulon", obj.emite_cedulon);
+                cmd.Parameters.AddWithValue("@cod_situacion_judicial", obj.cod_situacion_judicial);
+                cmd.Parameters.AddWithValue("@Telefono1", obj.Telefono1);
+                cmd.Parameters.AddWithValue("@Telefono2", obj.Telefono2);
+                cmd.Parameters.AddWithValue("@Celular1", obj.Celular1);
+                cmd.Parameters.AddWithValue("@Celular2", obj.Celular2);
+                cmd.Parameters.AddWithValue("@Ocupacion_vereda", obj.Ocupacion_vereda);
+                cmd.Parameters.AddWithValue("@Con_sucursal", obj.Con_sucursal);
+                cmd.Parameters.AddWithValue("@Nro_sucursal", obj.nro_sucursal);
+                cmd.Parameters.AddWithValue("@es_transferido", obj.es_transferido);
+                cmd.Parameters.AddWithValue("@Con_DDJJ_anual", obj.con_ddjj_anual);
+                cmd.Parameters.AddWithValue("@cod_zona_liquidacion", obj.cod_zona_liquidacion);
+                cmd.Parameters.AddWithValue("@debito_automatico", obj.debito_automatico);
+                cmd.Parameters.AddWithValue("@clave_pago", obj.clave_pago);
+                cmd.Parameters.AddWithValue("@fecha_DDJJ_Anual", obj.fecha_ddjj_anual);
+                cmd.Parameters.AddWithValue("@email_envio_cedulon", obj.email_envio_cedulon);
+                cmd.Parameters.AddWithValue("@telefono", obj.telefono);
+                cmd.Parameters.AddWithValue("@celular", obj.celular);
+                cmd.Parameters.AddWithValue("@Reempadronamiento", obj.Reempadronamiento);
+                cmd.Parameters.AddWithValue("@Empadronado", obj.empadronado);
+                cmd.Parameters.AddWithValue("@Fecha_empadronado", obj.fecha_empadronado);
+                cmd.Parameters.AddWithValue("@Es_agencia", obj.es_agencia);
+                cmd.Parameters.AddWithValue("@clave_gestion", obj.clave_gestion);
+                cmd.Parameters.AddWithValue("@Nro_local", obj.nro_local);
+                cmd.Parameters.AddWithValue("@Cedulon_digital", obj.cedulon_digital);
+                cmd.Parameters.AddWithValue("@Piso_dpto", obj.piso_dpto);
+                cmd.Parameters.AddWithValue("@cod_cond_ante_iva", obj.cod_cond_ante_iva);
+                cmd.Parameters.AddWithValue("@cod_caracter", obj.cod_caracter);
+                cmd.Parameters.AddWithValue("@Categoria_iva", obj.categoria_iva);
+                cmd.Parameters.AddWithValue("@otra_entidad", obj.otra_entidad);
+                cmd.Parameters.AddWithValue("@convenio_uni", obj.convenio_uni);
+                cmd.Parameters.AddWithValue("@cod_nueva_zona", obj.cod_nueva_zona);
+                cmd.Parameters.AddWithValue("@FECHA_VECINO_DIGITAL", obj.fecha_vecino_digital);
+                cmd.Parameters.AddWithValue("@CUIT_VECINO_DIGITAL", obj.cuit_vecino_digital);
+                cmd.Parameters.AddWithValue("@vto_inscripcion", Convert.ToDateTime(obj.vto_inscripcion, culturaFecArgentina).AddDays(90));
+                //cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
+
             }
             catch (Exception ex)
             {
@@ -1120,7 +1120,7 @@ namespace Web_Api_IyC.Entities
                 throw ex;
             }
         }
-        public static void Update(INDYCOM obj)
+        public static void Update(INDYCOM obj, SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -1165,58 +1165,58 @@ namespace Web_Api_IyC.Entities
                 //sql.AppendLine(", vto_inscripcion=@vto_inscripcion");
                 sql.AppendLine("WHERE");
                 sql.AppendLine("legajo=@legajo");
-                using (SqlConnection con = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = sql.ToString();
-                    cmd.Parameters.AddWithValue("@legajo", obj.legajo);
-                    cmd.Parameters.AddWithValue("@nro_bad", obj.nro_bad);
-                    cmd.Parameters.AddWithValue("@nro_contrib", obj.nro_contrib);
-                    cmd.Parameters.AddWithValue("@des_com", obj.des_com);
-                    cmd.Parameters.AddWithValue("@nom_fantasia", obj.nom_fantasia);
-                    //cmd.Parameters.AddWithValue("@dado_baja", obj.dado_baja);
-                    //cmd.Parameters.AddWithValue("@fecha_baja", obj.fecha_baja);
-                    cmd.Parameters.AddWithValue("@exento", obj.exento);
-                    cmd.Parameters.AddWithValue("@nro_cuit", obj.nro_cuit);
-                    cmd.Parameters.AddWithValue("@transporte", obj.transporte);
-                    cmd.Parameters.AddWithValue("@fecha_alta", obj.fecha_alta);
-                    cmd.Parameters.AddWithValue("@nom_calle", obj.nom_calle);
-                    cmd.Parameters.AddWithValue("@cod_calle", obj.cod_calle);
-                    cmd.Parameters.AddWithValue("@nro_dom", obj.nro_dom);
-                    cmd.Parameters.AddWithValue("@nro_local", obj.nro_local);
-                    cmd.Parameters.AddWithValue("@piso_dpto", obj.piso_dpto);
-                    cmd.Parameters.AddWithValue("@nom_barrio", obj.nom_barrio);
-                    cmd.Parameters.AddWithValue("@cod_barrio", obj.cod_barrio);
-                    cmd.Parameters.AddWithValue("@ciudad", obj.ciudad);
-                    cmd.Parameters.AddWithValue("@provincia", obj.provincia);
-                    cmd.Parameters.AddWithValue("@pais", obj.pais);
-                    cmd.Parameters.AddWithValue("@cod_postal", obj.cod_postal);
-                    cmd.Parameters.AddWithValue("@emite_cedulon", obj.emite_cedulon);
-                    //
-                    cmd.Parameters.AddWithValue("@cod_situacion_judicial", obj.cod_situacion_judicial);
-                    cmd.Parameters.AddWithValue("@telefono", obj.telefono);
-                    cmd.Parameters.AddWithValue("@celular", obj.celular);
-                    cmd.Parameters.AddWithValue("@ocupacion_vereda", obj.Ocupacion_vereda);
-                    //cmd.Parameters.AddWithValue("@clave_pago", obj.clave_pago);
-                    //cmd.Parameters.AddWithValue("@clave_gestion", obj.clave_gestion);
-                    cmd.Parameters.AddWithValue("@cod_cond_ante_iva", obj.cod_cond_ante_iva);
-                    cmd.Parameters.AddWithValue("@cod_caracter", obj.cod_caracter);
-                    cmd.Parameters.AddWithValue("@categoria_iva", obj.categoria_iva);
-                    cmd.Parameters.AddWithValue("@otra_entidad", obj.otra_entidad);
-                    cmd.Parameters.AddWithValue("@convenio_uni", obj.convenio_uni);
-                    cmd.Parameters.AddWithValue("@cod_nueva_zona", obj.cod_nueva_zona);
-                    //cmd.Parameters.AddWithValue("@vto_inscripcion", obj.Vto_inscripcion.AddDays(90));
-                    cmd.Connection.Open();
-                    cmd.ExecuteNonQuery();
-                }
+                //
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql.ToString();
+                cmd.Parameters.AddWithValue("@legajo", obj.legajo);
+                cmd.Parameters.AddWithValue("@nro_bad", obj.nro_bad);
+                cmd.Parameters.AddWithValue("@nro_contrib", obj.nro_contrib);
+                cmd.Parameters.AddWithValue("@des_com", obj.des_com);
+                cmd.Parameters.AddWithValue("@nom_fantasia", obj.nom_fantasia);
+                //cmd.Parameters.AddWithValue("@dado_baja", obj.dado_baja);
+                //cmd.Parameters.AddWithValue("@fecha_baja", obj.fecha_baja);
+                cmd.Parameters.AddWithValue("@exento", obj.exento);
+                cmd.Parameters.AddWithValue("@nro_cuit", obj.nro_cuit);
+                cmd.Parameters.AddWithValue("@transporte", obj.transporte);
+                cmd.Parameters.AddWithValue("@fecha_alta", obj.fecha_alta);
+                cmd.Parameters.AddWithValue("@nom_calle", obj.nom_calle);
+                cmd.Parameters.AddWithValue("@cod_calle", obj.cod_calle);
+                cmd.Parameters.AddWithValue("@nro_dom", obj.nro_dom);
+                cmd.Parameters.AddWithValue("@nro_local", obj.nro_local);
+                cmd.Parameters.AddWithValue("@piso_dpto", obj.piso_dpto);
+                cmd.Parameters.AddWithValue("@nom_barrio", obj.nom_barrio);
+                cmd.Parameters.AddWithValue("@cod_barrio", obj.cod_barrio);
+                cmd.Parameters.AddWithValue("@ciudad", obj.ciudad);
+                cmd.Parameters.AddWithValue("@provincia", obj.provincia);
+                cmd.Parameters.AddWithValue("@pais", obj.pais);
+                cmd.Parameters.AddWithValue("@cod_postal", obj.cod_postal);
+                cmd.Parameters.AddWithValue("@emite_cedulon", obj.emite_cedulon);
+                //
+                cmd.Parameters.AddWithValue("@cod_situacion_judicial", obj.cod_situacion_judicial);
+                cmd.Parameters.AddWithValue("@telefono", obj.telefono);
+                cmd.Parameters.AddWithValue("@celular", obj.celular);
+                cmd.Parameters.AddWithValue("@ocupacion_vereda", obj.Ocupacion_vereda);
+                //cmd.Parameters.AddWithValue("@clave_pago", obj.clave_pago);
+                //cmd.Parameters.AddWithValue("@clave_gestion", obj.clave_gestion);
+                cmd.Parameters.AddWithValue("@cod_cond_ante_iva", obj.cod_cond_ante_iva);
+                cmd.Parameters.AddWithValue("@cod_caracter", obj.cod_caracter);
+                cmd.Parameters.AddWithValue("@categoria_iva", obj.categoria_iva);
+                cmd.Parameters.AddWithValue("@otra_entidad", obj.otra_entidad);
+                cmd.Parameters.AddWithValue("@convenio_uni", obj.convenio_uni);
+                cmd.Parameters.AddWithValue("@cod_nueva_zona", obj.cod_nueva_zona);
+                //cmd.Parameters.AddWithValue("@vto_inscripcion", obj.Vto_inscripcion.AddDays(90));
+                //cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
+
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        public static void UpdateDatosDomPostal(INDYCOM obj)
+        public static void UpdateDatosDomPostal(INDYCOM obj, SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -1236,33 +1236,32 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", fecha_cambio_domicilio=@fecha_cambio_domicilio");
                 sql.AppendLine("WHERE");
                 sql.AppendLine("legajo=@legajo");
-                using (SqlConnection con = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = sql.ToString();
-                    cmd.Parameters.AddWithValue("@legajo", obj.legajo);
-                    cmd.Parameters.AddWithValue("@cod_calle_dom_esp", obj.cod_calle_dom_esp);
-                    cmd.Parameters.AddWithValue("@nom_calle_dom_esp", obj.nom_calle_dom_esp);
-                    cmd.Parameters.AddWithValue("@nro_dom_esp", obj.nro_dom_esp);
-                    cmd.Parameters.AddWithValue("@piso_dpto_esp", obj.piso_dpto_esp);
-                    cmd.Parameters.AddWithValue("@local_esp", obj.local_esp);
-                    cmd.Parameters.AddWithValue("@cod_barrio_dom_esp", obj.cod_barrio_dom_esp);
-                    cmd.Parameters.AddWithValue("@nom_barrio_dom_esp", obj.nom_barrio_dom_esp);
-                    cmd.Parameters.AddWithValue("@ciudad_dom_esp", obj.ciudad_dom_esp);
-                    cmd.Parameters.AddWithValue("@provincia_dom_esp", obj.provincia_dom_esp);
-                    cmd.Parameters.AddWithValue("@pais_dom_esp", obj.pais_dom_esp);
-                    cmd.Parameters.AddWithValue("@cod_postal_dom_esp", obj.cod_postal_dom_esp);
-                    cmd.Parameters.AddWithValue("@fecha_cambio_domicilio", obj.fecha_cambio_domicilio);
-                    cmd.Connection.Open();
-                }
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql.ToString();
+                cmd.Parameters.AddWithValue("@legajo", obj.legajo);
+                cmd.Parameters.AddWithValue("@cod_calle_dom_esp", obj.cod_calle_dom_esp);
+                cmd.Parameters.AddWithValue("@nom_calle_dom_esp", obj.nom_calle_dom_esp);
+                cmd.Parameters.AddWithValue("@nro_dom_esp", obj.nro_dom_esp);
+                cmd.Parameters.AddWithValue("@piso_dpto_esp", obj.piso_dpto_esp);
+                cmd.Parameters.AddWithValue("@local_esp", obj.local_esp);
+                cmd.Parameters.AddWithValue("@cod_barrio_dom_esp", obj.cod_barrio_dom_esp);
+                cmd.Parameters.AddWithValue("@nom_barrio_dom_esp", obj.nom_barrio_dom_esp);
+                cmd.Parameters.AddWithValue("@ciudad_dom_esp", obj.ciudad_dom_esp);
+                cmd.Parameters.AddWithValue("@provincia_dom_esp", obj.provincia_dom_esp);
+                cmd.Parameters.AddWithValue("@pais_dom_esp", obj.pais_dom_esp);
+                cmd.Parameters.AddWithValue("@cod_postal_dom_esp", obj.cod_postal_dom_esp);
+                cmd.Parameters.AddWithValue("@fecha_cambio_domicilio", obj.fecha_cambio_domicilio);
+                //cmd.Connection.Open();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        public static void SaveDatosAfip(INDYCOM obj)
+        public static void SaveDatosAfip(INDYCOM obj, SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -1274,25 +1273,25 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", convenio_uni=@convenio_uni");
                 sql.AppendLine("WHERE");
                 sql.AppendLine("legajo=@legajo");
-                using (SqlConnection con = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = sql.ToString();
-                    cmd.Parameters.AddWithValue("@legajo", obj.legajo);
-                    cmd.Parameters.AddWithValue("@cod_cond_ante_iva", obj.cod_cond_ante_iva);
-                    cmd.Parameters.AddWithValue("@categoria_iva", obj.categoria_iva.ToUpper());
-                    cmd.Parameters.AddWithValue("@nro_ing_bruto", obj.nro_ing_bruto);
-                    cmd.Parameters.AddWithValue("@convenio_uni", obj.convenio_uni);
-                    cmd.Connection.Open();
-                }
+                //
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql.ToString();
+                cmd.Parameters.AddWithValue("@legajo", obj.legajo);
+                cmd.Parameters.AddWithValue("@cod_cond_ante_iva", obj.cod_cond_ante_iva);
+                cmd.Parameters.AddWithValue("@categoria_iva", obj.categoria_iva);
+                cmd.Parameters.AddWithValue("@nro_ing_bruto", obj.nro_ing_bruto);
+                cmd.Parameters.AddWithValue("@convenio_uni", obj.convenio_uni);
+                //cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        public static void SaveDatosLiquidacion(INDYCOM obj)
+        public static void SaveDatosLiquidacion(INDYCOM obj, SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -1306,20 +1305,19 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", cod_nueva_zona=@cod_nueva_zona");
                 sql.AppendLine("WHERE");
                 sql.AppendLine("legajo=@legajo");
-                using (SqlConnection con = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = sql.ToString();
-                    cmd.Parameters.AddWithValue("@legajo", obj.legajo);
-                    cmd.Parameters.AddWithValue("@tipo_liquidacion", obj.tipo_liquidacion);
-                    cmd.Parameters.AddWithValue("@pri_periodo", obj.pri_periodo);
-                    cmd.Parameters.AddWithValue("@per_ult", obj.per_ult);
-                    cmd.Parameters.AddWithValue("@cod_zona", obj.cod_zona);
-                    cmd.Parameters.AddWithValue("@cod_zona_liquidacion", obj.cod_zona_liquidacion);
-                    cmd.Parameters.AddWithValue("@cod_nueva_zona", obj.cod_nueva_zona);
-                    cmd.Connection.Open();
-                }
+                //
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql.ToString();
+                cmd.Parameters.AddWithValue("@legajo", obj.legajo);
+                cmd.Parameters.AddWithValue("@tipo_liquidacion", obj.tipo_liquidacion);
+                cmd.Parameters.AddWithValue("@pri_periodo", obj.pri_periodo);
+                cmd.Parameters.AddWithValue("@per_ult", obj.per_ult);
+                cmd.Parameters.AddWithValue("@cod_zona", obj.cod_zona);
+                cmd.Parameters.AddWithValue("@cod_zona_liquidacion", obj.cod_zona_liquidacion);
+                cmd.Parameters.AddWithValue("@cod_nueva_zona", obj.cod_nueva_zona);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -1752,7 +1750,8 @@ namespace Web_Api_IyC.Entities
 
         }
         #endregion
-        public static void BajaComercial(int legajo, string fecha_baja)
+        public static void BajaComercial(int legajo, string fecha_baja, SqlConnection con,
+            SqlTransaction trx)
         {
             try
             {
@@ -1763,23 +1762,23 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(", fecha_baja=@fecha_baja");
                 sql.AppendLine("WHERE");
                 sql.AppendLine("legajo=@legajo");
-                using (SqlConnection con = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = sql.ToString();
-                    cmd.Parameters.AddWithValue("@legajo", legajo);
-                    //cmd.Parameters.AddWithValue("@dado_baja", 1);
-                    cmd.Parameters.AddWithValue("@fecha_baja", Convert.ToDateTime(fecha_baja, culturaFecArgentina).ToString());
-                    cmd.Connection.Open();
-                }
+                //
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql.ToString();
+                cmd.Parameters.AddWithValue("@legajo", legajo);
+                //cmd.Parameters.AddWithValue("@dado_baja", 1);
+                cmd.Parameters.AddWithValue("@fecha_baja", Convert.ToDateTime(fecha_baja, culturaFecArgentina).ToString());
+                cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        public static void BajaSucursal(int legajo, int nro_sucursal, string fecha_baja)
+        public static void BajaSucursal(int legajo, int nro_sucursal, string fecha_baja,
+            SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -1791,16 +1790,15 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine("WHERE");
                 sql.AppendLine("legajo=@legajo AND");
                 sql.AppendLine("nro_sucursal=@nro_sucursal");
-                using (SqlConnection con = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = sql.ToString();
-                    cmd.Parameters.AddWithValue("@legajo", legajo);
-                    cmd.Parameters.AddWithValue("@nro_sucursal", nro_sucursal);
-                    cmd.Parameters.AddWithValue("@fecha_baja", Convert.ToDateTime(fecha_baja, culturaFecArgentina).ToString());
-                    cmd.Connection.Open();
-                }
+                //
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql.ToString();
+                cmd.Parameters.AddWithValue("@legajo", legajo);
+                cmd.Parameters.AddWithValue("@nro_sucursal", nro_sucursal);
+                cmd.Parameters.AddWithValue("@fecha_baja", Convert.ToDateTime(fecha_baja, culturaFecArgentina).ToString());
+                cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {

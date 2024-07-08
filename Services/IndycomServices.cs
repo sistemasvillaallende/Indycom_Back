@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
@@ -58,19 +59,32 @@ namespace Web_Api_IyC.Services
                 throw ex;
             }
         }
-        public void Update(INDYCOM obj)
+        public void Update(INDYCOM obj, INDYCOM objOriginal)
         {
             try
             {
-                using (TransactionScope scope = new TransactionScope())
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
                 {
-                    obj.objAuditoria.identificacion = obj.legajo.ToString();
-                    obj.objAuditoria.proceso = "MODIFICACION INDYCOM";
-                    obj.objAuditoria.detalle = JsonConvert.SerializeObject(INDYCOM.GetByPk(obj.legajo));
-                    obj.objAuditoria.observaciones += string.Format(" Fecha auditoria: {0}", DateTime.Now);
-                    INDYCOM.Update(obj);
-                    AuditoriaD.InsertAuditoria(obj.objAuditoria);
-                    scope.Complete();
+                    con.Open();
+                    // Iniciar una transacción
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            obj.objAuditoria.identificacion = obj.legajo.ToString();
+                            obj.objAuditoria.proceso = "MODIFICACION INDYCOM";
+                            obj.objAuditoria.detalle = JsonConvert.SerializeObject(objOriginal);
+                            obj.objAuditoria.observaciones += string.Format(" Fecha auditoria: {0}", DateTime.Now);
+                            INDYCOM.Update(obj, con, trx);
+                            AuditoriaD.InsertAuditoria(obj.objAuditoria, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
                 }
             }
             catch (Exception)
@@ -156,15 +170,28 @@ namespace Web_Api_IyC.Services
         {
             try
             {
-                using (TransactionScope scope = new TransactionScope())
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
                 {
-                    obj.objAuditoria.identificacion = obj.legajo.ToString();
-                    obj.objAuditoria.proceso = "NUEVO INDYCOM";
-                    obj.objAuditoria.detalle = "";
-                    obj.objAuditoria.observaciones += string.Format("Fecha auditoria: {0}", DateTime.Now);
-                    Entities.INDYCOM.InsertDatosGeneral(obj);
-                    AuditoriaD.InsertAuditoria(obj.objAuditoria);
-                    scope.Complete();
+                    con.Open();
+                    // Iniciar una transacción
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            obj.objAuditoria.identificacion = obj.legajo.ToString();
+                            obj.objAuditoria.proceso = "NUEVO INDYCOM";
+                            obj.objAuditoria.detalle = "";
+                            obj.objAuditoria.observaciones += string.Format("Fecha auditoria: {0}", DateTime.Now);
+                            Entities.INDYCOM.InsertDatosGeneral(obj, con, trx);
+                            AuditoriaD.InsertAuditoria(obj.objAuditoria, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -172,19 +199,32 @@ namespace Web_Api_IyC.Services
                 throw ex;
             }
         }
-        public void UpdateDatosGenerales(INDYCOM obj)
+        public void UpdateDatosGenerales(INDYCOM obj, INDYCOM objOriginal)
         {
             try
             {
-                using (TransactionScope scope = new TransactionScope())
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
                 {
-                    obj.objAuditoria.identificacion = obj.legajo.ToString();
-                    obj.objAuditoria.proceso = "MODIFICACION INDYCOM";
-                    obj.objAuditoria.detalle = JsonConvert.SerializeObject(INDYCOM.GetByPk(obj.legajo));
-                    obj.objAuditoria.observaciones += string.Format("Fecha auditoria: {0}", DateTime.Now);
-                    INDYCOM.UpdateDatosGenerales(obj);
-                    AuditoriaD.InsertAuditoria(obj.objAuditoria);
-                    scope.Complete();
+                    con.Open();
+                    // Iniciar una transacción
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            obj.objAuditoria.identificacion = obj.legajo.ToString();
+                            obj.objAuditoria.proceso = "MODIFICACION INDYCOM";
+                            obj.objAuditoria.detalle = JsonConvert.SerializeObject(objOriginal);
+                            obj.objAuditoria.observaciones += string.Format("Fecha auditoria: {0}", DateTime.Now);
+                            INDYCOM.UpdateDatosGenerales(obj, con, trx);
+                            AuditoriaD.InsertAuditoria(obj.objAuditoria, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -192,19 +232,32 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-        public void UpdateDatosDomPostal(INDYCOM obj)
+        public void UpdateDatosDomPostal(INDYCOM obj, INDYCOM objOriginal)
         {
             try
             {
-                using (TransactionScope scope = new TransactionScope())
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
                 {
-                    obj.objAuditoria.identificacion = obj.legajo.ToString();
-                    obj.objAuditoria.proceso = "CAMBIO DOMIC. POSTAL INDYCOM";
-                    obj.objAuditoria.detalle = JsonConvert.SerializeObject(INDYCOM.GetByPk(obj.legajo));
-                    obj.objAuditoria.observaciones += string.Format("Fecha auditoria: {0}", DateTime.Now);
-                    Entities.INDYCOM.UpdateDatosDomPostal(obj);
-                    AuditoriaD.InsertAuditoria(obj.objAuditoria);
-                    scope.Complete();
+                    con.Open();
+                    // Iniciar una transacción
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            obj.objAuditoria.identificacion = obj.legajo.ToString();
+                            obj.objAuditoria.proceso = "CAMBIO DOMIC. POSTAL INDYCOM";
+                            obj.objAuditoria.detalle = JsonConvert.SerializeObject(objOriginal);
+                            obj.objAuditoria.observaciones += string.Format("Fecha auditoria: {0}", DateTime.Now);
+                            Entities.INDYCOM.UpdateDatosDomPostal(obj, con, trx);
+                            AuditoriaD.InsertAuditoria(obj.objAuditoria, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -212,19 +265,32 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-        public void SaveDatosAfip(INDYCOM obj)
+        public void SaveDatosAfip(INDYCOM obj, INDYCOM objOriginal)
         {
             try
             {
-                using (TransactionScope scope = new TransactionScope())
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
                 {
-                    obj.objAuditoria.identificacion = obj.legajo.ToString();
-                    obj.objAuditoria.proceso = "GUARDAR DATOS AFIP EN IYC";
-                    obj.objAuditoria.detalle = JsonConvert.SerializeObject(INDYCOM.GetByPk(obj.legajo));
-                    obj.objAuditoria.observaciones += string.Format("Fecha auditoria: {0}", DateTime.Now);
-                    Entities.INDYCOM.SaveDatosAfip(obj);
-                    AuditoriaD.InsertAuditoria(obj.objAuditoria);
-                    scope.Complete();
+                    con.Open();
+                    // Iniciar una transacción
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            obj.objAuditoria.identificacion = obj.legajo.ToString();
+                            obj.objAuditoria.proceso = "GUARDAR DATOS AFIP EN IYC";
+                            obj.objAuditoria.detalle = JsonConvert.SerializeObject(objOriginal);
+                            obj.objAuditoria.observaciones += string.Format("Fecha auditoria: {0}", DateTime.Now);
+                            Entities.INDYCOM.SaveDatosAfip(obj, con, trx);
+                            AuditoriaD.InsertAuditoria(obj.objAuditoria, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -233,19 +299,32 @@ namespace Web_Api_IyC.Services
             }
 
         }
-        public void SaveDatosLiquidacion(INDYCOM obj)
+        public void SaveDatosLiquidacion(INDYCOM obj, INDYCOM objOriginal)
         {
             try
             {
-                using (TransactionScope scope = new TransactionScope())
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
                 {
-                    obj.objAuditoria.identificacion = obj.legajo.ToString();
-                    obj.objAuditoria.proceso = "GUARDAR DATOS LIQUIDACION EN IYC";
-                    obj.objAuditoria.detalle = JsonConvert.SerializeObject(INDYCOM.GetByPk(obj.legajo));
-                    obj.objAuditoria.observaciones += string.Format("Fecha auditoria: {0}", DateTime.Now);
-                    Entities.INDYCOM.SaveDatosLiquidacion(obj);
-                    AuditoriaD.InsertAuditoria(obj.objAuditoria);
-                    scope.Complete();
+                    con.Open();
+                    // Iniciar una transacción
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            obj.objAuditoria.identificacion = obj.legajo.ToString();
+                            obj.objAuditoria.proceso = "GUARDAR DATOS LIQUIDACION EN IYC";
+                            obj.objAuditoria.detalle = JsonConvert.SerializeObject(objOriginal);
+                            obj.objAuditoria.observaciones += string.Format("Fecha auditoria: {0}", DateTime.Now);
+                            Entities.INDYCOM.SaveDatosLiquidacion(obj, con, trx);
+                            AuditoriaD.InsertAuditoria(obj.objAuditoria, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
                 }
             }
             catch (Exception)
@@ -302,19 +381,33 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-        public void BajaComercial(int legajo, string fecha_baja, Auditoria obj)
+        public void BajaComercial(int legajo, string fecha_baja, INDYCOM objOriginal, Auditoria obj)
         {
             try
             {
-                using (TransactionScope scope = new TransactionScope())
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
                 {
-                    obj.identificacion = legajo.ToString();
-                    obj.proceso = "BAJA IYC";
-                    obj.detalle = JsonConvert.SerializeObject(INDYCOM.GetByPk(legajo));
-                    obj.observaciones += string.Format("Baja IYC Legajo {0}, Fecha auditoria: {1}", legajo, DateTime.Now);
-                    INDYCOM.BajaComercial(legajo, fecha_baja);
-                    AuditoriaD.InsertAuditoria(obj);
-                    scope.Complete();
+                    con.Open();
+                    // Iniciar una transacción
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            obj.identificacion = legajo.ToString();
+                            obj.proceso = "BAJA IYC";
+                            obj.detalle = JsonConvert.SerializeObject(objOriginal);
+                            obj.observaciones += string.Format("Baja IYC Legajo {0}, Fecha auditoria: {1}",
+                                legajo, DateTime.Now);
+                            INDYCOM.BajaComercial(legajo, fecha_baja, con, trx);
+                            AuditoriaD.InsertAuditoria(obj, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
                 }
             }
             catch (Exception)
@@ -322,19 +415,32 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-        public void BajaSucursal(int legajo, int nro_sucursal, string fecha_baja, Auditoria obj)
+        public void BajaSucursal(int legajo, int nro_sucursal, string fecha_baja, INDYCOM objOriginal, Auditoria obj)
         {
             try
             {
-                using (TransactionScope scope = new TransactionScope())
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
                 {
-                    obj.identificacion = legajo.ToString();
-                    obj.proceso = "BAJA SUCURSAL";
-                    obj.detalle = JsonConvert.SerializeObject(INDYCOM.GetByPk(legajo));
-                    obj.observaciones += string.Format("Baja Sucursal {0}, del Legajo {1}, Fecha auditoria: {2}", nro_sucursal, legajo, DateTime.Now);
-                    INDYCOM.BajaSucursal(legajo, nro_sucursal, fecha_baja);
-                    AuditoriaD.InsertAuditoria(obj);
-                    scope.Complete();
+                    con.Open();
+                    // Iniciar una transacción
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            obj.identificacion = legajo.ToString();
+                            obj.proceso = "BAJA SUCURSAL";
+                            obj.detalle = JsonConvert.SerializeObject(objOriginal);
+                            obj.observaciones += string.Format("Baja Sucursal {0}, del Legajo {1}, Fecha auditoria: {2}", nro_sucursal, legajo, DateTime.Now);
+                            INDYCOM.BajaSucursal(legajo, nro_sucursal, fecha_baja, con, trx);
+                            AuditoriaD.InsertAuditoria(obj, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
                 }
             }
             catch (Exception)
@@ -394,15 +500,28 @@ namespace Web_Api_IyC.Services
         {
             try
             {
-                using (TransactionScope scope = new TransactionScope())
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
                 {
-                    objA.identificacion = legajo.ToString();
-                    objA.proceso = "IMPRIME_DEUDA_IYC";
-                    objA.observaciones += string.Format(" Fecha auditoria: {0}", DateTime.Now);
-                    AuditoriaD.InsertAuditoria(objA);
-                    scope.Complete();
+                    con.Open();
+                    // Iniciar una transacción
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            objA.identificacion = legajo.ToString();
+                            objA.proceso = "IMPRIME_DEUDA_IYC";
+                            objA.observaciones += string.Format(" Fecha auditoria: {0}", DateTime.Now);
+                            AuditoriaD.InsertAuditoria(objA, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
+                    return Informes.InformeCtaCteSoloDeuda(legajo, categoria_deuda, categoria_deuda2, per);
                 }
-                return Informes.InformeCtaCteSoloDeuda(legajo, categoria_deuda, categoria_deuda2, per);
             }
             catch (Exception)
             {
@@ -413,20 +532,31 @@ namespace Web_Api_IyC.Services
         {
             try
             {
-
-                using (TransactionScope scope = new TransactionScope())
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
                 {
-                    objA.identificacion = legajo.ToString();
-                    objA.proceso = "IMPRIME_DEUDA_IYC";
-                    objA.observaciones += string.Format(" Fecha auditoria: {0}", DateTime.Now);
-                    AuditoriaD.InsertAuditoria(objA);
-                    scope.Complete();
+                    con.Open();
+                    // Iniciar una transacción
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            objA.identificacion = legajo.ToString();
+                            objA.proceso = "IMPRIME_DEUDA_IYC";
+                            objA.observaciones += string.Format(" Fecha auditoria: {0}", DateTime.Now);
+                            AuditoriaD.InsertAuditoria(objA, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
+                    return Informes.InformeCtaCteCompleto(legajo, per);
                 }
-                return Informes.InformeCtaCteCompleto(legajo, per);
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -446,15 +576,28 @@ namespace Web_Api_IyC.Services
         {
             try
             {
-                using (TransactionScope scope = new TransactionScope())
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
                 {
-                    objA.identificacion = legajo.ToString();
-                    objA.proceso = "IMPRIME_DEUDA_IYC";
-                    objA.observaciones += string.Format(" Fecha auditoria: {0}", DateTime.Now);
-                    AuditoriaD.InsertAuditoria(objA);
-                    scope.Complete();
+                    con.Open();
+                    // Iniciar una transacción
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            objA.identificacion = legajo.ToString();
+                            objA.proceso = "IMPRIME_DEUDA_IYC";
+                            objA.observaciones += string.Format(" Fecha auditoria: {0}", DateTime.Now);
+                            AuditoriaD.InsertAuditoria(objA, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
+                    return Informes.Resumendeuda(legajo, tipo_consulta, periodo, cate_deuda_desde, cate_deuda_hasta);
                 }
-                return Informes.Resumendeuda(legajo, tipo_consulta, periodo, cate_deuda_desde, cate_deuda_hasta);
             }
             catch (Exception)
             {
