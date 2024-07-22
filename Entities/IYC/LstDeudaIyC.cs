@@ -42,32 +42,36 @@ namespace Web_Api_IyC.Entities.IYC
             SqlDataReader dr;
             SqlConnection cn = null;
 
-            string sql = 
-                    @"SELECT C.periodo, C.monto_original, C.debe -
-                    (SELECT SUM(haber) FROM CTASCTES_INDYCOM C2 WHERE
-                    C2.nro_transaccion=C.nro_transaccion  AND
-                    C2.legajo = C.legajo) as debe,
-                    vencimiento, b.des_categoria,
-                    c.pagado, c.nro_transaccion, c.cod_cate_deuda, c.nro_cedulon_paypertic,
-                    c.recargo,
-                    C.pago_parcial, 
-                    (SELECT SUM(haber) FROM CTASCTES_INDYCOM C2 WHERE
-                    C2.nro_transaccion=C.nro_transaccion  AND
-                    C2.legajo = C.legajo) as pago_a_cuenta, C.NRO_PROCURACION
-                    FROM CTASCTES_INDYCOM C
-                    inner join CATE_DEUDA_INDYCOM b on c.cod_cate_deuda = b.cod_categoria
-                    WHERE
-                    c.pagado = 0
-                    AND c.tipo_transaccion = 1
-                    AND c.nro_plan IS NULL
-                    AND c.nro_procuracion IS NULL
-                    AND c.legajo = @legajo AND vencimiento <= GETDATE() ORDER BY C.periodo ASC";
+            string sql = @"SELECT C.periodo, C.monto_original, C.debe -
+                            (SELECT SUM(haber) 
+                             FROM CTASCTES_INDYCOM C2 
+                             WHERE
+                                C2.nro_transaccion=C.nro_transaccion  AND
+                                C2.legajo = C.legajo) as debe,
+                            C.vencimiento, b.des_categoria,
+                            C.pagado, C.nro_transaccion, C.cod_cate_deuda, C.nro_cedulon_paypertic,
+                            C.recargo,
+                            C.pago_parcial, 
+                            (SELECT SUM(haber) 
+                             FROM CTASCTES_INDYCOM C2 
+                             WHERE
+                                C2.nro_transaccion=C.nro_transaccion  AND
+                                C2.legajo = C.legajo) as pago_a_cuenta, 
+                            C.NRO_PROCURACION
+                        FROM CTASCTES_INDYCOM C
+                        INNER JOIN CATE_DEUDA_INDYCOM b on c.cod_cate_deuda = b.cod_categoria
+                        WHERE
+                            C.pagado = 0
+                            AND C.tipo_transaccion = 1
+                            AND C.nro_plan IS NULL
+                            AND C.nro_procuracion IS NULL
+                            AND C.legajo = @legajo AND vencimiento <= GETDATE() ORDER BY C.periodo ASC";
 
 
             cmd = new SqlCommand();
 
-            cmd.Parameters.Add(new SqlParameter("@legajo", legajo));
-
+            //cmd.Parameters.Add(new SqlParameter("@legajo", legajo));
+            cmd.Parameters.AddWithValue("@legajo", legajo);
             try
             {
                 cn = DALBase.GetConnection();
@@ -75,7 +79,7 @@ namespace Web_Api_IyC.Entities.IYC
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = sql;
-                cmd.CommandTimeout = 900000;
+                //cmd.CommandTimeout = 900000;
                 cmd.Connection.Open();
 
                 dr = cmd.ExecuteReader();
