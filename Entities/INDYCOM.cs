@@ -1383,18 +1383,29 @@ namespace Web_Api_IyC.Entities
                             if (strParametro != string.Empty)
                             {
                                 sqlWhere = @" WHERE
-                                nro_bad in (SELECT nro_bad
-					                        FROM badec	
-					                        WHERE badec.nombre like @parametro + '%')  AND 
-                                RowNum BETWEEN @desde AND @hasta
-                                ORDER By legajo";
+                                            nro_bad in (SELECT nro_bad
+					                                    FROM badec	
+					                                    WHERE badec.nombre like @parametro + '%')  AND 
+                                            RowNum BETWEEN @desde AND @hasta
+                                            ORDER By legajo";
                             }
                             break;
                         case "nom_fantasia":
                             sqlWhere = @" WHERE
-                                nom_fantasia like @parametro + '%' AND
-                                RowNum BETWEEN @desde AND @hasta
-                                ORDER By legajo";
+                                            nom_fantasia like @parametro + '%' AND
+                                            RowNum BETWEEN @desde AND @hasta
+                                            ORDER By legajo";
+                            break;
+                        case "todos":
+                            if (strParametro != string.Empty)
+                            {
+                                sqlWhere = @" WHERE
+                                                nro_bad in (SELECT nro_bad
+					                                        FROM badec	
+					                                        WHERE badec.nombre like @parametro + '%')  AND 
+                                                RowNum BETWEEN @desde AND @hasta
+                                                ORDER By legajo";
+                            }
                             break;
                         default:
                             break;
