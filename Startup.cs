@@ -26,6 +26,7 @@ namespace Web_Api_IyC
             // configure DI for application services
             services.AddScoped<IIndycomServices, IndycomServices>();
             services.AddScoped<ICtasctes_indycomServices, Ctasctes_indycomServices>();
+            services.AddScoped<ITarjetasServices, TarjetasServices>();
 
             //
             services.AddCors();
