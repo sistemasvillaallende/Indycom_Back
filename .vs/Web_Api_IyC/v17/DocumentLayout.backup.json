@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "D:\\Dev\\NET2022\\Web_Api_IyC\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\controllers\\indycomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:controllers\\indycomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -25,6 +21,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\services\\ctasctes_indycomservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:services\\ctasctes_indycomservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\iyc\\lstdeudaiyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -122,6 +122,32 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BadecController.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Controllers\\BadecController.cs",
+              "RelativeDocumentMoniker": "Controllers\\BadecController.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Controllers\\BadecController.cs",
+              "RelativeToolTip": "Controllers\\BadecController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T13:38:38.176Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Ctasctes_indycomController.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Controllers\\Ctasctes_indycomController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Ctasctes_indycomController.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Controllers\\Ctasctes_indycomController.cs",
+              "RelativeToolTip": "Controllers\\Ctasctes_indycomController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGwAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T13:13:54.719Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 6,
               "Title": "LstDeudaIyC.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\IYC\\LstDeudaIyC.cs",
@@ -146,53 +172,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "IndycomController.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Controllers\\IndycomController.cs",
               "RelativeDocumentMoniker": "Controllers\\IndycomController.cs",
               "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Controllers\\IndycomController.cs",
               "RelativeToolTip": "Controllers\\IndycomController.cs",
-              "ViewState": "AgIAAMYAAAAAAAAAAAAAwLUAAABsAAAAAAAAAA==",
+              "ViewState": "AgIAAKsAAAAAAAAAAAAuwLQAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-08T01:03:37.271Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "BadecController.cs",
-              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Controllers\\BadecController.cs",
-              "RelativeDocumentMoniker": "Controllers\\BadecController.cs",
-              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Controllers\\BadecController.cs",
-              "RelativeToolTip": "Controllers\\BadecController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T13:38:38.176Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "INDYCOM.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\INDYCOM.cs",
               "RelativeDocumentMoniker": "Entities\\INDYCOM.cs",
               "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\INDYCOM.cs",
               "RelativeToolTip": "Entities\\INDYCOM.cs",
-              "ViewState": "AgIAAFwFAAAAAAAAAAAWwGcFAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHcFAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-08T00:23:41.258Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Ctasctes_indycomController.cs",
-              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Controllers\\Ctasctes_indycomController.cs",
-              "RelativeDocumentMoniker": "Controllers\\Ctasctes_indycomController.cs",
-              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Controllers\\Ctasctes_indycomController.cs",
-              "RelativeToolTip": "Controllers\\Ctasctes_indycomController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGwAAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T13:13:54.719Z"
+              "WhenOpened": "2024-07-08T00:23:41.258Z"
             },
             {
               "$type": "Document",
@@ -220,7 +221,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "Ctasctes_indycomServices.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Services\\Ctasctes_indycomServices.cs",
               "RelativeDocumentMoniker": "Services\\Ctasctes_indycomServices.cs",
@@ -244,7 +245,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Ctasctes_indycom.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Ctasctes_indycom.cs",
               "RelativeDocumentMoniker": "Entities\\Ctasctes_indycom.cs",
