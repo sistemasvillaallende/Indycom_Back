@@ -938,38 +938,38 @@ namespace Web_Api_IyC.Entities
                         }
                         if (lst.Count > 0)
                             obj = lst[0];
-                        strRetorno.AppendLine("Fecha Transacción: " + Convert.ToString(obj.fecha_transaccion, culturaFecArgentina));
+                        strRetorno.AppendLine("Fecha Transacciï¿½n: " + Convert.ToString(obj.fecha_transaccion, culturaFecArgentina));
                         strRetorno.AppendLine("Vencimiento: " + Convert.ToString(obj.vencimiento, culturaFecArgentina));
                         switch (obj.tipo_transaccion)
                         {
                             case 1:
                                 strRetorno.AppendLine("Mov.Deuda");
-                                strRetorno.AppendLine("Período: " + obj.periodo);
+                                strRetorno.AppendLine("Perï¿½odo: " + obj.periodo);
                                 strRetorno.AppendLine(obj.des_categoria.ToString());
                                 if (obj.pago_parcial)
                                     strRetorno.AppendLine("Deuda con Pago Parcial");
-                                strRetorno.AppendLine("Nro Transacción: " + obj.nro_transaccion.ToString());
+                                strRetorno.AppendLine("Nro Transacciï¿½n: " + obj.nro_transaccion.ToString());
                                 break;
                             case 2:
                                 if (obj.nro_cedulon != 0)
-                                    strRetorno.AppendLine("Mov.Pago con Nº Cedulon:" + obj.nro_cedulon.ToString());
+                                    strRetorno.AppendLine("Mov.Pago con Nï¿½ Cedulon:" + obj.nro_cedulon.ToString());
                                 else
                                     strRetorno.AppendLine("Mov.Pago");
-                                strRetorno.AppendLine("Período:" + obj.periodo.ToString());
+                                strRetorno.AppendLine("Perï¿½odo:" + obj.periodo.ToString());
                                 strRetorno.AppendLine(obj.des_categoria);
                                 if (obj.pago_parcial)
                                     strRetorno.AppendLine("Pago Parcial");
-                                strRetorno.AppendLine("Nro Transacción: " + obj.nro_transaccion.ToString());
+                                strRetorno.AppendLine("Nro Transacciï¿½n: " + obj.nro_transaccion.ToString());
                                 strRetorno.AppendLine("Monto Pagado:" + obj.monto_pagado.ToString());
                                 break;
                             case 3:
                                 strRetorno.AppendLine("Mov.Fin de Plan de Pago");
-                                strRetorno.AppendLine("Plan de Pago Nº:" + obj.nro_plan.ToString());
+                                strRetorno.AppendLine("Plan de Pago Nï¿½:" + obj.nro_plan.ToString());
                                 strRetorno.AppendLine("Nro Transaccion:" + obj.nro_transaccion.ToString());
                                 strRetorno.AppendLine(obj.des_categoria);
                                 break;
                             case 4:
-                                strRetorno.AppendLine("Mov.Bonificación por pago anticipado");
+                                strRetorno.AppendLine("Mov.Bonificaciï¿½n por pago anticipado");
                                 strRetorno.AppendLine("Nro Transaccion:" + obj.nro_transaccion.ToString());
                                 strRetorno.AppendLine(obj.des_categoria);
                                 break;
@@ -984,18 +984,18 @@ namespace Web_Api_IyC.Entities
                                 strRetorno.AppendLine(obj.des_categoria);
                                 break;
                             case 7:
-                                strRetorno.AppendLine("Mov.Cancelación Operativa");
+                                strRetorno.AppendLine("Mov.Cancelaciï¿½n Operativa");
                                 strRetorno.AppendLine("Nro Transaccion:" + obj.nro_transaccion.ToString());
                                 strRetorno.AppendLine(obj.des_categoria);
                                 break;
                             case 8:
-                                strRetorno.AppendLine("Mov.Decreto o Resolución");
+                                strRetorno.AppendLine("Mov.Decreto o Resoluciï¿½n");
                                 strRetorno.AppendLine("Nro Transaccion:" + obj.nro_transaccion.ToString());
                                 strRetorno.AppendLine(obj.des_categoria);
                                 break;
                             case 9:
                                 strRetorno.AppendLine("Mov.Baja de Plan de Pagos");
-                                strRetorno.AppendLine("Plan de Pago Nº:" + obj.nro_plan.ToString());
+                                strRetorno.AppendLine("Plan de Pago Nï¿½:" + obj.nro_plan.ToString());
                                 strRetorno.AppendLine("Nro Transaccion:" + obj.nro_transaccion.ToString());
                                 strRetorno.AppendLine(obj.des_categoria);
                                 break;
@@ -1373,23 +1373,25 @@ namespace Web_Api_IyC.Entities
                 strSQL = @"SELECT a.nro_transaccion, a.periodo, a.monto_original,
                               a.debe, a.vencimiento, v.cod_tipo_per
                             FROM CTASCTES_INDYCOM a WITH (NOLOCK)
-                            join VENCIMIENTOS_PERIODOS2 v on
-                            v.subsistema=3 and
+                            join VENCIMIENTOS_IYC v 
                             v.periodo=a.periodo
                             WHERE
                               a.legajo=@legajo AND
                               a.tipo_transaccion=1 AND pagado=0 AND
                               a.pago_parcial=0 AND nro_plan IS null AND
                               a.nro_procuracion IS NULL AND
-                              a.cod_categoria_deuda = 1";
+                              a.cod_cate_deuda = 1";
+                              
                 DateTimeFormatInfo culturaFecArgentina = new CultureInfo("es-AR", false).DateTimeFormat;
                 List<Ctasctes_indycom> lst = new();
                 Ctasctes_indycom? obj;
+            
                 using (SqlConnection con = GetConnectionSIIMVA())
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = strSQL.ToString();
+                    cmd.Connection.Open();
                     cmd.Parameters.AddWithValue("@legajo", legajo);
                     SqlDataReader dr = cmd.ExecuteReader();
                     if (dr.HasRows)
