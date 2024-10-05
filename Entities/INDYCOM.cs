@@ -95,7 +95,7 @@ namespace Web_Api_IyC.Entities
         public DateTime? vto_inscripcion { get; set; }
         public string titular { get; set; }
 
-        public AUDITORIA.Auditoria objAuditoria { get; set; }
+        public AUDITORIA.Auditoria? objAuditoria { get; set; }
 
         public INDYCOM()
         {
