@@ -27,6 +27,8 @@ namespace Web_Api_IyC
             services.AddScoped<IIndycomServices, IndycomServices>();
             services.AddScoped<ICtasctes_indycomServices, Ctasctes_indycomServices>();
             services.AddScoped<ITarjetasServices, TarjetasServices>();
+            services.AddScoped<IConceptos_iycService, Conceptos_iycService>();
+            services.AddScoped<IDescadic_x_iycService, Descadic_x_iycService>();
 
             //
             services.AddCors();
