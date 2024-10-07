@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Web_Api_IyC.Entities;
@@ -45,7 +46,17 @@ namespace Web_Api_IyC.Services
         public List<Indycomxcalle> ConsultaIyc_x_calles(string calledesde, string callehasta);
         public List<BADEC> GetBadecByNombre(string nombre);
         public List<BADEC> GetBadecByCuit(string cuit);
+        /* METODOS para la DECJUR*/
+        public List<Dec_jur_iyc> GetPeriodosDJSinLiquidar(int legajo);
+        public List<Rubros_x_dec_jur_iyc> GetRubrosDJIyC(int nro_transaccion, int legajo);
+        public void UpdateRubrosDJIyC(int legajo, List<Rubros_x_dec_jur_iyc> lst, Auditoria objA);
+        public void Liquidar_decjur(int legajo, Dec_jur_iyc obj, Auditoria objA);
+        public bool VerificarMontosIngresados(int nro_transaccion, int legajo);
+        public Dec_jur_iyc GetDecJur_completadas(int legajo, string periodo);
+        public bool VerificaDecJurPagada(int nro_transaccion);
+        public void EliminaDJIyC(Dec_jur_iyc objDDJJ, Auditoria objA);
+        public List<Rubros_x_dec_jur_iyc> ListaRubrosDJIyC(int nro_transaccion);
 
-
+        /*FIN DDJJ*/
     }
 }

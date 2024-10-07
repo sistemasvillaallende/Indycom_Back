@@ -13,7 +13,6 @@ namespace Web_Api_IyC.Entities
         public int cod_rubro { get; set; }
         public Single cantidad { get; set; }
         public decimal importe { get; set; }
-
         public Rubros_x_dec_jur_iyc()
         {
             nro_transaccion = 0;
@@ -21,7 +20,6 @@ namespace Web_Api_IyC.Entities
             cantidad = 0;
             importe = 0;
         }
-
         private static List<Rubros_x_dec_jur_iyc> mapeo(SqlDataReader dr)
         {
             List<Rubros_x_dec_jur_iyc> lst = new List<Rubros_x_dec_jur_iyc>();
@@ -44,7 +42,6 @@ namespace Web_Api_IyC.Entities
             }
             return lst;
         }
-
         public static List<Rubros_x_dec_jur_iyc> read()
         {
             try
@@ -66,7 +63,6 @@ namespace Web_Api_IyC.Entities
                 throw ex;
             }
         }
-
         public static Rubros_x_dec_jur_iyc getByPk(int nro_transaccion, int cod_rubro)
         {
             try
@@ -96,7 +92,6 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-
         public static int insert(Rubros_x_dec_jur_iyc obj)
         {
             try
@@ -130,7 +125,7 @@ namespace Web_Api_IyC.Entities
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
         public static void update(Rubros_x_dec_jur_iyc obj)
@@ -138,8 +133,8 @@ namespace Web_Api_IyC.Entities
             try
             {
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("UPDATE  Rubros_x_dec_jur_iyc SET");
-                sql.AppendLine("cantidad=@cantidad");
+                sql.AppendLine("UPDATE  Rubros_x_dec_jur_iyc");
+                sql.AppendLine("SET cantidad=@cantidad");
                 sql.AppendLine(", importe=@importe");
                 sql.AppendLine("WHERE");
                 sql.AppendLine("nro_transaccion=@nro_transaccion");
@@ -159,7 +154,7 @@ namespace Web_Api_IyC.Entities
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
         public static void delete(Rubros_x_dec_jur_iyc obj)
@@ -184,10 +179,10 @@ namespace Web_Api_IyC.Entities
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
-        public static List<Rubros_x_dec_jur_iyc> GetRubros_dec_jur_iyc(int nro_transaccion)
+        public static List<Rubros_x_dec_jur_iyc> GetRubrosDJIyC(int nro_transaccion, int legajo)
         {
             try
             {
@@ -213,7 +208,7 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        public static void UpdateRubros_dec_jur_iyc(SqlConnection cn, SqlTransaction trx, List<Rubros_x_dec_jur_iyc> lst)
+        public static void UpdateRubrosDJIyC(SqlConnection cn, SqlTransaction trx, List<Rubros_x_dec_jur_iyc> lst)
         {
             try
             {
@@ -232,10 +227,10 @@ namespace Web_Api_IyC.Entities
                 cmd.CommandText = strSQL;
                 foreach (var item in lst)
                 {
-                    cmd.Parameters["@nro_transaccion"].Value= item.nro_transaccion;
+                    cmd.Parameters["@nro_transaccion"].Value = item.nro_transaccion;
                     cmd.Parameters["@cod_rubro"].Value = item.cod_rubro;
-                    cmd.Parameters["@cantidad"].Value= item.cantidad;
-                    cmd.Parameters["@importe"].Value= item.importe;
+                    cmd.Parameters["@cantidad"].Value = item.cantidad;
+                    cmd.Parameters["@importe"].Value = item.importe;
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -245,28 +240,94 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        public static void SqlActualizaRubros(int nro_transaccion)
+        public static void SqlActualizaRubros(int nro_transaccion, SqlConnection con, SqlTransaction trx)
         {
             try
             {
                 string strSQL = @"UPDATE RUBROS_X_DEC_JUR_IYC 
                                  set cantidad=0, importe=0
                                  WHERE nro_transaccion=@nro_transaccion";
-                using (SqlConnection con = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = strSQL.ToString();
-                    cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
-                    cmd.Connection.Open();
-                    cmd.ExecuteNonQuery();
-                }
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSQL.ToString();
+                cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
+                //cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
                 throw;
             }
         }
+        public static bool VerificarMontosIngresados(int nro_transaccion, int legajo)
+        {
+            try
+            {
+                bool bRet = false;
+                string strSQL = @"SELECT *
+                                  FROM RUBROS_X_DEC_JUR_IYC 
+                                  WHERE nro_transaccion=@nro_transaccion";
+                List<Rubros_x_dec_jur_iyc> lst = new();
+                using (SqlConnection cn = DALBase.GetConnectionSIIMVA())
+                {
+                    SqlCommand cmd = cn.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
+                    cmd.CommandText = strSQL;
+                    cmd.Connection.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    lst = mapeo(dr);
+
+                    foreach (var item in lst)
+                    {
+                        if (item.importe == 0)
+                        {
+                            bRet = true;
+                            break;
+                        }
+                    }
+                    return bRet;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return true;
+        }
+        public static List<Rubros_x_dec_jur_iyc> ListaRubrosDJIyC(int nro_transaccion)
+        {
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.AppendLine("SELECT * FROM Rubros_x_dec_jur_iyc ");
+                sql.AppendLine("WHERE nro_transaccion = @nro_transaccion");
+                Rubros_x_dec_jur_iyc? obj = null;
+                List<Rubros_x_dec_jur_iyc> lst = new List<Rubros_x_dec_jur_iyc>();
+                using (SqlConnection con = GetConnection())
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = sql.ToString();
+                    cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
+                    cmd.Connection.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    lst = mapeo(dr);
+                    //if (lst.Count != 0)
+                    //    obj = lst[0];
+                }
+                return lst;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }
 

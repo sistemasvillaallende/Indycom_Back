@@ -1381,11 +1381,11 @@ namespace Web_Api_IyC.Entities
                               a.pago_parcial=0 AND nro_plan IS null AND
                               a.nro_procuracion IS NULL AND
                               a.cod_cate_deuda = 1";
-                              
+
                 DateTimeFormatInfo culturaFecArgentina = new CultureInfo("es-AR", false).DateTimeFormat;
                 List<Ctasctes_indycom> lst = new();
                 Ctasctes_indycom? obj;
-            
+
                 using (SqlConnection con = GetConnectionSIIMVA())
                 {
                     SqlCommand cmd = con.CreateCommand();
@@ -1578,7 +1578,7 @@ namespace Web_Api_IyC.Entities
         //        throw;
         //    }
         //}
-        private static double Calcula_Interes(double auxmonto_original, DateTime? vencimiento, 
+        private static double Calcula_Interes(double auxmonto_original, DateTime? vencimiento,
             SqlConnection con, SqlTransaction trx)
         {
             try
@@ -1601,7 +1601,7 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        private static void SqlActualiza_Ctasctes_Indycom(int legajo, int nro_transaccion)
+        public static void SqlActualiza_Ctasctes_Indycom(int legajo, int nro_transaccion, SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -1612,16 +1612,16 @@ namespace Web_Api_IyC.Entities
                                     nro_pago_parcial=0 AND
                                     nro_transaccion=@nro_transaccion AND
                                     legajo=@legajo";
-                using (SqlConnection con = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = strSQL.ToString();
-                    cmd.Parameters.AddWithValue("@legajo", legajo);
-                    cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
-                    cmd.Connection.Open();
-                    cmd.ExecuteNonQuery();
-                }
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSQL.ToString();
+                cmd.Parameters.AddWithValue("@legajo", legajo);
+                cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
+                //cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
+
             }
             catch (Exception)
             {

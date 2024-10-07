@@ -1,3 +1,4 @@
+using Microsoft.JSInterop;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Web_Api_IyC.Services;
@@ -27,7 +28,7 @@ namespace Web_Api_IyC
             services.AddScoped<IIndycomServices, IndycomServices>();
             services.AddScoped<ICtasctes_indycomServices, Ctasctes_indycomServices>();
             services.AddScoped<ITarjetasServices, TarjetasServices>();
-
+            services.AddScoped<IBadecServices, BadecServices>();
             //
             services.AddCors();
 

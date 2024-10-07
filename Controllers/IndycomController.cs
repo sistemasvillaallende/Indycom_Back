@@ -9,6 +9,7 @@ using Web_Api_IyC.Entities.HELPERS;
 using Web_Api_IyC.Entities.IYC;
 using Web_Api_IyC.Helpers;
 using Web_Api_IyC.Services;
+using static System.Net.Mime.MediaTypeNames;
 
 
 namespace Web_Api_IyC.Controllers
@@ -454,7 +455,6 @@ namespace Web_Api_IyC.Controllers
             return Ok(badec);
         }
 
-
         [HttpGet]
         public IActionResult GetBadecByCuit(string cuit)
         {
@@ -465,5 +465,254 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(badec);
         }
+
+        /* METODOS para la DECJUR*/
+        //[HttpGet]
+        //public IActionResult GetPeriodosDJSinLiquidar(int legajo)
+        //{
+        //    var iyc = _iindycomService.GetByPk(legajo);
+        //    if (iyc.tipo_liquidacion == 2)
+        //    {
+        //        var decjur = _iindycomService.GetPeriodosDJSinLiquidar(legajo);
+        //        if (decjur.Count == 0)
+        //        {
+        //            return BadRequest(new { message = @"El Comercio no debe Declaracion/es Jurada/s." });
+        //        }
+        //        else
+        //        {
+        //            return Ok(decjur);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return BadRequest(new { message = @"El Comercio no Presenta Declaracion Jurada." });
+        //    }
+        //}
+
+        [HttpGet]
+        public IActionResult GetPeriodosDJSinLiquidar(int legajo)
+        {
+            try
+            {
+                var iyc = _iindycomService.GetByPk(legajo);
+
+                if (iyc == null)
+                {
+                    return BadRequest(new { message = "No se encontró información para el legajo proporcionado." });
+                }
+
+                if (iyc.tipo_liquidacion == 2)
+                {
+                    var decjur = _iindycomService.GetPeriodosDJSinLiquidar(legajo);
+
+                    if (decjur == null || decjur.Count == 0)
+                    {
+                        return BadRequest(new { message = "El Comercio no debe Declaracion/es Jurada/s." });
+                    }
+
+                    return Ok(decjur);
+                }
+                else
+                {
+                    return BadRequest(new { message = "El Comercio no Presenta Declaracion Jurada." });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo de la excepción y respuesta con código de estado 500
+                return StatusCode(500, new { message = "Ocurrió un error al procesar la solicitud.", error = ex.Message });
+            }
+        }
+
+
+        //[HttpGet]
+        //public IActionResult GetRubrosDJIyC(int nro_transaccion, int legajo)
+        //{
+        //    try
+        //    {
+        //        var rubros = _iindycomService.GetRubros_dec_jur_iyc(nro_transaccion, legajo);
+
+        //        if (rubros == null || rubros.Count == 0)
+        //        {
+        //            return BadRequest(new { message = "La Declaración Jurada para este Período ha sido completada." });
+        //        }
+
+        //        return Ok(rubros);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Manejo de la excepción, puedes registrar el error si es necesario
+        //        return StatusCode(500, new { message = "Ocurrió un error al procesar la solicitud.", error = ex.Message });
+        //    }
+
+        //}
+
+        [HttpPost]
+        public IActionResult UpdateRubrosDJIyC(RubrosDJIyC_Con_Auditoria obj)
+        {
+            try
+            {
+                if (obj.legajo == 0 || obj.lst.Count == 0)
+                {
+                    return BadRequest(new { message = "No se pudo Actualizar porque la lista vino vacía!" });
+                }
+
+                foreach (var item in obj.lst)
+                {
+                    // Aquí usamos '&&' para asegurar que ambos valores sean no válidos para lanzar error
+                    if (item.cantidad <= 0 && item.importe <= 0)
+                    {
+                        return BadRequest(new { message = "Debe ingresar cantidad o importe...!" });
+                    }
+                }
+
+                // Llamada al servicio para realizar la actualización
+                _iindycomService.UpdateRubrosDJIyC(obj.legajo, obj.lst, obj.auditoria);
+
+                // Devuelve un mensaje más informativo
+                return Ok(new { message = "Los rubros fueron actualizados exitosamente." });
+            }
+            catch (Exception ex)
+            {
+                // Manejo de excepciones, devolver un error de servidor
+                return StatusCode(500, new { message = "Ocurrió un error al procesar la solicitud.", error = ex.Message });
+            }
+
+        }
+
+        [HttpPost]
+        public IActionResult LiquidarDJIyC(DJIyC_Con_Auditoria obj)
+        {
+            try
+            {
+                // Validación del objeto 'obj'
+                if (obj == null || obj.objDDJJ.nro_transaccion <= 0)
+                {
+                    return BadRequest(new { message = "Datos de la Declaración Jurada no válidos." });
+                }
+
+                if (_iindycomService.VerificarMontosIngresados(obj.legajo, obj.objDDJJ.nro_transaccion))
+                {
+                    return BadRequest(new { message = "Hay rubros a los cuales no se le han cargado los montos...!" });
+                }
+                // Llamada al servicio para realizar la Liquidacion
+                _iindycomService.Liquidar_decjur(obj.legajo, obj.objDDJJ, obj.auditoria);
+                // Devuelve un mensaje más informativo
+                return Ok(new { message = "La Liquidacion de la DDJJ fue con exito." });
+            }
+            catch (Exception ex)
+            {
+                // Manejo de excepciones, devolver un error de servidor
+                return StatusCode(500, new { message = "Ocurrió un error al procesar la Liquidacion.", error = ex.Message });
+            }
+        }
+
+        //[HttpPost]
+        //public IActionResult EliminaDDJJIyC(int legajo, int nro_transaccion, string periodo, Auditoria objA)
+        //{
+        //    try
+        //    {
+        //        var iyc = _iindycomService.GetByPk(legajo);
+        //        if (iyc == null || iyc.tipo_liquidacion != 2)
+        //        {
+        //            return BadRequest(new { message = "El Comercio no Presenta Declaracion Jurada.!" });
+        //        }
+        //        var ddjjiyc = _iindycomService.GetDecJur_completadas(legajo, periodo);
+        //        if (ddjjiyc.legajo <= 0)
+        //        {
+        //            return BadRequest(new { message = "No existe Declaración Jurada para este Periodo...!" });
+        //        }
+
+        //        if (_iindycomService.VerificaDecJurPagada(nro_transaccion))
+        //        {
+        //            return BadRequest(new { message = "El Periodo que quiere eliminar esta pagado...!" });
+        //        }
+        //        _iindycomService.EliminaDDJJIyC(ddjjiyc, objA);
+        //        // Devuelve un mensaje más informativo
+        //        return Ok(new { message = "La Liquidacion de la DDJJ fue con exito." });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Manejo de excepciones, devolver un error de servidor
+        //        return StatusCode(500, new { message = "Ocurrió un error al procesar la Liquidacion.", error = ex.Message });
+        //    }
+        //}
+
+
+        [HttpPost]
+        public IActionResult EliminaDJIyC(int legajo, int nro_transaccion, string periodo, Auditoria objA)
+        {
+            try
+            {
+                // Validar los parámetros de entrada
+                if (legajo <= 0 || nro_transaccion <= 0 || string.IsNullOrEmpty(periodo))
+                {
+                    return BadRequest(new { message = "Datos inválidos. Verifique los parámetros de entrada." });
+                }
+
+                // Obtener información del comercio
+                var iyc = _iindycomService.GetByPk(legajo);
+                if (iyc == null || iyc.tipo_liquidacion != 2)
+                {
+                    return BadRequest(new { message = "El Comercio no presenta Declaración Jurada." });
+                }
+
+                // Verificar si existe la declaración jurada completa
+                var djiyc = _iindycomService.GetDecJur_completadas(legajo, periodo);
+                if (djiyc == null || djiyc.legajo <= 0)
+                {
+                    return BadRequest(new { message = "No existe Declaración Jurada para este Periodo." });
+                }
+
+                // Verificar si la declaración está pagada
+                if (_iindycomService.VerificaDecJurPagada(nro_transaccion))
+                {
+                    return BadRequest(new { message = "El Periodo que quiere eliminar está pagado." });
+                }
+
+                // Eliminar la declaración jurada
+                _iindycomService.EliminaDJIyC(djiyc, objA);
+
+                // Devuelve un mensaje de éxito más adecuado
+                return Ok(new { message = "La Declaración Jurada fue eliminada exitosamente." });
+            }
+            catch (Exception ex)
+            {
+                // Manejo de excepciones
+                return StatusCode(500, new { message = "Ocurrió un error al procesar la eliminación de la Declaración Jurada.", error = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        public IActionResult ListaRubrosDJIyC(int nro_transaccion)
+        {
+            try
+            {
+                var rubrosdjiyc = _iindycomService.ListaRubrosDJIyC(nro_transaccion);
+
+                if (rubrosdjiyc == null || !rubrosdjiyc.Any())
+                {
+                    return NotFound(new { message = "No se encontraron rubros para el número de transacción proporcionado." });
+                }
+
+                return Ok(rubrosdjiyc);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(new { message = "Número de transacción inválido.", error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                // Puedes loguear el error aquí si tienes un sistema de logging
+                return StatusCode(500, new { message = "Se ha producido un error al obtener la lista de rubros.", error = ex.Message });
+            }
+        }
+
+        /*FIN DDJJ*/
+
+
     }
 }
+
+
+

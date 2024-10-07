@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -652,6 +653,168 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
+
+        //*********DDJJ*******************************//
+        public List<Dec_jur_iyc> GetPeriodosDJSinLiquidar(int legajo)
+        {
+            try
+            {
+                return Dec_jur_iyc.GetPeriodosDJSinLiquidar(legajo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public List<Rubros_x_dec_jur_iyc> GetRubrosDJIyC(int nro_transaccion, int legajo)
+        {
+            try
+            {
+                return Rubros_x_dec_jur_iyc.GetRubrosDJIyC(nro_transaccion, legajo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public void UpdateRubrosDJIyC(int legajo, List<Rubros_x_dec_jur_iyc> lst, Auditoria objA)
+        {
+            try
+            {
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
+                {
+                    con.Open();
+                    // Iniciar una transacción
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            Rubros_x_dec_jur_iyc.UpdateRubrosDJIyC(con, trx, lst);
+                            objA.identificacion = legajo.ToString();
+                            objA.proceso = "CARGA DE IMPORTES DE LA DDJJ IYC";
+                            objA.detalle = JsonConvert.SerializeObject(lst);
+                            AuditoriaD.InsertAuditoria(objA, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void Liquidar_decjur(int legajo, Dec_jur_iyc obj, Auditoria objA)
+        {
+            try
+            {
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
+                {
+                    con.Open();
+                    // Iniciar una transacción
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            Dec_jur_iyc.Liquidar_decjur(legajo, obj, con, trx);
+                            objA.identificacion = legajo.ToString();
+                            objA.proceso = "Liquida DDJJ IYC";
+                            objA.detalle = JsonConvert.SerializeObject(obj);
+                            objA.observaciones += string.Format("Se procede a Liquidar la DDJJ del Legajo {0}, Fecha auditoria: {1}",
+                                legajo, DateTime.Now);
+                            AuditoriaD.InsertAuditoria(objA, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool VerificarMontosIngresados(int nro_transaccion, int legajo)
+        {
+            return Rubros_x_dec_jur_iyc.VerificarMontosIngresados(nro_transaccion, legajo);
+        }
+        public Dec_jur_iyc GetDecJur_completadas(int legajo, string periodo)
+        {
+            try
+            {
+                return Dec_jur_iyc.GetDecJur_completadas(legajo, periodo);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool VerificaDecJurPagada(int nro_transaccion)
+        {
+            try
+            {
+                return Dec_jur_iyc.VerificaDecJurPagada(nro_transaccion);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void EliminaDJIyC(Dec_jur_iyc objDJ, Auditoria objA)
+        {
+            try
+            {
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
+                {
+                    con.Open();
+                    // Iniciar una transacción
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        Dec_jur_iyc.SqlUpdateDDJJ(objDJ, con, trx);
+                        Dec_jur_iyc.SqlEliminaDetalle(objDJ, con, trx);
+                        Rubros_x_dec_jur_iyc.SqlActualizaRubros(objDJ.nro_transaccion, con, trx);
+                        Ctasctes_indycom.SqlActualiza_Ctasctes_Indycom(objDJ.legajo, objDJ.nro_transaccion, con, trx);
+                        objA.identificacion = objDJ.legajo.ToString();
+                        objA.proceso = "ELIMINA_DECLARACION_JURADA";
+                        objA.detalle = JsonConvert.SerializeObject(objDJ);
+                        objA.observaciones += string.Format("Se procede a eliminar la DJ del Legajo {0}, Fecha auditoria: {1}", objDJ.legajo, DateTime.Now);
+                        AuditoriaD.InsertAuditoria(objA, con, trx);
+                        trx.Commit();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public List<Rubros_x_dec_jur_iyc> ListaRubrosDJIyC(int nro_transaccion)
+        {
+            try
+            {
+                return Rubros_x_dec_jur_iyc.ListaRubrosDJIyC(nro_transaccion);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        //*********FIN DDJJ*******************************//
 
     }
 }

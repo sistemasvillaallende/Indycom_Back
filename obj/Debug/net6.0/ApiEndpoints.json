@@ -1,0 +1,1132 @@
+[
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "Confirma_cancelacion_ctasctes",
+    "RelativePath": "Ctasctes_indycom/Confirma_cancelacion_ctasctes",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tipo_transaccion",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.HELPERS.CtasCtes_Con_Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "Confirma_elimina_cancelacion",
+    "RelativePath": "Ctasctes_indycom/Confirma_elimina_cancelacion",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.HELPERS.CtasCtes_Con_Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "Confirma_iniciar_ctacte",
+    "RelativePath": "Ctasctes_indycom/Confirma_iniciar_ctacte",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.HELPERS.CtasCtes_Con_Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "Confirma_reliquidacion",
+    "RelativePath": "Ctasctes_indycom/Confirma_reliquidacion",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.HELPERS.CtasCtes_Con_Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "Datos_transaccion",
+    "RelativePath": "Ctasctes_indycom/Datos_transaccion",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tipo_transaccion",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "nro_transaccion",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "DetalleDeuda",
+    "RelativePath": "Ctasctes_indycom/DetalleDeuda",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nro_transaccion",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Web_Api_IyC.Entities.Ctasctes_indycom, Web_Api_IyC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "DetallePago",
+    "RelativePath": "Ctasctes_indycom/DetallePago",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nro_cedulon",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "nro_transaccion",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "DetallePlan",
+    "RelativePath": "Ctasctes_indycom/DetallePlan",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nro_plan",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "DetalleProcuracion",
+    "RelativePath": "Ctasctes_indycom/DetalleProcuracion",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nro_proc",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "getListDeudaIyC",
+    "RelativePath": "Ctasctes_indycom/getListDeudaIyC",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "getListDeudaIyCNoVencida",
+    "RelativePath": "Ctasctes_indycom/getListDeudaIyCNoVencida",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "getListDeudaIyCProcurada",
+    "RelativePath": "Ctasctes_indycom/getListDeudaIyCProcurada",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "IniciarCtacte",
+    "RelativePath": "Ctasctes_indycom/IniciarCtacte",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "Listar_periodos_a_cancelar",
+    "RelativePath": "Ctasctes_indycom/Listar_periodos_a_cancelar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "Listar_periodos_a_reliquidar",
+    "RelativePath": "Ctasctes_indycom/Listar_periodos_a_reliquidar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "Listar_Periodos_cancelados",
+    "RelativePath": "Ctasctes_indycom/Listar_Periodos_cancelados",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Web_Api_IyC.Entities.Ctasctes_indycom, Web_Api_IyC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "ListarCtacte",
+    "RelativePath": "Ctasctes_indycom/ListarCtacte",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "tipo_consulta",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "cate_deuda_desde",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "cate_deuda_hasta",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Web_Api_IyC.Entities.Ctasctes_indycom, Web_Api_IyC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "Reliquidar_periodos",
+    "RelativePath": "Ctasctes_indycom/Reliquidar_periodos",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "lst",
+        "Type": "System.Collections.Generic.List\u00601[[Web_Api_IyC.Entities.Ctasctes_indycom, Web_Api_IyC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "BajaComercial",
+    "RelativePath": "Indycom/BajaComercial",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "fecha_baja",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "objAuditoria",
+        "Type": "Web_Api_IyC.Entities.AUDITORIA.Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "BajaSucursal",
+    "RelativePath": "Indycom/BajaSucursal",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "nro_sucursal",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "fecha_baja",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "objAuditoria",
+        "Type": "Web_Api_IyC.Entities.AUDITORIA.Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "BuscarRubroxDescripcion",
+    "RelativePath": "Indycom/BuscarRubroxDescripcion",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "descripcion",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "ConsultaIyc_x_calles",
+    "RelativePath": "Indycom/ConsultaIyc_x_calles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "calledesde",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "callehasta",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "Delete",
+    "RelativePath": "Indycom/Delete",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.INDYCOM",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "EliminaDJIyC",
+    "RelativePath": "Indycom/EliminaDJIyC",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "nro_transaccion",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "periodo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "objA",
+        "Type": "Web_Api_IyC.Entities.AUDITORIA.Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "GetBadecByCuit",
+    "RelativePath": "Indycom/GetBadecByCuit",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cuit",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "GetBadecByNombre",
+    "RelativePath": "Indycom/GetBadecByNombre",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nombre",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "GetBasesImponibles",
+    "RelativePath": "Indycom/GetBasesImponibles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "periodo_desde",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "periodo_hasta",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "GetByPk",
+    "RelativePath": "Indycom/GetByPk",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "GetCalle",
+    "RelativePath": "Indycom/GetCalle",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nomcalle",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "GetConvenios",
+    "RelativePath": "Indycom/GetConvenios",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nom_convenio",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "GetIndycomPaginado",
+    "RelativePath": "Indycom/GetIndycomPaginado",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "buscarPor",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "strParametro",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "pagina",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "registros_por_pagina",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Web_Api_IyC.Helpers.PaginadorGenerico\u00601[[Web_Api_IyC.Entities.INDYCOM, Web_Api_IyC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "GetMinimos_indycom",
+    "RelativePath": "Indycom/GetMinimos_indycom",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "minimo",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "GetPeriodosDJSinLiquidar",
+    "RelativePath": "Indycom/GetPeriodosDJSinLiquidar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "GetRubros_x_iyc",
+    "RelativePath": "Indycom/GetRubros_x_iyc",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "GetSucuralByLegajo",
+    "RelativePath": "Indycom/GetSucuralByLegajo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "nro_sucursal",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "InsertDatosGeneral",
+    "RelativePath": "Indycom/InsertDatosGeneral",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.INDYCOM",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "LiquidarDJIyC",
+    "RelativePath": "Indycom/LiquidarDJIyC",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.HELPERS.DJIyC_Con_Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "ListarCategoriasIyc",
+    "RelativePath": "Indycom/ListarCategoriasIyc",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Web_Api_IyC.Entities.HELPERS.Combo, Web_Api_IyC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "ListaRubrosDJIyC",
+    "RelativePath": "Indycom/ListaRubrosDJIyC",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nro_transaccion",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "Read",
+    "RelativePath": "Indycom/Read",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "Resumendeuda",
+    "RelativePath": "Indycom/Resumendeuda",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "tipo_consulta",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "periodo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "cate_deuda_desde",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "cate_deuda_hasta",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "objA",
+        "Type": "Web_Api_IyC.Entities.AUDITORIA.Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "saludo",
+    "RelativePath": "Indycom/saludo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "SaveDatosAfip",
+    "RelativePath": "Indycom/SaveDatosAfip",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.INDYCOM",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "SaveDatosLiquidacion",
+    "RelativePath": "Indycom/SaveDatosLiquidacion",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.INDYCOM",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "Situacion_judicial",
+    "RelativePath": "Indycom/Situacion_judicial",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "Tipos_entidad",
+    "RelativePath": "Indycom/Tipos_entidad",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "Tipos_iva",
+    "RelativePath": "Indycom/Tipos_iva",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "Tipos_liq_iyc",
+    "RelativePath": "Indycom/Tipos_liq_iyc",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "Tipos_per_iyc",
+    "RelativePath": "Indycom/Tipos_per_iyc",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "Update",
+    "RelativePath": "Indycom/Update",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.INDYCOM",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "UpdateDatosDomPostal",
+    "RelativePath": "Indycom/UpdateDatosDomPostal",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.INDYCOM",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "UpdateDatosGenerales",
+    "RelativePath": "Indycom/UpdateDatosGenerales",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.INDYCOM",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "UpdateRubrosDJIyC",
+    "RelativePath": "Indycom/UpdateRubrosDJIyC",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.HELPERS.RubrosDJIyC_Con_Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "Zonasiyc",
+    "RelativePath": "Indycom/Zonasiyc",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.TarjetasController",
+    "Method": "getPlanByPk",
+    "RelativePath": "Tarjetas/getPlanByPk",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cod_plan",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.TarjetasController",
+    "Method": "getPlanBySubsistema",
+    "RelativePath": "Tarjetas/getPlanBySubsistema",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "subsistema",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "deuda",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "cod_tarjeta",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.TarjetasController",
+    "Method": "getTarjetasByCodPayPerTic",
+    "RelativePath": "Tarjetas/getTarjetasByCodPayPerTic",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pk",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.TarjetasController",
+    "Method": "getTarjetasByPk",
+    "RelativePath": "Tarjetas/getTarjetasByPk",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pk",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.TarjetasController",
+    "Method": "getTarjetasDesktop",
+    "RelativePath": "Tarjetas/getTarjetasDesktop",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.TarjetasController",
+    "Method": "getTarjetasWeb",
+    "RelativePath": "Tarjetas/getTarjetasWeb",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.TarjetasController",
+    "Method": "readPlanes",
+    "RelativePath": "Tarjetas/readPlanes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.WeatherForecastController",
+    "Method": "Get",
+    "RelativePath": "WeatherForecast",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Web_Api_IyC.WeatherForecast, Web_Api_IyC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetWeatherForecast"
+  }
+]

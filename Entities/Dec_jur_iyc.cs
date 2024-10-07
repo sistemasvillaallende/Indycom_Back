@@ -235,10 +235,11 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        public static void Liquidar_decjur(SqlConnection cn, SqlTransaction trx, Dec_jur_iyc obj)
+        public static void Liquidar_decjur(int legajo, Dec_jur_iyc obj, SqlConnection cn, SqlTransaction trx)
         {
             try
             {
+                INDYCOM iyc = INDYCOM.GetByPk(legajo);
                 SqlCommand cmd = cn.CreateCommand();
                 cmd.Transaction = trx;
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -246,10 +247,9 @@ namespace Web_Api_IyC.Entities
                 cmd.Parameters.Add(new SqlParameter("@legajo", obj.legajo));
                 cmd.Parameters.Add(new SqlParameter("@periodo", obj.periodo));
                 cmd.Parameters.Add(new SqlParameter("@nro_transaccion", obj.nro_transaccion));
-                cmd.Parameters.Add(new SqlParameter("@cod_zona", obj.cod_zona));
-                cmd.Parameters.Add(new SqlParameter("@cod_tipo_per", obj.cod_tipo_per));
+                cmd.Parameters.Add(new SqlParameter("@cod_zona", iyc.cod_zona));
+                cmd.Parameters.Add(new SqlParameter("@cod_tipo_per", iyc.cod_tipo_per));
                 cmd.Parameters.Add(new SqlParameter("@presentacion_web", obj.presentacion_web));
-                cmd.Connection.Open();
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)
@@ -264,7 +264,7 @@ namespace Web_Api_IyC.Entities
                                   WHERE
                                     legajo=@legajo AND
                                     periodo=@periodo
-                                  ORDER BY d.periodo desc";
+                                  ORDER BY periodo desc";
                 List<Dec_jur_iyc> lst = new List<Dec_jur_iyc>();
                 Dec_jur_iyc? obj = new();
                 using (SqlConnection cn = GetConnectionSIIMVA())
@@ -293,7 +293,7 @@ namespace Web_Api_IyC.Entities
         {
             try
             {
-                int pagado = 0;
+                bool pagado = false;
                 string strSQL = @"SELECT ci.pagado 
                                   FROM CTASCTES_INDYCOM ci
                                   WHERE ci.tipo_transaccion=1 AND 
@@ -303,16 +303,18 @@ namespace Web_Api_IyC.Entities
                     SqlCommand cmd = cn.CreateCommand();
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = strSQL;
+                    cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
+                    cmd.Connection.Open();
                     SqlDataReader dr = cmd.ExecuteReader();
                     if (dr.HasRows)
                     {
                         while (dr.Read())
                         {
-                            pagado = dr.GetInt32(dr.GetOrdinal("pagado"));
+                            pagado = dr.GetBoolean(dr.GetOrdinal("pagado"));
                         }
                     }
                     dr.Close();
-                    if (pagado == 1)
+                    if (pagado)
                         return true;
                     else return false;
 
@@ -327,7 +329,7 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        public static void SqlUpdateDDJJ(Dec_jur_iyc obj)
+        public static void SqlUpdateDDJJ(Dec_jur_iyc obj, SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -337,22 +339,21 @@ namespace Web_Api_IyC.Entities
                                    fecha_presentacion_ddjj=NULL,
                                    presentacion_web=0
                                  WHERE nro_transaccion=@nro_transaccion";
-                using (SqlConnection con = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = strSQL.ToString();
-                    cmd.Parameters.AddWithValue("@nro_transaccion", obj.nro_transaccion);
-                    cmd.Connection.Open();
-                    cmd.ExecuteNonQuery();
-                }
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSQL.ToString();
+                cmd.Parameters.AddWithValue("@nro_transaccion", obj.nro_transaccion);
+                //cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
+
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        public static void SqlEliminaDetalle(Dec_jur_iyc obj)
+        public static void SqlEliminaDetalle(Dec_jur_iyc obj, SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -360,22 +361,22 @@ namespace Web_Api_IyC.Entities
                                   FROM Detalle_deuda_iyc
                                   WHERE
                                   nro_transaccion=@nro_transaccion";
-                using (SqlConnection con = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = strSQL.ToString();
-                    cmd.Parameters.AddWithValue("@nro_transaccion", obj.nro_transaccion);
-                    cmd.Connection.Open();
-                    cmd.ExecuteNonQuery();
-                }
+
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSQL.ToString();
+                cmd.Parameters.AddWithValue("@nro_transaccion", obj.nro_transaccion);
+                //cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
+
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        
 
 
 
