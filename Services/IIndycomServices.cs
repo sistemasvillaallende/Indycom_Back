@@ -55,6 +55,7 @@ namespace Web_Api_IyC.Services
         public Dec_jur_iyc GetDecJur_completadas(int legajo, string periodo);
         public bool VerificaDecJurPagada(int nro_transaccion);
         public void EliminaDJIyC(Dec_jur_iyc objDDJJ, Auditoria objA);
+        public Dec_jur_iyc GetPeriodoDJLiquidado (int legajo, string periodo);
         public List<Rubros_x_dec_jur_iyc> ListaRubrosDJIyC(int nro_transaccion);
 
         /*FIN DDJJ*/

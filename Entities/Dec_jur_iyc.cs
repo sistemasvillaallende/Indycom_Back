@@ -317,10 +317,6 @@ namespace Web_Api_IyC.Entities
                     if (pagado)
                         return true;
                     else return false;
-
-
-
-
                 }
             }
             catch (Exception)
@@ -378,7 +374,36 @@ namespace Web_Api_IyC.Entities
             }
         }
 
-
+        public static Dec_jur_iyc GetPeriodoDJLiquidado(int legajo, string periodo)
+        {
+            try
+            {
+                string strSQL = @"SELECT *
+                                  FROM Dec_jur_iyc
+                                  WHERE
+                                     legajo=@legajo AND
+                                     periodo=@periodo";
+                List<Dec_jur_iyc> lst = new List<Dec_jur_iyc>();
+                Dec_jur_iyc obj = new Dec_jur_iyc();
+                using (SqlConnection cn = GetConnectionSIIMVA())
+                {
+                    SqlCommand cmd = cn.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = strSQL;
+                    cmd.Parameters.AddWithValue("@legajo", legajo);
+                    cmd.Parameters.AddWithValue("@periodo", periodo);
+                    cmd.Connection.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    lst = mapeo(dr);
+                    obj = lst[0];
+                    return obj;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
 
 

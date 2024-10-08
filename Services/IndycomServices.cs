@@ -802,6 +802,18 @@ namespace Web_Api_IyC.Services
             }
 
         }
+        public Dec_jur_iyc GetPeriodoDJLiquidado(int legajo, string periodo)
+        {
+            try
+            {
+                return Dec_jur_iyc.GetPeriodoDJLiquidado(legajo, periodo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<Rubros_x_dec_jur_iyc> ListaRubrosDJIyC(int nro_transaccion)
         {
             try

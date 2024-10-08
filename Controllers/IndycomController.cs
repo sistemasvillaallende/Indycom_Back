@@ -524,7 +524,30 @@ namespace Web_Api_IyC.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult ListaRubrosDJIyC(int nro_transaccion)
+        {
+            try
+            {
+                var rubrosdjiyc = _iindycomService.ListaRubrosDJIyC(nro_transaccion);
 
+                if (rubrosdjiyc == null || !rubrosdjiyc.Any())
+                {
+                    return NotFound(new { message = "No se encontraron rubros para el número de transacción proporcionado." });
+                }
+
+                return Ok(rubrosdjiyc);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(new { message = "Número de transacción inválido.", error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                // Puedes loguear el error aquí si tienes un sistema de logging
+                return StatusCode(500, new { message = "Se ha producido un error al obtener la lista de rubros.", error = ex.Message });
+            }
+        }
         //[HttpGet]
         //public IActionResult GetRubrosDJIyC(int nro_transaccion, int legajo)
         //{
@@ -684,27 +707,35 @@ namespace Web_Api_IyC.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListaRubrosDJIyC(int nro_transaccion)
+        public IActionResult GetPeriodoDJLiquidado(int legajo, string periodo)
         {
+            if (legajo <= 0)
+            {
+                return BadRequest(new { message = "Legajo no válido." });
+            }
+
+            if (string.IsNullOrWhiteSpace(periodo))
+            {
+                return BadRequest(new { message = "El periodo no puede estar vacío." });
+            }
+
             try
             {
-                var rubrosdjiyc = _iindycomService.ListaRubrosDJIyC(nro_transaccion);
-
-                if (rubrosdjiyc == null || !rubrosdjiyc.Any())
+                var djiyc = _iindycomService.GetPeriodoDJLiquidado(legajo, periodo);
+                if (djiyc == null)
                 {
-                    return NotFound(new { message = "No se encontraron rubros para el número de transacción proporcionado." });
+                    return NotFound(new { message = "No se encontró DJ para este comercio." });
                 }
-
-                return Ok(rubrosdjiyc);
-            }
-            catch (ArgumentNullException ex)
-            {
-                return BadRequest(new { message = "Número de transacción inválido.", error = ex.Message });
+                if (djiyc.completa == false)
+                {
+                    return NotFound(new { message = string.Format("La DJ del Periodo {0} no esta Presentada.", periodo) });
+                }
+                return Ok(djiyc);
             }
             catch (Exception ex)
             {
-                // Puedes loguear el error aquí si tienes un sistema de logging
-                return StatusCode(500, new { message = "Se ha producido un error al obtener la lista de rubros.", error = ex.Message });
+                // Puedes registrar la excepción o devolver más información
+                return StatusCode(500, new { message = "Ocurrió un error en el servidor.", error = ex.Message });
             }
         }
 

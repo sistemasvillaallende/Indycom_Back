@@ -1,5 +1,119 @@
 [
   {
+    "ContainingType": "Web_Api_IyC.Controllers.Conceptos_iycController",
+    "Method": "AddConcepto",
+    "RelativePath": "Conceptos_iyc/AddConcepto",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.Descadic_x_iyc",
+        "IsRequired": true
+      },
+      {
+        "Name": "usuario",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Conceptos_iycController",
+    "Method": "DeleteConcepto",
+    "RelativePath": "Conceptos_iyc/DeleteConcepto",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "cod_concepto_iyc",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "usuario",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Conceptos_iycController",
+    "Method": "getConceptos_x_iyc",
+    "RelativePath": "Conceptos_iyc/getConceptos_x_iyc",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Web_Api_IyC.Entities.Descadic_x_iyc, Web_Api_IyC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Conceptos_iycController",
+    "Method": "readConceptos",
+    "RelativePath": "Conceptos_iyc/readConceptos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Web_Api_IyC.Entities.Conceptos_iyc, Web_Api_IyC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Conceptos_iycController",
+    "Method": "UpdateConcepto",
+    "RelativePath": "Conceptos_iyc/UpdateConcepto",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.Descadic_x_iyc",
+        "IsRequired": true
+      },
+      {
+        "Name": "usuario",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
     "Method": "Confirma_cancelacion_ctasctes",
     "RelativePath": "Ctasctes_indycom/Confirma_cancelacion_ctasctes",
@@ -363,6 +477,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Web_Api_IyC.Controllers.Descadic_x_iycController",
+    "Method": "getByPk",
+    "RelativePath": "Descadic_x_iyc/getByPk",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "cod_concepto_iyc",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
     "Method": "BajaComercial",
     "RelativePath": "Indycom/BajaComercial",
@@ -660,6 +795,27 @@
     "Parameters": [
       {
         "Name": "minimo",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "GetPeriodoDJLiquidado",
+    "RelativePath": "Indycom/GetPeriodoDJLiquidado",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "periodo",
         "Type": "System.String",
         "IsRequired": false
       }
