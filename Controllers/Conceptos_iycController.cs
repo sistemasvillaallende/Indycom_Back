@@ -74,15 +74,17 @@ namespace Web_Api_IyC.Controllers
         public IActionResult DeleteConcepto(int legajo, int cod_concepto_iyc, 
             string usuario)
         {
-            _Descadic_x_iycService.delete(legajo, cod_concepto_iyc, usuario);
 
-            var IndYCom= _Descadic_x_iycService.getByPk(legajo,
+            var IndYCom = _Descadic_x_iycService.getByPk(legajo,
                 cod_concepto_iyc);
-            if (IndYCom.legajo == 0)
+
+            if (IndYCom != null && IndYCom.legajo != 0)
             {
-                return Ok(new { message = "Error no se pudo eliminar el concepto." });
+                _Descadic_x_iycService.delete(legajo, cod_concepto_iyc, usuario);
+                return Ok(IndYCom);
             }
-            return Ok(IndYCom);
+
+            return Ok(new { message = "Error no se pudo eliminar el concepto." });
         }
     }
 }
