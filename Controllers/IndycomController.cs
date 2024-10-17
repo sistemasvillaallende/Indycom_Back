@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Web_Api_IyC.Entities;
@@ -738,8 +739,202 @@ namespace Web_Api_IyC.Controllers
                 return StatusCode(500, new { message = "Ocurrió un error en el servidor.", error = ex.Message });
             }
         }
-
         /*FIN DDJJ*/
+
+        //BAJA COMERCIO
+
+        //if Data_IndYCom.IndYCom.Eof then
+        //begin
+        //Application.MessageBox('Se ha llegado al Final del Archivo.','SIIMVA-Error', MB_ICONERROR + MB_OK);
+        //Exit;
+        //end;
+        //if Data_IndYCom.IndYComFecha_Baja.IsNull=False then
+        //begin
+        //Application.MessageBox('Este Comercio/Industria ya está dado de baja.','SIIMVA-Error', MB_ICONERROR + MB_OK);
+        //end;
+        //Baja.Tipo_baja:=1;// baja de casa central
+        //Baja.ShowModal;
+
+
+        //        procedure TBaja.ConfirmaClick(Sender: TObject);
+        //        var
+        //          fecha_baja: TDateTime;
+        //  fecha_acta: TDateTime;
+        //  fecha_expediente: TDateTime;
+        //  nro_sucursal:integer;
+        //begin
+        //  try
+        //    fecha_baja:=StrToDate(EFecha_Baja.Text);
+        //        except
+        //          Application.MessageBox('Fecha baja incorrecta.',
+        //            'SIIMVA-Error', MB_ICONERROR + MB_OK);
+        //        Efecha_baja.SetFocus;
+        //    Exit;
+        //  end;
+        //  try
+        //    fecha_acta:=StrToDate(EFecha_Acta.Text);
+        //        except
+        //          Application.MessageBox('Fecha acta incorrecta.', 'SIIMVA-Error', MB_ICONERROR + MB_OK);
+        //        Efecha_acta.SetFocus;
+        //    Exit;
+        //  end;
+        //  try
+        //    fecha_expediente:=StrToDate(EFecha_Expediente.Text);
+        //        except
+        //          Application.MessageBox('Fecha expediente incorrecta.', 'SIIMVA-Error', MB_ICONERROR + MB_OK);
+        //        Efecha_expediente.SetFocus;
+        //    Exit;
+        //  end;
+        //  Data_IndYCom.Siimva.StartTransaction;
+        //  Application.CreateForm(TAutoriza, Autoriza);
+        //  Autoriza.Autoriza_Procesos.ParamByName('proceso').Value:='BAJA IYC';
+        //  if Autoriza.ShowModal<> mrOk then
+        //  begin
+        //    Data_IndYCom.Siimva.Rollback;
+        //    Autoriza.Free;
+        //    Exit;
+        //  end;
+        //  Data_IndyCom.Auditor_V2.ParamByName('@usuario').Value        := PriIyC.usuario;
+        //  Data_IndyCom.Auditor_V2.ParamByName('@autorizacion').Value   := Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
+        //  Data_IndyCom.Auditor_V2.ParamByName('@identificacion').Value := Data_IndYCom.IndYComLegajo.AsString;
+        //  Data_IndyCom.Auditor_V2.ParamByName('@observaciones').Value  := Autoriza.Memo1.Lines.Text;
+        //  Data_IndyCom.Auditor_V2.ParamByName('@proceso').Value        := 'BAJA IYC';
+        //  Data_IndyCom.Auditor_V2.ParamByName('@detalle').Value        := ENro_Res.Text + ' ..';
+        //  Data_IndyCom.Auditor_V2.ExecProc;
+        //  //Data_IndyCom.SIIMVA.Commit;
+        //  Autoriza.Free;
+        //  if Tipo_baja=1  then
+        //  begin
+        //      Data_IndYCom.IndYCom.Edit;
+        //      Data_IndYCom.IndYComDado_Baja.Value:=True;
+        //      Data_IndYCom.IndYComFecha_Baja.Value:=fecha_baja;
+        //      Data_IndYCom.IndYCom.Post;
+        //  end;
+        //  if Tipo_baja=2 then
+        //  begin
+        //    nro_sucursal:= GestIyC.nro_sucursal;
+        //    try
+        //      //Data_IndYCom.Siimva.StartTransaction;
+        //      Application.CreateForm(TAutoriza, Autoriza);
+        //      Autoriza.Autoriza_Procesos.ParamByName('proceso').Value       := 'MODIFICACION INDYCOM';
+        //      Data_IndyCom.sqlUpdSuc.close;
+        //      Data_IndyCom.sqlUpdSuc.ParamByName('legajo').AsInteger        :=  Data_IndYCom.INDYCOM.fieldByName('legajo').AsInteger;
+        //      Data_IndYCom.sqlUpdSuc.ParamByName('nro_sucursal').AsInteger  :=  nro_sucursal ;
+        //      Data_IndYCom.sqlUpdSuc.ParamByName('fecha_baja').AsDateTime   :=  Now;
+        //      Data_IndYCom.sqlUpdSuc.ParamByName('dado_baja').AsBoolean     :=  True;
+        //      Data_IndyCom.sqlUpdSuc.ExecSQL;
+        //      // Data_IndYCom.SUCURSALES_INDYCOM.close;
+        //      //  Data_IndYCom.SUCURSALES_INDYCOM.Open;
+        //      //Data_IndYCom.Siimva.Commit;
+        //      Data_IndYCom.IndYCom.Refresh;
+        //    except
+        //      Data_IndYCom.Siimva.Rollback;
+        //        Application.MessageBox('Datos erróneos. Revise.', 'SIIMVA-Error',MB_ICONERROR + MB_OK);
+        //      Exit;
+        //    end;
+        //  end;
+        //  Data_IndYCom.Siimva.Commit;
+
+        //  if PrinterSetupDialog1.Execute=True then
+        //  begin
+
+        //    if Tipo_baja=1  then
+        //    begin
+        //        RBaja.QIndYCom.ParamByName('legajo').Value    := Data_IndYCom.IndYComLegajo.Value;
+        //        RBaja.QIndYCom.Open;
+        //        RBaja.QRLFecha_Expediente.Caption:=DateToStr(fecha_expediente);
+        //        RBaja.QRLNombre.Caption:=GestIyC.BadecNombre.Value;
+        //        RBaja.QRLLegajo2.Caption:=Data_IndYCom.IndYComLegajo.AsString;
+        //        RBaja.QRLDes_Com.Caption:=Data_IndYCom.IndYComDes_Com.AsString;
+        //        RBaja.QRLFecha_Acta.Caption:=DateToStr(fecha_acta);
+        //        RBaja.QRLDes_Com2.Caption:=Data_IndYCom.IndYComDes_Com.AsString;
+        //        RBaja.QRLNombre2.Caption:=GestIyC.BadecNombre.Value;
+        //        RBaja.QRLLegajo.Caption:=Data_IndYCom.IndYComLegajo.AsString;
+        //        RBaja.QRLNro_Res.Caption:=ENro_Res.Text;
+        //        RBaja.QRLFecha_Baja.Caption:=EFecha_Baja.Text;
+        //        RBaja.RepRes_Baja.Print;
+        //        RBaja.QIndYCom.Close;
+        //    end;
+
+        //    if Tipo_baja=2  then
+        //    begin
+        //        RBajaSuc:= TRBajaSuc.Create(self);
+        //        RBajaSuc.QSucIndYCom.Close;
+        //        RBajaSuc.QSucIndYCom.ParamByName('legajo').Value       := Data_IndYCom.INDYCOMLegajo.Value;
+        //        RBajaSuc.QSucIndYCom.ParamByName('nro_sucursal').Value := nro_sucursal;
+        //        RBajaSuc.QSucIndYCom.Open;
+        //        RBajaSuc.QRLFecha_Expediente.Caption:=DateToStr(fecha_expediente);
+        //        RBajaSuc.QRLNombre.Caption:=GestIyC.BadecNombre.Value;
+        //        RBajaSuc.QRLLegajo2.Caption:=RBajaSuc.QSucIndYComLegajo.AsString;
+        //        RBajaSuc.QRLDes_Com.Caption:=RBajaSuc.QSucIndYComDes_Com.AsString;
+        //        RBajaSuc.QRLFecha_Acta.Caption:=DateToStr(fecha_acta);
+        //        RBajaSuc.QRLDes_Com2.Caption:=RBajaSuc.QSucIndYComDes_Com.AsString;
+        //        RBajaSuc.QRLNombre2.Caption:=GestIyC.BadecNombre.Value;
+        //        RBajaSuc.QRLLegajo.Caption:=RBajaSuc.QSucIndYComLegajo.AsString;
+        //        RBajaSuc.QRLNro_Res.Caption:=  RBajaSuc.QSucIndYComNro_res.Value;
+        //        RBajaSuc.QRLFecha_Baja.Caption:=EFecha_Baja.Text;
+        //        RBajaSuc.qrlCalle.Caption := RBajaSuc.QSucIndYComNom_calle.Value + ' '+ RBajaSuc.QSucIndYComNro_dom.AsString ;
+        //        RBajaSuc.RepRes_Baja.Preview;
+        //        RBajaSuc.QSucIndYCom.Close;
+        //        FreeAndNil(RBajaSuc);
+        //        end;
+
+        //  end;
+        //end;
+
+
+        //DATOS DEL CONTACTO DEL COMERCIO
+
+//        procedure TDomPost.confirmaClick(Sender: TObject);
+//        begin
+
+
+
+//  if (Data_IndYCom.IndYComNom_Calle_Dom_Esp.Value=' ') or
+//   (Data_IndYCom.IndYComNro_Dom_Esp.IsNull= True) then
+//  begin
+//    Application.MessageBox('Datos Incorrecto. Verifique.','SIIMVA-Error',MB_ICONERROR + MB_OK);
+//    Exit;
+//  end;
+//  if Length(Data_IndYCom.IndYComemail_envio_cedulon.Value)>0 then
+//    begin
+//     if not EsEMail(Data_IndYCom.IndYComemail_envio_cedulon.Value) then
+//     begin
+//        Application.MessageBox('Ingrese correctamente el Email...','SIIMVA-Error',MB_ICONERROR + MB_OK);
+//        Exit;
+//     end;
+//    end;
+
+//  Data_IndYCom.Siimva.StartTransaction;
+//  Data_IndYCom.IndYComFecha_Cambio_Domicilio.Value:=Now;
+//  Data_IndYCom.IndYCom.Post;
+//  Application.CreateForm(TAutoriza, Autoriza);
+//  Autoriza.Autoriza_Procesos.ParamByName('proceso').Value:='RECALCULO DEUDA IYC';
+//  if Autoriza.ShowModal<> mrOk then
+//  begin
+//    Autoriza.Free;
+//    Data_IndYCom.Siimva.Rollback;
+//    Exit;
+//  end;
+//  Data_IndyCom.Auditor_V2.ParamByName('@usuario').Value:=PriIyC.usuario;
+//  Data_IndyCom.Auditor_V2.ParamByName('@autorizacion').Value:=
+//    Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
+//  Data_IndyCom.Auditor_V2.ParamByName('@identificacion').Value:=
+//    Data_IndYCom.IndYComLegajo.AsString;
+//  Data_IndyCom.Auditor_V2.ParamByName('@observaciones').Value:=
+//    Autoriza.Memo1.Lines.Text;
+//  Data_IndyCom.Auditor_V2.ParamByName('@proceso').Value:='CAMBIO DOMIC. POSTAL INDYCOM';
+//  Data_IndyCom.Auditor_V2.ParamByName('@detalle').Value:='Domic. Ant.: ' +
+//    'Calle: ' + LeftString(auxnom_calle,25) +
+//    ' Nro.: ' + LeftString(auxnro_dom,5) +
+//    ' Piso/Dpto: ' + LeftString(auxpiso_dpto,15) +
+//    ' Local: '+ LeftString(auxlocal,5) +
+//    ' Barrio: ' + LeftString(auxnom_barrio,25);
+//        Data_IndyCom.Auditor_V2.ExecProc;
+//  Autoriza.Free;
+//  Data_IndYCom.Siimva.Commit;
+//end;
+
 
 
     }

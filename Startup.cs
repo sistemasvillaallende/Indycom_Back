@@ -31,10 +31,6 @@ namespace Web_Api_IyC
             services.AddScoped<IBadecServices, BadecServices>();
             services.AddScoped<IConceptos_iycService, Conceptos_iycService>();
             services.AddScoped<IDescadic_x_iycService, Descadic_x_iycService>();
-<<<<<<< HEAD
-=======
-
->>>>>>> b6f70e0302ae9fc96942edbe5dc0f85ed855d29f
             //
             services.AddCors();
 
