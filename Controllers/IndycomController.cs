@@ -885,55 +885,279 @@ namespace Web_Api_IyC.Controllers
 
         //DATOS DEL CONTACTO DEL COMERCIO
 
-//        procedure TDomPost.confirmaClick(Sender: TObject);
-//        begin
+        //        procedure TDomPost.confirmaClick(Sender: TObject);
+        //        begin
 
 
 
-//  if (Data_IndYCom.IndYComNom_Calle_Dom_Esp.Value=' ') or
-//   (Data_IndYCom.IndYComNro_Dom_Esp.IsNull= True) then
-//  begin
-//    Application.MessageBox('Datos Incorrecto. Verifique.','SIIMVA-Error',MB_ICONERROR + MB_OK);
-//    Exit;
-//  end;
-//  if Length(Data_IndYCom.IndYComemail_envio_cedulon.Value)>0 then
-//    begin
-//     if not EsEMail(Data_IndYCom.IndYComemail_envio_cedulon.Value) then
-//     begin
-//        Application.MessageBox('Ingrese correctamente el Email...','SIIMVA-Error',MB_ICONERROR + MB_OK);
-//        Exit;
-//     end;
-//    end;
+        //  if (Data_IndYCom.IndYComNom_Calle_Dom_Esp.Value=' ') or
+        //   (Data_IndYCom.IndYComNro_Dom_Esp.IsNull= True) then
+        //  begin
+        //    Application.MessageBox('Datos Incorrecto. Verifique.','SIIMVA-Error',MB_ICONERROR + MB_OK);
+        //    Exit;
+        //  end;
+        //  if Length(Data_IndYCom.IndYComemail_envio_cedulon.Value)>0 then
+        //    begin
+        //     if not EsEMail(Data_IndYCom.IndYComemail_envio_cedulon.Value) then
+        //     begin
+        //        Application.MessageBox('Ingrese correctamente el Email...','SIIMVA-Error',MB_ICONERROR + MB_OK);
+        //        Exit;
+        //     end;
+        //    end;
 
-//  Data_IndYCom.Siimva.StartTransaction;
-//  Data_IndYCom.IndYComFecha_Cambio_Domicilio.Value:=Now;
-//  Data_IndYCom.IndYCom.Post;
-//  Application.CreateForm(TAutoriza, Autoriza);
-//  Autoriza.Autoriza_Procesos.ParamByName('proceso').Value:='RECALCULO DEUDA IYC';
-//  if Autoriza.ShowModal<> mrOk then
-//  begin
-//    Autoriza.Free;
-//    Data_IndYCom.Siimva.Rollback;
-//    Exit;
-//  end;
-//  Data_IndyCom.Auditor_V2.ParamByName('@usuario').Value:=PriIyC.usuario;
-//  Data_IndyCom.Auditor_V2.ParamByName('@autorizacion').Value:=
-//    Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
-//  Data_IndyCom.Auditor_V2.ParamByName('@identificacion').Value:=
-//    Data_IndYCom.IndYComLegajo.AsString;
-//  Data_IndyCom.Auditor_V2.ParamByName('@observaciones').Value:=
-//    Autoriza.Memo1.Lines.Text;
-//  Data_IndyCom.Auditor_V2.ParamByName('@proceso').Value:='CAMBIO DOMIC. POSTAL INDYCOM';
-//  Data_IndyCom.Auditor_V2.ParamByName('@detalle').Value:='Domic. Ant.: ' +
-//    'Calle: ' + LeftString(auxnom_calle,25) +
-//    ' Nro.: ' + LeftString(auxnro_dom,5) +
-//    ' Piso/Dpto: ' + LeftString(auxpiso_dpto,15) +
-//    ' Local: '+ LeftString(auxlocal,5) +
-//    ' Barrio: ' + LeftString(auxnom_barrio,25);
-//        Data_IndyCom.Auditor_V2.ExecProc;
-//  Autoriza.Free;
-//  Data_IndYCom.Siimva.Commit;
-//end;
+        //  Data_IndYCom.Siimva.StartTransaction;
+        //  Data_IndYCom.IndYComFecha_Cambio_Domicilio.Value:=Now;
+        //  Data_IndYCom.IndYCom.Post;
+        //  Application.CreateForm(TAutoriza, Autoriza);
+        //  Autoriza.Autoriza_Procesos.ParamByName('proceso').Value:='RECALCULO DEUDA IYC';
+        //  if Autoriza.ShowModal<> mrOk then
+        //  begin
+        //    Autoriza.Free;
+        //    Data_IndYCom.Siimva.Rollback;
+        //    Exit;
+        //  end;
+        //  Data_IndyCom.Auditor_V2.ParamByName('@usuario').Value:=PriIyC.usuario;
+        //  Data_IndyCom.Auditor_V2.ParamByName('@autorizacion').Value:=
+        //    Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
+        //  Data_IndyCom.Auditor_V2.ParamByName('@identificacion').Value:=
+        //    Data_IndYCom.IndYComLegajo.AsString;
+        //  Data_IndyCom.Auditor_V2.ParamByName('@observaciones').Value:=
+        //    Autoriza.Memo1.Lines.Text;
+        //  Data_IndyCom.Auditor_V2.ParamByName('@proceso').Value:='CAMBIO DOMIC. POSTAL INDYCOM';
+        //  Data_IndyCom.Auditor_V2.ParamByName('@detalle').Value:='Domic. Ant.: ' +
+        //    'Calle: ' + LeftString(auxnom_calle,25) +
+        //    ' Nro.: ' + LeftString(auxnro_dom,5) +
+        //    ' Piso/Dpto: ' + LeftString(auxpiso_dpto,15) +
+        //    ' Local: '+ LeftString(auxlocal,5) +
+        //    ' Barrio: ' + LeftString(auxnom_barrio,25);
+        //        Data_IndyCom.Auditor_V2.ExecProc;
+        //  Autoriza.Free;
+        //  Data_IndYCom.Siimva.Commit;
+        //end;
+
+
+
+
+        //PANTALLAS RUBROS del comercio
+        //SELECT* FROM RUBROS_X_IYC WHERE legajo=:legajo
+        //ORDER BY nro_sucursal
+
+        //Nuevo, Modifica, y el Elimina rubro para el comercio
+        //        procedure TRubros.confirmaClick(Sender: TObject);
+        //        begin
+        //  if operacion='Nuevo' then
+        //  begin
+        //    if QRubros_x_IYCCod_Rubro.IsNull=True then
+        //    begin
+        //      Application.MessageBox('Debe especificar rubro.',
+        //        'SIIMVA-Error', MB_ICONERROR + MB_OK);
+        //        Exit;
+        //    end;
+        //    if QRubros_x_IYCCantidad.Value <= 0 then
+        //    begin
+        //      Application.MessageBox('Cantidad Incorrecta.',
+        //        'SIIMVA-Error',MB_ICONERROR + MB_OK);
+        //      Exit;
+        //    end;
+        //    if QRubros_x_IYCCantidad.IsNull=True then
+        //      QRubros_x_IYCCantidad.Value:=1;
+        //    try
+        //      Data_IndYCom.Siimva.StartTransaction;
+        //      Rubros_x_IYC.Append;
+        //      Rubros_x_IYCLegajo.Value           :=  Data_IndYCom.IndYComLegajo.Value;
+        //      Rubros_x_IYCCod_Rubro.Value        :=  QRubros_x_IYCCod_Rubro.Value;
+        //      Rubros_x_IYCCod_Minimo.AsVariant   :=  QRubros_x_IYCCod_Minimo.AsVariant;
+        //      Rubros_x_IYCCod_Convenio.AsVariant :=  QRubros_x_IYCCod_Convenio.AsVariant;
+        //      Rubros_x_IYCCantidad.Value         :=  QRubros_x_IYCCantidad.Value;
+        //      Rubros_x_IYCNro_sucursal.Value     :=  QRubros_x_IYCNro_sucursal.Value;
+        //      Rubros_x_IYCExento.Value           :=  QRubros_x_IYCExento.Value;
+        //      Rubros_x_IYCDescuento.Value        :=  QRubros_x_IYCDescuento.Value;
+        //      Rubros_x_IYCValor.Value            :=  QRubros_x_IYCValor.Value;
+        //      Rubros_x_IYC.Post;
+        //      Data_IndYCom.Siimva.Commit;
+        //    except
+        //      Data_IndYCom.Siimva.Rollback;
+        //        Application.MessageBox('Datos incorrecto. Revise.',
+        //        'SIIMVA-Error',MB_ICONERROR + MB_OK);
+        //      Exit;
+        //    end;
+        //    QRubros_x_IYC.Cancel;
+        //    QRubros_x_IYC.Close;
+        //    QRubros_x_IYC.Open;
+
+        //    //Rubros_x_IYC.Locate('cod_rubro',Rubros_x_IYCCod_Rubro.Value,[]);
+        //    Activa_Desactiva_Controles(Panel_Trabajo);
+        //        end;
+        //  if operacion='Modifica' then
+        //  begin
+        //    if QRubros_x_IYCCantidad.Value <= 0 then
+        //    begin
+        //      Application.MessageBox('Cantidad Incorrecta.',
+        //        'SIIMVA-Error',MB_ICONERROR + MB_OK);
+        //      Exit;
+        //    end;
+        //    Application.CreateForm(TAutoriza, Autoriza);
+        //    Autoriza.Autoriza_Procesos.ParamByName('proceso').Value:='MODIFICACION RUBRO IYC';
+        //    if Autoriza.ShowModal<> mrOk then
+        //    begin
+        //      Autoriza.Free;
+        //      Exit;
+        //    end;
+        //    try
+        //      Data_IndYCom.Siimva.StartTransaction;
+        //      Rubros_x_IYC.Findkey([Data_IndYCom.IndYComLegajo.Value,
+        //                            QRubros_x_IYCCod_Rubro.Value]);
+        //      Data_IndyCom.Auditor_V2.ParamByName('@usuario').Value:=PriIyC.usuario;
+        //      Data_IndyCom.Auditor_V2.ParamByName('@autorizacion').Value:=
+        //        Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
+        //      Data_IndyCom.Auditor_V2.ParamByName('@identificacion').Value:=
+        //        Data_IndYCom.IndYComLegajo.AsString;
+        //      Data_IndyCom.Auditor_V2.ParamByName('@observaciones').Value:=
+        //        Autoriza.Memo1.Lines.Text;
+        //      Data_IndyCom.Auditor_V2.ParamByName('@proceso').Value := 'MODIFICACION RUBRO IYC';
+        //      Data_IndyCom.Auditor_V2.ParamByName('@detalle').Value := 'Cod_Minimo_Anterior: ' +
+        //        Rubros_x_IYCCod_Minimo.AsString   +  ' Cod_Convenio_Anterior: ' +
+        //        Rubros_x_IYCCod_Convenio.AsString +  ' Cantidad_Anterior: ' +
+        //        Rubros_x_IYCCantidad.AsString;
+        //      Data_IndyCom.Auditor_V2.ExecProc;
+        //      Rubros_x_IYC.Edit;
+        //      Rubros_x_IYCCod_Minimo.Value       :=  QRubros_x_IYCCod_Minimo.Value;
+        //      Rubros_x_IYCCod_Convenio.AsVariant :=  QRubros_x_IYCCod_Convenio.AsVariant;
+        //      Rubros_x_IYCCantidad.Value         :=  QRubros_x_IYCCantidad.Value;
+        //      Rubros_x_IYCExento.Value           :=  QRubros_x_IYCExento.Value;
+        //      Rubros_x_IYCDescuento.Value        :=  QRubros_x_IYCDescuento.Value;
+        //      Rubros_x_IYCValor.Value            :=  QRubros_x_IYCValor.Value;
+        //      Rubros_x_IYC.Post;
+        //      Data_IndYCom.Siimva.Commit;
+        //    except
+        //      Application.MessageBox('Datos incorrecto. Revise.',
+        //        'SIIMVA-Error', MB_ICONERROR + MB_OK);
+        //        Data_IndYCom.Siimva.Rollback;
+        //      Autoriza.Free;
+        //      Exit;
+        //    end;
+        //    Autoriza.Free;
+        //    QRubros_x_IYC.Cancel;
+        //    QRubros_x_IYC.Close;
+        //    QRubros_x_IYC.Open;
+        //    QRubros_x_IYC.Locate('cod_rubro',Rubros_x_IYCCod_Rubro.Value,[]);
+        //    Activa_Desactiva_Controles(Panel_Trabajo);
+        //        B_Rubro.Enabled:=False;
+        //    btnSuc.Enabled:=False;
+        //  end;
+
+        //  if operacion='Elimina' then
+        //  begin
+        //    Application.CreateForm(TAutoriza, Autoriza);
+        //    Autoriza.Autoriza_Procesos.ParamByName('proceso').Value:='ELIMINACION RUBRO IYC';
+        //    if Autoriza.ShowModal<> mrOk then
+        //    begin
+        //      Autoriza.Free;
+        //      Exit;
+        //    end;
+        //    try
+        //      Data_IndYCom.Siimva.StartTransaction;
+        //      Rubros_x_IYC.Findkey([Data_IndYCom.IndYComLegajo.Value,
+        //                            QRubros_x_IYCCod_Rubro.Value]);
+        //      Data_IndyCom.Auditor_V2.ParamByName('@usuario').Value:=PriIyC.usuario;
+        //      Data_IndyCom.Auditor_V2.ParamByName('@autorizacion').Value:=
+        //        Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
+        //      Data_IndyCom.Auditor_V2.ParamByName('@identificacion').Value:=
+        //        Data_IndYCom.IndYComLegajo.AsString;
+        //      Data_IndyCom.Auditor_V2.ParamByName('@observaciones').Value:=
+        //        Autoriza.Memo1.Lines.Text;
+        //      Data_IndyCom.Auditor_V2.ParamByName('@proceso').Value:='ELIMINACION RUBRO IYC';
+        //      Data_IndyCom.Auditor_V2.ParamByName('@detalle').Value:='Cod_Rubro: ' +
+        //        Rubros_x_IYCCod_Rubro.AsString + ' Cod_Minimo: ' +
+        //        Rubros_x_IYCCod_Minimo.AsString + ' Cod_Convenio: ' +
+        //        Rubros_x_IYCCod_Convenio.AsString + ' Cantidad: ' +
+        //        Rubros_x_IYCCantidad.AsString;
+        //      Data_IndyCom.Auditor_V2.ExecProc;
+        //      Rubros_x_IYC.Delete;
+        //      Data_IndYCom.Siimva.Commit;
+        //    except
+        //      Autoriza.Free;
+        //        Application.MessageBox('Baja imposible.',
+        //        'SIIMVA-Error',MB_ICONERROR + MB_OK);
+        //      Data_IndYCom.Siimva.Rollback;
+        //      Exit;
+        //    end;
+        //    Autoriza.Free;
+        //    QRubros_x_IYC.Close;
+        //    QRubros_x_IYC.Open;
+        //    Confirma.Enabled:=False;
+        //    Cancela.Enabled:=False;
+        //  end;
+        //  Navegador.Enabled:=True;
+        //  Nuevo.Enabled:=True;
+        //  Modifica.Enabled:=True;
+        //  Elimina.Enabled:=True;
+        //  Panel_Titulo.Caption:='Esperando Operación...';
+        //  Nuevo.SetFocus;
+        //end;
+
+        // Boton Busqueda de Sucursal
+        //        procedure TRubros.btnSucClick(Sender: TObject);
+        //        begin
+
+        //            QRubros_x_IYCNro_sucursal.AsVariant:=Busqueda3(qSucursal,'Busqueda de Sucursal ', Data_IndYCom.IndYComLegajo.AsString);
+        //        sqlSucursal.Close;
+        //    if QRubros_x_IYCNro_sucursal.Value<>0 then
+        //    begin
+        //       sqlSucursal.sql.Clear;
+        //       sqlSucursal.sql.Add('SELECT des_com FROM sucursales_indycom  WHERE legajo= :legajo  and nro_sucursal= :nro_sucursal and dado_baja=0 ');
+        //       sqlSucursal.ParamByName('legajo').AsInteger :=  Data_IndYCom.IndYComLegajo.AsInteger;
+        //       sqlSucursal.ParamByName('nro_sucursal').AsInteger:= QRubros_x_IYCNro_sucursal.AsInteger;
+        //    end
+        //    else
+        //    begin
+        //       sqlSucursal.sql.Clear;
+        //        sqlSucursal.sql.Add('SELECT des_com FROM indycom  WHERE legajo= :legajo  ');
+        //       sqlSucursal.ParamByName('legajo').AsInteger :=  Data_IndYCom.IndYComLegajo.AsInteger;
+
+        //    end;
+        //    sqlSucursal.Open;
+        //    lblRazon.Caption:= sqlSucursal.FieldByName('des_com').AsString;
+
+        //end;
+
+        //Boton Busqueda de Rubros
+        //SELECT Concepto = CONVERT(CHAR(45), concepto),
+        //Código = cod_rubro,
+        //Anio
+        //FROM RUBROS
+        //WHERE activo = 1 AND concepto LIKE :nombre_aproximado
+        //ORDER BY concepto
+
+
+
+        //Boton Busqueda de Minimo
+
+        //SELECT Descripción = CONVERT(CHAR(40), des_minimo),
+        //Código = cod_minimo
+        //FROM MINIMOS_INDYCOM
+        //WHERE des_minimo LIKE :nombre_aproximado
+        //ORDER BY des_minimo
+
+        //Boton Busqueda Convenios
+
+        //SELECT Nombre = CONVERT(CHAR(40), nom_convenio),
+        //Código = cod_convenio  FROM CONVENIOS_IYC
+        //WHERE nom_convenio LIKE :nombre_aproximado
+        //ORDER BY nom_convenio
+
+
+        //
+
+        //
+        //
+
+
+
+
+
+
+
 
 
 
