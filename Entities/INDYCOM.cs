@@ -1331,7 +1331,6 @@ namespace Web_Api_IyC.Entities
                 int count = 0;
                 string sql = @"SELECT count(*) 
                                FROM Indycom (nolock)";
-                //Where Baja=@baja";
                 using (SqlConnection con = GetConnectionSIIMVA())
                 {
                     SqlCommand cmd = con.CreateCommand();
@@ -1853,6 +1852,423 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
+
+
+        public static List<Rubros_x_iyc> mostrarRubro(int legajo)
+        {
+            try
+            {
+                List<Rubros_x_iyc> lst = new List<Rubros_x_iyc>();
+
+                string strSQL = @" SELECT * FROM RUBROS_X_IYC WHERE legajo=@legajo
+                                    ORDER BY nro_sucursal";
+
+                using (SqlConnection con = GetConnectionSIIMVA())
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = strSQL;
+                    cmd.Parameters.AddWithValue("@legajo", legajo);
+                    cmd.Connection.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            Rubros_x_iyc obj = new Rubros_x_iyc();
+                            if (!dr.IsDBNull(dr.GetOrdinal("legajo"))) { obj.legajo = dr.GetInt32(dr.GetOrdinal("legajo")); }
+                            if (!dr.IsDBNull(dr.GetOrdinal("cod_rubro"))) { obj.cod_rubro = dr.GetInt32(dr.GetOrdinal("cod_rubro")); }
+                            if (!dr.IsDBNull(dr.GetOrdinal("Nro_sucursal"))) { obj.Nro_sucursal = dr.GetInt32(dr.GetOrdinal("Nro_sucursal")); }
+                            if (!dr.IsDBNull(dr.GetOrdinal("cod_minimo"))) { obj.cod_minimo = dr.GetInt32(dr.GetOrdinal("cod_minimo")); }
+                            if (!dr.IsDBNull(dr.GetOrdinal("cod_convenio"))) { obj.cod_convenio = dr.GetInt32(dr.GetOrdinal("cod_convenio")); }
+                            if (!dr.IsDBNull(dr.GetOrdinal("cantidad"))) { obj.cantidad = dr.GetFloat(dr.GetOrdinal("cantidad")); }
+                            if (!dr.IsDBNull(dr.GetOrdinal("exento"))) { obj.exento = dr.GetBoolean(dr.GetOrdinal("exento")); }
+                            if (!dr.IsDBNull(dr.GetOrdinal("descuento"))) { obj.descuento = dr.GetBoolean(dr.GetOrdinal("descuento")); }
+                            if (!dr.IsDBNull(dr.GetOrdinal("valor"))) { obj.valor = dr.GetDecimal(dr.GetOrdinal("valor")); }
+
+                            lst.Add(obj);
+                        }
+                    }
+                    return lst;
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public static void nuevoRubro(Rubros_x_iyc obj, SqlConnection con, SqlTransaction trx)
+        {
+            try
+            {
+                string strSQL = @"
+            INSERT INTO RUBROS_X_IYC 
+            (legajo, cod_rubro, nro_sucursal, cod_minimo, cod_convenio, cantidad, exento, descuento, valor)
+            VALUES 
+            (@legajo, @cod_rubro, @nro_sucursal, @cod_minimo, @cod_convenio, @cantidad, @exento, @descuento, @valor)";
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSQL;
+
+                cmd.Parameters.AddWithValue("@legajo", obj.legajo);
+                cmd.Parameters.AddWithValue("@cod_rubro", obj.cod_rubro);
+                cmd.Parameters.AddWithValue("@nro_sucursal", obj.Nro_sucursal);
+                cmd.Parameters.AddWithValue("@cod_minimo", obj.cod_minimo);
+                cmd.Parameters.AddWithValue("@cod_convenio", obj.cod_convenio);
+                cmd.Parameters.AddWithValue("@cantidad", obj.cantidad);
+                cmd.Parameters.AddWithValue("@exento", obj.exento);
+                cmd.Parameters.AddWithValue("@descuento", obj.descuento);
+                cmd.Parameters.AddWithValue("@valor", obj.valor);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al insertar el rubro", ex);
+            }
+
+        }
+
+        public static void updateRubro(Rubros_x_iyc obj, SqlConnection con, SqlTransaction trx)
+        {
+            try
+            {
+                string strSQL = @"
+            UPDATE RUBROS_X_IYC 
+            SET cod_rubro = @cod_rubro, 
+                nro_sucursal = @nro_sucursal, 
+                cod_minimo = @cod_minimo, 
+                cod_convenio = @cod_convenio, 
+                cantidad = @cantidad, 
+                exento = @exento, 
+                descuento = @descuento, 
+                valor = @valor
+            WHERE legajo = @legajo";
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSQL;
+
+                cmd.Parameters.AddWithValue("@legajo", obj.legajo);
+                cmd.Parameters.AddWithValue("@cod_rubro", obj.cod_rubro);
+                cmd.Parameters.AddWithValue("@nro_sucursal", obj.Nro_sucursal);
+                cmd.Parameters.AddWithValue("@cod_minimo", obj.cod_minimo);
+                cmd.Parameters.AddWithValue("@cod_convenio", obj.cod_convenio);
+                cmd.Parameters.AddWithValue("@cantidad", obj.cantidad);
+                cmd.Parameters.AddWithValue("@exento", obj.exento);
+                cmd.Parameters.AddWithValue("@descuento", obj.descuento);
+                cmd.Parameters.AddWithValue("@valor", obj.valor);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el rubro", ex);
+            }
+        }
+
+        public static void deleteRubro(int legajo, int cod_rubro, SqlConnection con, SqlTransaction trx)
+        {
+            try
+            {
+                string strSQL = @"
+                                 DELETE FROM RUBROS_X_IYC 
+                                WHERE legajo = @legajo AND cod_rubro = @cod_rubro";
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSQL;
+
+                cmd.Parameters.AddWithValue("@legajo", legajo);
+                cmd.Parameters.AddWithValue("@cod_rubro", cod_rubro);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar el rubro", ex);
+            }
+        }
+
+
+        public static string busquedaSucursal(int legajo, int? nro_sucursal)
+        {
+            try
+            {
+                string strSQL;
+
+                if (nro_sucursal.HasValue && nro_sucursal != 0)
+                {
+                    strSQL = @"
+                SELECT des_com 
+                FROM sucursales_indycom 
+                WHERE legajo = @legajo 
+                AND nro_sucursal = @nro_sucursal 
+                AND dado_baja = 0";
+                }
+                else
+                {
+                    strSQL = @"
+                SELECT des_com 
+                FROM indycom 
+                WHERE legajo = @legajo";
+                }
+
+                using (SqlConnection con = GetConnectionSIIMVA())
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = strSQL;
+                    cmd.Parameters.AddWithValue("@legajo", legajo);
+
+                    if (nro_sucursal.HasValue && nro_sucursal != 0)
+                    {
+                        cmd.Parameters.AddWithValue("@nro_sucursal", nro_sucursal);
+                    }
+
+                    con.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        string value = null;
+
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+                            if (!dr.IsDBNull(0))
+                            {
+                                value = dr.GetString(0);
+                            }
+                        }
+
+                        return value;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al buscar la sucursal", ex);
+            }
+        }
+
+
+
+        public static List<ElemRubro> busquedaRubros(string? busqueda)
+        {
+            try
+            {
+
+                List<ElemRubro> lst = new List<ElemRubro>();
+                string strSQL = @"
+                  SELECT Concepto = CONVERT(CHAR(45), concepto),
+         Código = cod_rubro,
+         Anio
+         FROM RUBROS
+         WHERE activo = 1  AND (@busqueda IS NULL OR concepto LIKE @busqueda)
+         ORDER BY concepto";
+
+                using (SqlConnection con = GetConnectionSIIMVA())
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = strSQL;
+                    if (busqueda == null)
+                    {
+                        cmd.Parameters.AddWithValue("@busqueda", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@busqueda", busqueda + "%");
+                    }
+
+                    con.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                ElemRubro obj = new ElemRubro();
+                                if (!dr.IsDBNull(0)) { obj.concepto = dr.GetString(0); }
+                                if (!dr.IsDBNull(1)) { obj.codigo = dr.GetInt32(1); }
+                                if (!dr.IsDBNull(2)) { obj.anio = dr.GetInt32(2); }
+                                lst.Add(obj);
+                            }
+                        }
+                        return lst;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al buscar rubros", ex);
+            }
+        }
+
+
+        public static List<ElementoMinimo> busquedaMinimos(string? busqueda)
+        {
+            try
+            {
+                List<ElementoMinimo> lst = new List<ElementoMinimo>();
+                string strSQL = @"
+            SELECT 
+                Descripción = CONVERT(CHAR(40), des_minimo),
+                Código = cod_minimo
+            FROM MINIMOS_INDYCOM
+            WHERE (@busqueda IS NULL OR @busqueda = '' OR des_minimo LIKE @busqueda + '%')
+            ORDER BY des_minimo";
+
+                using (SqlConnection con = GetConnectionSIIMVA())
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = strSQL;
+                    if (busqueda == null)
+                    {
+                        cmd.Parameters.AddWithValue("@busqueda", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@busqueda", busqueda + "%");
+                    }
+                    con.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                ElementoMinimo obj = new ElementoMinimo();
+                                if (!dr.IsDBNull(0)) { obj.descripcion = dr.GetString(0); }
+                                if (!dr.IsDBNull(1)) { obj.codigo = dr.GetInt32(1); }
+                                lst.Add(obj);
+                            }
+                        }
+                        return lst;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al buscar mínimos", ex);
+            }
+        }
+
+        public static List<ElementoConvenio> busquedaConvenios(string? busqueda)
+        {
+            try
+            {
+                List<ElementoConvenio> lst = new List<ElementoConvenio>();
+                string strSQL = @"
+            SELECT 
+                Nombre = CONVERT(CHAR(40), nom_convenio),
+                Código = cod_convenio
+            FROM CONVENIOS_IYC
+            WHERE (@busqueda IS NULL OR @busqueda = '' OR nom_convenio LIKE @busqueda + '%')
+            ORDER BY nom_convenio";
+
+                using (SqlConnection con = GetConnectionSIIMVA())
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = strSQL;
+                     if (busqueda == null)
+                    {
+                        cmd.Parameters.AddWithValue("@busqueda", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@busqueda", busqueda + "%");
+                    }
+                    con.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                ElementoConvenio obj = new ElementoConvenio();
+                                if (!dr.IsDBNull(0)) { obj.nombre = dr.GetString(0); }
+                                if (!dr.IsDBNull(1)) { obj.codigo = dr.GetInt32(1); }
+                                lst.Add(obj);
+                            }
+                        }
+                        return lst;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al buscar convenios", ex);
+            }
+        }
+
+
+        public static void UpdateDomicilioFiscal(int legajo, DatosDomicilioFiscal datos, SqlConnection con, SqlTransaction trx)
+        {
+            try
+            {
+                string strSQL = @"
+                              UPDATE INDYCOM 
+                              SET nom_calle_dom_esp = @nom_calle_dom_esp, 
+                                  nro_dom_esp = @nro_dom_esp, 
+                                  piso_dpto_esp = @piso_dpto_esp, 
+                                  local_esp = @local_esp, 
+                                  cod_postal = @cod_postal, 
+                                  nom_barrio = @nom_barrio, 
+                                  ciudad = @ciudad, 
+                                  provincia = @provincia, 
+                                  pais = @pais, 
+                                  email_envio_cedulon = @email_envio_cedulon, 
+                                  telefono = @telefono, 
+                                  celular = @celular, 
+                                  fecha_cambio_domicilio = @fecha_cambio_domicilio
+                              WHERE legajo = @legajo";
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSQL;
+
+                cmd.Parameters.AddWithValue("@nom_calle_dom_esp", datos.nom_calle_dom_esp);
+                cmd.Parameters.AddWithValue("@nro_dom_esp", datos.nro_dom_esp);
+                cmd.Parameters.AddWithValue("@piso_dpto_esp", datos.piso_dpto_esp ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@local_esp", datos.local_esp ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@cod_postal", datos.cod_postal ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@nom_barrio", datos.nom_barrio ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@ciudad", datos.ciudad ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@provincia", datos.provincia ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@pais", datos.pais ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@email_envio_cedulon", datos.email_envio_cedulon ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@telefono", datos.telefono ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@celular", datos.celular ?? (object)DBNull.Value);
+
+                cmd.Parameters.AddWithValue("@fecha_cambio_domicilio", DateTime.Now);
+
+
+                cmd.Parameters.AddWithValue("@legajo", legajo);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el domicilio fiscal", ex);
+            }
+        }
+
+
 
     }
 }

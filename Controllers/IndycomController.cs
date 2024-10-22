@@ -883,6 +883,24 @@ namespace Web_Api_IyC.Controllers
         //end;
 
 
+
+
+        [HttpPut]
+        public IActionResult actualizarDomicilioFiscal(int legajo, DatosDomicilioFiscal datos)
+        {
+
+            var iyc = _iindycomService.GetByPk(legajo);
+
+            if (iyc == null)
+            {
+                return NotFound($"No se encontró el legajo {legajo}.");
+            }
+            
+            _iindycomService.UpdateDomicilioFiscal(legajo, datos);
+
+            return Ok(iyc);
+        }
+
         //DATOS DEL CONTACTO DEL COMERCIO
 
         //        procedure TDomPost.confirmaClick(Sender: TObject);
@@ -917,12 +935,9 @@ namespace Web_Api_IyC.Controllers
         //    Exit;
         //  end;
         //  Data_IndyCom.Auditor_V2.ParamByName('@usuario').Value:=PriIyC.usuario;
-        //  Data_IndyCom.Auditor_V2.ParamByName('@autorizacion').Value:=
-        //    Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
-        //  Data_IndyCom.Auditor_V2.ParamByName('@identificacion').Value:=
-        //    Data_IndYCom.IndYComLegajo.AsString;
-        //  Data_IndyCom.Auditor_V2.ParamByName('@observaciones').Value:=
-        //    Autoriza.Memo1.Lines.Text;
+        //  Data_IndyCom.Auditor_V2.ParamByName('@autorizacion').Value:= Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
+        //  Data_IndyCom.Auditor_V2.ParamByName('@identificacion').Value:= Data_IndYCom.IndYComLegajo.AsString;
+        //  Data_IndyCom.Auditor_V2.ParamByName('@observaciones').Value:=    Autoriza.Memo1.Lines.Text;
         //  Data_IndyCom.Auditor_V2.ParamByName('@proceso').Value:='CAMBIO DOMIC. POSTAL INDYCOM';
         //  Data_IndyCom.Auditor_V2.ParamByName('@detalle').Value:='Domic. Ant.: ' +
         //    'Calle: ' + LeftString(auxnom_calle,25) +
@@ -936,11 +951,99 @@ namespace Web_Api_IyC.Controllers
         //end;
 
 
+        [HttpGet]
+        public IActionResult mostrarRubro(int legajo)
+        {
+
+            var lstRubro = _iindycomService.MostrarRubro(legajo);
+
+            if (lstRubro == null)
+            {
+                return BadRequest("No posee rubros");
+            }
+
+            return Ok(lstRubro);
+        }
+
+        [HttpPost]
+        public IActionResult nuevoRubro(RubrosIyC_Con_Auditoria obj)
+        {
+
+            try
+            {
+                if (obj == null)
+                {
+                    return BadRequest(new { message = "Datos de rubros no válidos." });
+                }
+
+                _iindycomService.NuevoRubro(obj.rubro, obj.auditoria);
+
+                var nuevoRubro = _iindycomService.GetByPk(obj.rubro.legajo);
+
+                return Ok(nuevoRubro);
+
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, "Ocurrió un error al intentar crear nuevo rubro: " + ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public IActionResult updateRubro(RubrosIyC_Con_Auditoria obj)
+        {
+
+            try
+            {
+                if (obj == null)
+                {
+                    return BadRequest(new { message = "Datos de rubros no válidos." });
+                }
+
+                _iindycomService.UpdateRubro(obj.rubro, obj.auditoria);
+
+                var updatedRubro = _iindycomService.GetByPk(obj.rubro.legajo);
+
+                return Ok(updatedRubro);
+
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, "Ocurrió un error al intentar actualizar el rubro: " + ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        public IActionResult deleteRubro(int legajo, int cod_rubro, Auditoria objA)
+        {
+            try
+            {
+                var lstRubro = _iindycomService.MostrarRubro(legajo);
+
+                var rubroEncontrado = lstRubro.Find(r => r.cod_rubro == cod_rubro);
+
+                if (rubroEncontrado == null)
+                {
+                    return BadRequest("No se encontró un rubro con el código especificado.");
+                }
+
+                _iindycomService.DeleteRubro(legajo, cod_rubro, objA);
+
+                return Ok("Rubro eliminado correctamente");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Ocurrió un error al intentar eliminar el rubro: " + ex.Message);
+            }
+        }
 
 
-        //PANTALLAS RUBROS del comercio
-        //SELECT* FROM RUBROS_X_IYC WHERE legajo=:legajo
-        //ORDER BY nro_sucursal
+
+        // PANTALLAS RUBROS del comercio
+        // SELECT* FROM RUBROS_X_IYC WHERE legajo=:legajo
+        // ORDER BY nro_sucursal
 
         //Nuevo, Modifica, y el Elimina rubro para el comercio
         //        procedure TRubros.confirmaClick(Sender: TObject);
@@ -1060,12 +1163,9 @@ namespace Web_Api_IyC.Controllers
         //      Rubros_x_IYC.Findkey([Data_IndYCom.IndYComLegajo.Value,
         //                            QRubros_x_IYCCod_Rubro.Value]);
         //      Data_IndyCom.Auditor_V2.ParamByName('@usuario').Value:=PriIyC.usuario;
-        //      Data_IndyCom.Auditor_V2.ParamByName('@autorizacion').Value:=
-        //        Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
-        //      Data_IndyCom.Auditor_V2.ParamByName('@identificacion').Value:=
-        //        Data_IndYCom.IndYComLegajo.AsString;
-        //      Data_IndyCom.Auditor_V2.ParamByName('@observaciones').Value:=
-        //        Autoriza.Memo1.Lines.Text;
+        //      Data_IndyCom.Auditor_V2.ParamByName('@autorizacion').Value:= Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
+        //      Data_IndyCom.Auditor_V2.ParamByName('@identificacion').Value:= Data_IndYCom.IndYComLegajo.AsString;
+        //      Data_IndyCom.Auditor_V2.ParamByName('@observaciones').Value:= Autoriza.Memo1.Lines.Text;
         //      Data_IndyCom.Auditor_V2.ParamByName('@proceso').Value:='ELIMINACION RUBRO IYC';
         //      Data_IndyCom.Auditor_V2.ParamByName('@detalle').Value:='Cod_Rubro: ' +
         //        Rubros_x_IYCCod_Rubro.AsString + ' Cod_Minimo: ' +
@@ -1096,6 +1196,24 @@ namespace Web_Api_IyC.Controllers
         //  Nuevo.SetFocus;
         //end;
 
+
+        [HttpGet]
+        public IActionResult busquedaSucursal(int legajo, int? nro_sucursal)
+        {
+            try
+            {
+                var sucursal = _iindycomService.BusquedaSucarsal(legajo, nro_sucursal);
+
+                return Ok(sucursal);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, "Ocurrió un error al intentar crear nuevo rubro: " + ex.Message);
+            }
+        }
+
+
         // Boton Busqueda de Sucursal
         //        procedure TRubros.btnSucClick(Sender: TObject);
         //        begin
@@ -1121,43 +1239,69 @@ namespace Web_Api_IyC.Controllers
 
         //end;
 
-        //Boton Busqueda de Rubros
-        //SELECT Concepto = CONVERT(CHAR(45), concepto),
-        //Código = cod_rubro,
-        //Anio
-        //FROM RUBROS
-        //WHERE activo = 1 AND concepto LIKE :nombre_aproximado
-        //ORDER BY concepto
+        [HttpGet]
+        public IActionResult busquedaRubros(string? busqueda)
+        {
+
+            var lst = _iindycomService.BusquedaRubros(busqueda);
+
+            return Ok(lst);
 
 
+        }
+
+
+        // Boton Busqueda de Rubros
+        // SELECT Concepto = CONVERT(CHAR(45), concepto),
+        // Código = cod_rubro,
+        // Anio
+        // FROM RUBROS
+        // WHERE activo = 1 AND concepto LIKE :nombre_aproximado
+        // ORDER BY concepto
+
+        [HttpGet]
+        public IActionResult busquedaMinimo(string? busqueda)
+        {
+            try
+            {
+                List<ElementoMinimo> lst = _iindycomService.BusquedaMinimos(busqueda);
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Ocurrió un error al intentar buscar minimo: " + ex.Message);
+            }
+        }
 
         //Boton Busqueda de Minimo
 
-        //SELECT Descripción = CONVERT(CHAR(40), des_minimo),
-        //Código = cod_minimo
-        //FROM MINIMOS_INDYCOM
-        //WHERE des_minimo LIKE :nombre_aproximado
-        //ORDER BY des_minimo
+        // SELECT Descripción = CONVERT(CHAR(40), des_minimo),
+        // Código = cod_minimo
+        // FROM MINIMOS_INDYCOM
+        // WHERE des_minimo LIKE :nombre_aproximado
+        // ORDER BY des_minimo
 
-        //Boton Busqueda Convenios
-
-        //SELECT Nombre = CONVERT(CHAR(40), nom_convenio),
-        //Código = cod_convenio  FROM CONVENIOS_IYC
-        //WHERE nom_convenio LIKE :nombre_aproximado
-        //ORDER BY nom_convenio
-
-
-        //
-
-        //
-        //
+        //Boton Busqueda Convenio
+        // SELECT Nombre = CONVERT(CHAR(40), nom_convenio),
+        // Código = cod_convenio  FROM CONVENIOS_IYC
+        // WHERE nom_convenio LIKE :nombre_aproximado
+        // ORDER BY nom_convenio
 
 
 
-
-
-
-
+        [HttpGet]
+        public IActionResult busquedaConvenio(string? busqueda)
+        {
+            try
+            {
+                List<ElementoConvenio> lst = _iindycomService.BusquedaConvenios(busqueda);
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Ocurrió un error al intentar buscar convenio: " + ex.Message);
+            }
+        }
 
 
 
