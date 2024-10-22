@@ -59,5 +59,16 @@ namespace Web_Api_IyC.Services
         public List<Rubros_x_dec_jur_iyc> ListaRubrosDJIyC(int nro_transaccion);
 
         /*FIN DDJJ*/
+        /* RUBROS */
+        public List<Rubros_x_iyc> MostrarRubro(int legajo);
+        public void NuevoRubro(Rubros_x_iyc obj, Auditoria objA);
+        public void UpdateRubro(Rubros_x_iyc obj, Auditoria objA);
+        public void DeleteRubro(int legajo, int cod_rubro, Auditoria objA);
+        public string BusquedaSucarsal(int legajo, int? nro_sucursal);
+        public List<ElemRubro> BusquedaRubros(string? busqueda);
+        public List<ElementoMinimo> BusquedaMinimos(string? busqueda);
+        public List<ElementoConvenio> BusquedaConvenios(string? busqueda);
+
+        public void UpdateDomicilioFiscal(int legajo, DatosDomicilioFiscal datos);
     }
 }
