@@ -48,6 +48,8 @@ namespace Web_Api_IyC.Services
         public List<BADEC> GetBadecByCuit(string cuit);
         /* METODOS para la DECJUR*/
         public List<Dec_jur_iyc> GetPeriodosDJSinLiquidar(int legajo);
+        public List<ElementDJJIyC> GetElementosDJSinLiquidar(int legajo);
+        public List<ElementDJJIyC> GetElementosDJLiquidados(int legajo);
         public List<Rubros_x_dec_jur_iyc> GetRubrosDJIyC(int nro_transaccion, int legajo);
         public void UpdateRubrosDJIyC(int legajo, List<Rubros_x_dec_jur_iyc> lst, Auditoria objA);
         public void Liquidar_decjur(int legajo, Dec_jur_iyc obj, Auditoria objA);

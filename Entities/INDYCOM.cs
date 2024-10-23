@@ -1778,7 +1778,7 @@ namespace Web_Api_IyC.Entities
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = sql.ToString();
                 cmd.Parameters.AddWithValue("@legajo", legajo);
-                //cmd.Parameters.AddWithValue("@dado_baja", 1);
+
                 cmd.Parameters.AddWithValue("@fecha_baja", Convert.ToDateTime(fecha_baja, culturaFecArgentina).ToString());
                 cmd.ExecuteNonQuery();
             }
