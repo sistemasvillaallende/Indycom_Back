@@ -656,6 +656,32 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
+
+        public List<ElementDJJIyC> GetElementosDJSinLiquidar(int legajo)
+        {
+            try
+            {
+                return Dec_jur_iyc.GetElementosDJSinLiquidar(legajo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<ElementDJJIyC> GetElementosDJLiquidados(int legajo)
+        {
+            try
+            {
+                return Dec_jur_iyc.GetElementosDJLiquidados(legajo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<Rubros_x_dec_jur_iyc> GetRubrosDJIyC(int nro_transaccion, int legajo)
         {
             try
@@ -956,13 +982,13 @@ namespace Web_Api_IyC.Services
         }
 
 
-        public List<ElemRubro> BusquedaRubros( string? busqueda)
+        public List<ElemRubro> BusquedaRubros(string? busqueda)
         {
             try
             {
-                return INDYCOM.busquedaRubros( busqueda);
+                return INDYCOM.busquedaRubros(busqueda);
             }
-            catch (Exception )
+            catch (Exception)
             {
 
                 throw;
@@ -1009,10 +1035,10 @@ namespace Web_Api_IyC.Services
                             datos.objAuditoria.identificacion = legajo.ToString();
                             datos.objAuditoria.proceso = "CAMBIO DOMIC. POSTAL INDYCOM";
                             datos.objAuditoria.detalle = JsonConvert.SerializeObject(datos);
-                            datos.objAuditoria.observaciones += string.Format( " Actualización de domicilio Fiscal para el legajo {0} en la fecha {1}",
+                            datos.objAuditoria.observaciones += string.Format(" Actualización de domicilio Fiscal para el legajo {0} en la fecha {1}",
                                 legajo, DateTime.Now);
 
-                            INDYCOM.UpdateDomicilioFiscal(legajo,datos,con,trx);
+                            INDYCOM.UpdateDomicilioFiscal(legajo, datos, con, trx);
                             AuditoriaD.InsertAuditoria(datos.objAuditoria, con, trx);
 
                             trx.Commit();

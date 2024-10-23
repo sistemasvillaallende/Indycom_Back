@@ -525,6 +525,55 @@ namespace Web_Api_IyC.Controllers
             }
         }
 
+
+        [HttpGet]
+        public IActionResult GetElementosDJSinLiquidar(int legajo)
+        {
+            try
+            {
+                var iyc = _iindycomService.GetByPk(legajo);
+
+                if (iyc == null)
+                {
+                    return BadRequest(new { message = "No se encontró información para el legajo proporcionado." });
+                }
+
+                var lst = _iindycomService.GetElementosDJSinLiquidar(legajo);
+
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Ocurrió un error al procesar la solicitud.", error = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        public IActionResult GetElementosDJLiquidados(int legajo)
+        {
+            try
+            {
+                var iyc = _iindycomService.GetByPk(legajo);
+
+                if (iyc == null)
+                {
+                    return BadRequest(new { message = "No se encontró información para el legajo proporcionado." });
+                }
+
+                var lst = _iindycomService.GetElementosDJLiquidados(legajo);
+
+                return Ok(lst);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Ocurrió un error al procesar la solicitud.", error = ex.Message });
+            }
+        }
+
+
+
+
+
         [HttpGet]
         public IActionResult ListaRubrosDJIyC(int nro_transaccion)
         {
@@ -895,7 +944,7 @@ namespace Web_Api_IyC.Controllers
             {
                 return NotFound($"No se encontró el legajo {legajo}.");
             }
-            
+
             _iindycomService.UpdateDomicilioFiscal(legajo, datos);
 
             return Ok(iyc);

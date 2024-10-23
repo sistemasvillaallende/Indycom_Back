@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Web_Api_IyC.Entities.AUDITORIA;
+using Web_Api_IyC.Entities.HELPERS;
 
 namespace Web_Api_IyC.Entities
 {
@@ -405,8 +406,105 @@ namespace Web_Api_IyC.Entities
             }
         }
 
+        public static List<ElementDJJIyC> GetElementosDJSinLiquidar(int legajo)
+        {
+            try
+            {
+                string strSQL = @"SELECT dji.periodo , c.monto_original , convert(varchar(10),c.vencimiento, 103) as vencimiento, b.des_categoria 
+                                    FROM CTASCTES_INDYCOM c
+                                    JOIN CATE_DEUDA_INDYCOM b ON c.cod_cate_deuda = b.cod_categoria
+                                    JOIN DEC_JUR_IYC dji ON dji.legajo = c.legajo
+                                        AND dji.nro_transaccion = c.nro_transaccion
+                                    WHERE dji.legajo = 2618
+                                        AND dji.completa = 0
+                                        AND c.tipo_transaccion = 1
+                                        AND c.pagado = 0
+                                    ORDER BY dji.periodo;";
 
+                List<ElementDJJIyC> lst = new List<ElementDJJIyC>();
 
+                using (SqlConnection cn = GetConnectionSIIMVA())
+                {
+                    SqlCommand cmd = cn.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = strSQL;
+                    cmd.Parameters.AddWithValue("@legajo", legajo);
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            ElementDJJIyC elem = new ElementDJJIyC();
+                            if (!dr.IsDBNull(0)) elem.periodo = dr.GetString(0);
+                            if (!dr.IsDBNull(1)) elem.monto_original = dr.GetDecimal(1);
+                            if (!dr.IsDBNull(2)) elem.vencimiento = dr.GetString(2);
+                            if (!dr.IsDBNull(3)) elem.categoria = dr.GetString(3);
+
+                            lst.Add(elem);
+                        }
+                    }
+                }
+
+                return lst;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener elementos DJ sin liquidar", ex);
+            }
+        }
+
+            public static List<ElementDJJIyC> GetElementosDJLiquidados(int legajo)
+        {
+            try
+            {
+                string strSQL = @"Select C.periodo, C.monto_original, 
+                                   convert(varchar(10),c.vencimiento, 103) as vencimiento, b.des_categoria
+                                   FROM CTASCTES_INDYCOM C 
+                                   JOIN CATE_DEUDA_INDYCOM b on 
+                                   c.cod_cate_deuda=b.cod_categoria 
+                                   JOIN DEC_JUR_IYC dji on 
+                                   dji.legajo=c.legajo and 
+                                   dji.nro_transaccion=c.nro_transaccion and
+                                   dji.completa=1
+                                   WHERE
+                                   c.tipo_transaccion=1 and
+                                   c.nro_plan IS NULL and c.nro_procuracion IS NULL and
+                                   c.legajo=2618
+                                   ORDER BY dji.periodo DESC;";
+
+                List<ElementDJJIyC> lst = new List<ElementDJJIyC>();
+
+                using (SqlConnection cn = GetConnectionSIIMVA())
+                {
+                    SqlCommand cmd = cn.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = strSQL;
+                    cmd.Parameters.AddWithValue("@legajo", legajo);
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            ElementDJJIyC elem = new ElementDJJIyC();
+                            if (!dr.IsDBNull(0)) elem.periodo = dr.GetString(0);
+                            if (!dr.IsDBNull(1)) elem.monto_original = dr.GetDecimal(1);
+                            if (!dr.IsDBNull(2)) elem.vencimiento = dr.GetString(2);
+                            if (!dr.IsDBNull(3)) elem.categoria = dr.GetString(3);
+
+                            lst.Add(elem);
+                        }
+                    }
+                }
+
+                return lst;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener elementos DJ liquidados", ex);
+            }
+        }
 
 
     }
