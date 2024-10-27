@@ -1768,7 +1768,7 @@ namespace Web_Api_IyC.Entities
                 DateTimeFormatInfo culturaFecArgentina = new CultureInfo("es-AR", false).DateTimeFormat;
                 StringBuilder sql = new StringBuilder();
                 sql.AppendLine("UPDATE INDYCOM SET");
-                sql.AppendLine(", dado_baja=1");
+                sql.AppendLine(" dado_baja=1");
                 sql.AppendLine(", fecha_baja=@fecha_baja");
                 sql.AppendLine("WHERE");
                 sql.AppendLine("legajo=@legajo");
@@ -1854,14 +1854,16 @@ namespace Web_Api_IyC.Entities
         }
 
 
-        public static List<Rubros_x_iyc> mostrarRubro(int legajo)
+        public static List<Rubros_x_iyc_con> mostrarRubro(int legajo)
         {
             try
             {
-                List<Rubros_x_iyc> lst = new List<Rubros_x_iyc>();
+                List<Rubros_x_iyc_con> lst = new List<Rubros_x_iyc_con>();
 
-                string strSQL = @" SELECT * FROM RUBROS_X_IYC WHERE legajo=@legajo
-                                    ORDER BY nro_sucursal";
+                string strSQL = @" SELECT rxi.*, 
+                        (SELECT TOP 1 concepto FROM RUBROS WHERE cod_rubro = rxi.cod_rubro) AS concepto
+                        FROM RUBROS_X_IYC rxi
+                        WHERE rxi.legajo = @legajo;";
 
                 using (SqlConnection con = GetConnectionSIIMVA())
                 {
@@ -1876,7 +1878,7 @@ namespace Web_Api_IyC.Entities
                     {
                         while (dr.Read())
                         {
-                            Rubros_x_iyc obj = new Rubros_x_iyc();
+                            Rubros_x_iyc_con obj = new Rubros_x_iyc_con();
                             if (!dr.IsDBNull(dr.GetOrdinal("legajo"))) { obj.legajo = dr.GetInt32(dr.GetOrdinal("legajo")); }
                             if (!dr.IsDBNull(dr.GetOrdinal("cod_rubro"))) { obj.cod_rubro = dr.GetInt32(dr.GetOrdinal("cod_rubro")); }
                             if (!dr.IsDBNull(dr.GetOrdinal("Nro_sucursal"))) { obj.Nro_sucursal = dr.GetInt32(dr.GetOrdinal("Nro_sucursal")); }
@@ -1886,6 +1888,7 @@ namespace Web_Api_IyC.Entities
                             if (!dr.IsDBNull(dr.GetOrdinal("exento"))) { obj.exento = dr.GetBoolean(dr.GetOrdinal("exento")); }
                             if (!dr.IsDBNull(dr.GetOrdinal("descuento"))) { obj.descuento = dr.GetBoolean(dr.GetOrdinal("descuento")); }
                             if (!dr.IsDBNull(dr.GetOrdinal("valor"))) { obj.valor = dr.GetDecimal(dr.GetOrdinal("valor")); }
+                            if (!dr.IsDBNull(dr.GetOrdinal("concepto"))) { obj.concepto = dr.GetString(dr.GetOrdinal("concepto")); }
 
                             lst.Add(obj);
                         }
@@ -1901,6 +1904,9 @@ namespace Web_Api_IyC.Entities
             }
         }
 
+        ///
+
+     
 
         public static void nuevoRubro(Rubros_x_iyc obj, SqlConnection con, SqlTransaction trx)
         {
@@ -1942,15 +1948,15 @@ namespace Web_Api_IyC.Entities
             {
                 string strSQL = @"
             UPDATE RUBROS_X_IYC 
-            SET cod_rubro = @cod_rubro, 
-                nro_sucursal = @nro_sucursal, 
-                cod_minimo = @cod_minimo, 
+            SET cod_minimo = @cod_minimo, 
                 cod_convenio = @cod_convenio, 
                 cantidad = @cantidad, 
                 exento = @exento, 
                 descuento = @descuento, 
                 valor = @valor
-            WHERE legajo = @legajo";
+            WHERE legajo = @legajo 
+            AND cod_rubro = @cod_rubro 
+            AND nro_sucursal = @nro_sucursal";
 
                 SqlCommand cmd = con.CreateCommand();
                 cmd.Transaction = trx;
@@ -2183,7 +2189,7 @@ namespace Web_Api_IyC.Entities
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = strSQL;
-                     if (busqueda == null)
+                    if (busqueda == null)
                     {
                         cmd.Parameters.AddWithValue("@busqueda", DBNull.Value);
                     }

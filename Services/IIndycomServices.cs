@@ -57,12 +57,13 @@ namespace Web_Api_IyC.Services
         public Dec_jur_iyc GetDecJur_completadas(int legajo, string periodo);
         public bool VerificaDecJurPagada(int nro_transaccion);
         public void EliminaDJIyC(Dec_jur_iyc objDDJJ, Auditoria objA);
-        public Dec_jur_iyc GetPeriodoDJLiquidado (int legajo, string periodo);
-        public List<Rubros_x_dec_jur_iyc> ListaRubrosDJIyC(int nro_transaccion);
-
+        public Dec_jur_iyc GetPeriodoDJLiquidado(int legajo, string periodo);
+        public List<RubroInfo> ListaRubrosDJIyC(int nro_transaccion, int legajo);
+        //public List<Rubros_x_dec_jur_iyc> ListaRubrosDJIyC(int nro_transaccion);
+        public ImpresionDDJJ ImprimirDDJJ(int legajo, int nro_transaccion);
         /*FIN DDJJ*/
         /* RUBROS */
-        public List<Rubros_x_iyc> MostrarRubro(int legajo);
+        public List<Rubros_x_iyc_con> MostrarRubro(int legajo);
         public void NuevoRubro(Rubros_x_iyc obj, Auditoria objA);
         public void UpdateRubro(Rubros_x_iyc obj, Auditoria objA);
         public void DeleteRubro(int legajo, int cod_rubro, Auditoria objA);
