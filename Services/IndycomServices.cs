@@ -661,6 +661,9 @@ namespace Web_Api_IyC.Services
         {
             try
             {
+
+                var ret =  Dec_jur_iyc.GetElementosDJSinLiquidar(legajo);
+
                 return Dec_jur_iyc.GetElementosDJSinLiquidar(legajo);
             }
             catch (Exception)
@@ -828,11 +831,11 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-        public List<Rubros_x_dec_jur_iyc> ListaRubrosDJIyC(int nro_transaccion)
+        public List<RubroInfo> ListaRubrosDJIyC(int nro_transaccion, int legajo)
         {
             try
             {
-                return Rubros_x_dec_jur_iyc.ListaRubrosDJIyC(nro_transaccion);
+                return Rubros_x_dec_jur_iyc.ListaRubrosDJIyC(nro_transaccion, legajo);
             }
             catch (Exception)
             {
@@ -840,10 +843,24 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
+
+         public ImpresionDDJJ ImprimirDDJJ(int legajo,int nro_transaccion)
+        {
+            try
+            {
+                return Dec_jur_iyc.ImprimirDDJJ(legajo,nro_transaccion);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         //*********FIN DDJJ*******************************//
 
 
-        public List<Rubros_x_iyc> MostrarRubro(int legajo)
+        public List<Rubros_x_iyc_con> MostrarRubro(int legajo)
         {
             try
             {

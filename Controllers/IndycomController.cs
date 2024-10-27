@@ -309,6 +309,12 @@ namespace Web_Api_IyC.Controllers
         public ActionResult BajaComercial(int legajo, string fecha_baja, Auditoria objAuditoria)
         {
             var objOriginal = _iindycomService.GetByPk(legajo);
+
+            if (objOriginal.dado_baja == true)
+            {
+                return BadRequest(new { message = "Comercio ya se encuentra dado de baja" });
+
+            }
             _iindycomService.BajaComercial(legajo, fecha_baja, objOriginal, objAuditoria);
             var indycom = _iindycomService.GetByPk(legajo);
             if (indycom.fecha_baja == null)
@@ -531,12 +537,12 @@ namespace Web_Api_IyC.Controllers
         {
             try
             {
-                var iyc = _iindycomService.GetByPk(legajo);
+                // var iyc = _iindycomService.GetByPk(legajo);
 
-                if (iyc == null)
-                {
-                    return BadRequest(new { message = "No se encontró información para el legajo proporcionado." });
-                }
+                // if (iyc == null)
+                // {
+                //     return BadRequest(new { message = "No se encontró información para el legajo proporcionado." });
+                // }
 
                 var lst = _iindycomService.GetElementosDJSinLiquidar(legajo);
 
@@ -575,11 +581,11 @@ namespace Web_Api_IyC.Controllers
 
 
         [HttpGet]
-        public IActionResult ListaRubrosDJIyC(int nro_transaccion)
+        public IActionResult ListaRubrosDJIyC(int nro_transaccion,int legajo)
         {
             try
             {
-                var rubrosdjiyc = _iindycomService.ListaRubrosDJIyC(nro_transaccion);
+                var rubrosdjiyc = _iindycomService.ListaRubrosDJIyC(nro_transaccion, legajo);
 
                 if (rubrosdjiyc == null || !rubrosdjiyc.Any())
                 {
@@ -788,6 +794,26 @@ namespace Web_Api_IyC.Controllers
                 return StatusCode(500, new { message = "Ocurrió un error en el servidor.", error = ex.Message });
             }
         }
+
+        [HttpGet]
+        public IActionResult ImprimirDDJJ(int legajo, int nro_transaccion)
+        {
+            if (legajo <= 0)
+            {
+                return BadRequest(new { message = "Legajo no válido." });
+            }
+            try
+            {
+                var impresion = _iindycomService.ImprimirDDJJ(legajo, nro_transaccion);
+                return Ok(impresion);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Ocurrió un error en el servidor.", error = ex.Message });
+            }
+
+        }
+
         /*FIN DDJJ*/
 
         //BAJA COMERCIO
