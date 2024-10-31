@@ -1373,7 +1373,7 @@ namespace Web_Api_IyC.Entities
                 strSQL = @"SELECT a.nro_transaccion, a.periodo, a.monto_original,
                               a.debe, a.vencimiento, v.cod_tipo_per
                             FROM CTASCTES_INDYCOM a WITH (NOLOCK)
-                            join VENCIMIENTOS_IYC v 
+                            join VENCIMIENTOS_IYC v ON
                             v.periodo=a.periodo
                             WHERE
                               a.legajo=@legajo AND
@@ -1589,10 +1589,9 @@ namespace Web_Api_IyC.Entities
                 cmd.Transaction = trx;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "dbo.Calculo_Interes_4";
-                //cmd.Connection.Open();
                 cmd.Parameters.AddWithValue("@monto_original", auxmonto_original);
                 cmd.Parameters.AddWithValue("@vencimiento", Convert.ToDateTime(vencimiento, culturaFecArgentina));
-                interes = Convert.ToDouble(cmd.ExecuteScalarAsync());
+                interes = Convert.ToDouble(cmd.ExecuteScalar());
                 return interes;
             }
             catch (Exception)
@@ -1728,7 +1727,7 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        private static double sp_RECALCULO_INDYCOM(int legajo, string periodo, int tipo_per,
+        private static double sp_RECALCULO_INDYCOM(int legajo, string periodo, int cod_tipo_per,
             SqlConnection con, SqlTransaction trx)
         {
             try
@@ -1742,8 +1741,8 @@ namespace Web_Api_IyC.Entities
                 //cmd.Connection.Open();
                 cmd.Parameters.AddWithValue("@legajo", legajo);
                 cmd.Parameters.AddWithValue("@periodo", periodo);
-                cmd.Parameters.AddWithValue("@cod_tipo_liquidacion", tipo_per);
-                cmd.ExecuteNonQuery();
+                cmd.Parameters.AddWithValue("@cod_tipo_per", cod_tipo_per);
+                //cmd.ExecuteNonQuery();
                 total = Convert.ToDouble(cmd.ExecuteScalar());
                 return total;
             }

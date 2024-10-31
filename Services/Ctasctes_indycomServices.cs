@@ -211,7 +211,6 @@ namespace Web_Api_IyC.Services
         {
             try
             {
-                List<Ctasctes_indycom> lstCtasctes = new();
                 using (SqlConnection con = DALBase.GetConnectionSIIMVA())
                 {
                     con.Open();
@@ -220,8 +219,10 @@ namespace Web_Api_IyC.Services
                     {
                         try
                         {
+                            List<Ctasctes_indycom> lstCtasctes = new();
                             lstCtasctes = Ctasctes_indycom.Reliquidar_periodos(legajo, lst, con, trx);
                             trx.Commit();
+                            return lstCtasctes;
                         }
                         catch (Exception ex)
                         {
@@ -230,7 +231,6 @@ namespace Web_Api_IyC.Services
                         }
                     }
                 }
-                return lstCtasctes;
             }
             catch (Exception)
             {

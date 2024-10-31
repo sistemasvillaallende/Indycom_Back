@@ -790,6 +790,7 @@ namespace Web_Api_IyC.Services
             }
         }
         public void EliminaDJIyC(Dec_jur_iyc objDJ, Auditoria objA)
+        
         {
             try
             {
