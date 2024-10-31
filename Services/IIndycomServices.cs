@@ -59,7 +59,7 @@ namespace Web_Api_IyC.Services
         public void EliminaDJIyC(Dec_jur_iyc objDDJJ, Auditoria objA);
         public Dec_jur_iyc GetPeriodoDJLiquidado(int legajo, string periodo);
         public List<RubroInfo> ListaRubrosDJIyC(int nro_transaccion, int legajo);
-        //public List<Rubros_x_dec_jur_iyc> ListaRubrosDJIyC(int nro_transaccion);
+
         public ImpresionDDJJ ImprimirDDJJ(int legajo, int nro_transaccion);
         /*FIN DDJJ*/
         /* RUBROS */

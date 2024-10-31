@@ -1947,16 +1947,17 @@ namespace Web_Api_IyC.Entities
             try
             {
                 string strSQL = @"
-            UPDATE RUBROS_X_IYC 
-            SET cod_minimo = @cod_minimo, 
-                cod_convenio = @cod_convenio, 
-                cantidad = @cantidad, 
-                exento = @exento, 
-                descuento = @descuento, 
-                valor = @valor
-            WHERE legajo = @legajo 
-            AND cod_rubro = @cod_rubro 
-            AND nro_sucursal = @nro_sucursal";
+                                     UPDATE RUBROS_X_IYC 
+                                     SET 
+                                         nro_sucursal = @nro_sucursal,
+                                         cod_minimo = @cod_minimo, 
+                                         cod_convenio = @cod_convenio, 
+                                         cantidad = @cantidad, 
+                                         exento = @exento, 
+                                         descuento = @descuento, 
+                                         valor = @valor
+                                     WHERE legajo = @legajo 
+                                     AND cod_rubro = @cod_rubro ";
 
                 SqlCommand cmd = con.CreateCommand();
                 cmd.Transaction = trx;
