@@ -3,7 +3,136 @@
   "WorkspaceRootPath": "D:\\Dev\\NET2022\\Web_Api_IyC\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Dev\\NET2018\\WS\\DAL\\LstDeudaIyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\zonas_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\zonas_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\tipos_riesgo_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\tipos_riesgo_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\tipos_per_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\tipos_per_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\tipos_liq_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\tipos_liq_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\tipos_de_iva.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\tipos_de_iva.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\tarjetas\\tarjetas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\tarjetas\\tarjetas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\seguridadd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\seguridadd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\iyc\\planpago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\iyc\\planpago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\tarjetas\\planes_cobro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\tarjetas\\planes_cobro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\iyc\\lstdeudaiyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\iyc\\lstdeudaiyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\iyc\\informes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\iyc\\informes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\iyc\\indycomxcalle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\iyc\\indycomxcalle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\iyc\\grillaiyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\iyc\\grillaiyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\detalle_pago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\detalle_pago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\detalle_deuda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\detalle_deuda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\detalle_cedulon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\detalle_cedulon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\iyc\\detalleplanpago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\iyc\\detalleplanpago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\iyc\\chequera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\iyc\\chequera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\caracter_entidades.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\caracter_entidades.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\badec.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\badec.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\rubros.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\rubros.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\rubros_x_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\rubros_x_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\rubros_x_dec_jur_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\rubros_x_dec_jur_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\ctasctes_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\ctasctes_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\sucursales_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\sucursales_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\planes_cobro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\planes_cobro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\conceptos_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\conceptos_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\bases_imponibles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\bases_imponibles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\dec_jur_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\dec_jur_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\descadic_x_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\descadic_x_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\tarjetas_debitos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\tarjetas_debitos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\datos_transaccion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\datos_transaccion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\controllers\\indycomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -18,10 +147,6 @@
       "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:services\\indycomservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\dec_jur_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\dec_jur_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -30,28 +155,8 @@
       "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:services\\iindycomservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\ctasctes_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\ctasctes_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\rubros_x_dec_jur_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\rubros_x_dec_jur_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\rubros_x_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\rubros_x_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\services\\ctasctes_indycomservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:services\\ctasctes_indycomservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|d:\\dev\\net2022\\web_api_iyc\\entities\\rubros.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\rubros.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -134,57 +239,396 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "LstDeudaIyc.cs",
-              "DocumentMoniker": "D:\\Dev\\NET2018\\WS\\DAL\\LstDeudaIyc.cs",
-              "RelativeDocumentMoniker": "..\\..\\NET2018\\WS\\DAL\\LstDeudaIyc.cs",
-              "ToolTip": "D:\\Dev\\NET2018\\WS\\DAL\\LstDeudaIyc.cs",
-              "RelativeToolTip": "..\\..\\NET2018\\WS\\DAL\\LstDeudaIyc.cs",
-              "ViewState": "AgIAAKIAAAAAAAAAAAAAAFsAAAA3AAAAAAAAAA==",
+              "Title": "ZONAS_IYC.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\ZONAS_IYC.cs",
+              "RelativeDocumentMoniker": "Entities\\ZONAS_IYC.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\ZONAS_IYC.cs",
+              "RelativeToolTip": "Entities\\ZONAS_IYC.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAABsAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T12:53:47.339Z",
+              "WhenOpened": "2024-10-21T12:47:51.638Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TIPOS_RIESGO_IYC.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\TIPOS_RIESGO_IYC.cs",
+              "RelativeDocumentMoniker": "Entities\\TIPOS_RIESGO_IYC.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\TIPOS_RIESGO_IYC.cs",
+              "RelativeToolTip": "Entities\\TIPOS_RIESGO_IYC.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAIA2wCoAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:51.046Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "TIPOS_PER_IYC.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\TIPOS_PER_IYC.cs",
+              "RelativeDocumentMoniker": "Entities\\TIPOS_PER_IYC.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\TIPOS_PER_IYC.cs",
+              "RelativeToolTip": "Entities\\TIPOS_PER_IYC.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAD4vyIAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:49.743Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TIPOS_LIQ_IYC.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\TIPOS_LIQ_IYC.cs",
+              "RelativeDocumentMoniker": "Entities\\TIPOS_LIQ_IYC.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\TIPOS_LIQ_IYC.cs",
+              "RelativeToolTip": "Entities\\TIPOS_LIQ_IYC.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAD4vx8AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:49.125Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TIPOS_DE_IVA.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\TIPOS_DE_IVA.cs",
+              "RelativeDocumentMoniker": "Entities\\TIPOS_DE_IVA.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\TIPOS_DE_IVA.cs",
+              "RelativeToolTip": "Entities\\TIPOS_DE_IVA.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAD4vyEAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:47.58Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Tarjetas.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\TARJETAS\\Tarjetas.cs",
+              "RelativeDocumentMoniker": "Entities\\TARJETAS\\Tarjetas.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\TARJETAS\\Tarjetas.cs",
+              "RelativeToolTip": "Entities\\TARJETAS\\Tarjetas.cs",
+              "ViewState": "AgIAAI8AAAAAAAAAAADgv60AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:44.779Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SeguridadD.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\SeguridadD.cs",
+              "RelativeDocumentMoniker": "Entities\\SeguridadD.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\SeguridadD.cs",
+              "RelativeToolTip": "Entities\\SeguridadD.cs",
+              "ViewState": "AgIAAMsAAAAAAAAAAAASwPIAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:43.332Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PlanPago.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\IYC\\PlanPago.cs",
+              "RelativeDocumentMoniker": "Entities\\IYC\\PlanPago.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\IYC\\PlanPago.cs",
+              "RelativeToolTip": "Entities\\IYC\\PlanPago.cs",
+              "ViewState": "AgIAAMQAAAAAAAAAAAASwN0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:42.179Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PLANES_COBRO.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\TARJETAS\\PLANES_COBRO.cs",
+              "RelativeDocumentMoniker": "Entities\\TARJETAS\\PLANES_COBRO.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\TARJETAS\\PLANES_COBRO.cs",
+              "RelativeToolTip": "Entities\\TARJETAS\\PLANES_COBRO.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAADgv00AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:40.2Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "LstDeudaIyC.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\IYC\\LstDeudaIyC.cs",
+              "RelativeDocumentMoniker": "Entities\\IYC\\LstDeudaIyC.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\IYC\\LstDeudaIyC.cs",
+              "RelativeToolTip": "Entities\\IYC\\LstDeudaIyC.cs",
+              "ViewState": "AgIAAAUBAAAAAAAAAAAiwCgBAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:37.122Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Informes.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\IYC\\Informes.cs",
+              "RelativeDocumentMoniker": "Entities\\IYC\\Informes.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\IYC\\Informes.cs",
+              "RelativeToolTip": "Entities\\IYC\\Informes.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAUwD4AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:35.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Indycomxcalle.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\IYC\\Indycomxcalle.cs",
+              "RelativeDocumentMoniker": "Entities\\IYC\\Indycomxcalle.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\IYC\\Indycomxcalle.cs",
+              "RelativeToolTip": "Entities\\IYC\\Indycomxcalle.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAUwEQAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:34.711Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "GrillaIyC.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\IYC\\GrillaIyC.cs",
+              "RelativeDocumentMoniker": "Entities\\IYC\\GrillaIyC.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\IYC\\GrillaIyC.cs",
+              "RelativeToolTip": "Entities\\IYC\\GrillaIyC.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAiwD8AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:34.178Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "DETALLE_PAGO.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\DETALLE_PAGO.cs",
+              "RelativeDocumentMoniker": "Entities\\DETALLE_PAGO.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\DETALLE_PAGO.cs",
+              "RelativeToolTip": "Entities\\DETALLE_PAGO.cs",
+              "ViewState": "AgIAABQBAAAAAAAAAAAiwDUBAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:30.268Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "DETALLE_DEUDA.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\DETALLE_DEUDA.cs",
+              "RelativeDocumentMoniker": "Entities\\DETALLE_DEUDA.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\DETALLE_DEUDA.cs",
+              "RelativeToolTip": "Entities\\DETALLE_DEUDA.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAiwDEAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:28.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "DETALLE_CEDULON.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\DETALLE_CEDULON.cs",
+              "RelativeDocumentMoniker": "Entities\\DETALLE_CEDULON.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\DETALLE_CEDULON.cs",
+              "RelativeToolTip": "Entities\\DETALLE_CEDULON.cs",
+              "ViewState": "AgIAAKgAAAAAAAAAAAAiwMQAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:27.62Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "DetallePlanPago.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\IYC\\DetallePlanPago.cs",
+              "RelativeDocumentMoniker": "Entities\\IYC\\DetallePlanPago.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\IYC\\DetallePlanPago.cs",
+              "RelativeToolTip": "Entities\\IYC\\DetallePlanPago.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAUwE0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:27.011Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Chequera.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\IYC\\Chequera.cs",
+              "RelativeDocumentMoniker": "Entities\\IYC\\Chequera.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\IYC\\Chequera.cs",
+              "RelativeToolTip": "Entities\\IYC\\Chequera.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAswEIAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:24.537Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "CARACTER_ENTIDADES.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\CARACTER_ENTIDADES.cs",
+              "RelativeDocumentMoniker": "Entities\\CARACTER_ENTIDADES.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\CARACTER_ENTIDADES.cs",
+              "RelativeToolTip": "Entities\\CARACTER_ENTIDADES.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAmwB0AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:24.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "BADEC.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\BADEC.cs",
+              "RelativeDocumentMoniker": "Entities\\BADEC.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\BADEC.cs",
+              "RelativeToolTip": "Entities\\BADEC.cs",
+              "ViewState": "AgIAALkAAAAAAAAAAAAkwNcAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:19.374Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Tarjetas_debitos.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Tarjetas_debitos.cs",
+              "RelativeDocumentMoniker": "Entities\\Tarjetas_debitos.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Tarjetas_debitos.cs",
+              "RelativeToolTip": "Entities\\Tarjetas_debitos.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAwC8AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T21:33:13.012Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Descadic_x_iyc.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Descadic_x_iyc.cs",
+              "RelativeDocumentMoniker": "Entities\\Descadic_x_iyc.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Descadic_x_iyc.cs",
+              "RelativeToolTip": "Entities\\Descadic_x_iyc.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAkwEoAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T21:33:01.983Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Datos_transaccion.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Datos_transaccion.cs",
+              "RelativeDocumentMoniker": "Entities\\Datos_transaccion.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Datos_transaccion.cs",
+              "RelativeToolTip": "Entities\\Datos_transaccion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T21:32:46.817Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Bases_imponibles.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Bases_imponibles.cs",
+              "RelativeDocumentMoniker": "Entities\\Bases_imponibles.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Bases_imponibles.cs",
+              "RelativeToolTip": "Entities\\Bases_imponibles.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAA7wFcAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T21:32:35.203Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Conceptos_iyc.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Conceptos_iyc.cs",
+              "RelativeDocumentMoniker": "Entities\\Conceptos_iyc.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Conceptos_iyc.cs",
+              "RelativeToolTip": "Entities\\Conceptos_iyc.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAA7wCUAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T21:32:23.748Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Planes_cobro.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Planes_cobro.cs",
+              "RelativeDocumentMoniker": "Entities\\Planes_cobro.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Planes_cobro.cs",
+              "RelativeToolTip": "Entities\\Planes_cobro.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAkwFEAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T21:26:12.561Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Sucursales_indycom.cs",
+              "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Sucursales_indycom.cs",
+              "RelativeDocumentMoniker": "Entities\\Sucursales_indycom.cs",
+              "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Sucursales_indycom.cs",
+              "RelativeToolTip": "Entities\\Sucursales_indycom.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAswHcAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T21:25:56.195Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
               "Title": "Ctasctes_indycomController.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Controllers\\Ctasctes_indycomController.cs",
               "RelativeDocumentMoniker": "Controllers\\Ctasctes_indycomController.cs",
               "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Controllers\\Ctasctes_indycomController.cs",
               "RelativeToolTip": "Controllers\\Ctasctes_indycomController.cs",
-              "ViewState": "AgIAAFUAAAAAAAAAAAAuwHIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAxwHIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-17T12:18:49.885Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 28,
               "Title": "Dec_jur_iyc.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Dec_jur_iyc.cs",
               "RelativeDocumentMoniker": "Entities\\Dec_jur_iyc.cs",
               "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Dec_jur_iyc.cs",
               "RelativeToolTip": "Entities\\Dec_jur_iyc.cs",
-              "ViewState": "AgIAABYBAAAAAAAAAAAtwCgBAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAAAkwDUAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-06T03:03:52.965Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 22,
               "Title": "Rubros_x_dec_jur_iyc.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Rubros_x_dec_jur_iyc.cs",
               "RelativeDocumentMoniker": "Entities\\Rubros_x_dec_jur_iyc.cs",
               "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Rubros_x_dec_jur_iyc.cs",
               "RelativeToolTip": "Entities\\Rubros_x_dec_jur_iyc.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAAewP8AAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAswCYAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-06T00:24:59.842Z"
+              "WhenOpened": "2024-10-06T00:24:59.842Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 36,
               "Title": "Startup.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Startup.cs",
               "RelativeDocumentMoniker": "Startup.cs",
@@ -192,60 +636,64 @@
               "RelativeToolTip": "Startup.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAYwCEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-04T17:19:33.3Z"
+              "WhenOpened": "2024-10-04T17:19:33.3Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 23,
               "Title": "Ctasctes_indycom.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Ctasctes_indycom.cs",
               "RelativeDocumentMoniker": "Entities\\Ctasctes_indycom.cs",
               "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Ctasctes_indycom.cs",
               "RelativeToolTip": "Entities\\Ctasctes_indycom.cs",
-              "ViewState": "AgIAALIEAAAAAAAAAAAhwFUGAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAGYFAAAAAAAAAAAswIkFAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-04T13:29:23.533Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 38,
               "Title": "Ctasctes_indycomServices.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Services\\Ctasctes_indycomServices.cs",
               "RelativeDocumentMoniker": "Services\\Ctasctes_indycomServices.cs",
               "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Services\\Ctasctes_indycomServices.cs",
               "RelativeToolTip": "Services\\Ctasctes_indycomServices.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAEAAAAAAAAAAEBVwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-04T13:15:01.771Z"
+              "WhenOpened": "2024-10-04T13:15:01.771Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 21,
               "Title": "Rubros_x_iyc.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Rubros_x_iyc.cs",
               "RelativeDocumentMoniker": "Entities\\Rubros_x_iyc.cs",
               "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\Rubros_x_iyc.cs",
               "RelativeToolTip": "Entities\\Rubros_x_iyc.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAQBAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAswDoAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-03T00:23:45.973Z"
+              "WhenOpened": "2024-10-03T00:23:45.973Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 20,
               "Title": "RUBROS.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\RUBROS.cs",
               "RelativeDocumentMoniker": "Entities\\RUBROS.cs",
               "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\RUBROS.cs",
               "RelativeToolTip": "Entities\\RUBROS.cs",
-              "ViewState": "AgIAAA0BAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAkwEUAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-03T00:20:16.309Z"
+              "WhenOpened": "2024-10-03T00:20:16.309Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 35,
               "Title": "IndycomServices.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Services\\IndycomServices.cs",
               "RelativeDocumentMoniker": "Services\\IndycomServices.cs",
@@ -258,41 +706,42 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 33,
               "Title": "IndycomController.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Controllers\\IndycomController.cs",
               "RelativeDocumentMoniker": "Controllers\\IndycomController.cs",
               "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Controllers\\IndycomController.cs",
               "RelativeToolTip": "Controllers\\IndycomController.cs",
-              "ViewState": "AgIAAFMEAAAAAAAAAAAgwH0EAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAxwH8EAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-08T01:03:37.271Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 31,
               "Title": "INDYCOM.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\INDYCOM.cs",
               "RelativeDocumentMoniker": "Entities\\INDYCOM.cs",
               "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Entities\\INDYCOM.cs",
               "RelativeToolTip": "Entities\\INDYCOM.cs",
-              "ViewState": "AgIAAF8BAAAAAAAAAAAuwI8BAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAABgHAAAAAAAAAAAkwDMHAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-08T00:23:41.258Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 37,
               "Title": "IIndycomServices.cs",
               "DocumentMoniker": "D:\\Dev\\NET2022\\Web_Api_IyC\\Services\\IIndycomServices.cs",
               "RelativeDocumentMoniker": "Services\\IIndycomServices.cs",
               "ToolTip": "D:\\Dev\\NET2022\\Web_Api_IyC\\Services\\IIndycomServices.cs",
               "RelativeToolTip": "Services\\IIndycomServices.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAjwDkAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAIA2wDkAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-08T01:00:03.74Z"
+              "WhenOpened": "2024-07-08T01:00:03.74Z",
+              "EditorCaption": ""
             }
           ]
         }
