@@ -5,7 +5,10 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Web_Api_IyC.Entities.HELPERS;
+
 namespace Web_Api_IyC.Entities
+
 {
     public class Rubros_x_dec_jur_iyc : DALBase
     {
@@ -299,32 +302,95 @@ namespace Web_Api_IyC.Entities
 
             return true;
         }
-        public static List<Rubros_x_dec_jur_iyc> ListaRubrosDJIyC(int nro_transaccion)
+        // public static List<Rubros_x_dec_jur_iyc> ListaRubrosDJIyC(int nro_transaccion)
+        // {
+        //     try
+        //     {
+        //         StringBuilder sql = new StringBuilder();
+        //         sql.AppendLine("SELECT * FROM Rubros_x_dec_jur_iyc ");
+        //         sql.AppendLine("WHERE nro_transaccion = @nro_transaccion");
+        //         Rubros_x_dec_jur_iyc? obj = null;
+        //         List<Rubros_x_dec_jur_iyc> lst = new List<Rubros_x_dec_jur_iyc>();
+        //         using (SqlConnection con = GetConnection())
+        //         {
+        //             SqlCommand cmd = con.CreateCommand();
+        //             cmd.CommandType = CommandType.Text;
+        //             cmd.CommandText = sql.ToString();
+        //             cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
+        //             cmd.Connection.Open();
+        //             SqlDataReader dr = cmd.ExecuteReader();
+        //             lst = mapeo(dr);
+        //         }
+        //         return lst;
+        //     }
+        //     catch (Exception)
+        //     {
+        //         throw;
+        //     }
+        // }
+
+
+        public static List<RubroInfo> ListaRubrosDJIyC(int nro_transaccion, int legajo)
         {
             try
             {
-                StringBuilder sql = new StringBuilder();
-                sql.AppendLine("SELECT * FROM Rubros_x_dec_jur_iyc ");
-                sql.AppendLine("WHERE nro_transaccion = @nro_transaccion");
-                Rubros_x_dec_jur_iyc? obj = null;
-                List<Rubros_x_dec_jur_iyc> lst = new List<Rubros_x_dec_jur_iyc>();
+                var lstRubros = new List<RubroInfo>();
+
+                string sqlRubros = @"
+            SELECT rdji.nro_transaccion, 
+                   rdji.cod_rubro,
+                   SUM(rdji.cantidad) AS cantidad, 
+                   SUM(rdji.importe) AS importe,
+                   dji.periodo,
+                   (SELECT TOP 1 concepto FROM RUBROS WHERE cod_rubro = rdji.cod_rubro) AS concepto
+            FROM Rubros_x_dec_jur_iyc rdji
+            JOIN DEC_JUR_IYC dji ON dji.nro_transaccion = rdji.nro_transaccion
+            WHERE dji.legajo = @legajo AND rdji.nro_transaccion = @nro_transaccion
+            GROUP BY rdji.nro_transaccion, rdji.cod_rubro, dji.periodo
+            ORDER BY dji.periodo;";
+
                 using (SqlConnection con = GetConnection())
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = sql.ToString();
+                    cmd.CommandText = sqlRubros;
                     cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
-                    cmd.Connection.Open();
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    lst = mapeo(dr);
-                    //if (lst.Count != 0)
-                    //    obj = lst[0];
+                    cmd.Parameters.AddWithValue("@legajo", legajo);
+                    con.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            var rubroInfo = new RubroInfo
+                            {
+                                nro_transaccion = dr.GetInt32(dr.GetOrdinal("nro_transaccion")),
+                                periodo = dr.GetString(dr.GetOrdinal("periodo")),
+                                concepto = dr.IsDBNull(dr.GetOrdinal("concepto"))
+                                    ? string.Empty
+                                    : dr.GetString(dr.GetOrdinal("concepto"))
+                            };
+
+                            var rubro = new Rubros_x_dec_jur_iyc
+                            {
+                                nro_transaccion = rubroInfo.nro_transaccion, // reutilizar el nro_transaccion
+                                cod_rubro = dr.GetInt32(dr.GetOrdinal("cod_rubro")),
+                                cantidad = dr.IsDBNull(dr.GetOrdinal("cantidad")) ? 0 : Convert.ToSingle(dr.GetDouble(dr.GetOrdinal("cantidad"))),
+                                importe = dr.IsDBNull(dr.GetOrdinal("importe")) ? 0 : dr.GetDecimal(dr.GetOrdinal("importe"))
+                            };
+
+
+                            rubroInfo.rdji = rubro;
+                            lstRubros.Add(rubroInfo);
+                        }
+                    }
                 }
-                return lst;
+
+                return lstRubros;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception("Error al obtener los rubros de la declaración jurada IyC", ex);
             }
         }
 

@@ -48,6 +48,8 @@ namespace Web_Api_IyC.Services
         public List<BADEC> GetBadecByCuit(string cuit);
         /* METODOS para la DECJUR*/
         public List<Dec_jur_iyc> GetPeriodosDJSinLiquidar(int legajo);
+        public List<ElementDJJIyC> GetElementosDJSinLiquidar(int legajo);
+        public List<ElementDJJIyC> GetElementosDJLiquidados(int legajo);
         public List<Rubros_x_dec_jur_iyc> GetRubrosDJIyC(int nro_transaccion, int legajo);
         public void UpdateRubrosDJIyC(int legajo, List<Rubros_x_dec_jur_iyc> lst, Auditoria objA);
         public void Liquidar_decjur(int legajo, Dec_jur_iyc obj, Auditoria objA);
@@ -55,9 +57,21 @@ namespace Web_Api_IyC.Services
         public Dec_jur_iyc GetDecJur_completadas(int legajo, string periodo);
         public bool VerificaDecJurPagada(int nro_transaccion);
         public void EliminaDJIyC(Dec_jur_iyc objDDJJ, Auditoria objA);
-        public Dec_jur_iyc GetPeriodoDJLiquidado (int legajo, string periodo);
-        public List<Rubros_x_dec_jur_iyc> ListaRubrosDJIyC(int nro_transaccion);
+        public Dec_jur_iyc GetPeriodoDJLiquidado(int legajo, string periodo);
+        public List<RubroInfo> ListaRubrosDJIyC(int nro_transaccion, int legajo);
 
+        public ImpresionDDJJ ImprimirDDJJ(int legajo, int nro_transaccion);
         /*FIN DDJJ*/
+        /* RUBROS */
+        public List<Rubros_x_iyc_con> MostrarRubro(int legajo);
+        public void NuevoRubro(Rubros_x_iyc obj, Auditoria objA);
+        public void UpdateRubro(Rubros_x_iyc obj, Auditoria objA);
+        public void DeleteRubro(int legajo, int cod_rubro, Auditoria objA);
+        public string BusquedaSucarsal(int legajo, int? nro_sucursal);
+        public List<ElemRubro> BusquedaRubros(string? busqueda);
+        public List<ElementoMinimo> BusquedaMinimos(string? busqueda);
+        public List<ElementoConvenio> BusquedaConvenios(string? busqueda);
+
+        public void UpdateDomicilioFiscal(int legajo, DatosDomicilioFiscal datos);
     }
 }

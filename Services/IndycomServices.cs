@@ -38,17 +38,6 @@ namespace Web_Api_IyC.Services
                 throw ex;
             }
         }
-        //public int Insert(INDYCOM obj)
-        //{
-        //    try
-        //    {
-        //        return Entities.INDYCOM.Insert(obj);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
         public List<INDYCOM> Read()
         {
             try
@@ -667,6 +656,35 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
+
+        public List<ElementDJJIyC> GetElementosDJSinLiquidar(int legajo)
+        {
+            try
+            {
+
+                var ret =  Dec_jur_iyc.GetElementosDJSinLiquidar(legajo);
+
+                return Dec_jur_iyc.GetElementosDJSinLiquidar(legajo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<ElementDJJIyC> GetElementosDJLiquidados(int legajo)
+        {
+            try
+            {
+                return Dec_jur_iyc.GetElementosDJLiquidados(legajo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<Rubros_x_dec_jur_iyc> GetRubrosDJIyC(int nro_transaccion, int legajo)
         {
             try
@@ -687,7 +705,6 @@ namespace Web_Api_IyC.Services
                 using (SqlConnection con = DALBase.GetConnectionSIIMVA())
                 {
                     con.Open();
-                    // Iniciar una transacción
                     using (SqlTransaction trx = con.BeginTransaction())
                     {
                         try
@@ -773,6 +790,7 @@ namespace Web_Api_IyC.Services
             }
         }
         public void EliminaDJIyC(Dec_jur_iyc objDJ, Auditoria objA)
+        
         {
             try
             {
@@ -814,11 +832,11 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-        public List<Rubros_x_dec_jur_iyc> ListaRubrosDJIyC(int nro_transaccion)
+        public List<RubroInfo> ListaRubrosDJIyC(int nro_transaccion, int legajo)
         {
             try
             {
-                return Rubros_x_dec_jur_iyc.ListaRubrosDJIyC(nro_transaccion);
+                return Rubros_x_dec_jur_iyc.ListaRubrosDJIyC(nro_transaccion, legajo);
             }
             catch (Exception)
             {
@@ -826,7 +844,238 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
+
+         public ImpresionDDJJ ImprimirDDJJ(int legajo,int nro_transaccion)
+        {
+            try
+            {
+                return Dec_jur_iyc.ImprimirDDJJ(legajo,nro_transaccion);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         //*********FIN DDJJ*******************************//
+
+
+        public List<Rubros_x_iyc_con> MostrarRubro(int legajo)
+        {
+            try
+            {
+                return INDYCOM.mostrarRubro(legajo);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void NuevoRubro(Rubros_x_iyc obj, Auditoria objA)
+        {
+            try
+            {
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
+                {
+                    con.Open();
+
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+
+                            objA.identificacion = obj.legajo.ToString();
+                            objA.proceso = "Nuevo rubro";
+                            objA.detalle = JsonConvert.SerializeObject(obj);
+                            objA.observaciones += string.Format(" Nuevo Rubro",
+                                obj.legajo, DateTime.Now);
+                            INDYCOM.nuevoRubro(obj, con, trx);
+                            AuditoriaD.InsertAuditoria(objA, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        public void UpdateRubro(Rubros_x_iyc obj, Auditoria objA)
+        {
+            try
+            {
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
+                {
+                    con.Open();
+
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            objA.identificacion = obj.legajo.ToString();
+                            objA.proceso = "MODIFICACION RUBRO IYC";
+                            objA.detalle = JsonConvert.SerializeObject(obj);
+                            objA.observaciones += string.Format(" Actualización de Rubro para el legajo {0} en la fecha {1}",
+                                obj.legajo, DateTime.Now);
+
+                            INDYCOM.updateRubro(obj, con, trx);
+                            AuditoriaD.InsertAuditoria(objA, con, trx);
+
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el rubro", ex);
+            }
+        }
+
+        public void DeleteRubro(int legajo, int cod_rubro, Auditoria objA)
+        {
+            try
+            {
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
+                {
+                    con.Open();
+
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            objA.identificacion = legajo.ToString();
+                            objA.proceso = "ELIMINACION RUBRO IYC";
+                            objA.detalle = JsonConvert.SerializeObject(new { legajo, cod_rubro });
+                            objA.observaciones += string.Format(" Eliminación de Rubro con cod_rubro {0} para el legajo {1} en la fecha {2}",
+                                cod_rubro, legajo, DateTime.Now);
+
+                            INDYCOM.deleteRubro(legajo, cod_rubro, con, trx);
+                            AuditoriaD.InsertAuditoria(objA, con, trx);
+
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar el rubro", ex);
+            }
+        }
+
+
+        public string BusquedaSucarsal(int legajo, int? nro_sucursal)
+        {
+            try
+            {
+                return INDYCOM.busquedaSucursal(legajo, nro_sucursal);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public List<ElemRubro> BusquedaRubros(string? busqueda)
+        {
+            try
+            {
+                return INDYCOM.busquedaRubros(busqueda);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<ElementoMinimo> BusquedaMinimos(string? busqueda)
+        {
+            try
+            {
+                return INDYCOM.busquedaMinimos(busqueda);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public List<ElementoConvenio> BusquedaConvenios(string? busqueda)
+        {
+            try
+            {
+                return INDYCOM.busquedaConvenios(busqueda);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void UpdateDomicilioFiscal(int legajo, DatosDomicilioFiscal datos)
+        {
+            try
+            {
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
+                {
+                    con.Open();
+
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            datos.objAuditoria.identificacion = legajo.ToString();
+                            datos.objAuditoria.proceso = "CAMBIO DOMIC. POSTAL INDYCOM";
+                            datos.objAuditoria.detalle = JsonConvert.SerializeObject(datos);
+                            datos.objAuditoria.observaciones += string.Format(" Actualización de domicilio Fiscal para el legajo {0} en la fecha {1}",
+                                legajo, DateTime.Now);
+
+                            INDYCOM.UpdateDomicilioFiscal(legajo, datos, con, trx);
+                            AuditoriaD.InsertAuditoria(datos.objAuditoria, con, trx);
+
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el rubro", ex);
+            }
+        }
+
+
 
     }
 }
