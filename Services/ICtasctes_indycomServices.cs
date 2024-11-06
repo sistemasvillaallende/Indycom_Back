@@ -1,6 +1,8 @@
 ﻿using System.Data.SqlClient;
+using Web_Api_Auto.Entities.HELPERS;
 using Web_Api_IyC.Entities;
 using Web_Api_IyC.Entities.AUDITORIA;
+using Web_Api_IyC.Entities.HELPERS;
 using Web_Api_IyC.Entities.IYC;
 
 namespace Web_Api_IyC.Services
@@ -28,5 +30,10 @@ namespace Web_Api_IyC.Services
         public List<LstDeudaIyC> getListDeudaIyC(int legajo);
         public List<LstDeudaIyC> getListDeudaIyCProcurada(int legajo);
         public List<LstDeudaIyC> getListDeudaIyCNoVencida(int legajo);
+                public List<Ctasctes_indycom> ListarDeudas(int legajo);
+        public List<CateDeudaIyC> ListarCategoriaDeudas();
+        public void NuevaDeuda(CtasCtes_Con_Auditoria obj);
+        public void modificarDeuda(CtasCtes_Con_Auditoria obj);
+        public void eliminarDeuda(int legajo, int nro_transaccion,Auditoria obj);
     }
 }

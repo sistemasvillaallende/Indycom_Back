@@ -1712,18 +1712,18 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        public static List<Combo> GetCalle(string nomcalle)
+        public static List<Combo> GetCalle(string? nomcalle)
         {
             try
             {
-                string strSQL = @"SELECT
-                                    cod_calle,
-                                    nom_calle
-                                  FROM Calles
-                                  WHERE
-                                     nom_calle Like @nomcalle
-                                  ORDER BY
-                                      nom_calle";
+                string strSQL = @"	SELECT
+                            cod_calle,
+                            nom_calle
+                          FROM Calles
+                          WHERE
+                             (@nomcalle IS NULL OR @nomcalle = '' OR nom_calle LIKE @nomcalle + '%')
+                          ORDER BY
+                              nom_calle";
                 List<Combo> lst = new List<Combo>();
                 using (SqlConnection con = GetConnectionSIIMVA())
                 {
@@ -1787,34 +1787,34 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        public static void BajaSucursal(int legajo, int nro_sucursal, string fecha_baja,
-            SqlConnection con, SqlTransaction trx)
-        {
-            try
-            {
-                DateTimeFormatInfo culturaFecArgentina = new CultureInfo("es-AR", false).DateTimeFormat;
-                StringBuilder sql = new StringBuilder();
-                sql.AppendLine("UPDATE Sucursales_Indycom SET");
-                sql.AppendLine(", dado_baja=1");
-                sql.AppendLine(", fecha_baja=@fecha_baja");
-                sql.AppendLine("WHERE");
-                sql.AppendLine("legajo=@legajo AND");
-                sql.AppendLine("nro_sucursal=@nro_sucursal");
-                //
-                SqlCommand cmd = con.CreateCommand();
-                cmd.Transaction = trx;
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = sql.ToString();
-                cmd.Parameters.AddWithValue("@legajo", legajo);
-                cmd.Parameters.AddWithValue("@nro_sucursal", nro_sucursal);
-                cmd.Parameters.AddWithValue("@fecha_baja", Convert.ToDateTime(fecha_baja, culturaFecArgentina).ToString());
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        // public static void BajaSucursal(int legajo, int nro_sucursal, string fecha_baja,
+        //     SqlConnection con, SqlTransaction trx)
+        // {
+        //     try
+        //     {
+        //         DateTimeFormatInfo culturaFecArgentina = new CultureInfo("es-AR", false).DateTimeFormat;
+        //         StringBuilder sql = new StringBuilder();
+        //         sql.AppendLine("UPDATE Sucursales_Indycom SET");
+        //         sql.AppendLine(", dado_baja=1");
+        //         sql.AppendLine(", fecha_baja=@fecha_baja");
+        //         sql.AppendLine("WHERE");
+        //         sql.AppendLine("legajo=@legajo AND");
+        //         sql.AppendLine("nro_sucursal=@nro_sucursal");
+        //         //
+        //         SqlCommand cmd = con.CreateCommand();
+        //         cmd.Transaction = trx;
+        //         cmd.CommandType = CommandType.Text;
+        //         cmd.CommandText = sql.ToString();
+        //         cmd.Parameters.AddWithValue("@legajo", legajo);
+        //         cmd.Parameters.AddWithValue("@nro_sucursal", nro_sucursal);
+        //         cmd.Parameters.AddWithValue("@fecha_baja", Convert.ToDateTime(fecha_baja, culturaFecArgentina).ToString());
+        //         cmd.ExecuteNonQuery();
+        //     }
+        //     catch (Exception)
+        //     {
+        //         throw;
+        //     }
+        // }
 
         //SELECT des_com FROM sucursales_indycom  WHERE legajo= :legajo  and nro_sucursal= :nro_sucursal and dado_baja=0 
         public static List<Combo> ListarCategoriasIyc()

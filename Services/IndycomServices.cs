@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Sockets;
 using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -412,7 +413,6 @@ namespace Web_Api_IyC.Services
                 using (SqlConnection con = DALBase.GetConnectionSIIMVA())
                 {
                     con.Open();
-                    // Iniciar una transacción
                     using (SqlTransaction trx = con.BeginTransaction())
                     {
                         try
@@ -421,7 +421,7 @@ namespace Web_Api_IyC.Services
                             obj.proceso = "BAJA SUCURSAL";
                             obj.detalle = JsonConvert.SerializeObject(objOriginal);
                             obj.observaciones += string.Format("Baja Sucursal {0}, del Legajo {1}, Fecha auditoria: {2}", nro_sucursal, legajo, DateTime.Now);
-                            INDYCOM.BajaSucursal(legajo, nro_sucursal, fecha_baja, con, trx);
+                            Sucursales_indycom.BajaSucursal(legajo, nro_sucursal, fecha_baja, con, trx);
                             AuditoriaD.InsertAuditoria(obj, con, trx);
                             trx.Commit();
                         }
@@ -461,6 +461,8 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
+
+        /// SUCURSALES <<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<
         public Sucursales_indycom GetSucuralByLegajo(int legajo, int nro_sucursal)
         {
             try
@@ -473,6 +475,121 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
+
+        public List<Sucursales_indycom> GetSucursales(int legajo)
+        {
+            try
+            {
+                return Sucursales_indycom.GetSucursales(legajo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void NuevaSucursal(int legajo, Sucursal_Con_Auditoria obj, INDYCOM objOriginal)
+        {
+            try
+            {
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
+                {
+                    con.Open();
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            obj.auditoria.identificacion = legajo.ToString();
+                            obj.auditoria.proceso = "NUEVA SUCURSAL";
+                            obj.auditoria.detalle = JsonConvert.SerializeObject(objOriginal);
+                            obj.auditoria.observaciones += string.Format("Alta nueva Sucursal del Legajo {0}, Fecha auditoria: {1}", legajo, DateTime.Now);
+                            Sucursales_indycom.NuevaSucursal(legajo, obj.sucursal, con, trx);
+                            AuditoriaD.InsertAuditoria(obj.auditoria, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void ModificarSucursal(int legajo, int nro_sucursal, Sucursal_Con_Auditoria obj, INDYCOM objOriginal)
+        {
+            try
+            {
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
+                {
+                    con.Open();
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            obj.auditoria.identificacion = legajo.ToString();
+                            obj.auditoria.proceso = "MODIFICAR SUCURSAL";
+                            obj.auditoria.detalle = JsonConvert.SerializeObject(objOriginal);
+                            obj.auditoria.observaciones += string.Format("Alta nueva Sucursal del Legajo {0}, Fecha auditoria: {1}", legajo, DateTime.Now);
+                            Sucursales_indycom.ModificarSucursal(legajo, nro_sucursal, obj.sucursal, con, trx);
+                            AuditoriaD.InsertAuditoria(obj.auditoria, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public void EliminarSucursal(int legajo, int nro_sucursal, Auditoria obj, INDYCOM objOriginal)
+        {
+            try
+            {
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
+                {
+                    con.Open();
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            obj.identificacion = legajo.ToString();
+                            obj.proceso = "ELIMINAR SUCURSAL";
+                            obj.detalle = JsonConvert.SerializeObject(objOriginal);
+                            obj.observaciones += string.Format("Eliminar Sucursal del Legajo {0}, Fecha auditoria: {1}", legajo, DateTime.Now);
+                            Sucursales_indycom.Delete(legajo,nro_sucursal,con,trx);
+                            AuditoriaD.InsertAuditoria(obj, con, trx);
+                            trx.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<RUBROS> BuscarRubroxDescripcion(string descripcion)
         {
             try
@@ -493,7 +610,6 @@ namespace Web_Api_IyC.Services
                 using (SqlConnection con = DALBase.GetConnectionSIIMVA())
                 {
                     con.Open();
-                    // Iniciar una transacción
                     using (SqlTransaction trx = con.BeginTransaction())
                     {
                         try
@@ -662,7 +778,7 @@ namespace Web_Api_IyC.Services
             try
             {
 
-                var ret =  Dec_jur_iyc.GetElementosDJSinLiquidar(legajo);
+                var ret = Dec_jur_iyc.GetElementosDJSinLiquidar(legajo);
 
                 return Dec_jur_iyc.GetElementosDJSinLiquidar(legajo);
             }
@@ -790,7 +906,7 @@ namespace Web_Api_IyC.Services
             }
         }
         public void EliminaDJIyC(Dec_jur_iyc objDJ, Auditoria objA)
-        
+
         {
             try
             {
@@ -845,11 +961,11 @@ namespace Web_Api_IyC.Services
             }
         }
 
-         public ImpresionDDJJ ImprimirDDJJ(int legajo,int nro_transaccion)
+        public ImpresionDDJJ ImprimirDDJJ(int legajo, int nro_transaccion)
         {
             try
             {
-                return Dec_jur_iyc.ImprimirDDJJ(legajo,nro_transaccion);
+                return Dec_jur_iyc.ImprimirDDJJ(legajo, nro_transaccion);
             }
             catch (Exception)
             {
@@ -986,6 +1102,7 @@ namespace Web_Api_IyC.Services
         }
 
 
+
         public string BusquedaSucarsal(int legajo, int? nro_sucursal)
         {
             try
@@ -998,7 +1115,6 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-
 
         public List<ElemRubro> BusquedaRubros(string? busqueda)
         {

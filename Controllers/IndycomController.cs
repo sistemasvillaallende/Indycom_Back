@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Web_Api_Auto.Helpers;
 using Web_Api_IyC.Entities;
 using Web_Api_IyC.Entities.AUDITORIA;
 using Web_Api_IyC.Entities.HELPERS;
@@ -324,18 +326,6 @@ namespace Web_Api_IyC.Controllers
             return Ok(indycom);
         }
 
-        [HttpPost]
-        public ActionResult BajaSucursal(int legajo, int nro_sucursal, string fecha_baja, Auditoria objAuditoria)
-        {
-            var objOriginal = _iindycomService.GetByPk(legajo);
-            _iindycomService.BajaSucursal(legajo, nro_sucursal, fecha_baja, objOriginal, objAuditoria);
-            var indycom = _iindycomService.GetByPk(legajo);
-            if (indycom.fecha_baja == null)
-            {
-                return BadRequest(new { message = "No se pudo dar de Baja la Sucursal!" });
-            }
-            return Ok(indycom);
-        }
 
         [HttpGet]
         public IActionResult GetBasesImponibles(int legajo, string periodo_desde, string periodo_hasta)
@@ -349,6 +339,8 @@ namespace Web_Api_IyC.Controllers
             return Ok(bases);
         }
 
+
+
         [HttpGet]
         public IActionResult GetRubros_x_iyc(int legajo)
         {
@@ -361,21 +353,96 @@ namespace Web_Api_IyC.Controllers
             return Ok(rubros);
         }
 
+
+
         [HttpGet]
         public IActionResult GetSucuralByLegajo(int legajo, int nro_sucursal)
         {
             var sucursales = _iindycomService.GetSucuralByLegajo(legajo, nro_sucursal);
-            string des_com = string.Empty;
 
-            if (sucursales.Nro_sucursal > 0)
+            if (sucursales.Nro_sucursal == 0)
             {
-                des_com = sucursales.Des_com;
+                return BadRequest(new { message = $"No se encontró la sucursal con número {nro_sucursal} para el legajo {legajo}." });
             }
-            else
+            return Ok(sucursales);
+        }
+
+        [HttpGet]
+        public IActionResult GetSucurales(int legajo)
+        {
+            var sucursales = _iindycomService.GetSucursales(legajo);
+            return Ok(sucursales);
+        }
+
+        [HttpPost]
+        public IActionResult NuevaSucursal(int legajo, Sucursal_Con_Auditoria obj)
+        {
+
+            var objOriginal = _iindycomService.GetByPk(legajo);
+            if (objOriginal.dado_baja == true)
             {
-                des_com = _iindycomService.GetByPk(legajo).des_com;
+                return BadRequest(new { message = "No se pudo dar de alta nueva la Sucursal!" });
             }
-            return Ok(des_com);
+            _iindycomService.NuevaSucursal(legajo, obj, objOriginal);
+            return Ok(new { message = "Sucursal creada exitosamente" });
+        }
+
+        [HttpPut]
+        public IActionResult ModificarSucursal(int legajo, int nro_sucursal, Sucursal_Con_Auditoria obj)
+        {
+            var sucursal = _iindycomService.GetSucuralByLegajo(legajo, nro_sucursal);
+
+            if (sucursal.Nro_sucursal == 0)
+            {
+                return BadRequest(new { message = $"No se encontró la sucursal con número {nro_sucursal} para el legajo {legajo}." });
+
+            }
+
+            var objOriginal = _iindycomService.GetByPk(legajo);
+            if (objOriginal.dado_baja == true)
+            {
+                return BadRequest(new { message = "No se pudo modificar la  Sucursal!" });
+            }
+            _iindycomService.ModificarSucursal(legajo, nro_sucursal, obj, objOriginal);
+            return Ok(new { message = "Sucursal modificada exitosamente" });
+        }
+
+        [HttpDelete]
+        public IActionResult EliminarSucursal(int legajo, int nro_sucursal, Auditoria obj)
+        {
+            var sucursal = _iindycomService.GetSucuralByLegajo(legajo, nro_sucursal);
+
+            if (sucursal.Nro_sucursal == 0)
+            {
+                return BadRequest(new { message = $"No se encontró la sucursal con número {nro_sucursal} para el legajo {legajo}." });
+
+            }
+
+            var objOriginal = _iindycomService.GetByPk(legajo);
+            if (objOriginal.dado_baja == true)
+            {
+                return BadRequest(new { message = "No se pudo eliminar la  Sucursal!" });
+            }
+            _iindycomService.EliminarSucursal(legajo, nro_sucursal, obj, objOriginal);
+            return Ok(new { message = "Sucursal Eliminada exitosamente" });
+        }
+
+        [HttpPut]
+        public ActionResult BajaSucursal(int legajo, int nro_sucursal, string fecha_baja, Auditoria objAuditoria)
+        {
+            var sucursal = _iindycomService.GetSucuralByLegajo(legajo, nro_sucursal);
+
+            if (sucursal.Nro_sucursal == 0)
+            {
+                return BadRequest(new { message = $"No se encontró la sucursal con número {nro_sucursal} para el legajo {legajo}." });
+            }
+            var objOriginal = _iindycomService.GetByPk(legajo);
+            if (sucursal.Dado_baja == true)
+            {
+                return BadRequest(new { message = "No se pudo dar de Baja logica la Sucursal!" });
+            }
+            _iindycomService.BajaSucursal(legajo, nro_sucursal, fecha_baja, objOriginal, objAuditoria);
+            return Ok(new { message = "Sucursal dada de baja logica exitosamente" });
         }
 
         [HttpGet]
@@ -388,28 +455,6 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(rubros);
         }
-
-        //[HttpPost]
-        //public IActionResult InformeCtaCteCompleto(int legajo, string per, Auditoria objA)
-        //{
-        //    var reporte = _iindycomService.InformeCtaCteCompleto(legajo, per, objA);
-        //    if (reporte.Count == 0)
-        //    {
-        //        return BadRequest(new { message = @"Información, no se encontraron Datos para este Legajo " + legajo });
-        //    }
-        //    return Ok(reporte);
-        //}
-
-        //[HttpPost]
-        //public IActionResult InformeCtaCteSolodeuda(int legajo, int categoria_deuda, int categoria_deuda2, string per, Auditoria objA)
-        //{
-        //    var reporte = _iindycomService.InformeCtaCteSoloDeuda(legajo, categoria_deuda, categoria_deuda2, per, objA);
-        //    if (reporte.Count == 0)
-        //    {
-        //        return BadRequest(new { message = @"Información, no se encontraron Datos para este Legajo " + legajo });
-        //    }
-        //    return Ok(reporte);
-        //}
 
         [HttpGet]
         public ActionResult<List<Combo>> ListarCategoriasIyc()
@@ -430,7 +475,7 @@ namespace Web_Api_IyC.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetCalle(string nomcalle)
+        public IActionResult GetCalle(string? nomcalle)
         {
             var calles = _iindycomService.GetCalle(nomcalle);
             if (calles.Count == 0)
@@ -439,6 +484,8 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(calles);
         }
+
+
 
         [HttpGet]
         public IActionResult ConsultaIyc_x_calles(string calledesde, string callehasta)
@@ -472,29 +519,6 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(badec);
         }
-
-        /* METODOS para la DECJUR*/
-        //[HttpGet]
-        //public IActionResult GetPeriodosDJSinLiquidar(int legajo)
-        //{
-        //    var iyc = _iindycomService.GetByPk(legajo);
-        //    if (iyc.tipo_liquidacion == 2)
-        //    {
-        //        var decjur = _iindycomService.GetPeriodosDJSinLiquidar(legajo);
-        //        if (decjur.Count == 0)
-        //        {
-        //            return BadRequest(new { message = @"El Comercio no debe Declaracion/es Jurada/s." });
-        //        }
-        //        else
-        //        {
-        //            return Ok(decjur);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return BadRequest(new { message = @"El Comercio no Presenta Declaracion Jurada." });
-        //    }
-        //}
 
         [HttpGet]
         public IActionResult GetPeriodosDJSinLiquidar(int legajo)
@@ -581,7 +605,7 @@ namespace Web_Api_IyC.Controllers
 
 
         [HttpGet]
-        public IActionResult ListaRubrosDJIyC(int nro_transaccion,int legajo)
+        public IActionResult ListaRubrosDJIyC(int nro_transaccion, int legajo)
         {
             try
             {
@@ -604,27 +628,6 @@ namespace Web_Api_IyC.Controllers
                 return StatusCode(500, new { message = "Se ha producido un error al obtener la lista de rubros.", error = ex.Message });
             }
         }
-        //[HttpGet]
-        //public IActionResult GetRubrosDJIyC(int nro_transaccion, int legajo)
-        //{
-        //    try
-        //    {
-        //        var rubros = _iindycomService.GetRubros_dec_jur_iyc(nro_transaccion, legajo);
-
-        //        if (rubros == null || rubros.Count == 0)
-        //        {
-        //            return BadRequest(new { message = "La Declaración Jurada para este Período ha sido completada." });
-        //        }
-
-        //        return Ok(rubros);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Manejo de la excepción, puedes registrar el error si es necesario
-        //        return StatusCode(500, new { message = "Ocurrió un error al procesar la solicitud.", error = ex.Message });
-        //    }
-
-        //}
 
         [HttpPost]
         public IActionResult UpdateRubrosDJIyC(RubrosDJIyC_Con_Auditoria obj)
@@ -685,37 +688,6 @@ namespace Web_Api_IyC.Controllers
                 return StatusCode(500, new { message = "Ocurrió un error al procesar la Liquidacion.", error = ex.Message });
             }
         }
-
-        //[HttpPost]
-        //public IActionResult EliminaDDJJIyC(int legajo, int nro_transaccion, string periodo, Auditoria objA)
-        //{
-        //    try
-        //    {
-        //        var iyc = _iindycomService.GetByPk(legajo);
-        //        if (iyc == null || iyc.tipo_liquidacion != 2)
-        //        {
-        //            return BadRequest(new { message = "El Comercio no Presenta Declaracion Jurada.!" });
-        //        }
-        //        var ddjjiyc = _iindycomService.GetDecJur_completadas(legajo, periodo);
-        //        if (ddjjiyc.legajo <= 0)
-        //        {
-        //            return BadRequest(new { message = "No existe Declaración Jurada para este Periodo...!" });
-        //        }
-
-        //        if (_iindycomService.VerificaDecJurPagada(nro_transaccion))
-        //        {
-        //            return BadRequest(new { message = "El Periodo que quiere eliminar esta pagado...!" });
-        //        }
-        //        _iindycomService.EliminaDDJJIyC(ddjjiyc, objA);
-        //        // Devuelve un mensaje más informativo
-        //        return Ok(new { message = "La Liquidacion de la DDJJ fue con exito." });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Manejo de excepciones, devolver un error de servidor
-        //        return StatusCode(500, new { message = "Ocurrió un error al procesar la Liquidacion.", error = ex.Message });
-        //    }
-        //}
 
 
         [HttpPost]
@@ -813,151 +785,6 @@ namespace Web_Api_IyC.Controllers
             }
 
         }
-
-        /*FIN DDJJ*/
-
-        //BAJA COMERCIO
-
-        //if Data_IndYCom.IndYCom.Eof then
-        //begin
-        //Application.MessageBox('Se ha llegado al Final del Archivo.','SIIMVA-Error', MB_ICONERROR + MB_OK);
-        //Exit;
-        //end;
-        //if Data_IndYCom.IndYComFecha_Baja.IsNull=False then
-        //begin
-        //Application.MessageBox('Este Comercio/Industria ya está dado de baja.','SIIMVA-Error', MB_ICONERROR + MB_OK);
-        //end;
-        //Baja.Tipo_baja:=1;// baja de casa central
-        //Baja.ShowModal;
-
-
-        //        procedure TBaja.ConfirmaClick(Sender: TObject);
-        //        var
-        //          fecha_baja: TDateTime;
-        //  fecha_acta: TDateTime;
-        //  fecha_expediente: TDateTime;
-        //  nro_sucursal:integer;
-        //begin
-        //  try
-        //    fecha_baja:=StrToDate(EFecha_Baja.Text);
-        //        except
-        //          Application.MessageBox('Fecha baja incorrecta.',
-        //            'SIIMVA-Error', MB_ICONERROR + MB_OK);
-        //        Efecha_baja.SetFocus;
-        //    Exit;
-        //  end;
-        //  try
-        //    fecha_acta:=StrToDate(EFecha_Acta.Text);
-        //        except
-        //          Application.MessageBox('Fecha acta incorrecta.', 'SIIMVA-Error', MB_ICONERROR + MB_OK);
-        //        Efecha_acta.SetFocus;
-        //    Exit;
-        //  end;
-        //  try
-        //    fecha_expediente:=StrToDate(EFecha_Expediente.Text);
-        //        except
-        //          Application.MessageBox('Fecha expediente incorrecta.', 'SIIMVA-Error', MB_ICONERROR + MB_OK);
-        //        Efecha_expediente.SetFocus;
-        //    Exit;
-        //  end;
-        //  Data_IndYCom.Siimva.StartTransaction;
-        //  Application.CreateForm(TAutoriza, Autoriza);
-        //  Autoriza.Autoriza_Procesos.ParamByName('proceso').Value:='BAJA IYC';
-        //  if Autoriza.ShowModal<> mrOk then
-        //  begin
-        //    Data_IndYCom.Siimva.Rollback;
-        //    Autoriza.Free;
-        //    Exit;
-        //  end;
-        //  Data_IndyCom.Auditor_V2.ParamByName('@usuario').Value        := PriIyC.usuario;
-        //  Data_IndyCom.Auditor_V2.ParamByName('@autorizacion').Value   := Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
-        //  Data_IndyCom.Auditor_V2.ParamByName('@identificacion').Value := Data_IndYCom.IndYComLegajo.AsString;
-        //  Data_IndyCom.Auditor_V2.ParamByName('@observaciones').Value  := Autoriza.Memo1.Lines.Text;
-        //  Data_IndyCom.Auditor_V2.ParamByName('@proceso').Value        := 'BAJA IYC';
-        //  Data_IndyCom.Auditor_V2.ParamByName('@detalle').Value        := ENro_Res.Text + ' ..';
-        //  Data_IndyCom.Auditor_V2.ExecProc;
-        //  //Data_IndyCom.SIIMVA.Commit;
-        //  Autoriza.Free;
-        //  if Tipo_baja=1  then
-        //  begin
-        //      Data_IndYCom.IndYCom.Edit;
-        //      Data_IndYCom.IndYComDado_Baja.Value:=True;
-        //      Data_IndYCom.IndYComFecha_Baja.Value:=fecha_baja;
-        //      Data_IndYCom.IndYCom.Post;
-        //  end;
-        //  if Tipo_baja=2 then
-        //  begin
-        //    nro_sucursal:= GestIyC.nro_sucursal;
-        //    try
-        //      //Data_IndYCom.Siimva.StartTransaction;
-        //      Application.CreateForm(TAutoriza, Autoriza);
-        //      Autoriza.Autoriza_Procesos.ParamByName('proceso').Value       := 'MODIFICACION INDYCOM';
-        //      Data_IndyCom.sqlUpdSuc.close;
-        //      Data_IndyCom.sqlUpdSuc.ParamByName('legajo').AsInteger        :=  Data_IndYCom.INDYCOM.fieldByName('legajo').AsInteger;
-        //      Data_IndYCom.sqlUpdSuc.ParamByName('nro_sucursal').AsInteger  :=  nro_sucursal ;
-        //      Data_IndYCom.sqlUpdSuc.ParamByName('fecha_baja').AsDateTime   :=  Now;
-        //      Data_IndYCom.sqlUpdSuc.ParamByName('dado_baja').AsBoolean     :=  True;
-        //      Data_IndyCom.sqlUpdSuc.ExecSQL;
-        //      // Data_IndYCom.SUCURSALES_INDYCOM.close;
-        //      //  Data_IndYCom.SUCURSALES_INDYCOM.Open;
-        //      //Data_IndYCom.Siimva.Commit;
-        //      Data_IndYCom.IndYCom.Refresh;
-        //    except
-        //      Data_IndYCom.Siimva.Rollback;
-        //        Application.MessageBox('Datos erróneos. Revise.', 'SIIMVA-Error',MB_ICONERROR + MB_OK);
-        //      Exit;
-        //    end;
-        //  end;
-        //  Data_IndYCom.Siimva.Commit;
-
-        //  if PrinterSetupDialog1.Execute=True then
-        //  begin
-
-        //    if Tipo_baja=1  then
-        //    begin
-        //        RBaja.QIndYCom.ParamByName('legajo').Value    := Data_IndYCom.IndYComLegajo.Value;
-        //        RBaja.QIndYCom.Open;
-        //        RBaja.QRLFecha_Expediente.Caption:=DateToStr(fecha_expediente);
-        //        RBaja.QRLNombre.Caption:=GestIyC.BadecNombre.Value;
-        //        RBaja.QRLLegajo2.Caption:=Data_IndYCom.IndYComLegajo.AsString;
-        //        RBaja.QRLDes_Com.Caption:=Data_IndYCom.IndYComDes_Com.AsString;
-        //        RBaja.QRLFecha_Acta.Caption:=DateToStr(fecha_acta);
-        //        RBaja.QRLDes_Com2.Caption:=Data_IndYCom.IndYComDes_Com.AsString;
-        //        RBaja.QRLNombre2.Caption:=GestIyC.BadecNombre.Value;
-        //        RBaja.QRLLegajo.Caption:=Data_IndYCom.IndYComLegajo.AsString;
-        //        RBaja.QRLNro_Res.Caption:=ENro_Res.Text;
-        //        RBaja.QRLFecha_Baja.Caption:=EFecha_Baja.Text;
-        //        RBaja.RepRes_Baja.Print;
-        //        RBaja.QIndYCom.Close;
-        //    end;
-
-        //    if Tipo_baja=2  then
-        //    begin
-        //        RBajaSuc:= TRBajaSuc.Create(self);
-        //        RBajaSuc.QSucIndYCom.Close;
-        //        RBajaSuc.QSucIndYCom.ParamByName('legajo').Value       := Data_IndYCom.INDYCOMLegajo.Value;
-        //        RBajaSuc.QSucIndYCom.ParamByName('nro_sucursal').Value := nro_sucursal;
-        //        RBajaSuc.QSucIndYCom.Open;
-        //        RBajaSuc.QRLFecha_Expediente.Caption:=DateToStr(fecha_expediente);
-        //        RBajaSuc.QRLNombre.Caption:=GestIyC.BadecNombre.Value;
-        //        RBajaSuc.QRLLegajo2.Caption:=RBajaSuc.QSucIndYComLegajo.AsString;
-        //        RBajaSuc.QRLDes_Com.Caption:=RBajaSuc.QSucIndYComDes_Com.AsString;
-        //        RBajaSuc.QRLFecha_Acta.Caption:=DateToStr(fecha_acta);
-        //        RBajaSuc.QRLDes_Com2.Caption:=RBajaSuc.QSucIndYComDes_Com.AsString;
-        //        RBajaSuc.QRLNombre2.Caption:=GestIyC.BadecNombre.Value;
-        //        RBajaSuc.QRLLegajo.Caption:=RBajaSuc.QSucIndYComLegajo.AsString;
-        //        RBajaSuc.QRLNro_Res.Caption:=  RBajaSuc.QSucIndYComNro_res.Value;
-        //        RBajaSuc.QRLFecha_Baja.Caption:=EFecha_Baja.Text;
-        //        RBajaSuc.qrlCalle.Caption := RBajaSuc.QSucIndYComNom_calle.Value + ' '+ RBajaSuc.QSucIndYComNro_dom.AsString ;
-        //        RBajaSuc.RepRes_Baja.Preview;
-        //        RBajaSuc.QSucIndYCom.Close;
-        //        FreeAndNil(RBajaSuc);
-        //        end;
-
-        //  end;
-        //end;
-
-
 
 
         [HttpPut]
@@ -1343,6 +1170,11 @@ namespace Web_Api_IyC.Controllers
         //    end;
 
 
+
+
+
+
+
         //    end;
         //  end;
 
@@ -1495,7 +1327,6 @@ namespace Web_Api_IyC.Controllers
 
 
         //    end;
-
 
 
 
@@ -1679,24 +1510,27 @@ namespace Web_Api_IyC.Controllers
         //     Data_IndYCom.INDYCOM.Post;
         //   end;
 
-        //end;
+        // end;
 
 
-        //Listar Sucursales
+        // Listar Sucursales
         //        SELECT nro_sucursal,
         //                     Des_com,
         //                     Nom_calle,
         //                     nro_dom,
         //                     nro_local
 
-        //FROM SUCURSALES_INDYCOM
-        //where legajo = :legajo
-        //order by nro_sucursal
+        // FROM SUCURSALES_INDYCOM
+        // where legajo = :legajo
+        // order by nro_sucursal
+
+
+       
 
         ///////////////////////////////////////////////////////////////////////////////////////////
         ///Gestion de Deudas
         ///
-        //SELECT* FROM CTASCTES_INDYCOM WHERE
+        // SELECT* FROM CTASCTES_INDYCOM WHERE
         //                   legajo=:legajo AND
         //                   tipo_transaccion=1 AND pagado = 0
         //                   AND pago_parcial = 0 AND nro_plan IS NULL AND
@@ -1794,356 +1628,356 @@ namespace Web_Api_IyC.Controllers
 
 
 
-//        procedure TGestFact.confirmaClick(Sender: TObject);
-//        var
-//          auxnro_transaccion: integer;
-//  bandera: boolean;
-//  year: word;
-//  month: word;
-//  day: word;
-//begin
-//  if operacion='Nuevo' then
-//  begin
-//    if QDeudas_OtrasCod_Cate_Deuda.IsNull=True then
-//    begin
-//      Application.MessageBox('No seleccionó Categoría Deuda.','SIIMVA-Error', MB_ICONERROR + MB_OK);
-//        Combo_Cate.SetFocus;
-//      Exit;
-//    end;
-//    if QDeudas_OtrasMonto_Original.Value <=0 then
-//    begin
-//      Application.MessageBox('Monto Original Incorrecto.','SIIMVA-Error',MB_ICONERROR + MB_OK);
-//      Monto_Original.SetFocus;
-//      Exit;
-//    end;
-//    if QDeudas_OtrasDebe.Value <=0 then
-//    begin
-//      Application.MessageBox('Debe Incorrecto.','SIIMVA-Error',MB_ICONERROR + MB_OK);
-//      Debe.SetFocus;
-//      Exit;
-//    end;
-//    if QDeudas_OtrasDebe.Value<QDeudas_OtrasMonto_Original.Value then
-//    begin
-//      Application.MessageBox('El Monto Original debe ser menor o igual que lo que se debe.','SIIMVA-Error',MB_ICONERROR + MB_OK);
-//      Monto_Original.SetFocus;
-//      Exit;
-//    end;
-    
-//    if QDeudas_OtrasCod_Cate_Deuda.Value=1 then
-//    begin
-//      if Length(QDeudas_OtrasPeriodo.Value)<>7 then
-//      begin
-//        Application.MessageBox('Periodo Incorrecto...','SIIMVA-Error',MB_ICONERROR + MB_OK);
-//        Periodo.SetFocus;
-//        Exit;
-//      end;
-//      if QDeudas_OtrasPeriodo.IsNull=True then
-//      begin
-//        Application.MessageBox('Periodo Incorrecto.','SIIMVA-Error', MB_ICONERROR + MB_OK);
-//        Periodo.SetFocus;
-//        Exit;
-//      end;
-//      if QDeudas_OtrasVencimiento.IsNull=True then
-//      begin
-//        Application.MessageBox('Fecha Incorrecta.','SIIMVA-Error', MB_ICONERROR + MB_OK);
-//        Vencimiento.SetFocus;
-//        Exit;
-//      end;
+        //        procedure TGestFact.confirmaClick(Sender: TObject);
+        //        var
+        //          auxnro_transaccion: integer;
+        //  bandera: boolean;
+        //  year: word;
+        //  month: word;
+        //  day: word;
+        //begin
+        //  if operacion='Nuevo' then
+        //  begin
+        //    if QDeudas_OtrasCod_Cate_Deuda.IsNull=True then
+        //    begin
+        //      Application.MessageBox('No seleccionó Categoría Deuda.','SIIMVA-Error', MB_ICONERROR + MB_OK);
+        //        Combo_Cate.SetFocus;
+        //      Exit;
+        //    end;
+        //    if QDeudas_OtrasMonto_Original.Value <=0 then
+        //    begin
+        //      Application.MessageBox('Monto Original Incorrecto.','SIIMVA-Error',MB_ICONERROR + MB_OK);
+        //      Monto_Original.SetFocus;
+        //      Exit;
+        //    end;
+        //    if QDeudas_OtrasDebe.Value <=0 then
+        //    begin
+        //      Application.MessageBox('Debe Incorrecto.','SIIMVA-Error',MB_ICONERROR + MB_OK);
+        //      Debe.SetFocus;
+        //      Exit;
+        //    end;
+        //    if QDeudas_OtrasDebe.Value<QDeudas_OtrasMonto_Original.Value then
+        //    begin
+        //      Application.MessageBox('El Monto Original debe ser menor o igual que lo que se debe.','SIIMVA-Error',MB_ICONERROR + MB_OK);
+        //      Monto_Original.SetFocus;
+        //      Exit;
+        //    end;
 
-//    end;
-//    Application.CreateForm(TAutoriza, Autoriza);
-//    Autoriza.Autoriza_Procesos.ParamByName('proceso').Value:='NUEVA DEUDA INDYCOM';
-//    if Autoriza.ShowModal<> mrOk then
-//    begin
-//      Autoriza.Free;
-//      Exit;
-//    end;
-//    try
-//      Data_IndYCom.Siimva.StartTransaction;
-//      Numeros_Claves.Last;
-//      auxnro_transaccion:=Numeros_ClavesNro_Tran_IYC.Value + 1;
-//      bandera:=False;
-//      while bandera=False do
-//      begin
-//        try
-//          Numeros_Claves.Edit;
-//          Numeros_ClavesNro_Tran_IYC.Value:=auxnro_transaccion;
-//          Numeros_Claves.Post;
-//          bandera:=True;
-//        except
-//          bandera:=False;
-//          auxnro_transaccion:=auxnro_transaccion + 1;
-//        end;
-//      end;
-//      with Data_IndyCom.Auditor_V2 do
-//      begin
-//        ParamByName('@usuario').Value        := PriIyC.usuario;
-//        ParamByName('@autorizacion').Value   := Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
-//        ParamByName('@identificacion').Value := Data_IndYCom.IndYComLegajo.AsString;
-//        ParamByName('@observaciones').Value  := Autoriza.Memo1.Lines.Text;
-//        ParamByName('@proceso').Value        := 'NUEVA DEUDA INDYCOM';
-//        ParamByName('@detalle').Value        := 'Periodo: ' + QDeudas_OtrasPeriodo.Value +
-//         ' Monto original: ' + FloatToStr(QDeudas_otrasMonto_original.Value) +
-//         ' Deuda: ' + FloatToStr(QDeudas_OtrasDebe.Value);
-//        end;
-//      Data_IndyCom.Auditor_V2.ExecProc;
+        //    if QDeudas_OtrasCod_Cate_Deuda.Value=1 then
+        //    begin
+        //      if Length(QDeudas_OtrasPeriodo.Value)<>7 then
+        //      begin
+        //        Application.MessageBox('Periodo Incorrecto...','SIIMVA-Error',MB_ICONERROR + MB_OK);
+        //        Periodo.SetFocus;
+        //        Exit;
+        //      end;
+        //      if QDeudas_OtrasPeriodo.IsNull=True then
+        //      begin
+        //        Application.MessageBox('Periodo Incorrecto.','SIIMVA-Error', MB_ICONERROR + MB_OK);
+        //        Periodo.SetFocus;
+        //        Exit;
+        //      end;
+        //      if QDeudas_OtrasVencimiento.IsNull=True then
+        //      begin
+        //        Application.MessageBox('Fecha Incorrecta.','SIIMVA-Error', MB_ICONERROR + MB_OK);
+        //        Vencimiento.SetFocus;
+        //        Exit;
+        //      end;
 
-//      DecodeDate(date, year, month, day);
-//        Ctasctes_IndYCom.Append;
-//      Ctasctes_IndYComTipo_Transaccion.Value  := 1;
-//      Ctasctes_IndYComNro_Transaccion.Value   := auxnro_transaccion;
-//      Ctasctes_IndYComNro_Pago_Parcial.Value  := 0;
-//      Ctasctes_IndYComLegajo.Value            := QDeudas_OtrasLegajo.Value;
-//      Ctasctes_IndYComFecha_Transaccion.Value := now;
-//      if (QDeudas_OtrasCod_Cate_Deuda.Value=1) or(QDeudas_OtrasPeriodo.IsNull= False) then
-//        Ctasctes_IndYComPeriodo.Value := QDeudas_OtrasPeriodo.Value
-//      else
-//        Ctasctes_IndYComPeriodo.Value :=
-//          LeftString(Cate_Deuda_IndYComDes_Categoria.Value,1) +
-//            Rellena_Izquierda('0',2, IntToStr(day)) +
-//            Rellena_Izquierda('0',2, IntToStr(month)) +
-//            Rellena_Izquierda('0',2, RightString(IntToStr(year),2));
+        //    end;
+        //    Application.CreateForm(TAutoriza, Autoriza);
+        //    Autoriza.Autoriza_Procesos.ParamByName('proceso').Value:='NUEVA DEUDA INDYCOM';
+        //    if Autoriza.ShowModal<> mrOk then
+        //    begin
+        //      Autoriza.Free;
+        //      Exit;
+        //    end;
+        //    try
+        //      Data_IndYCom.Siimva.StartTransaction;
+        //      Numeros_Claves.Last;
+        //      auxnro_transaccion:=Numeros_ClavesNro_Tran_IYC.Value + 1;
+        //      bandera:=False;
+        //      while bandera=False do
+        //      begin
+        //        try
+        //          Numeros_Claves.Edit;
+        //          Numeros_ClavesNro_Tran_IYC.Value:=auxnro_transaccion;
+        //          Numeros_Claves.Post;
+        //          bandera:=True;
+        //        except
+        //          bandera:=False;
+        //          auxnro_transaccion:=auxnro_transaccion + 1;
+        //        end;
+        //      end;
+        //      with Data_IndyCom.Auditor_V2 do
+        //      begin
+        //        ParamByName('@usuario').Value        := PriIyC.usuario;
+        //        ParamByName('@autorizacion').Value   := Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
+        //        ParamByName('@identificacion').Value := Data_IndYCom.IndYComLegajo.AsString;
+        //        ParamByName('@observaciones').Value  := Autoriza.Memo1.Lines.Text;
+        //        ParamByName('@proceso').Value        := 'NUEVA DEUDA INDYCOM';
+        //        ParamByName('@detalle').Value        := 'Periodo: ' + QDeudas_OtrasPeriodo.Value +
+        //         ' Monto original: ' + FloatToStr(QDeudas_otrasMonto_original.Value) +
+        //         ' Deuda: ' + FloatToStr(QDeudas_OtrasDebe.Value);
+        //        end;
+        //      Data_IndyCom.Auditor_V2.ExecProc;
 
-//      Ctasctes_IndYComMonto_Original.Value      := QDeudas_OtrasMonto_Original.Value;
-//      Ctasctes_IndYComPagado.Value              := False;
-//      Ctasctes_IndYComDebe.Value                := QDeudas_OtrasDebe.Value;
-//      Ctasctes_IndYComHaber.Value               := 0;
-//      Ctasctes_IndYComPago_Parcial.Value        := False;
-//      Ctasctes_IndYComCod_Cate_Deuda.Value      := QDeudas_OtrasCod_Cate_Deuda.Value;
-//      Ctasctes_IndYComVencimiento.Value         := QDeudas_OtrasVencimiento.Value;
-//      Ctasctes_IndYComDeclaracion_Jurada.Value  := True;
-//      Ctasctes_IndYComLiquidacion_Especial.Value:= False;
-//      Ctasctes_IndYCom.Post;
+        //      DecodeDate(date, year, month, day);
+        //        Ctasctes_IndYCom.Append;
+        //      Ctasctes_IndYComTipo_Transaccion.Value  := 1;
+        //      Ctasctes_IndYComNro_Transaccion.Value   := auxnro_transaccion;
+        //      Ctasctes_IndYComNro_Pago_Parcial.Value  := 0;
+        //      Ctasctes_IndYComLegajo.Value            := QDeudas_OtrasLegajo.Value;
+        //      Ctasctes_IndYComFecha_Transaccion.Value := now;
+        //      if (QDeudas_OtrasCod_Cate_Deuda.Value=1) or(QDeudas_OtrasPeriodo.IsNull= False) then
+        //        Ctasctes_IndYComPeriodo.Value := QDeudas_OtrasPeriodo.Value
+        //      else
+        //        Ctasctes_IndYComPeriodo.Value :=
+        //          LeftString(Cate_Deuda_IndYComDes_Categoria.Value,1) +
+        //            Rellena_Izquierda('0',2, IntToStr(day)) +
+        //            Rellena_Izquierda('0',2, IntToStr(month)) +
+        //            Rellena_Izquierda('0',2, RightString(IntToStr(year),2));
 
-//      //Grabo primer concepto: Tasa Básica
-//      Detalle_Deuda_IndYCom.Append;
-//      Detalle_Deuda_IndYComNro_Transaccion.Value := Ctasctes_IndYComNro_Transaccion.Value;
-//      Detalle_Deuda_IndYComNro_Item.Value        := 1;
-//      Detalle_Deuda_IndYComFecha_Item.Value      := Ctasctes_IndYComFecha_Transaccion.Value;
-//      Detalle_Deuda_IndYComCod_Concepto_IYC.Value:= 1;
-//      Detalle_Deuda_IndYComSuma_Item.Value       := True;
-//      Detalle_Deuda_IndYComImporte_Item.Value    := Ctasctes_IndYComMonto_Original.Value;
-//      Detalle_Deuda_IndYComActivo_Item.Value     := True;
-//      Detalle_Deuda_IndYComImporte_Actual.Value  := Ctasctes_IndYComMonto_Original.Value;
-//      Detalle_Deuda_IndYCom.Post;
-//      //Grabo segundo concepto si corresponde: Interés
-//      if QDeudas_OtrasMonto_Original.Value<> QDeudas_OtrasDebe.Value then
-//      begin
-//        Detalle_Deuda_IndYCom.Append;
-//        Detalle_Deuda_IndYComNro_Transaccion.Value  := Ctasctes_IndYComNro_Transaccion.Value;
-//        Detalle_Deuda_IndYComNro_Item.Value         := 2;
-//        Detalle_Deuda_IndYComFecha_Item.Value       := Ctasctes_IndYComFecha_Transaccion.Value;
-//        Detalle_Deuda_IndYComCod_Concepto_IYC.Value := 2;
-//        Detalle_Deuda_IndYComSuma_Item.Value        := True;
-//        Detalle_Deuda_IndYComImporte_Item.Value     := Ctasctes_IndYComDebe.Value - Ctasctes_IndYComMonto_Original.Value;
-//        Detalle_Deuda_IndYComActivo_Item.Value      := True;
-//        Detalle_Deuda_IndYComImporte_Actual.Value   := Ctasctes_IndYComDebe.Value - Ctasctes_IndYComMonto_Original.Value;
-//        Detalle_Deuda_IndYCom.Post;
-//      end;
-//      if QDeudas_OtrasCod_Cate_Deuda.Value=1 then
-//      begin
-//        if QDeudas_OtrasPeriodo.Value > Data_IndYCom.IndYComPer_Ult.Value then
-//        begin
-//          Data_IndYCom.IndYCom.Edit;
-//        Data_IndYCom.IndYComPer_Ult.Value:=QDeudas_OtrasPeriodo.Value;
-//          Data_IndYCom.IndYCom.Post;
-//        end;
-//      end;
-//      QDeudas_Otras.Cancel;
-//      Data_IndYCom.Siimva.Commit;
-//      Autoriza.Free;
-//    except
-//      Data_IndYCom.Siimva.Rollback;
-//        Application.MessageBox('Revise los datos.','SIIMVA-Error',MB_ICONERROR + MB_OK);
-//      Autoriza.Free;
-//      Exit;
-//    end;
-//    QDeudas_Otras.Close;
-//    QDeudas_Otras.Open;
-//    QDeudas_Otras.Last;
-//    Combo_Cate.Enabled:=False;
-//  end;
+        //      Ctasctes_IndYComMonto_Original.Value      := QDeudas_OtrasMonto_Original.Value;
+        //      Ctasctes_IndYComPagado.Value              := False;
+        //      Ctasctes_IndYComDebe.Value                := QDeudas_OtrasDebe.Value;
+        //      Ctasctes_IndYComHaber.Value               := 0;
+        //      Ctasctes_IndYComPago_Parcial.Value        := False;
+        //      Ctasctes_IndYComCod_Cate_Deuda.Value      := QDeudas_OtrasCod_Cate_Deuda.Value;
+        //      Ctasctes_IndYComVencimiento.Value         := QDeudas_OtrasVencimiento.Value;
+        //      Ctasctes_IndYComDeclaracion_Jurada.Value  := True;
+        //      Ctasctes_IndYComLiquidacion_Especial.Value:= False;
+        //      Ctasctes_IndYCom.Post;
 
-//  if operacion='Modifica' then
-//  begin
-//    if QDeudas_OtrasMonto_Original.Value <=0 then
-//    begin
-//      Application.MessageBox('Monto Original Incorrecto.','SIIMVA-Error',MB_ICONERROR + MB_OK);
-//      Monto_Original.SetFocus;
-//      Exit;
-//    end;
-//    if QDeudas_OtrasDebe.Value <=0 then
-//    begin
-//      Application.MessageBox('Debe Incorrecto.','SIIMVA-Error',MB_ICONERROR + MB_OK);
-//      Debe.SetFocus;
-//      Exit;
-//    end;
-//    if QDeudas_OtrasDebe.Value<QDeudas_OtrasMonto_Original.Value then
-//    begin
-//      Application.MessageBox('El Monto Original debe ser menor o igual que lo que se debe.','SIIMVA-Error',MB_ICONERROR + MB_OK);
-//      Monto_Original.SetFocus;
-//      Exit;
-//    end;
-//    Ctasctes_IndYCom.FindKey([1, QDeudas_OtrasNro_Transaccion.Value]);
-//    Application.CreateForm(TAutoriza, Autoriza);
-//    Autoriza.Autoriza_Procesos.ParamByName('proceso').Value:='MODIFICACION DEUDA INDYCOM';
-//    if Autoriza.ShowModal<> mrOk then
-//    begin
-//      Autoriza.Free;
-//      Exit;
-//    end;
-//    try
-//      Data_IndYCom.Siimva.StartTransaction;
-//      Data_IndyCom.Auditor_V2.ParamByName('@usuario').Value:=PriIyC.usuario;
-//      Data_IndyCom.Auditor_V2.ParamByName('@autorizacion').Value:=
-//        Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
-//      Data_IndyCom.Auditor_V2.ParamByName('@identificacion').Value:=
-//        Data_IndYCom.IndYComLegajo.AsString;
-//      Data_IndyCom.Auditor_V2.ParamByName('@observaciones').Value:=
-//        Autoriza.Memo1.Lines.Text;
-//      Data_IndyCom.Auditor_V2.ParamByName('@proceso').Value:='MODIFICACION DEUDA INDYCOM';
-//      Data_IndyCom.Auditor_V2.ParamByName('@detalle').Value:=
-//        'Periodo: ' + QDeudas_OtrasPeriodo.Value +
-//        ' Monto original antes: ' + FloatToStr(Ctasctes_indycomMonto_original.Value) +
-//        ' Monto original despues: '+ FloatToStr(QDeudas_OtrasMonto_original.Value) +
-//        ' Deuda Antes: ' + FloatToStr(Ctasctes_IndYComDebe.Value) +
-//        ' Deuda Después: ' + FloatToStr(QDeudas_OtrasDebe.Value);
-//        Data_IndyCom.Auditor_V2.ExecProc;
-//      Ctasctes_IndYCom.Edit;
-//      Ctasctes_IndYComMonto_Original.Value:=
-//        QDeudas_OtrasMonto_Original.Value;
-//      Ctasctes_IndYComDebe.Value:=
-//        QDeudas_OtrasDebe.Value;
-//      Ctasctes_IndYCom.Post;
-//      QDetalle_Deuda_IndYCom.ParamByName('nro_transaccion').Value:=
-//        QDeudas_OtrasNro_Transaccion.Value;
-//      QDetalle_Deuda_IndYCom.Open;
-//      QDetalle_Deuda_IndYCom.First;
-//      while not QDetalle_Deuda_IndYCom.Eof do
-//      begin
-//        Detalle_Deuda_IndYCom.
-//          FindKey([QDetalle_Deuda_IndYComNro_Transaccion.Value,
-//                   QDetalle_Deuda_IndYComNro_Item.Value]);
-//        Detalle_Deuda_IndYCom.Delete;
-//        QDetalle_Deuda_IndYCom.Next;
-//      end;
-//      QDetalle_Deuda_IndYCom.Close;
+        //      //Grabo primer concepto: Tasa Básica
+        //      Detalle_Deuda_IndYCom.Append;
+        //      Detalle_Deuda_IndYComNro_Transaccion.Value := Ctasctes_IndYComNro_Transaccion.Value;
+        //      Detalle_Deuda_IndYComNro_Item.Value        := 1;
+        //      Detalle_Deuda_IndYComFecha_Item.Value      := Ctasctes_IndYComFecha_Transaccion.Value;
+        //      Detalle_Deuda_IndYComCod_Concepto_IYC.Value:= 1;
+        //      Detalle_Deuda_IndYComSuma_Item.Value       := True;
+        //      Detalle_Deuda_IndYComImporte_Item.Value    := Ctasctes_IndYComMonto_Original.Value;
+        //      Detalle_Deuda_IndYComActivo_Item.Value     := True;
+        //      Detalle_Deuda_IndYComImporte_Actual.Value  := Ctasctes_IndYComMonto_Original.Value;
+        //      Detalle_Deuda_IndYCom.Post;
+        //      //Grabo segundo concepto si corresponde: Interés
+        //      if QDeudas_OtrasMonto_Original.Value<> QDeudas_OtrasDebe.Value then
+        //      begin
+        //        Detalle_Deuda_IndYCom.Append;
+        //        Detalle_Deuda_IndYComNro_Transaccion.Value  := Ctasctes_IndYComNro_Transaccion.Value;
+        //        Detalle_Deuda_IndYComNro_Item.Value         := 2;
+        //        Detalle_Deuda_IndYComFecha_Item.Value       := Ctasctes_IndYComFecha_Transaccion.Value;
+        //        Detalle_Deuda_IndYComCod_Concepto_IYC.Value := 2;
+        //        Detalle_Deuda_IndYComSuma_Item.Value        := True;
+        //        Detalle_Deuda_IndYComImporte_Item.Value     := Ctasctes_IndYComDebe.Value - Ctasctes_IndYComMonto_Original.Value;
+        //        Detalle_Deuda_IndYComActivo_Item.Value      := True;
+        //        Detalle_Deuda_IndYComImporte_Actual.Value   := Ctasctes_IndYComDebe.Value - Ctasctes_IndYComMonto_Original.Value;
+        //        Detalle_Deuda_IndYCom.Post;
+        //      end;
+        //      if QDeudas_OtrasCod_Cate_Deuda.Value=1 then
+        //      begin
+        //        if QDeudas_OtrasPeriodo.Value > Data_IndYCom.IndYComPer_Ult.Value then
+        //        begin
+        //          Data_IndYCom.IndYCom.Edit;
+        //        Data_IndYCom.IndYComPer_Ult.Value:=QDeudas_OtrasPeriodo.Value;
+        //          Data_IndYCom.IndYCom.Post;
+        //        end;
+        //      end;
+        //      QDeudas_Otras.Cancel;
+        //      Data_IndYCom.Siimva.Commit;
+        //      Autoriza.Free;
+        //    except
+        //      Data_IndYCom.Siimva.Rollback;
+        //        Application.MessageBox('Revise los datos.','SIIMVA-Error',MB_ICONERROR + MB_OK);
+        //      Autoriza.Free;
+        //      Exit;
+        //    end;
+        //    QDeudas_Otras.Close;
+        //    QDeudas_Otras.Open;
+        //    QDeudas_Otras.Last;
+        //    Combo_Cate.Enabled:=False;
+        //  end;
 
-//      //Grabo primer concepto: Tasa Básica
-//      Detalle_Deuda_IndYCom.Append;
-//      Detalle_Deuda_IndYComNro_Transaccion.Value:=
-//        Ctasctes_IndYComNro_Transaccion.Value;
-//      Detalle_Deuda_IndYComNro_Item.Value:=1;
-//      Detalle_Deuda_IndYComFecha_Item.Value:=
-//        Ctasctes_IndYComFecha_Transaccion.Value;
-//      Detalle_Deuda_IndYComCod_Concepto_IYC.Value:=1;
-//      Detalle_Deuda_IndYComSuma_Item.Value:=True;
-//      Detalle_Deuda_IndYComImporte_Item.Value:=
-//        Ctasctes_IndYComMonto_Original.Value;
-//      Detalle_Deuda_IndYComActivo_Item.Value:=True;
-//      Detalle_Deuda_IndYComImporte_Actual.Value:=
-//        Ctasctes_IndYComMonto_Original.Value;
-//      Detalle_Deuda_IndYCom.Post;
-//      //Grabo segundo concepto si corresponde: Interés
-//      if QDeudas_OtrasMonto_Original.Value<>
-//        QDeudas_OtrasDebe.Value then
-//      begin
-//        Detalle_Deuda_IndYCom.Append;
-//        Detalle_Deuda_IndYComNro_Transaccion.Value:=
-//          Ctasctes_IndYComNro_Transaccion.Value;
-//        Detalle_Deuda_IndYComNro_Item.Value:=2;
-//        Detalle_Deuda_IndYComFecha_Item.Value:=
-//          Ctasctes_IndYComFecha_Transaccion.Value;
-//        Detalle_Deuda_IndYComCod_Concepto_IYC.Value:=2;
-//        Detalle_Deuda_IndYComSuma_Item.Value:=True;
-//        Detalle_Deuda_IndYComImporte_Item.Value:=
-//          Ctasctes_IndYComDebe.Value -
-//          Ctasctes_IndYComMonto_Original.Value;
-//        Detalle_Deuda_IndYComActivo_Item.Value:=True;
-//        Detalle_Deuda_IndYComImporte_Actual.Value:=
-//          Ctasctes_IndYComDebe.Value -
-//          Ctasctes_IndYComMonto_Original.Value;
-//        Detalle_Deuda_IndYCom.Post;
-//      end;
-//      QDeudas_Otras.Cancel;
-//      Data_IndYCom.Siimva.Commit;
-//      Autoriza.Free;
-//    except
-//      Data_IndYCom.Siimva.Rollback;
-//        Application.MessageBox('Revise los datos.','SIIMVA-Error',MB_ICONERROR + MB_OK);
-//      Autoriza.Free;
-//      Exit;
-//    end;
-//    QDeudas_Otras.Close;
-//    QDeudas_Otras.Open;
-//  end;
+        //  if operacion='Modifica' then
+        //  begin
+        //    if QDeudas_OtrasMonto_Original.Value <=0 then
+        //    begin
+        //      Application.MessageBox('Monto Original Incorrecto.','SIIMVA-Error',MB_ICONERROR + MB_OK);
+        //      Monto_Original.SetFocus;
+        //      Exit;
+        //    end;
+        //    if QDeudas_OtrasDebe.Value <=0 then
+        //    begin
+        //      Application.MessageBox('Debe Incorrecto.','SIIMVA-Error',MB_ICONERROR + MB_OK);
+        //      Debe.SetFocus;
+        //      Exit;
+        //    end;
+        //    if QDeudas_OtrasDebe.Value<QDeudas_OtrasMonto_Original.Value then
+        //    begin
+        //      Application.MessageBox('El Monto Original debe ser menor o igual que lo que se debe.','SIIMVA-Error',MB_ICONERROR + MB_OK);
+        //      Monto_Original.SetFocus;
+        //      Exit;
+        //    end;
+        //    Ctasctes_IndYCom.FindKey([1, QDeudas_OtrasNro_Transaccion.Value]);
+        //    Application.CreateForm(TAutoriza, Autoriza);
+        //    Autoriza.Autoriza_Procesos.ParamByName('proceso').Value:='MODIFICACION DEUDA INDYCOM';
+        //    if Autoriza.ShowModal<> mrOk then
+        //    begin
+        //      Autoriza.Free;
+        //      Exit;
+        //    end;
+        //    try
+        //      Data_IndYCom.Siimva.StartTransaction;
+        //      Data_IndyCom.Auditor_V2.ParamByName('@usuario').Value:=PriIyC.usuario;
+        //      Data_IndyCom.Auditor_V2.ParamByName('@autorizacion').Value:=
+        //        Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
+        //      Data_IndyCom.Auditor_V2.ParamByName('@identificacion').Value:=
+        //        Data_IndYCom.IndYComLegajo.AsString;
+        //      Data_IndyCom.Auditor_V2.ParamByName('@observaciones').Value:=
+        //        Autoriza.Memo1.Lines.Text;
+        //      Data_IndyCom.Auditor_V2.ParamByName('@proceso').Value:='MODIFICACION DEUDA INDYCOM';
+        //      Data_IndyCom.Auditor_V2.ParamByName('@detalle').Value:=
+        //        'Periodo: ' + QDeudas_OtrasPeriodo.Value +
+        //        ' Monto original antes: ' + FloatToStr(Ctasctes_indycomMonto_original.Value) +
+        //        ' Monto original despues: '+ FloatToStr(QDeudas_OtrasMonto_original.Value) +
+        //        ' Deuda Antes: ' + FloatToStr(Ctasctes_IndYComDebe.Value) +
+        //        ' Deuda Después: ' + FloatToStr(QDeudas_OtrasDebe.Value);
+        //        Data_IndyCom.Auditor_V2.ExecProc;
+        //      Ctasctes_IndYCom.Edit;
+        //      Ctasctes_IndYComMonto_Original.Value:=
+        //        QDeudas_OtrasMonto_Original.Value;
+        //      Ctasctes_IndYComDebe.Value:=
+        //        QDeudas_OtrasDebe.Value;
+        //      Ctasctes_IndYCom.Post;
+        //      QDetalle_Deuda_IndYCom.ParamByName('nro_transaccion').Value:=
+        //        QDeudas_OtrasNro_Transaccion.Value;
+        //      QDetalle_Deuda_IndYCom.Open;
+        //      QDetalle_Deuda_IndYCom.First;
+        //      while not QDetalle_Deuda_IndYCom.Eof do
+        //      begin
+        //        Detalle_Deuda_IndYCom.
+        //          FindKey([QDetalle_Deuda_IndYComNro_Transaccion.Value,
+        //                   QDetalle_Deuda_IndYComNro_Item.Value]);
+        //        Detalle_Deuda_IndYCom.Delete;
+        //        QDetalle_Deuda_IndYCom.Next;
+        //      end;
+        //      QDetalle_Deuda_IndYCom.Close;
 
-//  if operacion='Elimina' then
-//  begin
-//    Application.CreateForm(TAutoriza, Autoriza);
-//    Autoriza.Autoriza_Procesos.ParamByName('proceso').Value:='ELIMINA DEUDA INDYCOM';
-//    if Autoriza.ShowModal<> mrOk then
-//    begin
-//      Autoriza.Free;
-//      Exit;
-//    end;
-//    try
-//      Data_IndYCom.Siimva.StartTransaction;
-//      Data_IndyCom.Auditor_V2.ParamByName('@usuario').Value:=PriIyC.usuario;
-//      Data_IndyCom.Auditor_V2.ParamByName('@autorizacion').Value:=
-//        Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
-//      Data_IndyCom.Auditor_V2.ParamByName('@identificacion').Value:=
-//        Data_IndYCom.IndYComLegajo.AsString;
-//      Data_IndyCom.Auditor_V2.ParamByName('@observaciones').Value:=
-//        Autoriza.Memo1.Lines.Text;
-//      Data_IndyCom.Auditor_V2.ParamByName('@proceso').Value:='ELIMINA DEUDA INDYCOM';
-//      Data_IndyCom.Auditor_V2.ParamByName('@detalle').Value:=
-//        'Periodo: ' + QDeudas_OtrasPeriodo.Value +
-//        ' Monto original: ' + FloatToStr(QDeudas_otrasMonto_original.Value) +
-//        ' Deuda: ' + FloatToStr(QDeudas_OtrasDebe.Value);
-//        Data_IndyCom.Auditor_V2.ExecProc;
-//      Ctasctes_IndYCom.FindKey([1, QDeudas_OtrasNro_Transaccion.Value]);
-//      Ctasctes_IndYCom.Delete;
-//      Data_IndYCom.Siimva.Commit;
-//      Autoriza.Free;
-//    except
-//      Application.MessageBox('Revise los datos.','SIIMVA-Error', MB_ICONERROR + MB_OK);
-//        Autoriza.Free;
-//      Exit;
-//    end;
-//    QDeudas_Otras.Close;
-//    QDeudas_Otras.Open;
-//  end;
-//  Combo_Cate.Enabled:=False;
-//  Periodo.Enabled:=False;
-//  Vencimiento.Enabled:=False;
-//  Monto_Original.Enabled:=False;
-//  Debe.Enabled:=False;
-//  Confirma.Enabled:=False;
-//  Cancela.Enabled:=False;
-//  Activa_Desactiva_Controles(Panel_Operaciones);
-//        Navegador.Enabled:=True;
-//  Legajo.Enabled:=False;
-//  Panel_Titulo.Caption:='Esperando Operación...';
-//end;
+        //      //Grabo primer concepto: Tasa Básica
+        //      Detalle_Deuda_IndYCom.Append;
+        //      Detalle_Deuda_IndYComNro_Transaccion.Value:=
+        //        Ctasctes_IndYComNro_Transaccion.Value;
+        //      Detalle_Deuda_IndYComNro_Item.Value:=1;
+        //      Detalle_Deuda_IndYComFecha_Item.Value:=
+        //        Ctasctes_IndYComFecha_Transaccion.Value;
+        //      Detalle_Deuda_IndYComCod_Concepto_IYC.Value:=1;
+        //      Detalle_Deuda_IndYComSuma_Item.Value:=True;
+        //      Detalle_Deuda_IndYComImporte_Item.Value:=
+        //        Ctasctes_IndYComMonto_Original.Value;
+        //      Detalle_Deuda_IndYComActivo_Item.Value:=True;
+        //      Detalle_Deuda_IndYComImporte_Actual.Value:=
+        //        Ctasctes_IndYComMonto_Original.Value;
+        //      Detalle_Deuda_IndYCom.Post;
+        //      //Grabo segundo concepto si corresponde: Interés
+        //      if QDeudas_OtrasMonto_Original.Value<>
+        //        QDeudas_OtrasDebe.Value then
+        //      begin
+        //        Detalle_Deuda_IndYCom.Append;
+        //        Detalle_Deuda_IndYComNro_Transaccion.Value:=
+        //          Ctasctes_IndYComNro_Transaccion.Value;
+        //        Detalle_Deuda_IndYComNro_Item.Value:=2;
+        //        Detalle_Deuda_IndYComFecha_Item.Value:=
+        //          Ctasctes_IndYComFecha_Transaccion.Value;
+        //        Detalle_Deuda_IndYComCod_Concepto_IYC.Value:=2;
+        //        Detalle_Deuda_IndYComSuma_Item.Value:=True;
+        //        Detalle_Deuda_IndYComImporte_Item.Value:=
+        //          Ctasctes_IndYComDebe.Value -
+        //          Ctasctes_IndYComMonto_Original.Value;
+        //        Detalle_Deuda_IndYComActivo_Item.Value:=True;
+        //        Detalle_Deuda_IndYComImporte_Actual.Value:=
+        //          Ctasctes_IndYComDebe.Value -
+        //          Ctasctes_IndYComMonto_Original.Value;
+        //        Detalle_Deuda_IndYCom.Post;
+        //      end;
+        //      QDeudas_Otras.Cancel;
+        //      Data_IndYCom.Siimva.Commit;
+        //      Autoriza.Free;
+        //    except
+        //      Data_IndYCom.Siimva.Rollback;
+        //        Application.MessageBox('Revise los datos.','SIIMVA-Error',MB_ICONERROR + MB_OK);
+        //      Autoriza.Free;
+        //      Exit;
+        //    end;
+        //    QDeudas_Otras.Close;
+        //    QDeudas_Otras.Open;
+        //  end;
 
-//procedure TGestFact.cancelaClick(Sender: TObject);
-//        begin
-//  if (QDeudas_Otras.State=dsEdit) or
-//    (QDeudas_Otras.State= dsInsert) then
-//    QDeudas_Otras.Cancel;
-//        Combo_Cate.Enabled:=False;
-//  Periodo.Enabled:=False;
-//  Vencimiento.Enabled:=False;
-//  Monto_Original.Enabled:=False;
-//  Debe.Enabled:=False;
-//  Confirma.Enabled:=False;
-//  Cancela.Enabled:=False;
-//  Activa_Desactiva_Controles(Panel_Operaciones);
-//        Legajo.Enabled:=False;
-//  Navegador.Enabled:=True;
-//  Panel_Titulo.Caption:='Esperando Operación...';
-//end;
+        //  if operacion='Elimina' then
+        //  begin
+        //    Application.CreateForm(TAutoriza, Autoriza);
+        //    Autoriza.Autoriza_Procesos.ParamByName('proceso').Value:='ELIMINA DEUDA INDYCOM';
+        //    if Autoriza.ShowModal<> mrOk then
+        //    begin
+        //      Autoriza.Free;
+        //      Exit;
+        //    end;
+        //    try
+        //      Data_IndYCom.Siimva.StartTransaction;
+        //      Data_IndyCom.Auditor_V2.ParamByName('@usuario').Value:=PriIyC.usuario;
+        //      Data_IndyCom.Auditor_V2.ParamByName('@autorizacion').Value:=
+        //        Autoriza.ComboBox1.Items[Autoriza.ComboBox1.ItemIndex];
+        //      Data_IndyCom.Auditor_V2.ParamByName('@identificacion').Value:=
+        //        Data_IndYCom.IndYComLegajo.AsString;
+        //      Data_IndyCom.Auditor_V2.ParamByName('@observaciones').Value:=
+        //        Autoriza.Memo1.Lines.Text;
+        //      Data_IndyCom.Auditor_V2.ParamByName('@proceso').Value:='ELIMINA DEUDA INDYCOM';
+        //      Data_IndyCom.Auditor_V2.ParamByName('@detalle').Value:=
+        //        'Periodo: ' + QDeudas_OtrasPeriodo.Value +
+        //        ' Monto original: ' + FloatToStr(QDeudas_otrasMonto_original.Value) +
+        //        ' Deuda: ' + FloatToStr(QDeudas_OtrasDebe.Value);
+        //        Data_IndyCom.Auditor_V2.ExecProc;
+        //      Ctasctes_IndYCom.FindKey([1, QDeudas_OtrasNro_Transaccion.Value]);
+        //      Ctasctes_IndYCom.Delete;
+        //      Data_IndYCom.Siimva.Commit;
+        //      Autoriza.Free;
+        //    except
+        //      Application.MessageBox('Revise los datos.','SIIMVA-Error', MB_ICONERROR + MB_OK);
+        //        Autoriza.Free;
+        //      Exit;
+        //    end;
+        //    QDeudas_Otras.Close;
+        //    QDeudas_Otras.Open;
+        //  end;
+        //  Combo_Cate.Enabled:=False;
+        //  Periodo.Enabled:=False;
+        //  Vencimiento.Enabled:=False;
+        //  Monto_Original.Enabled:=False;
+        //  Debe.Enabled:=False;
+        //  Confirma.Enabled:=False;
+        //  Cancela.Enabled:=False;
+        //  Activa_Desactiva_Controles(Panel_Operaciones);
+        //        Navegador.Enabled:=True;
+        //  Legajo.Enabled:=False;
+        //  Panel_Titulo.Caption:='Esperando Operación...';
+        //end;
+
+        //procedure TGestFact.cancelaClick(Sender: TObject);
+        //        begin
+        //  if (QDeudas_Otras.State=dsEdit) or
+        //    (QDeudas_Otras.State= dsInsert) then
+        //    QDeudas_Otras.Cancel;
+        //        Combo_Cate.Enabled:=False;
+        //  Periodo.Enabled:=False;
+        //  Vencimiento.Enabled:=False;
+        //  Monto_Original.Enabled:=False;
+        //  Debe.Enabled:=False;
+        //  Confirma.Enabled:=False;
+        //  Cancela.Enabled:=False;
+        //  Activa_Desactiva_Controles(Panel_Operaciones);
+        //        Legajo.Enabled:=False;
+        //  Navegador.Enabled:=True;
+        //  Panel_Titulo.Caption:='Esperando Operación...';
+        //end;
 
 
 
