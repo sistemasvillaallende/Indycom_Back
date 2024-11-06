@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace Web_Api_IyC.Entities
     public class Sucursales_indycom : DALBase
     {
         public int Legajo { get; set; }
-        public int Nro_sucursal { get; set; }
+        public int? Nro_sucursal { get; set; }
         public string Des_com { get; set; }
         public string Nom_fantasia { get; set; }
         public int Cod_calle { get; set; }
@@ -132,7 +133,7 @@ namespace Web_Api_IyC.Entities
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "SELECT *FROM Sucursales_indycom";
+                    cmd.CommandText = "SELECT * FROM Sucursales_indycom";
                     cmd.Connection.Open();
                     SqlDataReader dr = cmd.ExecuteReader();
                     lst = mapeo(dr);
@@ -144,41 +145,41 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
-        public static Sucursales_indycom getByPk()
-        {
-            try
-            {
-                StringBuilder sql = new StringBuilder();
-                sql.AppendLine("SELECT * FROM Sucursales_indycom WHERE");
-                Sucursales_indycom obj = new();
-                using (SqlConnection con = GetConnectionSIIMVA())
-                {
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = sql.ToString();
-                    cmd.Connection.Open();
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    List<Sucursales_indycom> lst = mapeo(dr);
-                    if (lst.Count != 0)
-                        obj = lst[0];
-                }
-                return obj;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        // public static Sucursales_indycom getByPk()
+        // {
+        //     try
+        //     {
+        //         StringBuilder sql = new StringBuilder();
+        //         sql.AppendLine("SELECT * FROM Sucursales_indycom WHERE");
+        //         Sucursales_indycom obj = new();
+        //         using (SqlConnection con = GetConnectionSIIMVA())
+        //         {
+        //             SqlCommand cmd = con.CreateCommand();
+        //             cmd.CommandType = CommandType.Text;
+        //             cmd.CommandText = sql.ToString();
+        //             cmd.Connection.Open();
+        //             SqlDataReader dr = cmd.ExecuteReader();
+        //             List<Sucursales_indycom> lst = mapeo(dr);
+        //             if (lst.Count != 0)
+        //                 obj = lst[0];
+        //         }
+        //         return obj;
+        //     }
+        //     catch (Exception)
+        //     {
+        //         throw;
+        //     }
+        // }
         public static Sucursales_indycom GetSucuralByLegajo(int legajo, int nro_sucursal)
         {
             try
             {
-                string sql = @"SELECT *
+                Sucursales_indycom obj = new Sucursales_indycom();
+                string sql = @"SELECT  *
                                FROM Sucursales_indycom 
                                WHERE legajo=@legajo AND
                                      nro_sucursal=@nro_sucursal AND
                                      dado_baja = 0";
-                Sucursales_indycom? obj = new();
                 using (SqlConnection con = GetConnectionSIIMVA())
                 {
                     SqlCommand cmd = con.CreateCommand();
@@ -186,7 +187,7 @@ namespace Web_Api_IyC.Entities
                     cmd.CommandText = sql.ToString();
                     cmd.Parameters.AddWithValue("@legajo", legajo);
                     cmd.Parameters.AddWithValue("@nro_sucursal", nro_sucursal);
-                    cmd.Connection.Open();
+                    con.Open();
                     SqlDataReader dr = cmd.ExecuteReader();
                     List<Sucursales_indycom> lst = mapeo(dr);
                     if (lst.Count != 0)
@@ -364,27 +365,235 @@ namespace Web_Api_IyC.Entities
                 throw ex;
             }
         }
-        public static void delete(Sucursales_indycom obj)
+        public static void Delete(int legajo,int nro_sucursal, SqlConnection con, SqlTransaction trx)
         {
             try
             {
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("DELETE  Sucursales_indycom ");
-                sql.AppendLine("WHERE");
+                sql.AppendLine("DELETE FROM Sucursales_indycom");
+                sql.AppendLine("WHERE Legajo = @Legajo AND Nro_sucursal = @Nro_sucursal");
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql.ToString();
+
+                cmd.Parameters.AddWithValue("@Legajo", legajo);
+                cmd.Parameters.AddWithValue("@Nro_sucursal", nro_sucursal);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar la sucursal", ex);
+            }
+        }
+
+
+
+        public static List<Sucursales_indycom> GetSucursales(int legajo)
+        {
+            try
+            {
+                List<Sucursales_indycom> lst = new List<Sucursales_indycom>();
+                string sql = @"SELECT  *
+                               FROM Sucursales_indycom 
+                               WHERE legajo=@legajo AND
+                                     dado_baja = 0";
                 using (SqlConnection con = GetConnectionSIIMVA())
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = sql.ToString();
-                    cmd.Connection.Open();
-                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.AddWithValue("@legajo", legajo);
+                    con.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    lst = mapeo(dr);
+
                 }
+                return lst;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
+
+
+        public static void BajaSucursal(int legajo, int nro_sucursal, string fecha_baja,
+            SqlConnection con, SqlTransaction trx)
+        {
+            try
+            {
+                DateTimeFormatInfo culturaFecArgentina = new CultureInfo("es-AR", false).DateTimeFormat;
+                StringBuilder sql = new StringBuilder();
+                sql.AppendLine("UPDATE Sucursales_Indycom SET");
+                sql.AppendLine("dado_baja=1,");
+                sql.AppendLine("fecha_baja=@fecha_baja");
+                sql.AppendLine("WHERE");
+                sql.AppendLine("legajo=@legajo AND ");
+                sql.AppendLine("nro_sucursal=@nro_sucursal");
+                //
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql.ToString();
+                cmd.Parameters.AddWithValue("@legajo", legajo);
+                cmd.Parameters.AddWithValue("@nro_sucursal", nro_sucursal);
+                cmd.Parameters.AddWithValue("@fecha_baja", Convert.ToDateTime(fecha_baja, culturaFecArgentina).ToString());
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static int ObtenerUltimoNroSucursal(int legajo, SqlConnection con, SqlTransaction trx)
+        {
+            int ultimoNroSucursal = 0;
+
+            string strSQL = @"
+                                 SELECT MAX(Nro_sucursal) AS UltimoNroSucursal
+                                 FROM Sucursales_Indycom
+                                 WHERE legajo = @legajo;";
+
+            SqlCommand cmd = con.CreateCommand();
+            cmd.Transaction = trx;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = strSQL;
+            cmd.Parameters.AddWithValue("@legajo", legajo);
+
+            object result = cmd.ExecuteScalar();
+
+            if (result != DBNull.Value && result != null)
+            {
+                ultimoNroSucursal = Convert.ToInt32(result);
+            }
+
+            return ultimoNroSucursal;
+        }
+
+
+        public static void NuevaSucursal(int legajo, Sucursales_indycom sucursal,
+                  SqlConnection con, SqlTransaction trx)
+        {
+            try
+            {
+                int nroSucursal = ObtenerUltimoNroSucursal(legajo, con, trx);
+                Console.WriteLine(nroSucursal);
+                string strSQL = @"
+                               INSERT INTO Sucursales_Indycom 
+                                    (Legajo, Nro_sucursal, Des_com, Nom_fantasia, Cod_calle, Nom_calle, Nro_dom, 
+                                     Cod_barrio, Nom_barrio, Ciudad, Provincia, Pais, Cod_postal, Nro_res, 
+                                     Fecha_inicio, Fecha_Baja, Fecha_hab, Dado_baja, nro_exp_mesa_ent, fecha_alta, 
+                                     cod_zona, Nro_local, Piso_dpto, Vto_inscripcion) 
+                               VALUES 
+                                    (@Legajo, @Nro_sucursal, @Des_com, @Nom_fantasia, @Cod_calle, @Nom_calle, @Nro_dom, 
+                                     @Cod_barrio, @Nom_barrio, @Ciudad, @Provincia, @Pais, @Cod_postal, @Nro_res, 
+                                     @Fecha_inicio, @Fecha_Baja, @Fecha_hab, @Dado_baja, @nro_exp_mesa_ent, @fecha_alta, 
+                                     @cod_zona, @Nro_local, @Piso_dpto, @Vto_inscripcion);";
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSQL;
+
+                cmd.Parameters.AddWithValue("@Legajo", sucursal.Legajo);
+                cmd.Parameters.AddWithValue("@Nro_sucursal", nroSucursal + 1);
+                cmd.Parameters.AddWithValue("@Des_com", sucursal.Des_com ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Nom_fantasia", sucursal.Nom_fantasia ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Cod_calle", sucursal.Cod_calle);
+                cmd.Parameters.AddWithValue("@Nom_calle", sucursal.Nom_calle ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Nro_dom", sucursal.Nro_dom);
+                cmd.Parameters.AddWithValue("@Cod_barrio", sucursal.Cod_barrio);
+                cmd.Parameters.AddWithValue("@Nom_barrio", sucursal.Nom_barrio ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Ciudad", sucursal.Ciudad ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Provincia", sucursal.Provincia ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Pais", sucursal.Pais ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Cod_postal", sucursal.Cod_postal ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Nro_res", sucursal.Nro_res ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Fecha_inicio", sucursal.Fecha_inicio ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@fecha_baja", sucursal.Fecha_Baja ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Fecha_hab", sucursal.Fecha_hab ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Dado_baja", sucursal.Dado_baja);
+                cmd.Parameters.AddWithValue("@nro_exp_mesa_ent", sucursal.nro_exp_mesa_ent ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@fecha_alta", sucursal.fecha_alta ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@cod_zona", sucursal.cod_zona ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Nro_local", sucursal.Nro_local ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Piso_dpto", sucursal.Piso_dpto ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Vto_inscripcion", sucursal.Vto_inscripcion ?? (object)DBNull.Value);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static void ModificarSucursal(int legajo, int nroSucursal, Sucursales_indycom sucursal, SqlConnection con, SqlTransaction trx)
+        {
+            string strSQL = @"
+                             UPDATE Sucursales_Indycom
+                             SET Des_com = @Des_com,
+                                 Nom_fantasia = @Nom_fantasia,
+                                 Cod_calle = @Cod_calle,
+                                 Nom_calle = @Nom_calle,
+                                 Nro_dom = @Nro_dom,
+                                 Cod_barrio = @Cod_barrio,
+                                 Nom_barrio = @Nom_barrio,
+                                 Ciudad = @Ciudad,
+                                 Provincia = @Provincia,
+                                 Pais = @Pais,
+                                 Cod_postal = @Cod_postal,
+                                 Nro_res = @Nro_res,
+                                 Fecha_inicio = @Fecha_inicio,
+                                 Fecha_Baja = @Fecha_Baja,
+                                 Fecha_hab = @Fecha_hab,
+                                 Dado_baja = @Dado_baja,
+                                 nro_exp_mesa_ent = @nro_exp_mesa_ent,
+                                 fecha_alta = @fecha_alta,
+                                 cod_zona = @cod_zona,
+                                 Nro_local = @Nro_local,
+                                 Piso_dpto = @Piso_dpto,
+                                 Vto_inscripcion = @Vto_inscripcion
+                             WHERE Legajo = @Legajo AND Nro_sucursal = @Nro_sucursal;";
+
+            SqlCommand cmd = con.CreateCommand();
+            cmd.Transaction = trx;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = strSQL;
+
+            cmd.Parameters.AddWithValue("@Legajo", legajo);
+            cmd.Parameters.AddWithValue("@Nro_sucursal", nroSucursal);
+            cmd.Parameters.AddWithValue("@Des_com", sucursal.Des_com ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Nom_fantasia", sucursal.Nom_fantasia ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Cod_calle", sucursal.Cod_calle);
+            cmd.Parameters.AddWithValue("@Nom_calle", sucursal.Nom_calle ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Nro_dom", sucursal.Nro_dom);
+            cmd.Parameters.AddWithValue("@Cod_barrio", sucursal.Cod_barrio);
+            cmd.Parameters.AddWithValue("@Nom_barrio", sucursal.Nom_barrio ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Ciudad", sucursal.Ciudad ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Provincia", sucursal.Provincia ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Pais", sucursal.Pais ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Cod_postal", sucursal.Cod_postal ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Nro_res", sucursal.Nro_res ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Fecha_inicio", sucursal.Fecha_inicio ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Fecha_Baja", sucursal.Fecha_Baja ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Fecha_hab", sucursal.Fecha_hab ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Dado_baja", sucursal.Dado_baja);
+            cmd.Parameters.AddWithValue("@nro_exp_mesa_ent", sucursal.nro_exp_mesa_ent ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@fecha_alta", sucursal.fecha_alta ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@cod_zona", sucursal.cod_zona ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Nro_local", sucursal.Nro_local ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Piso_dpto", sucursal.Piso_dpto ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Vto_inscripcion", sucursal.Vto_inscripcion ?? (object)DBNull.Value);
+
+            cmd.ExecuteNonQuery();
+        }
+
+
 
     }
 }

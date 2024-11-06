@@ -1,7 +1,9 @@
 ﻿using System.Data.SqlClient;
 using System.Transactions;
+using Web_Api_Auto.Entities.HELPERS;
 using Web_Api_IyC.Entities;
 using Web_Api_IyC.Entities.AUDITORIA;
+using Web_Api_IyC.Entities.HELPERS;
 using Web_Api_IyC.Entities.IYC;
 
 namespace Web_Api_IyC.Services
@@ -363,5 +365,145 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
+
+
+        #region Deudas
+        public List<Ctasctes_indycom> ListarDeudas(int legajo)
+        {
+            try
+            {
+                return Ctasctes_indycom.ListarDeudas(legajo);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<CateDeudaIyC> ListarCategoriaDeudas()
+        {
+            try
+            {
+                return Ctasctes_indycom.ListarCategoriaDeudas();
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        public void NuevaDeuda(CtasCtes_Con_Auditoria obj)
+        {
+            try
+            {
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
+                {
+                    con.Open();
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            obj.auditoria.identificacion = obj.legajo.ToString();
+                            obj.auditoria.proceso = "NUEVA DEUDA INDYCOM";
+                            obj.auditoria.detalle = obj.legajo.ToString();
+                            obj.auditoria.observaciones += string.Format(" Fecha nueva deuda: {0} ", DateTime.Now);
+
+
+                            foreach (var aux in obj.lstCtastes)
+                            {
+                                var ultimoRegistro = Ctasctes_indycom.ObtenerUltimoNroTransaccion(con, trx);
+                                Ctasctes_indycom.insertNvaDeuda(aux, con, trx, ultimoRegistro + 1);
+                            }
+                            AuditoriaD.InsertAuditoria(obj.auditoria, con, trx);
+                            trx.Commit();
+
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void modificarDeuda(CtasCtes_Con_Auditoria obj)
+        {
+            try
+            {
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
+                {
+                    con.Open();
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            obj.auditoria.identificacion = obj.legajo.ToString();
+                            obj.auditoria.proceso = "MODIFICACION DEUDA INDYCOM";
+                            obj.auditoria.detalle = obj.legajo.ToString();
+                            obj.auditoria.observaciones += string.Format(" Fecha modificar deuda: {0} ", DateTime.Now);
+                            foreach (var aux in obj.lstCtastes)
+                            {
+                                Ctasctes_indycom.updateDeuda(aux, con, trx);
+                            }
+                            AuditoriaD.InsertAuditoria(obj.auditoria, con, trx);
+                            trx.Commit();
+
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void eliminarDeuda(int legajo, int nro_transaccion, Auditoria obj)
+        {
+            try
+            {
+                using (SqlConnection con = DALBase.GetConnectionSIIMVA())
+                {
+                    con.Open();
+                    using (SqlTransaction trx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            obj.identificacion = legajo.ToString();
+                            obj.proceso = "ELIMINA DEUDA INDYCOM";
+                            obj.detalle = legajo.ToString();
+                            obj.observaciones += string.Format(" Fecha eliminar deuda: {0} ", DateTime.Now);
+                            Ctasctes_indycom.deleteDeuda(legajo, nro_transaccion, con, trx);
+                            AuditoriaD.InsertAuditoria(obj, con, trx);
+                            trx.Commit();
+
+                        }
+                        catch (Exception)
+                        {
+                            trx.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        #endregion
     }
 }

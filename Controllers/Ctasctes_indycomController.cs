@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Mvc;
+using Web_Api_Auto.Helpers;
 using Web_Api_IyC.Entities;
+using Web_Api_IyC.Entities.AUDITORIA;
 using Web_Api_IyC.Entities.HELPERS;
 using Web_Api_IyC.Services;
 
@@ -210,5 +213,106 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(lstDeuda);
         }
+
+         [HttpGet]
+        public IActionResult ListarDeudasXLegajo(int legajo)
+        {
+            var lst = _Ctasctes_indycomServices.ListarDeudas(legajo);
+
+            if (lst.Count() == 0)
+            {
+                return BadRequest(new { message ="La lista de deudas es nula"});
+            }
+
+            return Ok(lst);
+        }
+
+        [HttpGet]
+        public IActionResult ListarCategoriaDeuda()
+        {
+            var lst = _Ctasctes_indycomServices.ListarCategoriaDeudas();
+
+            if (lst.Count() == 0)
+            {
+                return BadRequest(new { message ="La lista de deudas es nula"});
+            }
+
+            return Ok(lst);
+        }
+
+        [HttpPost]
+        public IActionResult NuevaDeuda(CtasCtes_Con_Auditoria obj)
+        {
+            var objCta = obj.lstCtastes[0];
+
+            if (objCta.monto_original <= 0)
+            {
+                return BadRequest(new { message ="Monto Original Incorrecto."});
+            }
+            if (objCta.debe <= 0)
+            {
+                return BadRequest(new { message ="Debe Incorrecto."});
+            }
+
+            if (objCta.debe < objCta.monto_original)
+            {
+                return BadRequest(new { message ="El Monto Original debe ser menor o igual que lo que se debe."});
+            }
+            if (objCta.cod_cate_deuda != 1)
+            {
+                objCta.periodo = GeneradorPeriodo.GenerarPeriodoAleatorio();
+                objCta.vencimiento = null;
+            }
+            if (objCta.cod_cate_deuda == 1)
+            {
+                var regex = new Regex(@"^\d{4}/\d{2}$");
+                if (!regex.IsMatch(objCta.periodo))
+                {
+                    return BadRequest(new { message = "El campo 'periodo' debe estar en el formato 'yyyy/MM' y tener exactamente 7 caracteres."});
+                }
+            }
+
+            _Ctasctes_indycomServices.NuevaDeuda(obj);
+            return Ok(new { message = "Se genero nueva deuda" });
+
+        }
+
+
+        [HttpPut]
+        public IActionResult ModificarDeuda(CtasCtes_Con_Auditoria obj)
+        {
+            var objCta = obj.lstCtastes[0];
+
+            if (objCta.monto_original <= 0)
+            {
+                return BadRequest(new { message = "Monto Original Incorrecto." });
+            }
+            if (objCta.debe <= 0)
+            {
+                return BadRequest(new { message = "Debe Incorrecto." });
+            }
+
+            if (objCta.debe < objCta.monto_original)
+            {
+                return BadRequest(new { message = "El Monto Original debe ser menor o igual que lo que se debe." });
+            }
+
+            if (objCta.cod_cate_deuda != 1)
+            {
+                objCta.periodo = GeneradorPeriodo.GenerarPeriodoAleatorio();
+                objCta.vencimiento = null;
+            }
+            _Ctasctes_indycomServices.modificarDeuda(obj);
+            return Ok(new { message = $"Se modificó la deuda {obj.lstCtastes[0].nro_transaccion}" });
+        }
+
+        [HttpDelete]
+        public IActionResult EliminarDeuda(int legajo, int nro_transaccion, Auditoria obj)
+        {
+            _Ctasctes_indycomServices.eliminarDeuda(legajo, nro_transaccion, obj);
+            return Ok(new { message = $"Se elimino la deuda {nro_transaccion} correctamente" });
+
+        }
+
     }
 }

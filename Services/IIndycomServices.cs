@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Web_Api_Auto.Entities.HELPERS;
 using Web_Api_IyC.Entities;
 using Web_Api_IyC.Entities.AUDITORIA;
 using Web_Api_IyC.Entities.HELPERS;
@@ -37,12 +38,16 @@ namespace Web_Api_IyC.Services
         public List<Bases_imponibles> GetBasesImponibles(int legajo, string periodo_desde, string periodo_hasta);
         public List<Rubros_x_iyc> GetRubros_x_iyc(int legajo);
         public Sucursales_indycom GetSucuralByLegajo(int legajo, int nro_sucursal);
+        public void NuevaSucursal(int legajo,Sucursal_Con_Auditoria obj, INDYCOM objOriginal);
+        public void ModificarSucursal(int legajo, int nro_sucursal,Sucursal_Con_Auditoria obj, INDYCOM objOriginal);
+        public void EliminarSucursal(int legajo, int nro_sucursal, Auditoria obj, INDYCOM objOriginal);
+        public List<Sucursales_indycom> GetSucursales(int legajo);
         public List<RUBROS> BuscarRubroxDescripcion(string descripcion);
         public List<Informes> InformeCtaCteSoloDeuda(int legajo, int categoria_deuda, int categoria_deuda2, string per, Auditoria objA);
         public List<Informes> InformeCtaCteCompleto(int legajo, string per, Auditoria objA);
         public List<Combo> ListarCategoriasIyc();
         public List<Informes> Resumendeuda(int legajo, int tipo_consulta, string periodo, int cate_deuda_desde, int cate_deuda_hasta, Auditoria objA);
-        public List<Combo> GetCalle(string nomcalle);
+        public List<Combo> GetCalle(string? nomcalle);
         public List<Indycomxcalle> ConsultaIyc_x_calles(string calledesde, string callehasta);
         public List<BADEC> GetBadecByNombre(string nombre);
         public List<BADEC> GetBadecByCuit(string cuit);
@@ -71,7 +76,7 @@ namespace Web_Api_IyC.Services
         public List<ElemRubro> BusquedaRubros(string? busqueda);
         public List<ElementoMinimo> BusquedaMinimos(string? busqueda);
         public List<ElementoConvenio> BusquedaConvenios(string? busqueda);
-
         public void UpdateDomicilioFiscal(int legajo, DatosDomicilioFiscal datos);
+
     }
 }
