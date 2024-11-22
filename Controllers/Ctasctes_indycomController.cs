@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
-using Web_Api_Auto.Helpers;
+using Web_Api_IyC.Helpers;
 using Web_Api_IyC.Entities;
 using Web_Api_IyC.Entities.AUDITORIA;
 using Web_Api_IyC.Entities.HELPERS;
@@ -19,7 +19,7 @@ namespace Web_Api_IyC.Controllers
             _Ctasctes_indycomServices = Ctasctes_indycomServices;
             _iindycomService = iindycomService;
         }
-     
+
         [HttpGet]
         public IActionResult IniciarCtacte(int legajo)
         {
@@ -123,6 +123,13 @@ namespace Web_Api_IyC.Controllers
             if (obj.lstCtastes.Count > 0)
             {
                 var indycom = _iindycomService.GetByPk(obj.legajo);
+
+
+                if (indycom == null)
+                {
+                    return BadRequest(new { message = $"No se encontró información para el legajo {obj.legajo}" });
+                }
+
                 int tipo_liquidacion = indycom.tipo_liquidacion;
                 _Ctasctes_indycomServices.Confirma_reliquidacion(obj.legajo, tipo_liquidacion, obj.lstCtastes, obj.auditoria);
             }
@@ -214,14 +221,14 @@ namespace Web_Api_IyC.Controllers
             return Ok(lstDeuda);
         }
 
-         [HttpGet]
+        [HttpGet]
         public IActionResult ListarDeudasXLegajo(int legajo)
         {
             var lst = _Ctasctes_indycomServices.ListarDeudas(legajo);
 
             if (lst.Count() == 0)
             {
-                return BadRequest(new { message ="La lista de deudas es nula"});
+                return BadRequest(new { message = "La lista de deudas es nula" });
             }
 
             return Ok(lst);
@@ -234,7 +241,7 @@ namespace Web_Api_IyC.Controllers
 
             if (lst.Count() == 0)
             {
-                return BadRequest(new { message ="La lista de deudas es nula"});
+                return BadRequest(new { message = "La lista de deudas es nula" });
             }
 
             return Ok(lst);
@@ -247,16 +254,16 @@ namespace Web_Api_IyC.Controllers
 
             if (objCta.monto_original <= 0)
             {
-                return BadRequest(new { message ="Monto Original Incorrecto."});
+                return BadRequest(new { message = "Monto Original Incorrecto." });
             }
             if (objCta.debe <= 0)
             {
-                return BadRequest(new { message ="Debe Incorrecto."});
+                return BadRequest(new { message = "Debe Incorrecto." });
             }
 
             if (objCta.debe < objCta.monto_original)
             {
-                return BadRequest(new { message ="El Monto Original debe ser menor o igual que lo que se debe."});
+                return BadRequest(new { message = "El Monto Original debe ser menor o igual que lo que se debe." });
             }
             if (objCta.cod_cate_deuda != 1)
             {
@@ -268,7 +275,7 @@ namespace Web_Api_IyC.Controllers
                 var regex = new Regex(@"^\d{4}/\d{2}$");
                 if (!regex.IsMatch(objCta.periodo))
                 {
-                    return BadRequest(new { message = "El campo 'periodo' debe estar en el formato 'yyyy/MM' y tener exactamente 7 caracteres."});
+                    return BadRequest(new { message = "El campo 'periodo' debe estar en el formato 'yyyy/MM' y tener exactamente 7 caracteres." });
                 }
             }
 

@@ -1,6 +1,5 @@
 ﻿using System.Data.SqlClient;
 using System.Transactions;
-using Web_Api_Auto.Entities.HELPERS;
 using Web_Api_IyC.Entities;
 using Web_Api_IyC.Entities.AUDITORIA;
 using Web_Api_IyC.Entities.HELPERS;
@@ -21,17 +20,6 @@ namespace Web_Api_IyC.Services
                 throw;
             }
         }
-        //public List<Ctasctes_indycom> PeriodosRecalculo(int legajo)
-        //{
-        //    try
-        //    {
-        //        return Ctasctes_indycom.PeriodosRecalculo(legajo);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
         public List<Ctasctes_indycom> ListarCtacte(int legajo, int tipo_consulta,
                                                         int cate_deuda_desde, int cate_deuda_hasta)
         {

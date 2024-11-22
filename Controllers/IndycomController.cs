@@ -5,12 +5,11 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Web_Api_Auto.Helpers;
+using Web_Api_IyC.Helpers;
 using Web_Api_IyC.Entities;
 using Web_Api_IyC.Entities.AUDITORIA;
 using Web_Api_IyC.Entities.HELPERS;
 using Web_Api_IyC.Entities.IYC;
-using Web_Api_IyC.Helpers;
 using Web_Api_IyC.Services;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -695,41 +694,34 @@ namespace Web_Api_IyC.Controllers
         {
             try
             {
-                // Validar los parámetros de entrada
                 if (legajo <= 0 || nro_transaccion <= 0 || string.IsNullOrEmpty(periodo))
                 {
                     return BadRequest(new { message = "Datos inválidos. Verifique los parámetros de entrada." });
                 }
 
-                // Obtener información del comercio
                 var iyc = _iindycomService.GetByPk(legajo);
                 if (iyc == null || iyc.tipo_liquidacion != 2)
                 {
                     return BadRequest(new { message = "El Comercio no presenta Declaración Jurada." });
                 }
 
-                // Verificar si existe la declaración jurada completa
                 var djiyc = _iindycomService.GetDecJur_completadas(legajo, periodo);
                 if (djiyc == null || djiyc.legajo <= 0)
                 {
                     return BadRequest(new { message = "No existe Declaración Jurada para este Periodo." });
                 }
 
-                // Verificar si la declaración está pagada
                 if (_iindycomService.VerificaDecJurPagada(nro_transaccion))
                 {
                     return BadRequest(new { message = "El Periodo que quiere eliminar está pagado." });
                 }
 
-                // Eliminar la declaración jurada
                 _iindycomService.EliminaDJIyC(djiyc, objA);
 
-                // Devuelve un mensaje de éxito más adecuado
                 return Ok(new { message = "La Declaración Jurada fue eliminada exitosamente." });
             }
             catch (Exception ex)
             {
-                // Manejo de excepciones
                 return StatusCode(500, new { message = "Ocurrió un error al procesar la eliminación de la Declaración Jurada.", error = ex.Message });
             }
         }
