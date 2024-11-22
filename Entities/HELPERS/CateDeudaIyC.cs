@@ -1,4 +1,4 @@
-namespace Web_Api_Auto.Entities.HELPERS
+namespace Web_Api_IyC.Entities.HELPERS
 {
     public class CateDeudaIyC
     {

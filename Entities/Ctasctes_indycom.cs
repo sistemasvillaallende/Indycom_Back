@@ -6,7 +6,6 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Web_Api_Auto.Entities.HELPERS;
 using Web_Api_IyC.Entities.HELPERS;
 
 namespace Web_Api_IyC.Entities
@@ -1381,7 +1380,25 @@ namespace Web_Api_IyC.Entities
                               a.tipo_transaccion=1 AND pagado=0 AND
                               a.pago_parcial=0 AND nro_plan IS null AND
                               a.nro_procuracion IS NULL AND
-                              a.cod_cate_deuda = 1";
+                              a.cod_cate_deuda = 1
+                              ";
+
+                              
+                            //    UNION ALL
+
+                            // SELECT b.nro_transaccion, a.periodo, a.monto_1 as monto_original,
+                            //  a.monto_2 as debe, a.vencimiento_1 as vencimiento,
+                            //  4 as cod_tipo_per
+                            // FROM Cedulones2 A  WITH (NOLOCK)
+                            // JOIN Deudas_x_cedulon3 b on
+                            //   a.nro_cedulon=b.nro_cedulon
+                            // WHERE
+                            //   A.legajo=@legajo AND
+                            //   A.no_pagado=1 AND
+                            //   A.subsistema=3 and
+                            //   A.tipo_cedulon=1 and 
+                            //   A.activo=1
+                            // order by A.periodo
 
                 DateTimeFormatInfo culturaFecArgentina = new CultureInfo("es-AR", false).DateTimeFormat;
                 List<Ctasctes_indycom> lst = new();
@@ -1408,6 +1425,9 @@ namespace Web_Api_IyC.Entities
                         {
                             obj = new();
                             obj.legajo = legajo;
+                            obj.tipo_transaccion = 1;
+                            obj.pagado = false;
+                            obj.pago_parcial = false;
                             if (!dr.IsDBNull(nro_transaccion)) { obj.nro_transaccion = dr.GetInt32(nro_transaccion); }
                             if (!dr.IsDBNull(periodo)) { obj.periodo = dr.GetString(periodo); }
                             if (!dr.IsDBNull(monto_original)) { obj.monto_original = dr.GetDecimal(monto_original); }
@@ -1619,9 +1639,7 @@ namespace Web_Api_IyC.Entities
                 cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
                 cmd.Parameters.AddWithValue("@monto_1", monto_original);
                 cmd.Parameters.AddWithValue("@monto_2", debe);
-                //cmd.Connection.Open();
                 cmd.ExecuteNonQuery();
-                //}
             }
             catch (Exception)
             {
@@ -1712,7 +1730,8 @@ namespace Web_Api_IyC.Entities
                 cmd.Parameters.AddWithValue("@legajo", legajo);
                 cmd.Parameters.AddWithValue("@periodo", periodo);
                 cmd.Parameters.AddWithValue("@cod_tipo_per", cod_tipo_per);
-                total = Convert.ToDouble(cmd.ExecuteScalar());
+                object result = cmd.ExecuteScalar();
+                total = (result != null && result != DBNull.Value) ? Convert.ToDouble(result) : 0;
                 return total;
             }
             catch (Exception)
