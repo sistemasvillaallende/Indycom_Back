@@ -380,7 +380,7 @@ namespace Web_Api_IyC.Controllers
             var objOriginal = _iindycomService.GetByPk(legajo);
             if (objOriginal.dado_baja == true)
             {
-                return BadRequest(new { message = "No se pudo dar de alta nueva la Sucursal!" });
+                return BadRequest(new { message = "Comercio en baja. No se pudo dar de alta nueva la Sucursal!" });
             }
             _iindycomService.NuevaSucursal(legajo, obj, objOriginal);
             return Ok(new { message = "Sucursal creada exitosamente" });
@@ -394,13 +394,12 @@ namespace Web_Api_IyC.Controllers
             if (sucursal.Nro_sucursal == 0)
             {
                 return BadRequest(new { message = $"No se encontró la sucursal con número {nro_sucursal} para el legajo {legajo}." });
-
             }
 
             var objOriginal = _iindycomService.GetByPk(legajo);
             if (objOriginal.dado_baja == true)
             {
-                return BadRequest(new { message = "No se pudo modificar la  Sucursal!" });
+                    return BadRequest(new { message = $"No se pudo modificar la Sucursal! El comercio con número de legajo {legajo} está dado de baja." });
             }
             _iindycomService.ModificarSucursal(legajo, nro_sucursal, obj, objOriginal);
             return Ok(new { message = "Sucursal modificada exitosamente" });
@@ -713,7 +712,7 @@ namespace Web_Api_IyC.Controllers
 
                 if (_iindycomService.VerificaDecJurPagada(nro_transaccion))
                 {
-                    return BadRequest(new { message = "El Periodo que quiere eliminar está pagado." });
+                    return BadRequest(new { message = "No se puede eliminar. El Periodo que quiere eliminar está pagado." });
                 }
 
                 _iindycomService.EliminaDJIyC(djiyc, objA);

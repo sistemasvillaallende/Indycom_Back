@@ -534,7 +534,7 @@ namespace Web_Api_IyC.Entities
                 sql.AppendLine(")");
 
                 nro_transaccion = GetNroTransaccion(3, con, trx);
-                UpdateNroTransaccion(3, (nro_transaccion + lst.Count), con, trx);
+                //UpdateNroTransaccion(3, (nro_transaccion + lst.Count), con, trx);
                 SqlCommand cmd = con.CreateCommand();
                 cmd.Transaction = trx;
                 cmd.CommandType = CommandType.Text;
@@ -1659,7 +1659,7 @@ namespace Web_Api_IyC.Entities
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = strSQL;
                 cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
-                //cmd.Connection.Open();
+
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)

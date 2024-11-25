@@ -86,8 +86,10 @@ namespace Web_Api_IyC.Entities
                     case 2:
                         break;
                     case 3:
-                        strSQL = @"SELECT ISNULL(MAX(nro_tran_iyc),0) as nro_transaccion
-                                   FROM Numeros_Claves";
+                        // strSQL = @"SELECT ISNULL(MAX(nro_tran_iyc),0) as nro_transaccion
+                        //            FROM Numeros_Claves";
+                         strSQL = @" SELECT ISNULL(MAX(nro_transaccion),0) as nro_transaccion
+                                   FROM CTASCTES_INDYCOM";
                         break;
                     case 4:
                         strSQL = @"SELECT ISNULL(MAX(nro_tran_automotor),0) as nro_transaccion
@@ -104,7 +106,7 @@ namespace Web_Api_IyC.Entities
                 cmd.CommandText = strSQL;
                 //cmd.Connection.Open();
                 nro_transaccion = Convert.ToInt32(cmd.ExecuteScalar());
-                return nro_transaccion + 1;
+                return nro_transaccion ;
 
             }
             catch (Exception)
@@ -138,13 +140,11 @@ namespace Web_Api_IyC.Entities
                     default:
                         break;
                 }
-                //
 
                 SqlCommand cmd = con.CreateCommand();
                 cmd.Transaction = trx;
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = strSQL;
-                //cmd.Connection.Open();
                 cmd.Parameters.AddWithValue("@nro_transaccion", nro_transaccion);
                 cmd.ExecuteNonQuery();
             }
