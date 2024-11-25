@@ -236,7 +236,7 @@ namespace Web_Api_IyC.Services
                 using (SqlConnection con = DALBase.GetConnectionSIIMVA())
                 {
                     con.Open();
-                    // Iniciar una transacción
+
                     using (SqlTransaction trx = con.BeginTransaction())
                     {
                         try
