@@ -1,7 +1,9 @@
 namespace Web_Api_IyC.Entities.HELPERS
 {
-    public class DatosDomicilioFiscal
+    public class DatosDomicilioPostal
     {
+
+        public int cod_calle_dom_esp { get; set; }
         public string nom_calle_dom_esp { get; set; }
         public int nro_dom_esp { get; set; }
         public string piso_dpto_esp { get; set; }
@@ -16,8 +18,9 @@ namespace Web_Api_IyC.Entities.HELPERS
         public string celular { get; set; }
         public AUDITORIA.Auditoria objAuditoria { get; set; }
 
-        public DatosDomicilioFiscal()
+        public DatosDomicilioPostal()
         {
+            cod_calle_dom_esp = 0;
             nom_calle_dom_esp = string.Empty;
             nro_dom_esp = 0;
             piso_dpto_esp = string.Empty;
