@@ -1154,7 +1154,7 @@ namespace Web_Api_IyC.Services
             }
         }
 
-        public void UpdateDomicilioFiscal(int legajo, DatosDomicilioFiscal datos)
+        public void UpdateDomicilioPostal(int legajo, DatosDomicilioPostal datos)
         {
             try
             {
@@ -1169,10 +1169,10 @@ namespace Web_Api_IyC.Services
                             datos.objAuditoria.identificacion = legajo.ToString();
                             datos.objAuditoria.proceso = "CAMBIO DOMIC. POSTAL INDYCOM";
                             datos.objAuditoria.detalle = JsonConvert.SerializeObject(datos);
-                            datos.objAuditoria.observaciones += string.Format(" Actualización de domicilio Fiscal para el legajo {0} en la fecha {1}",
+                            datos.objAuditoria.observaciones = string.Format(" Actualización de domicilio Fiscal para el legajo {0} en la fecha {1}",
                                 legajo, DateTime.Now);
 
-                            INDYCOM.UpdateDomicilioFiscal(legajo, datos, con, trx);
+                            INDYCOM.UpdateDomicilioPostal(legajo, datos, con, trx);
                             AuditoriaD.InsertAuditoria(datos.objAuditoria, con, trx);
 
                             trx.Commit();
@@ -1187,7 +1187,7 @@ namespace Web_Api_IyC.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al actualizar el rubro", ex);
+                throw new Exception("Error al actualizar el domicilio fiscal", ex);
             }
         }
 

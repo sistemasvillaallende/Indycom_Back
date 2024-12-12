@@ -779,7 +779,7 @@ namespace Web_Api_IyC.Controllers
 
 
         [HttpPut]
-        public IActionResult actualizarDomicilioFiscal(int legajo, DatosDomicilioFiscal datos)
+        public IActionResult ActualizarDomicilioPostal(int legajo, DatosDomicilioPostal datos)
         {
 
             var iyc = _iindycomService.GetByPk(legajo);
@@ -789,9 +789,10 @@ namespace Web_Api_IyC.Controllers
                 return NotFound($"No se encontró el legajo {legajo}.");
             }
 
-            _iindycomService.UpdateDomicilioFiscal(legajo, datos);
+            _iindycomService.UpdateDomicilioPostal(legajo, datos);
 
-            return Ok(iyc);
+
+            return Ok(new { message = "Se actualizo correctamente Domicilio fiscal."});
         }
 
         //DATOS DEL CONTACTO DEL COMERCIO

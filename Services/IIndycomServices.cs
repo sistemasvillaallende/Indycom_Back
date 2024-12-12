@@ -75,7 +75,7 @@ namespace Web_Api_IyC.Services
         public List<ElemRubro> BusquedaRubros(string? busqueda);
         public List<ElementoMinimo> BusquedaMinimos(string? busqueda);
         public List<ElementoConvenio> BusquedaConvenios(string? busqueda);
-        public void UpdateDomicilioFiscal(int legajo, DatosDomicilioFiscal datos);
+        public void UpdateDomicilioPostal(int legajo, DatosDomicilioPostal datos);
 
     }
 }

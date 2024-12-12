@@ -2223,13 +2223,14 @@ namespace Web_Api_IyC.Entities
         }
 
 
-        public static void UpdateDomicilioFiscal(int legajo, DatosDomicilioFiscal datos, SqlConnection con, SqlTransaction trx)
+        public static void UpdateDomicilioPostal(int legajo, DatosDomicilioPostal datos, SqlConnection con, SqlTransaction trx)
         {
             try
             {
                 string strSQL = @"
                               UPDATE INDYCOM 
-                              SET nom_calle_dom_esp = @nom_calle_dom_esp, 
+                              SET cod_calle_dom_esp = @cod_calle_dom_esp,
+                                  nom_calle_dom_esp = @nom_calle_dom_esp, 
                                   nro_dom_esp = @nro_dom_esp, 
                                   piso_dpto_esp = @piso_dpto_esp, 
                                   local_esp = @local_esp, 
@@ -2249,6 +2250,7 @@ namespace Web_Api_IyC.Entities
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = strSQL;
 
+                cmd.Parameters.AddWithValue("@cod_calle_dom_esp", datos.cod_calle_dom_esp);
                 cmd.Parameters.AddWithValue("@nom_calle_dom_esp", datos.nom_calle_dom_esp);
                 cmd.Parameters.AddWithValue("@nro_dom_esp", datos.nro_dom_esp);
                 cmd.Parameters.AddWithValue("@piso_dpto_esp", datos.piso_dpto_esp ?? (object)DBNull.Value);
