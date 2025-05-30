@@ -3,6 +3,7 @@ using Newtonsoft;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 using Newtonsoft.Json;
 using Web_Api_IyC.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web_Api_IyC.Controllers
 {
@@ -15,6 +16,8 @@ namespace Web_Api_IyC.Controllers
         {
             _Descadic_x_iycService = Descadic_x_iycService;
         }
+
+        [Authorize]
         [HttpGet]
         public IActionResult getByPk(
         int legajo, int cod_concepto_iyc)

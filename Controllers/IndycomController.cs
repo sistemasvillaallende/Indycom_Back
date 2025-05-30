@@ -12,6 +12,7 @@ using Web_Api_IyC.Entities.HELPERS;
 using Web_Api_IyC.Entities.IYC;
 using Web_Api_IyC.Services;
 using static System.Net.Mime.MediaTypeNames;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Web_Api_IyC.Controllers
@@ -26,6 +27,7 @@ namespace Web_Api_IyC.Controllers
             _iindycomService = indycomService;
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Update(INDYCOM obj)
         {
@@ -34,6 +36,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(objOriginal);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Delete(Entities.INDYCOM obj)
         {
@@ -42,6 +45,8 @@ namespace Web_Api_IyC.Controllers
 
             return Ok(indycom);
         }
+
+        [Authorize]
         [HttpGet]
         public IActionResult Read()
         {
@@ -49,6 +54,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(indycom);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetByPk(int legajo)
         {
@@ -57,6 +63,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(indycom);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult saludo()
         {
@@ -64,6 +71,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(msg);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Tipos_liq_iyc()
         {
@@ -75,6 +83,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(tipos);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Tipos_per_iyc()
         {
@@ -85,6 +94,8 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(tipos);
         }
+
+        [Authorize]
         [HttpGet]
         public IActionResult Tipos_iva()
         {
@@ -95,6 +106,8 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(tipos);
         }
+
+        [Authorize]
         [HttpGet]
         public IActionResult Tipos_entidad()
         {
@@ -105,6 +118,8 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(entidad);
         }
+
+        [Authorize]
         [HttpGet]
         public IActionResult Zonasiyc()
         {
@@ -116,6 +131,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(zonas);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Situacion_judicial()
         {
@@ -126,6 +142,8 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(SituacionJudicial);
         }
+
+        [Authorize]
         [HttpPost]
         public IActionResult InsertDatosGeneral(Entities.INDYCOM obj)
         {
@@ -137,6 +155,8 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(indycom);
         }
+
+        [Authorize]
         [HttpPost]
         public IActionResult UpdateDatosGenerales(INDYCOM obj)
         {
@@ -152,6 +172,8 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(indycom);
         }
+
+        [Authorize]
         [HttpPost]
         public IActionResult UpdateDatosDomPostal(INDYCOM obj)
         {
@@ -161,6 +183,8 @@ namespace Web_Api_IyC.Controllers
             var indycom = _iindycomService.Read();
             return Ok(indycom);
         }
+
+        [Authorize]
         [HttpPost]
         public IActionResult SaveDatosAfip(INDYCOM obj)
         {
@@ -170,6 +194,8 @@ namespace Web_Api_IyC.Controllers
             var indycom = _iindycomService.Read();
             return Ok(indycom);
         }
+
+        [Authorize]
         [HttpPost]
         public IActionResult SaveDatosLiquidacion(INDYCOM obj)
         {
@@ -179,7 +205,8 @@ namespace Web_Api_IyC.Controllers
             var indycom = _iindycomService.Read();
             return Ok(indycom);
         }
-        //
+
+        [Authorize]
         [HttpGet]
         public ActionResult<PaginadorGenerico<Entities.INDYCOM>> GetIndycomPaginado(
            string buscarPor = "0", string strParametro = "0", int pagina = 1, int registros_por_pagina = 10)
@@ -283,7 +310,7 @@ namespace Web_Api_IyC.Controllers
             }
             return _PaginadorIndycom;
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult GetConvenios(string nom_convenio)
         {
@@ -295,6 +322,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(convenios);
 
         }
+        [Authorize]
         [HttpGet]
         public IActionResult GetMinimos_indycom(string minimo)
         {
@@ -306,6 +334,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(minimos);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult BajaComercial(int legajo, string fecha_baja, Auditoria objAuditoria)
         {
@@ -325,7 +354,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(indycom);
         }
 
-
+        [Authorize]
         [HttpGet]
         public IActionResult GetBasesImponibles(int legajo, string periodo_desde, string periodo_hasta)
         {
@@ -339,7 +368,7 @@ namespace Web_Api_IyC.Controllers
         }
 
 
-
+        [Authorize]
         [HttpGet]
         public IActionResult GetRubros_x_iyc(int legajo)
         {
@@ -353,7 +382,7 @@ namespace Web_Api_IyC.Controllers
         }
 
 
-
+        [Authorize]
         [HttpGet]
         public IActionResult GetSucuralByLegajo(int legajo, int nro_sucursal)
         {
@@ -366,6 +395,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(sucursales);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetSucurales(int legajo)
         {
@@ -373,6 +403,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(sucursales);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult NuevaSucursal(int legajo, Sucursal_Con_Auditoria obj)
         {
@@ -386,6 +417,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(new { message = "Sucursal creada exitosamente" });
         }
 
+        [Authorize]
         [HttpPut]
         public IActionResult ModificarSucursal(int legajo, int nro_sucursal, Sucursal_Con_Auditoria obj)
         {
@@ -405,6 +437,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(new { message = "Sucursal modificada exitosamente" });
         }
 
+        [Authorize]
         [HttpDelete]
         public IActionResult EliminarSucursal(int legajo, int nro_sucursal, Auditoria obj)
         {
@@ -425,6 +458,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(new { message = "Sucursal Eliminada exitosamente" });
         }
 
+        [Authorize]
         [HttpPut]
         public ActionResult BajaSucursal(int legajo, int nro_sucursal, string fecha_baja, Auditoria objAuditoria)
         {
@@ -443,6 +477,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(new { message = "Sucursal dada de baja logica exitosamente" });
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult BuscarRubroxDescripcion(string descripcion)
         {
@@ -454,6 +489,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(rubros);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult<List<Combo>> ListarCategoriasIyc()
         {
@@ -461,6 +497,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(categorias);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Resumendeuda(int legajo, int tipo_consulta, string periodo, int cate_deuda_desde, int cate_deuda_hasta, Auditoria objA)
         {
@@ -472,6 +509,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(resumen);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetCalle(string? nomcalle)
         {
@@ -485,6 +523,7 @@ namespace Web_Api_IyC.Controllers
 
 
 
+        [Authorize]
         [HttpGet]
         public IActionResult ConsultaIyc_x_calles(string calledesde, string callehasta)
         {
@@ -496,6 +535,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(consulta);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetBadecByNombre(string nombre)
         {
@@ -507,6 +547,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(badec);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetBadecByCuit(string cuit)
         {
@@ -518,6 +559,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(badec);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetPeriodosDJSinLiquidar(int legajo)
         {
@@ -553,7 +595,7 @@ namespace Web_Api_IyC.Controllers
             }
         }
 
-
+        [Authorize]
         [HttpGet]
         public IActionResult GetElementosDJSinLiquidar(int legajo)
         {
@@ -576,6 +618,7 @@ namespace Web_Api_IyC.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetElementosDJLiquidados(int legajo)
         {
@@ -601,7 +644,7 @@ namespace Web_Api_IyC.Controllers
 
 
 
-
+        [Authorize]
         [HttpGet]
         public IActionResult ListaRubrosDJIyC(int nro_transaccion, int legajo)
         {
@@ -627,6 +670,7 @@ namespace Web_Api_IyC.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult UpdateRubrosDJIyC(RubrosDJIyC_Con_Auditoria obj)
         {
@@ -660,6 +704,7 @@ namespace Web_Api_IyC.Controllers
 
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult LiquidarDJIyC(DJIyC_Con_Auditoria obj)
         {
@@ -687,7 +732,7 @@ namespace Web_Api_IyC.Controllers
             }
         }
 
-
+        [Authorize]
         [HttpPost]
         public IActionResult EliminaDJIyC(int legajo, int nro_transaccion, string periodo, Auditoria objA)
         {
@@ -725,6 +770,7 @@ namespace Web_Api_IyC.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetPeriodoDJLiquidado(int legajo, string periodo)
         {
@@ -758,6 +804,7 @@ namespace Web_Api_IyC.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult ImprimirDDJJ(int legajo, int nro_transaccion)
         {
@@ -777,7 +824,7 @@ namespace Web_Api_IyC.Controllers
 
         }
 
-
+        [Authorize]
         [HttpPut]
         public IActionResult ActualizarDomicilioPostal(int legajo, DatosDomicilioPostal datos)
         {
@@ -844,7 +891,7 @@ namespace Web_Api_IyC.Controllers
         //  Data_IndYCom.Siimva.Commit;
         //end;
 
-
+        [Authorize]
         [HttpGet]
         public IActionResult mostrarRubro(int legajo)
         {
@@ -859,6 +906,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(lstRubro);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult nuevoRubro(RubrosIyC_Con_Auditoria obj)
         {
@@ -884,6 +932,7 @@ namespace Web_Api_IyC.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut]
         public IActionResult updateRubro(RubrosIyC_Con_Auditoria obj)
         {
@@ -909,6 +958,7 @@ namespace Web_Api_IyC.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete]
         public IActionResult deleteRubro(int legajo, int cod_rubro, Auditoria objA)
         {
@@ -933,7 +983,7 @@ namespace Web_Api_IyC.Controllers
             }
         }
 
-
+        [Authorize]
         [HttpGet]
         public IActionResult busquedaSucursal(int legajo, int? nro_sucursal)
         {
@@ -976,6 +1026,7 @@ namespace Web_Api_IyC.Controllers
 
         //end;
 
+        [Authorize]
         [HttpGet]
         public IActionResult busquedaRubros(string? busqueda)
         {
@@ -996,6 +1047,7 @@ namespace Web_Api_IyC.Controllers
         // WHERE activo = 1 AND concepto LIKE :nombre_aproximado
         // ORDER BY concepto
 
+        [Authorize]
         [HttpGet]
         public IActionResult busquedaMinimo(string? busqueda)
         {
@@ -1025,7 +1077,7 @@ namespace Web_Api_IyC.Controllers
         // ORDER BY nom_convenio
 
 
-
+        [Authorize]
         [HttpGet]
         public IActionResult busquedaConvenio(string? busqueda)
         {

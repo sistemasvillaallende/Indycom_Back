@@ -4,6 +4,7 @@ using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 using Newtonsoft.Json;
 using Web_Api_IyC.Entities;
 using Web_Api_IyC.Services;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Web_Api_IyC.Controllers
@@ -22,6 +23,7 @@ namespace Web_Api_IyC.Controllers
             _Conceptos_iycService = Conceptos_iycService;
             _Descadic_x_iycService = descadic_x_iycService;
         }
+        [Authorize]
         [HttpGet]
         public ActionResult<List<Conceptos_iyc>> readConceptos()
         {
@@ -29,6 +31,7 @@ namespace Web_Api_IyC.Controllers
 
             return Ok(conceptos);
         }
+        [Authorize]
         [HttpGet]
         public ActionResult<List<Descadic_x_iyc>> getConceptos_x_iyc(
             int legajo)
@@ -37,6 +40,7 @@ namespace Web_Api_IyC.Controllers
 
             return Ok(conceptos);
         }
+        [Authorize]
         [HttpPost]
         public IActionResult UpdateConcepto(Descadic_x_iyc obj, string usuario)
         {
@@ -54,6 +58,7 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(IndYCom);
         }
+        [Authorize]
         [HttpPost]
         public IActionResult AddConcepto(Descadic_x_iyc obj, string usuario)
         {
@@ -70,6 +75,7 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(IndYCom);
         }
+        [Authorize]
         [HttpPost]
         public IActionResult DeleteConcepto(int legajo, int cod_concepto_iyc, 
             string usuario)

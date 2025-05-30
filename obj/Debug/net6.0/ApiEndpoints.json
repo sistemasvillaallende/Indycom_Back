@@ -294,6 +294,32 @@
   },
   {
     "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "EliminarDeuda",
+    "RelativePath": "Ctasctes_indycom/EliminarDeuda",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "nro_transaccion",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.AUDITORIA.Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
     "Method": "getListDeudaIyC",
     "RelativePath": "Ctasctes_indycom/getListDeudaIyC",
     "HttpMethod": "GET",
@@ -416,6 +442,16 @@
   },
   {
     "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "ListarCategoriaDeuda",
+    "RelativePath": "Ctasctes_indycom/ListarCategoriaDeuda",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
     "Method": "ListarCtacte",
     "RelativePath": "Ctasctes_indycom/ListarCtacte",
     "HttpMethod": "GET",
@@ -454,6 +490,54 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "ListarDeudasXLegajo",
+    "RelativePath": "Ctasctes_indycom/ListarDeudasXLegajo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "ModificarDeuda",
+    "RelativePath": "Ctasctes_indycom/ModificarDeuda",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.HELPERS.CtasCtes_Con_Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
+    "Method": "NuevaDeuda",
+    "RelativePath": "Ctasctes_indycom/NuevaDeuda",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.HELPERS.CtasCtes_Con_Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Web_Api_IyC.Controllers.Ctasctes_indycomController",
@@ -499,6 +583,27 @@
   },
   {
     "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "ActualizarDomicilioPostal",
+    "RelativePath": "Indycom/ActualizarDomicilioPostal",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "datos",
+        "Type": "Web_Api_IyC.Entities.HELPERS.DatosDomicilioPostal",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
     "Method": "BajaComercial",
     "RelativePath": "Indycom/BajaComercial",
     "HttpMethod": "POST",
@@ -527,7 +632,7 @@
     "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
     "Method": "BajaSucursal",
     "RelativePath": "Indycom/BajaSucursal",
-    "HttpMethod": "POST",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -572,6 +677,75 @@
   },
   {
     "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "busquedaConvenio",
+    "RelativePath": "Indycom/busquedaConvenio",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "busqueda",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "busquedaMinimo",
+    "RelativePath": "Indycom/busquedaMinimo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "busqueda",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "busquedaRubros",
+    "RelativePath": "Indycom/busquedaRubros",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "busqueda",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "busquedaSucursal",
+    "RelativePath": "Indycom/busquedaSucursal",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "nro_sucursal",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
     "Method": "ConsultaIyc_x_calles",
     "RelativePath": "Indycom/ConsultaIyc_x_calles",
     "HttpMethod": "GET",
@@ -609,6 +783,32 @@
   },
   {
     "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "deleteRubro",
+    "RelativePath": "Indycom/deleteRubro",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "cod_rubro",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "objA",
+        "Type": "Web_Api_IyC.Entities.AUDITORIA.Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
     "Method": "EliminaDJIyC",
     "RelativePath": "Indycom/EliminaDJIyC",
     "HttpMethod": "POST",
@@ -632,6 +832,32 @@
       },
       {
         "Name": "objA",
+        "Type": "Web_Api_IyC.Entities.AUDITORIA.Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "EliminarSucursal",
+    "RelativePath": "Indycom/EliminarSucursal",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "nro_sucursal",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "obj",
         "Type": "Web_Api_IyC.Entities.AUDITORIA.Auditoria",
         "IsRequired": true
       }
@@ -739,6 +965,38 @@
       {
         "Name": "nom_convenio",
         "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "GetElementosDJLiquidados",
+    "RelativePath": "Indycom/GetElementosDJLiquidados",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "GetElementosDJSinLiquidar",
+    "RelativePath": "Indycom/GetElementosDJSinLiquidar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
@@ -877,6 +1135,43 @@
   },
   {
     "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "GetSucurales",
+    "RelativePath": "Indycom/GetSucurales",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "ImprimirDDJJ",
+    "RelativePath": "Indycom/ImprimirDDJJ",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "nro_transaccion",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
     "Method": "InsertDatosGeneral",
     "RelativePath": "Indycom/InsertDatosGeneral",
     "HttpMethod": "POST",
@@ -939,6 +1234,90 @@
         "Name": "nro_transaccion",
         "Type": "System.Int32",
         "IsRequired": false
+      },
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "ModificarSucursal",
+    "RelativePath": "Indycom/ModificarSucursal",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "nro_sucursal",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.HELPERS.Sucursal_Con_Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "mostrarRubro",
+    "RelativePath": "Indycom/mostrarRubro",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "NuevaSucursal",
+    "RelativePath": "Indycom/NuevaSucursal",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "legajo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.HELPERS.Sucursal_Con_Auditoria",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "nuevoRubro",
+    "RelativePath": "Indycom/nuevoRubro",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.HELPERS.RubrosIyC_Con_Auditoria",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -1129,6 +1508,22 @@
       {
         "Name": "obj",
         "Type": "Web_Api_IyC.Entities.INDYCOM",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_Api_IyC.Controllers.IndycomController",
+    "Method": "updateRubro",
+    "RelativePath": "Indycom/updateRubro",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "Web_Api_IyC.Entities.HELPERS.RubrosIyC_Con_Auditoria",
         "IsRequired": true
       }
     ],

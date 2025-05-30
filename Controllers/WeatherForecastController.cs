@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web_Api_IyC.Controllers
@@ -17,7 +18,7 @@ namespace Web_Api_IyC.Controllers
         {
             _logger = logger;
         }
-
+        [Authorize]
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {

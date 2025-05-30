@@ -1,0 +1,3726 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Mi API",
+    "version": "v1"
+  },
+  "paths": {
+    "/Conceptos_iyc/readConceptos": {
+      "get": {
+        "tags": [
+          "Conceptos_iyc"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Conceptos_iyc"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Conceptos_iyc"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Conceptos_iyc"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Conceptos_iyc/getConceptos_x_iyc": {
+      "get": {
+        "tags": [
+          "Conceptos_iyc"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Descadic_x_iyc"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Descadic_x_iyc"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Descadic_x_iyc"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Conceptos_iyc/UpdateConcepto": {
+      "post": {
+        "tags": [
+          "Conceptos_iyc"
+        ],
+        "parameters": [
+          {
+            "name": "usuario",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Descadic_x_iyc"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Descadic_x_iyc"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Descadic_x_iyc"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Conceptos_iyc/AddConcepto": {
+      "post": {
+        "tags": [
+          "Conceptos_iyc"
+        ],
+        "parameters": [
+          {
+            "name": "usuario",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Descadic_x_iyc"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Descadic_x_iyc"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Descadic_x_iyc"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Conceptos_iyc/DeleteConcepto": {
+      "post": {
+        "tags": [
+          "Conceptos_iyc"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "cod_concepto_iyc",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "usuario",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/IniciarCtacte": {
+      "get": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/Confirma_iniciar_ctacte": {
+      "post": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/Listar_periodos_a_cancelar": {
+      "get": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/Confirma_cancelacion_ctasctes": {
+      "post": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "tipo_transaccion",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/Listar_Periodos_cancelados": {
+      "get": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ctasctes_indycom"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ctasctes_indycom"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ctasctes_indycom"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/Confirma_elimina_cancelacion": {
+      "post": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/Listar_periodos_a_reliquidar": {
+      "get": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/Reliquidar_periodos": {
+      "post": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Ctasctes_indycom"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Ctasctes_indycom"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Ctasctes_indycom"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/Confirma_reliquidacion": {
+      "post": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/ListarCtacte": {
+      "get": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "tipo_consulta",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "cate_deuda_desde",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "cate_deuda_hasta",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ctasctes_indycom"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ctasctes_indycom"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ctasctes_indycom"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/DetalleDeuda": {
+      "get": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "nro_transaccion",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ctasctes_indycom"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ctasctes_indycom"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ctasctes_indycom"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/DetalleProcuracion": {
+      "get": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "nro_proc",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/DetallePlan": {
+      "get": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "nro_plan",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/Datos_transaccion": {
+      "get": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "tipo_transaccion",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nro_transaccion",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/DetallePago": {
+      "get": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "nro_cedulon",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nro_transaccion",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/getListDeudaIyC": {
+      "get": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/getListDeudaIyCNoVencida": {
+      "get": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/getListDeudaIyCProcurada": {
+      "get": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/ListarDeudasXLegajo": {
+      "get": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/ListarCategoriaDeuda": {
+      "get": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/NuevaDeuda": {
+      "post": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/ModificarDeuda": {
+      "put": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CtasCtes_Con_Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Ctasctes_indycom/EliminarDeuda": {
+      "delete": {
+        "tags": [
+          "Ctasctes_indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nro_transaccion",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Descadic_x_iyc/getByPk": {
+      "get": {
+        "tags": [
+          "Descadic_x_iyc"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "cod_concepto_iyc",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/Update": {
+      "post": {
+        "tags": [
+          "Indycom"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/Delete": {
+      "post": {
+        "tags": [
+          "Indycom"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/Read": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/GetByPk": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/saludo": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/Tipos_liq_iyc": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/Tipos_per_iyc": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/Tipos_iva": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/Tipos_entidad": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/Zonasiyc": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/Situacion_judicial": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/InsertDatosGeneral": {
+      "post": {
+        "tags": [
+          "Indycom"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/UpdateDatosGenerales": {
+      "post": {
+        "tags": [
+          "Indycom"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/UpdateDatosDomPostal": {
+      "post": {
+        "tags": [
+          "Indycom"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/SaveDatosAfip": {
+      "post": {
+        "tags": [
+          "Indycom"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/SaveDatosLiquidacion": {
+      "post": {
+        "tags": [
+          "Indycom"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/INDYCOM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/GetIndycomPaginado": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "buscarPor",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "strParametro",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "registros_por_pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/INDYCOMPaginadorGenerico"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/INDYCOMPaginadorGenerico"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/INDYCOMPaginadorGenerico"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Indycom/GetConvenios": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "nom_convenio",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/GetMinimos_indycom": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "minimo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/BajaComercial": {
+      "post": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "fecha_baja",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/GetBasesImponibles": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "periodo_desde",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "periodo_hasta",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/GetRubros_x_iyc": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/GetSucuralByLegajo": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nro_sucursal",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/GetSucurales": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/NuevaSucursal": {
+      "post": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sucursal_Con_Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sucursal_Con_Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sucursal_Con_Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/ModificarSucursal": {
+      "put": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nro_sucursal",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sucursal_Con_Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sucursal_Con_Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sucursal_Con_Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/EliminarSucursal": {
+      "delete": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nro_sucursal",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/BajaSucursal": {
+      "put": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nro_sucursal",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "fecha_baja",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/BuscarRubroxDescripcion": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "descripcion",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/ListarCategoriasIyc": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Combo"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Combo"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Combo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Indycom/Resumendeuda": {
+      "post": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "tipo_consulta",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "periodo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cate_deuda_desde",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "cate_deuda_hasta",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/GetCalle": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "nomcalle",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/ConsultaIyc_x_calles": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "calledesde",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "callehasta",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/GetBadecByNombre": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "nombre",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/GetBadecByCuit": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "cuit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/GetPeriodosDJSinLiquidar": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/GetElementosDJSinLiquidar": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/GetElementosDJLiquidados": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/ListaRubrosDJIyC": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "nro_transaccion",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/UpdateRubrosDJIyC": {
+      "post": {
+        "tags": [
+          "Indycom"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RubrosDJIyC_Con_Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RubrosDJIyC_Con_Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RubrosDJIyC_Con_Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/LiquidarDJIyC": {
+      "post": {
+        "tags": [
+          "Indycom"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DJIyC_Con_Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DJIyC_Con_Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DJIyC_Con_Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/EliminaDJIyC": {
+      "post": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nro_transaccion",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "periodo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/GetPeriodoDJLiquidado": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "periodo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/ImprimirDDJJ": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nro_transaccion",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/ActualizarDomicilioPostal": {
+      "put": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DatosDomicilioPostal"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DatosDomicilioPostal"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DatosDomicilioPostal"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/mostrarRubro": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/nuevoRubro": {
+      "post": {
+        "tags": [
+          "Indycom"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RubrosIyC_Con_Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RubrosIyC_Con_Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RubrosIyC_Con_Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/updateRubro": {
+      "put": {
+        "tags": [
+          "Indycom"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RubrosIyC_Con_Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RubrosIyC_Con_Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RubrosIyC_Con_Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/deleteRubro": {
+      "delete": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "cod_rubro",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auditoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/busquedaSucursal": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "legajo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nro_sucursal",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/busquedaRubros": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "busqueda",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/busquedaMinimo": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "busqueda",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Indycom/busquedaConvenio": {
+      "get": {
+        "tags": [
+          "Indycom"
+        ],
+        "parameters": [
+          {
+            "name": "busqueda",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Tarjetas/getTarjetasWeb": {
+      "get": {
+        "tags": [
+          "Tarjetas"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Tarjetas/getTarjetasDesktop": {
+      "get": {
+        "tags": [
+          "Tarjetas"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Tarjetas/getTarjetasByPk": {
+      "get": {
+        "tags": [
+          "Tarjetas"
+        ],
+        "parameters": [
+          {
+            "name": "pk",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Tarjetas/getTarjetasByCodPayPerTic": {
+      "get": {
+        "tags": [
+          "Tarjetas"
+        ],
+        "parameters": [
+          {
+            "name": "pk",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Tarjetas/readPlanes": {
+      "get": {
+        "tags": [
+          "Tarjetas"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Tarjetas/getPlanBySubsistema": {
+      "get": {
+        "tags": [
+          "Tarjetas"
+        ],
+        "parameters": [
+          {
+            "name": "subsistema",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "deuda",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "cod_tarjeta",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Tarjetas/getPlanByPk": {
+      "get": {
+        "tags": [
+          "Tarjetas"
+        ],
+        "parameters": [
+          {
+            "name": "cod_plan",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/WeatherForecast": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Auditoria": {
+        "type": "object",
+        "properties": {
+          "id_auditoria": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fecha": {
+            "type": "string",
+            "nullable": true
+          },
+          "usuario": {
+            "type": "string",
+            "nullable": true
+          },
+          "proceso": {
+            "type": "string",
+            "nullable": true
+          },
+          "identificacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "autorizaciones": {
+            "type": "string",
+            "nullable": true
+          },
+          "observaciones": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalle": {
+            "type": "string",
+            "nullable": true
+          },
+          "ip": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Combo": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "campo_enlace": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Conceptos_iyc": {
+        "type": "object",
+        "properties": {
+          "cod_concepto_iyc": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "des_concepto_iyc": {
+            "type": "string",
+            "nullable": true
+          },
+          "suma": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CtasCtes_Con_Auditoria": {
+        "type": "object",
+        "properties": {
+          "legajo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lstCtastes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Ctasctes_indycom"
+            },
+            "nullable": true
+          },
+          "auditoria": {
+            "$ref": "#/components/schemas/Auditoria"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Ctasctes_indycom": {
+        "type": "object",
+        "properties": {
+          "tipo_transaccion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nro_transaccion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nro_pago_parcial": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "legajo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fecha_transaccion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "periodo": {
+            "type": "string",
+            "nullable": true
+          },
+          "monto_original": {
+            "type": "number",
+            "format": "double"
+          },
+          "nro_plan": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pagado": {
+            "type": "boolean"
+          },
+          "debe": {
+            "type": "number",
+            "format": "double"
+          },
+          "haber": {
+            "type": "number",
+            "format": "double"
+          },
+          "nro_procuracion": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pago_parcial": {
+            "type": "boolean"
+          },
+          "vencimiento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "nro_cedulon": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "declaracion_jurada": {
+            "type": "boolean"
+          },
+          "liquidacion_especial": {
+            "type": "boolean"
+          },
+          "cod_cate_deuda": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "monto_pagado": {
+            "type": "number",
+            "format": "double"
+          },
+          "recargo": {
+            "type": "number",
+            "format": "double"
+          },
+          "honorarios": {
+            "type": "number",
+            "format": "double"
+          },
+          "iva_hons": {
+            "type": "number",
+            "format": "double"
+          },
+          "tipo_deuda": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "decreto": {
+            "type": "string",
+            "nullable": true
+          },
+          "observaciones": {
+            "type": "string",
+            "nullable": true
+          },
+          "nro_cedulon_paypertic": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "des_movimiento": {
+            "type": "string",
+            "nullable": true
+          },
+          "des_categoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "deuda": {
+            "type": "number",
+            "format": "double"
+          },
+          "sel": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "costo_financiero": {
+            "type": "number",
+            "format": "double"
+          },
+          "des_rubro": {
+            "type": "string",
+            "nullable": true
+          },
+          "cod_tipo_per": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sub_total": {
+            "type": "number",
+            "format": "double"
+          },
+          "deuda_activa": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DJIyC_Con_Auditoria": {
+        "type": "object",
+        "properties": {
+          "legajo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "objDDJJ": {
+            "$ref": "#/components/schemas/Dec_jur_iyc"
+          },
+          "auditoria": {
+            "$ref": "#/components/schemas/Auditoria"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DatosDomicilioPostal": {
+        "type": "object",
+        "properties": {
+          "cod_calle_dom_esp": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nom_calle_dom_esp": {
+            "type": "string",
+            "nullable": true
+          },
+          "nro_dom_esp": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "piso_dpto_esp": {
+            "type": "string",
+            "nullable": true
+          },
+          "local_esp": {
+            "type": "string",
+            "nullable": true
+          },
+          "cod_postal": {
+            "type": "string",
+            "nullable": true
+          },
+          "nom_barrio": {
+            "type": "string",
+            "nullable": true
+          },
+          "ciudad": {
+            "type": "string",
+            "nullable": true
+          },
+          "provincia": {
+            "type": "string",
+            "nullable": true
+          },
+          "pais": {
+            "type": "string",
+            "nullable": true
+          },
+          "email_envio_cedulon": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "celular": {
+            "type": "string",
+            "nullable": true
+          },
+          "objAuditoria": {
+            "$ref": "#/components/schemas/Auditoria"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Dec_jur_iyc": {
+        "type": "object",
+        "properties": {
+          "nro_transaccion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "legajo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "periodo": {
+            "type": "string",
+            "nullable": true
+          },
+          "completa": {
+            "type": "boolean"
+          },
+          "fecha_presentacion_ddjj": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "presentacion_web": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cod_zona": {
+            "type": "string",
+            "nullable": true
+          },
+          "cod_tipo_per": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Descadic_x_iyc": {
+        "type": "object",
+        "properties": {
+          "legajo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cod_concepto_iyc": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "des_concepto_iyc": {
+            "type": "string",
+            "nullable": true
+          },
+          "porcentaje": {
+            "type": "number",
+            "format": "float"
+          },
+          "monto": {
+            "type": "number",
+            "format": "double"
+          },
+          "vencimiento": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "nro_decreto": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "objAuditoria": {
+            "$ref": "#/components/schemas/Auditoria"
+          }
+        },
+        "additionalProperties": false
+      },
+      "INDYCOM": {
+        "type": "object",
+        "properties": {
+          "legajo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nro_bad": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nro_contrib": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "des_com": {
+            "type": "string",
+            "nullable": true
+          },
+          "nom_fantasia": {
+            "type": "string",
+            "nullable": true
+          },
+          "cod_calle": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nro_dom": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cod_barrio": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cod_tipo_per": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cod_zona": {
+            "type": "string",
+            "nullable": true
+          },
+          "pri_periodo": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo_liquidacion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dado_baja": {
+            "type": "boolean"
+          },
+          "fecha_baja": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "exento": {
+            "type": "boolean"
+          },
+          "vencimiento_eximido": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "per_ult": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha_inicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fecha_hab": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "nro_res": {
+            "type": "string",
+            "nullable": true
+          },
+          "nro_exp_mesa_ent": {
+            "type": "string",
+            "nullable": true
+          },
+          "nro_ing_bruto": {
+            "type": "string",
+            "nullable": true
+          },
+          "nro_cuit": {
+            "type": "string",
+            "nullable": true
+          },
+          "transporte": {
+            "type": "boolean"
+          },
+          "fecha_alta": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "nom_calle": {
+            "type": "string",
+            "nullable": true
+          },
+          "nom_barrio": {
+            "type": "string",
+            "nullable": true
+          },
+          "ciudad": {
+            "type": "string",
+            "nullable": true
+          },
+          "provincia": {
+            "type": "string",
+            "nullable": true
+          },
+          "pais": {
+            "type": "string",
+            "nullable": true
+          },
+          "cod_postal": {
+            "type": "string",
+            "nullable": true
+          },
+          "cod_calle_dom_esp": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nom_calle_dom_esp": {
+            "type": "string",
+            "nullable": true
+          },
+          "nro_dom_esp": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "piso_dpto_esp": {
+            "type": "string",
+            "nullable": true
+          },
+          "local_esp": {
+            "type": "string",
+            "nullable": true
+          },
+          "cod_barrio_dom_esp": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nom_barrio_dom_esp": {
+            "type": "string",
+            "nullable": true
+          },
+          "ciudad_dom_esp": {
+            "type": "string",
+            "nullable": true
+          },
+          "provincia_dom_esp": {
+            "type": "string",
+            "nullable": true
+          },
+          "pais_dom_esp": {
+            "type": "string",
+            "nullable": true
+          },
+          "cod_postal_dom_esp": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha_cambio_domicilio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "emite_cedulon": {
+            "type": "boolean"
+          },
+          "cod_situacion_judicial": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "telefono1": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono2": {
+            "type": "string",
+            "nullable": true
+          },
+          "celular1": {
+            "type": "string",
+            "nullable": true
+          },
+          "celular2": {
+            "type": "string",
+            "nullable": true
+          },
+          "ocupacion_vereda": {
+            "type": "boolean"
+          },
+          "con_sucursal": {
+            "type": "boolean"
+          },
+          "nro_sucursal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "es_transferido": {
+            "type": "boolean"
+          },
+          "con_ddjj_anual": {
+            "type": "boolean"
+          },
+          "cod_zona_liquidacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "debito_automatico": {
+            "type": "boolean"
+          },
+          "clave_pago": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha_ddjj_anual": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "email_envio_cedulon": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "celular": {
+            "type": "string",
+            "nullable": true
+          },
+          "reempadronamiento": {
+            "type": "boolean"
+          },
+          "empadronado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fecha_empadronado": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "es_agencia": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "clave_gestion": {
+            "type": "string",
+            "nullable": true
+          },
+          "nro_local": {
+            "type": "string",
+            "nullable": true
+          },
+          "cedulon_digital": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "piso_dpto": {
+            "type": "string",
+            "nullable": true
+          },
+          "cod_cond_ante_iva": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cod_caracter": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoria_iva": {
+            "type": "string",
+            "nullable": true
+          },
+          "otra_entidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "convenio_uni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cod_nueva_zona": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha_vecino_digital": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "cuit_vecino_digital": {
+            "type": "string",
+            "nullable": true
+          },
+          "vto_inscripcion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "titular": {
+            "type": "string",
+            "nullable": true
+          },
+          "objAuditoria": {
+            "$ref": "#/components/schemas/Auditoria"
+          }
+        },
+        "additionalProperties": false
+      },
+      "INDYCOMPaginadorGenerico": {
+        "type": "object",
+        "properties": {
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPaginas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "busquedaPor": {
+            "type": "string",
+            "nullable": true
+          },
+          "parametro": {
+            "type": "string",
+            "nullable": true
+          },
+          "resultado": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/INDYCOM"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RubrosDJIyC_Con_Auditoria": {
+        "type": "object",
+        "properties": {
+          "legajo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lst": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Rubros_x_dec_jur_iyc"
+            },
+            "nullable": true
+          },
+          "auditoria": {
+            "$ref": "#/components/schemas/Auditoria"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RubrosIyC_Con_Auditoria": {
+        "type": "object",
+        "properties": {
+          "rubro": {
+            "$ref": "#/components/schemas/Rubros_x_iyc"
+          },
+          "auditoria": {
+            "$ref": "#/components/schemas/Auditoria"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Rubros_x_dec_jur_iyc": {
+        "type": "object",
+        "properties": {
+          "nro_transaccion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cod_rubro": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cantidad": {
+            "type": "number",
+            "format": "float"
+          },
+          "importe": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Rubros_x_iyc": {
+        "type": "object",
+        "properties": {
+          "legajo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cod_rubro": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nro_sucursal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cod_minimo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cod_convenio": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cantidad": {
+            "type": "number",
+            "format": "float"
+          },
+          "exento": {
+            "type": "boolean"
+          },
+          "descuento": {
+            "type": "boolean"
+          },
+          "valor": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Sucursal_Con_Auditoria": {
+        "type": "object",
+        "properties": {
+          "sucursal": {
+            "$ref": "#/components/schemas/Sucursales_indycom"
+          },
+          "auditoria": {
+            "$ref": "#/components/schemas/Auditoria"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Sucursales_indycom": {
+        "type": "object",
+        "properties": {
+          "legajo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nro_sucursal": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "des_com": {
+            "type": "string",
+            "nullable": true
+          },
+          "nom_fantasia": {
+            "type": "string",
+            "nullable": true
+          },
+          "cod_calle": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nom_calle": {
+            "type": "string",
+            "nullable": true
+          },
+          "nro_dom": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cod_barrio": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nom_barrio": {
+            "type": "string",
+            "nullable": true
+          },
+          "ciudad": {
+            "type": "string",
+            "nullable": true
+          },
+          "provincia": {
+            "type": "string",
+            "nullable": true
+          },
+          "pais": {
+            "type": "string",
+            "nullable": true
+          },
+          "cod_postal": {
+            "type": "string",
+            "nullable": true
+          },
+          "nro_res": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha_inicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fecha_Baja": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fecha_hab": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dado_baja": {
+            "type": "boolean"
+          },
+          "nro_exp_mesa_ent": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha_alta": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "cod_zona": {
+            "type": "string",
+            "nullable": true
+          },
+          "nro_local": {
+            "type": "string",
+            "nullable": true
+          },
+          "piso_dpto": {
+            "type": "string",
+            "nullable": true
+          },
+          "vto_inscripcion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WeatherForecast": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

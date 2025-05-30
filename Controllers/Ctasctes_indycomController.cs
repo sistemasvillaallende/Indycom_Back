@@ -5,6 +5,7 @@ using Web_Api_IyC.Entities;
 using Web_Api_IyC.Entities.AUDITORIA;
 using Web_Api_IyC.Entities.HELPERS;
 using Web_Api_IyC.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web_Api_IyC.Controllers
 {
@@ -19,7 +20,7 @@ namespace Web_Api_IyC.Controllers
             _Ctasctes_indycomServices = Ctasctes_indycomServices;
             _iindycomService = iindycomService;
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult IniciarCtacte(int legajo)
         {
@@ -31,6 +32,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(lista);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Confirma_iniciar_ctacte(CtasCtes_Con_Auditoria obj)
         {
@@ -45,6 +47,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(obj.lstCtastes);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Listar_periodos_a_cancelar(int legajo)
         {
@@ -56,6 +59,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(Ctasctes);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Confirma_cancelacion_ctasctes(int tipo_transaccion, CtasCtes_Con_Auditoria obj)
         {
@@ -71,6 +75,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(obj.lstCtastes);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult<List<Ctasctes_indycom>> Listar_Periodos_cancelados(int legajo)
         {
@@ -82,6 +87,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(Ctasctes);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Confirma_elimina_cancelacion(CtasCtes_Con_Auditoria obj)
         {
@@ -95,6 +101,7 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(obj.lstCtastes);
         }
+        [Authorize]
         [HttpGet]
         public IActionResult Listar_periodos_a_reliquidar(int legajo)
         {
@@ -106,6 +113,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(ctasctes);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Reliquidar_periodos(int legajo, List<Ctasctes_indycom> lst)
         {
@@ -117,6 +125,8 @@ namespace Web_Api_IyC.Controllers
             return Ok(ctasctes);
 
         }
+
+        [Authorize]
         [HttpPost]
         public IActionResult Confirma_reliquidacion(CtasCtes_Con_Auditoria obj)
         {
@@ -141,7 +151,7 @@ namespace Web_Api_IyC.Controllers
 
         }
 
-
+        [Authorize]
         [HttpGet]
         public ActionResult<List<Ctasctes_indycom>> ListarCtacte(int legajo, int tipo_consulta, int cate_deuda_desde, int cate_deuda_hasta)
         {
@@ -149,6 +159,8 @@ namespace Web_Api_IyC.Controllers
 
             return Ok(Ctasctes);
         }
+
+        [Authorize]
         [HttpGet]
         public ActionResult<List<Ctasctes_indycom>> DetalleDeuda(int nro_transaccion)
         {
@@ -156,6 +168,8 @@ namespace Web_Api_IyC.Controllers
 
             return Ok(Ctasctes);
         }
+
+        [Authorize]
         [HttpGet]
         public ActionResult DetalleProcuracion(int nro_proc)
         {
@@ -163,6 +177,8 @@ namespace Web_Api_IyC.Controllers
 
             return Ok(Ctasctes);
         }
+
+        [Authorize]
         [HttpGet]
         public ActionResult DetallePlan(int nro_plan)
         {
@@ -170,6 +186,8 @@ namespace Web_Api_IyC.Controllers
 
             return Ok(Ctasctes);
         }
+
+        [Authorize]
         [HttpGet]
         public ActionResult<string> Datos_transaccion(int tipo_transaccion, int nro_transaccion)
         {
@@ -180,6 +198,8 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(Transaccion);
         }
+
+        [Authorize]
         [HttpGet]
         public ActionResult DetallePago(int nro_cedulon, int nro_transaccion)
         {
@@ -190,6 +210,8 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(Transaccion);
         }
+
+        [Authorize]
         [HttpGet]
         public ActionResult getListDeudaIyC(int legajo)
         {
@@ -200,6 +222,7 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(lstDeuda);
         }
+        [Authorize]
         [HttpGet]
         public ActionResult getListDeudaIyCNoVencida(int legajo)
         {
@@ -210,6 +233,8 @@ namespace Web_Api_IyC.Controllers
             }
             return Ok(lstDeuda);
         }
+
+        [Authorize]
         [HttpGet]
         public ActionResult getListDeudaIyCProcurada(int legajo)
         {
@@ -221,6 +246,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(lstDeuda);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult ListarDeudasXLegajo(int legajo)
         {
@@ -234,6 +260,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(lst);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult ListarCategoriaDeuda()
         {
@@ -247,6 +274,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(lst);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult NuevaDeuda(CtasCtes_Con_Auditoria obj)
         {
@@ -284,7 +312,7 @@ namespace Web_Api_IyC.Controllers
 
         }
 
-
+        [Authorize]
         [HttpPut]
         public IActionResult ModificarDeuda(CtasCtes_Con_Auditoria obj)
         {
@@ -313,6 +341,7 @@ namespace Web_Api_IyC.Controllers
             return Ok(new { message = $"Se modificó la deuda {obj.lstCtastes[0].nro_transaccion}" });
         }
 
+        [Authorize]
         [HttpDelete]
         public IActionResult EliminarDeuda(int legajo, int nro_transaccion, Auditoria obj)
         {
