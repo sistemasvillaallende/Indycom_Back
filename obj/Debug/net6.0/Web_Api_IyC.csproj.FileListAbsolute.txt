@@ -132,3 +132,6 @@ C:\Vecino-Va\Indycom_Back\obj\Debug\net6.0\refint\Web_Api_IyC.dll
 C:\Vecino-Va\Indycom_Back\obj\Debug\net6.0\Web_Api_IyC.pdb
 C:\Vecino-Va\Indycom_Back\obj\Debug\net6.0\Web_Api_IyC.genruntimeconfig.cache
 C:\Vecino-Va\Indycom_Back\obj\Debug\net6.0\ref\Web_Api_IyC.dll
+C:\Vecino-Va\Indycom_Back\bin\Debug\net6.0\FluentValidation.dll
+C:\Vecino-Va\Indycom_Back\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\Vecino-Va\Indycom_Back\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll

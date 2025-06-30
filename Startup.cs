@@ -5,6 +5,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Web_Api_IyC.Services;
 using System.Text;
+using Web_Api_IyC.Validators;
+using FluentValidation.AspNetCore;
+using FluentValidation;
+
 
 namespace Web_Api_IyC
 {
@@ -29,7 +33,7 @@ namespace Web_Api_IyC
                             ValidateAudience = true,
                             ValidateLifetime = true,
                             ValidateIssuerSigningKey = true,
-                            ValidIssuer = "TuIssuer", // debe coincidir con el que usás en el micro de auth
+                            ValidIssuer = "TuIssuer", // debe coincidir con el otro micro
                             ValidAudience = "TuAudience", // debe coincidir también
                             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your-very-long-secret-key-that-is-at-least-32-characters"))
                         };
@@ -48,6 +52,8 @@ namespace Web_Api_IyC
                         };
                     });
             services.AddControllers();
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssembly(typeof(AuditoriaValidator).Assembly);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mi API", Version = "v1" });

@@ -3,12 +3,40 @@
   "WorkspaceRootPath": "C:\\Vecino-Va\\Indycom_Back\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\validators\\sucursales_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:validators\\sucursales_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\validators\\auditoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:validators\\auditoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\validators\\indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:validators\\indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\validators\\sucursal_con_auditoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:validators\\sucursal_con_auditoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\validators\\rubros_x_dec_jur_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:validators\\rubros_x_dec_jur_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\validators\\descadic_x_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:validators\\descadic_x_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\validators\\ctasctes_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:validators\\ctasctes_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\validators\\ctasctes_con_auditoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:validators\\ctasctes_con_auditoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,6 +51,18 @@
       "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:controllers\\indycomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\entities\\indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\entities\\sucursales_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\sucursales_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\entities\\rubros_x_dec_jur_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\rubros_x_dec_jur_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\controllers\\descadic_x_iyccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:controllers\\descadic_x_iyccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -31,12 +71,32 @@
       "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:controllers\\ctasctes_indycomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\entities\\ctasctes_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\ctasctes_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\controllers\\conceptos_iyccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:controllers\\conceptos_iyccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\entities\\indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\entities\\descadic_x_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\descadic_x_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\web_api_iyc.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:web_api_iyc.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\controllers\\badeccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:controllers\\badeccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\entities\\zonas_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -127,18 +187,6 @@
       "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\rubros_x_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\entities\\rubros_x_dec_jur_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\rubros_x_dec_jur_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\entities\\ctasctes_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\ctasctes_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\entities\\sucursales_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\sucursales_indycom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\entities\\planes_cobro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\planes_cobro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -153,10 +201,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\entities\\dec_jur_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\dec_jur_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\entities\\descadic_x_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|solutionrelative:entities\\descadic_x_iyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4ED0BD2D-9A4B-4525-B49D-BE538438FEFF}|Web_Api_IyC.csproj|c:\\vecino-va\\indycom_back\\entities\\tarjetas_debitos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -186,86 +230,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 22,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAACAAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T12:07:33.248Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "WeatherForecastController.cs",
-              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\WeatherForecastController.cs",
-              "RelativeDocumentMoniker": "Controllers\\WeatherForecastController.cs",
-              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\WeatherForecastController.cs",
-              "RelativeToolTip": "Controllers\\WeatherForecastController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T12:07:16.333Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TarjetasController.cs",
-              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\TarjetasController.cs",
-              "RelativeDocumentMoniker": "Controllers\\TarjetasController.cs",
-              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\TarjetasController.cs",
-              "RelativeToolTip": "Controllers\\TarjetasController.cs",
-              "ViewState": "AgIAAFAAAAAAAAAAAAA8wFoAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T12:06:48.778Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Startup.cs",
-              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Startup.cs",
-              "RelativeDocumentMoniker": "Startup.cs",
-              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Startup.cs",
-              "RelativeToolTip": "Startup.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAowCEAAABQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-04T17:19:33.3Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Descadic_x_iycController.cs",
-              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\Descadic_x_iycController.cs",
-              "RelativeDocumentMoniker": "Controllers\\Descadic_x_iycController.cs",
-              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\Descadic_x_iycController.cs",
-              "RelativeToolTip": "Controllers\\Descadic_x_iycController.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAA5wBMAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T12:03:35.611Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Conceptos_iycController.cs",
-              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\Conceptos_iycController.cs",
-              "RelativeDocumentMoniker": "Controllers\\Conceptos_iycController.cs",
-              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\Conceptos_iycController.cs",
-              "RelativeToolTip": "Controllers\\Conceptos_iycController.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAA4wE0AAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T12:01:31.874Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
@@ -336,115 +302,371 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ZONAS_IYC.cs",
-              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\ZONAS_IYC.cs",
-              "RelativeDocumentMoniker": "Entities\\ZONAS_IYC.cs",
-              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\ZONAS_IYC.cs",
-              "RelativeToolTip": "Entities\\ZONAS_IYC.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAABsAAAAkAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "Descadic_x_iyc.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Validators\\Descadic_x_iyc.cs",
+              "RelativeDocumentMoniker": "Validators\\Descadic_x_iyc.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Validators\\Descadic_x_iyc.cs",
+              "RelativeToolTip": "Validators\\Descadic_x_iyc.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAgwC0AAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T12:47:51.638Z",
+              "WhenOpened": "2025-06-23T12:23:28.661Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "IndycomController.cs",
-              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\IndycomController.cs",
-              "RelativeDocumentMoniker": "Controllers\\IndycomController.cs",
-              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\IndycomController.cs",
-              "RelativeToolTip": "Controllers\\IndycomController.cs",
-              "ViewState": "AgIAAB0FAAAAAAAAAAAIwDcEAAATAAAAAAAAAA==",
+              "Title": "Rubros_x_dec_jur_iyc.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Validators\\Rubros_x_dec_jur_iyc.cs",
+              "RelativeDocumentMoniker": "Validators\\Rubros_x_dec_jur_iyc.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Validators\\Rubros_x_dec_jur_iyc.cs",
+              "RelativeToolTip": "Validators\\Rubros_x_dec_jur_iyc.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-08T01:03:37.271Z",
+              "WhenOpened": "2025-06-23T12:41:24.389Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "TIPOS_LIQ_IYC.cs",
-              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\TIPOS_LIQ_IYC.cs",
-              "RelativeDocumentMoniker": "Entities\\TIPOS_LIQ_IYC.cs",
-              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\TIPOS_LIQ_IYC.cs",
-              "RelativeToolTip": "Entities\\TIPOS_LIQ_IYC.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAD4vx8AAAAkAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "Sucursal_Con_Auditoria.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Validators\\Sucursal_Con_Auditoria.cs",
+              "RelativeDocumentMoniker": "Validators\\Sucursal_Con_Auditoria.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Validators\\Sucursal_Con_Auditoria.cs",
+              "RelativeToolTip": "Validators\\Sucursal_Con_Auditoria.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T12:47:49.125Z"
+              "WhenOpened": "2025-06-23T12:48:21.423Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Sucursales_indycom.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Validators\\Sucursales_indycom.cs",
+              "RelativeDocumentMoniker": "Validators\\Sucursales_indycom.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Validators\\Sucursales_indycom.cs",
+              "RelativeToolTip": "Validators\\Sucursales_indycom.cs",
+              "ViewState": "AgIAAGgAAAAAAAAAAAAQwAUAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T12:44:58.982Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "INDYCOM.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Validators\\INDYCOM.cs",
+              "RelativeDocumentMoniker": "Validators\\INDYCOM.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Validators\\INDYCOM.cs",
+              "RelativeToolTip": "Validators\\INDYCOM.cs",
+              "ViewState": "AgIAAOUAAAAAAAAAAAAgwP8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T12:25:34.906Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Auditoria.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Validators\\Auditoria.cs",
+              "RelativeDocumentMoniker": "Validators\\Auditoria.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Validators\\Auditoria.cs",
+              "RelativeToolTip": "Validators\\Auditoria.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAgwCwAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-18T11:56:33.525Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Ctasctes_indycomController.cs",
-              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\Ctasctes_indycomController.cs",
-              "RelativeDocumentMoniker": "Controllers\\Ctasctes_indycomController.cs",
-              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\Ctasctes_indycomController.cs",
-              "RelativeToolTip": "Controllers\\Ctasctes_indycomController.cs",
-              "ViewState": "AgIAAEsBAAAAAAAAAAAmwFcBAAATAAAAAAAAAA==",
+              "Title": "Ctasctes_indycom.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Validators\\Ctasctes_indycom.cs",
+              "RelativeDocumentMoniker": "Validators\\Ctasctes_indycom.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Validators\\Ctasctes_indycom.cs",
+              "RelativeToolTip": "Validators\\Ctasctes_indycom.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAkwE4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-17T12:18:49.885Z",
+              "WhenOpened": "2025-06-23T12:33:39.492Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "TIPOS_PER_IYC.cs",
-              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\TIPOS_PER_IYC.cs",
-              "RelativeDocumentMoniker": "Entities\\TIPOS_PER_IYC.cs",
-              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\TIPOS_PER_IYC.cs",
-              "RelativeToolTip": "Entities\\TIPOS_PER_IYC.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAD4vyIAAAAkAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "CtasCtes_Con_Auditoria.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Validators\\CtasCtes_Con_Auditoria.cs",
+              "RelativeDocumentMoniker": "Validators\\CtasCtes_Con_Auditoria.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Validators\\CtasCtes_Con_Auditoria.cs",
+              "RelativeToolTip": "Validators\\CtasCtes_Con_Auditoria.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T12:47:49.743Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "TIPOS_DE_IVA.cs",
-              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\TIPOS_DE_IVA.cs",
-              "RelativeDocumentMoniker": "Entities\\TIPOS_DE_IVA.cs",
-              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\TIPOS_DE_IVA.cs",
-              "RelativeToolTip": "Entities\\TIPOS_DE_IVA.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAD4vyEAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T12:47:47.58Z"
+              "WhenOpened": "2025-06-23T12:36:08.207Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "Startup.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Startup.cs",
+              "RelativeDocumentMoniker": "Startup.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Startup.cs",
+              "RelativeToolTip": "Startup.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAwwDcAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-04T17:19:33.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "Controllers\\WeatherForecastController.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "Controllers\\WeatherForecastController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwBQAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T12:07:16.333Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TarjetasController.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\TarjetasController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TarjetasController.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\TarjetasController.cs",
+              "RelativeToolTip": "Controllers\\TarjetasController.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAmwFoAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T12:06:48.778Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "INDYCOM.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\INDYCOM.cs",
               "RelativeDocumentMoniker": "Entities\\INDYCOM.cs",
               "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\INDYCOM.cs",
               "RelativeToolTip": "Entities\\INDYCOM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMHAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAqwGEAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-08T00:23:41.258Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-08T00:23:41.258Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
+              "Title": "IndycomController.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\IndycomController.cs",
+              "RelativeDocumentMoniker": "Controllers\\IndycomController.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\IndycomController.cs",
+              "RelativeToolTip": "Controllers\\IndycomController.cs",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAiwLEAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-08T01:03:37.271Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Sucursales_indycom.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Sucursales_indycom.cs",
+              "RelativeDocumentMoniker": "Entities\\Sucursales_indycom.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Sucursales_indycom.cs",
+              "RelativeToolTip": "Entities\\Sucursales_indycom.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T21:25:56.195Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Descadic_x_iycController.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\Descadic_x_iycController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Descadic_x_iycController.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\Descadic_x_iycController.cs",
+              "RelativeToolTip": "Controllers\\Descadic_x_iycController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAqwBMAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T12:03:35.611Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Ctasctes_indycomController.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\Ctasctes_indycomController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Ctasctes_indycomController.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\Ctasctes_indycomController.cs",
+              "RelativeToolTip": "Controllers\\Ctasctes_indycomController.cs",
+              "ViewState": "AgIAAEgBAAAAAAAAAAAkwH4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T12:18:49.885Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Rubros_x_dec_jur_iyc.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Rubros_x_dec_jur_iyc.cs",
+              "RelativeDocumentMoniker": "Entities\\Rubros_x_dec_jur_iyc.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Rubros_x_dec_jur_iyc.cs",
+              "RelativeToolTip": "Entities\\Rubros_x_dec_jur_iyc.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-06T00:24:59.842Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Conceptos_iycController.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\Conceptos_iycController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Conceptos_iycController.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\Conceptos_iycController.cs",
+              "RelativeToolTip": "Controllers\\Conceptos_iycController.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAIwCwAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T12:01:31.874Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Ctasctes_indycom.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Ctasctes_indycom.cs",
+              "RelativeDocumentMoniker": "Entities\\Ctasctes_indycom.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Ctasctes_indycom.cs",
+              "RelativeToolTip": "Entities\\Ctasctes_indycom.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAgwFsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-04T13:29:23.533Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Descadic_x_iyc.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Descadic_x_iyc.cs",
+              "RelativeDocumentMoniker": "Entities\\Descadic_x_iyc.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Descadic_x_iyc.cs",
+              "RelativeToolTip": "Entities\\Descadic_x_iyc.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAoAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T21:33:01.983Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Web_Api_IyC.csproj",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Web_Api_IyC.csproj",
+              "RelativeDocumentMoniker": "Web_Api_IyC.csproj",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Web_Api_IyC.csproj",
+              "RelativeToolTip": "Web_Api_IyC.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-23T12:01:44.848Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAYAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-02T11:59:15.962Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "BadecController.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\BadecController.cs",
+              "RelativeDocumentMoniker": "Controllers\\BadecController.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Controllers\\BadecController.cs",
+              "RelativeToolTip": "Controllers\\BadecController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-18T11:46:22.281Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAIBJwCAAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T12:07:33.248Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ZONAS_IYC.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\ZONAS_IYC.cs",
+              "RelativeDocumentMoniker": "Entities\\ZONAS_IYC.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\ZONAS_IYC.cs",
+              "RelativeToolTip": "Entities\\ZONAS_IYC.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAABRwBsAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:51.638Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "TIPOS_LIQ_IYC.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\TIPOS_LIQ_IYC.cs",
+              "RelativeDocumentMoniker": "Entities\\TIPOS_LIQ_IYC.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\TIPOS_LIQ_IYC.cs",
+              "RelativeToolTip": "Entities\\TIPOS_LIQ_IYC.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAtwB8AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:49.125Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "TIPOS_PER_IYC.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\TIPOS_PER_IYC.cs",
+              "RelativeDocumentMoniker": "Entities\\TIPOS_PER_IYC.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\TIPOS_PER_IYC.cs",
+              "RelativeToolTip": "Entities\\TIPOS_PER_IYC.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAtwCIAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:49.743Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "TIPOS_DE_IVA.cs",
+              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\TIPOS_DE_IVA.cs",
+              "RelativeDocumentMoniker": "Entities\\TIPOS_DE_IVA.cs",
+              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\TIPOS_DE_IVA.cs",
+              "RelativeToolTip": "Entities\\TIPOS_DE_IVA.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAtwCEAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T12:47:47.58Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
               "Title": "TIPOS_RIESGO_IYC.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\TIPOS_RIESGO_IYC.cs",
               "RelativeDocumentMoniker": "Entities\\TIPOS_RIESGO_IYC.cs",
               "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\TIPOS_RIESGO_IYC.cs",
               "RelativeToolTip": "Entities\\TIPOS_RIESGO_IYC.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAIA2wCoAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAIAywCoAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-21T12:47:51.046Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 29,
               "Title": "Tarjetas.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\TARJETAS\\Tarjetas.cs",
               "RelativeDocumentMoniker": "Entities\\TARJETAS\\Tarjetas.cs",
@@ -456,19 +678,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 30,
               "Title": "SeguridadD.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\SeguridadD.cs",
               "RelativeDocumentMoniker": "Entities\\SeguridadD.cs",
               "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\SeguridadD.cs",
               "RelativeToolTip": "Entities\\SeguridadD.cs",
-              "ViewState": "AgIAAMsAAAAAAAAAAAASwPIAAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAASwA0AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-21T12:47:43.332Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 31,
               "Title": "PlanPago.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\IYC\\PlanPago.cs",
               "RelativeDocumentMoniker": "Entities\\IYC\\PlanPago.cs",
@@ -480,7 +702,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 32,
               "Title": "PLANES_COBRO.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\TARJETAS\\PLANES_COBRO.cs",
               "RelativeDocumentMoniker": "Entities\\TARJETAS\\PLANES_COBRO.cs",
@@ -492,7 +714,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 33,
               "Title": "LstDeudaIyC.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\IYC\\LstDeudaIyC.cs",
               "RelativeDocumentMoniker": "Entities\\IYC\\LstDeudaIyC.cs",
@@ -504,7 +726,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 34,
               "Title": "Informes.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\IYC\\Informes.cs",
               "RelativeDocumentMoniker": "Entities\\IYC\\Informes.cs",
@@ -516,7 +738,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 35,
               "Title": "Indycomxcalle.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\IYC\\Indycomxcalle.cs",
               "RelativeDocumentMoniker": "Entities\\IYC\\Indycomxcalle.cs",
@@ -528,7 +750,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 36,
               "Title": "GrillaIyC.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\IYC\\GrillaIyC.cs",
               "RelativeDocumentMoniker": "Entities\\IYC\\GrillaIyC.cs",
@@ -540,7 +762,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 37,
               "Title": "DETALLE_PAGO.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\DETALLE_PAGO.cs",
               "RelativeDocumentMoniker": "Entities\\DETALLE_PAGO.cs",
@@ -552,7 +774,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 38,
               "Title": "DETALLE_DEUDA.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\DETALLE_DEUDA.cs",
               "RelativeDocumentMoniker": "Entities\\DETALLE_DEUDA.cs",
@@ -564,7 +786,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 39,
               "Title": "DETALLE_CEDULON.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\DETALLE_CEDULON.cs",
               "RelativeDocumentMoniker": "Entities\\DETALLE_CEDULON.cs",
@@ -576,7 +798,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 40,
               "Title": "DetallePlanPago.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\IYC\\DetallePlanPago.cs",
               "RelativeDocumentMoniker": "Entities\\IYC\\DetallePlanPago.cs",
@@ -588,7 +810,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 41,
               "Title": "Chequera.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\IYC\\Chequera.cs",
               "RelativeDocumentMoniker": "Entities\\IYC\\Chequera.cs",
@@ -600,7 +822,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 42,
               "Title": "CARACTER_ENTIDADES.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\CARACTER_ENTIDADES.cs",
               "RelativeDocumentMoniker": "Entities\\CARACTER_ENTIDADES.cs",
@@ -612,7 +834,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 43,
               "Title": "BADEC.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\BADEC.cs",
               "RelativeDocumentMoniker": "Entities\\BADEC.cs",
@@ -624,31 +846,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 50,
               "Title": "Tarjetas_debitos.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Tarjetas_debitos.cs",
               "RelativeDocumentMoniker": "Entities\\Tarjetas_debitos.cs",
               "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Tarjetas_debitos.cs",
               "RelativeToolTip": "Entities\\Tarjetas_debitos.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAwC8AAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAuwC8AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-18T21:33:13.012Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "Descadic_x_iyc.cs",
-              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Descadic_x_iyc.cs",
-              "RelativeDocumentMoniker": "Entities\\Descadic_x_iyc.cs",
-              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Descadic_x_iyc.cs",
-              "RelativeToolTip": "Entities\\Descadic_x_iyc.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAkwEoAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T21:33:01.983Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 51,
               "Title": "Datos_transaccion.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Datos_transaccion.cs",
               "RelativeDocumentMoniker": "Entities\\Datos_transaccion.cs",
@@ -660,31 +870,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 48,
               "Title": "Bases_imponibles.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Bases_imponibles.cs",
               "RelativeDocumentMoniker": "Entities\\Bases_imponibles.cs",
               "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Bases_imponibles.cs",
               "RelativeToolTip": "Entities\\Bases_imponibles.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAA7wFcAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAkwFcAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-18T21:32:35.203Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 47,
               "Title": "Conceptos_iyc.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Conceptos_iyc.cs",
               "RelativeDocumentMoniker": "Entities\\Conceptos_iyc.cs",
               "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Conceptos_iyc.cs",
               "RelativeToolTip": "Entities\\Conceptos_iyc.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAA7wCUAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAkwCUAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-18T21:32:23.748Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 46,
               "Title": "Planes_cobro.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Planes_cobro.cs",
               "RelativeDocumentMoniker": "Entities\\Planes_cobro.cs",
@@ -696,67 +906,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "Sucursales_indycom.cs",
-              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Sucursales_indycom.cs",
-              "RelativeDocumentMoniker": "Entities\\Sucursales_indycom.cs",
-              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Sucursales_indycom.cs",
-              "RelativeToolTip": "Entities\\Sucursales_indycom.cs",
-              "ViewState": "AgIAAFoAAAAAAAAAAAAswHcAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T21:25:56.195Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 49,
               "Title": "Dec_jur_iyc.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Dec_jur_iyc.cs",
               "RelativeDocumentMoniker": "Entities\\Dec_jur_iyc.cs",
               "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Dec_jur_iyc.cs",
               "RelativeToolTip": "Entities\\Dec_jur_iyc.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAkwDUAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAAA3wDUAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-06T03:03:52.965Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "Rubros_x_dec_jur_iyc.cs",
-              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Rubros_x_dec_jur_iyc.cs",
-              "RelativeDocumentMoniker": "Entities\\Rubros_x_dec_jur_iyc.cs",
-              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Rubros_x_dec_jur_iyc.cs",
-              "RelativeToolTip": "Entities\\Rubros_x_dec_jur_iyc.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAswCYAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-06T00:24:59.842Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "Ctasctes_indycom.cs",
-              "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Ctasctes_indycom.cs",
-              "RelativeDocumentMoniker": "Entities\\Ctasctes_indycom.cs",
-              "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Ctasctes_indycom.cs",
-              "RelativeToolTip": "Entities\\Ctasctes_indycom.cs",
-              "ViewState": "AgIAAGYFAAAAAAAAAAAswIkFAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-04T13:29:23.533Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 54,
               "Title": "Ctasctes_indycomServices.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Services\\Ctasctes_indycomServices.cs",
               "RelativeDocumentMoniker": "Services\\Ctasctes_indycomServices.cs",
               "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Services\\Ctasctes_indycomServices.cs",
               "RelativeToolTip": "Services\\Ctasctes_indycomServices.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAEBVwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBZwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-04T13:15:01.771Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 45,
               "Title": "Rubros_x_iyc.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\Rubros_x_iyc.cs",
               "RelativeDocumentMoniker": "Entities\\Rubros_x_iyc.cs",
@@ -768,7 +942,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 44,
               "Title": "RUBROS.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Entities\\RUBROS.cs",
               "RelativeDocumentMoniker": "Entities\\RUBROS.cs",
@@ -780,7 +954,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 52,
               "Title": "IndycomServices.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Services\\IndycomServices.cs",
               "RelativeDocumentMoniker": "Services\\IndycomServices.cs",
@@ -792,13 +966,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 53,
               "Title": "IIndycomServices.cs",
               "DocumentMoniker": "C:\\Vecino-Va\\Indycom_Back\\Services\\IIndycomServices.cs",
               "RelativeDocumentMoniker": "Services\\IIndycomServices.cs",
               "ToolTip": "C:\\Vecino-Va\\Indycom_Back\\Services\\IIndycomServices.cs",
               "RelativeToolTip": "Services\\IIndycomServices.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAIA2wDkAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAACsAAAAAAAAAAIAywDkAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-08T01:00:03.74Z"
             }
