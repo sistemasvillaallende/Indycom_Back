@@ -1906,7 +1906,7 @@ namespace Web_Api_IyC.Entities
 
         ///
 
-     
+
 
         public static void nuevoRubro(Rubros_x_iyc obj, SqlConnection con, SqlTransaction trx)
         {
@@ -2276,6 +2276,11 @@ namespace Web_Api_IyC.Entities
                 throw new Exception("Error al actualizar el domicilio fiscal", ex);
             }
         }
+
+
+        
+
+
 
 
 

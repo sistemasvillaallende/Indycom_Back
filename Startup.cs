@@ -31,6 +31,7 @@ namespace Web_Api_IyC
             services.AddScoped<IBadecServices, BadecServices>();
             services.AddScoped<IConceptos_iycService, Conceptos_iycService>();
             services.AddScoped<IDescadic_x_iycService, Descadic_x_iycService>();
+            services.AddScoped<ICertificado_habilitacionService, Certificado_habilitacionService>();
             //
             services.AddCors();
 
