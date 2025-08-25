@@ -301,7 +301,7 @@ namespace Web_Api_IyC.Entities
         }
 
 
-        public static int insert(int legajo, int nro_certificado, int anio_certificado, int nro_sucursal, int cod_rubro, string certificado, DateTime fecha_emision, DateTime vto_certificado,string qr, SqlConnection con, SqlTransaction trx)
+        public static int insert(int legajo, int nro_certificado, int anio_certificado, int nro_sucursal, int cod_rubro, string certificado, DateTime fecha_emision, DateTime vto_certificado, string qr, SqlConnection con, SqlTransaction trx)
         {
             try
             {
@@ -368,6 +368,227 @@ namespace Web_Api_IyC.Entities
 
 
 
+        public static List<Certificado_habilitacionImp> GetCertificadoPrincipal(int legajo)
+        {
+            try
+            {
+                List<Certificado_habilitacionImp> certificados = new List<Certificado_habilitacionImp>();
+
+                using (SqlConnection con = GetConnection())
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = @"                                                            
+                                SELECT 
+                                    chi.Legajo, 
+                                    chi.Certificado,
+                                    COALESCE(vd.NOMBRE, b.NOMBRE) AS NOMBRE,
+                                    vd.APELLIDO,
+                                    i.nom_fantasia,
+                                    i.nro_cuit,
+                                    i.nom_calle_dom_esp,
+                                    i.nro_dom_esp,
+                                    chi.anio_certificado,
+                                    chi.Nro_sucursal, 
+                                    chi.cod_rubro,
+                                    CASE chi.cod_rubro
+                                        WHEN 0 THEN i.des_com
+                                        ELSE (
+                                            SELECT r.concepto 
+                                            FROM RUBROS r
+                                            WHERE r.cod_rubro = chi.cod_rubro
+                                            AND r.activo = 1
+                                        )
+                                    END AS des_com,
+                                    Emision = CONVERT(VARCHAR(10), chi.fecha_emision, 103),
+                                    Vto_certificado = CONVERT(VARCHAR(10), chi.Vto_certificado, 103),
+                                    chi.url,
+                                    chi.qr,
+                                    COALESCE(vd.apellido + ', ' + vd.nombre, b.NOMBRE) AS contribuyente
+                                FROM CERTIFICADO_HABILITACION_IYC chi
+                                LEFT JOIN INDYCOM i 
+                                    ON i.Legajo = chi.Legajo
+                                LEFT JOIN VECINO_DIGITAL vd 
+                                    ON vd.CUIT = i.nro_cuit
+                                LEFT JOIN (
+                                    SELECT CUIT, MAX(NOMBRE) AS NOMBRE
+                                    FROM BADEC
+                                    GROUP BY CUIT
+                                ) b ON b.CUIT = i.nro_cuit
+                                WHERE chi.Legajo = @legajo
+                                AND chi.nro_sucursal = 0
+                                ORDER BY chi.Legajo, chi.Vto_certificado;
+                                    ";
+
+                    cmd.Parameters.AddWithValue("@legajo", legajo);
+
+                    con.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    if (dr.HasRows)
+                    {
+                        int Legajo = dr.GetOrdinal("Legajo");
+                        int Certificado = dr.GetOrdinal("Certificado");
+                        int Nombre = dr.GetOrdinal("NOMBRE");
+                        int Apellido = dr.GetOrdinal("APELLIDO");
+                        int Nom_fantasia = dr.GetOrdinal("nom_fantasia");
+                        int Nro_cuit = dr.GetOrdinal("nro_cuit");
+                        int Nombre_calle = dr.GetOrdinal("nom_calle_dom_esp");
+                        int Nro_domicilio = dr.GetOrdinal("nro_dom_esp");
+                        int AnioCertificado = dr.GetOrdinal("anio_certificado");
+                        int NroSucursal = dr.GetOrdinal("Nro_Sucursal");
+                         int CodRubro = dr.GetOrdinal("cod_rubro");
+                        int DesCom = dr.GetOrdinal("des_com");
+                        int Emision = dr.GetOrdinal("Emision");
+                        int VtoCertificado = dr.GetOrdinal("Vto_certificado");
+                        int Url = dr.GetOrdinal("url");
+                        int Qr = dr.GetOrdinal("qr");
+
+                        while (dr.Read())
+                        {
+
+                            Certificado_habilitacionImp obj = new Certificado_habilitacionImp();
+                            if (!dr.IsDBNull(Legajo)) { obj.Legajo = dr.GetInt32(Legajo); }
+                            if (!dr.IsDBNull(Certificado)) { obj.Certificado = dr.GetString(Certificado); }
+                            if (!dr.IsDBNull(Nombre)) { obj.Nombre = dr.GetString(Nombre); }
+                            if (!dr.IsDBNull(Apellido)) { obj.Apellido = dr.GetString(Apellido); }
+                            if (!dr.IsDBNull(Nom_fantasia)) { obj.Nom_fantasia = dr.GetString(Nom_fantasia); }
+                            if (!dr.IsDBNull(Nro_cuit)) { obj.Nro_cuit = dr.GetString(Nro_cuit); }
+                            if (!dr.IsDBNull(Nombre_calle)) { obj.Nombre_calle = dr.GetString(Nombre_calle); }
+                            if (!dr.IsDBNull(Nro_domicilio)) { obj.Nro_domicilio = dr.GetInt32(Nro_domicilio); }
+                            if (!dr.IsDBNull(AnioCertificado)) { obj.Anio_certificado = dr.GetInt32(AnioCertificado); }
+                            if (!dr.IsDBNull(NroSucursal)) { obj.Nro_sucursal = dr.GetInt32(NroSucursal); }
+                            if (!dr.IsDBNull(CodRubro)) { obj.Cod_rubro = dr.GetInt32(CodRubro); }
+                            if (!dr.IsDBNull(DesCom)) { obj.Des_comercio = dr.GetString(DesCom); }
+                            if (!dr.IsDBNull(Emision)) { obj.Emision = dr.GetString(Emision); }
+                            if (!dr.IsDBNull(VtoCertificado)) { obj.VtoCertificado = dr.GetString(VtoCertificado); }
+                            if (!dr.IsDBNull(Url)) { obj.Url = dr.GetString(Url); }
+                            if (!dr.IsDBNull(Qr)) { obj.Qr = dr.GetString(Qr); }
+
+                            certificados.Add(obj);
+                        }
+                    }
+                }
+                return certificados;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+
+        public static List<Certificado_habilitacionImp> GetCertificadoSucursal(int legajo)
+        {
+            try
+            {
+                List<Certificado_habilitacionImp> certificados = new List<Certificado_habilitacionImp>();
+
+                using (SqlConnection con = GetConnection())
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = @"
+                                SELECT DISTINCT
+                                        chi.Legajo,    
+                                        chi.Certificado,
+                                        COALESCE(vd.NOMBRE, b.NOMBRE) AS NOMBRE,
+                                        vd.APELLIDO,
+                                        si.Nom_fantasia,
+                                        i.nro_cuit,  
+                                        si.Nom_calle,
+                                        si.Nro_dom,
+                                        chi.anio_certificado,
+                                        chi.Nro_sucursal, 
+                                        chi.cod_rubro,
+                                        CASE chi.cod_rubro
+                                            WHEN 0 THEN si.des_com
+                                            ELSE (
+                                                SELECT r.concepto
+                                                FROM RUBROS r
+                                                WHERE r.cod_rubro = chi.cod_rubro
+                                                AND r.activo = 1
+                                            )
+                                        END AS des_com,
+                                        Emision = CONVERT(VARCHAR(10), chi.fecha_emision, 103),
+                                        Vto_certificado = CONVERT(VARCHAR(10), chi.Vto_certificado, 103),
+                                        chi.url,
+                                        chi.qr
+                                    FROM CERTIFICADO_HABILITACION_IYC chi
+                                    LEFT JOIN SUCURSALES_INDYCOM si 
+                                        ON si.Legajo = chi.Legajo
+                                        AND si.Nro_sucursal = chi.Nro_sucursal  
+                                    LEFT JOIN INDYCOM i 
+                                        ON i.Legajo = chi.Legajo
+                                    LEFT JOIN VECINO_DIGITAL vd 
+                                        ON vd.CUIT = i.nro_cuit
+                                    LEFT JOIN (
+                                        SELECT CUIT, MAX(NOMBRE) AS NOMBRE
+                                        FROM BADEC
+                                        GROUP BY CUIT
+                                    ) b ON b.CUIT = i.nro_cuit
+                                    WHERE chi.Legajo = @legajo
+                                    AND chi.nro_sucursal <> 0
+                                    ORDER BY chi.Legajo, chi.Nro_sucursal, Vto_certificado;
+                                    ";
+
+                    cmd.Parameters.AddWithValue("@legajo", legajo);
+
+                    con.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    if (dr.HasRows)
+                    {
+                        int Legajo = dr.GetOrdinal("Legajo");
+                        int Certificado = dr.GetOrdinal("Certificado");
+                        int Nombre = dr.GetOrdinal("NOMBRE");
+                        int Apellido = dr.GetOrdinal("APELLIDO");
+                        int Nom_fantasia = dr.GetOrdinal("Nom_fantasia");
+                        int Nro_cuit = dr.GetOrdinal("nro_cuit");
+                        int Nombre_calle = dr.GetOrdinal("Nom_calle");
+                        int Nro_domicilio = dr.GetOrdinal("Nro_dom");
+                        int AnioCertificado = dr.GetOrdinal("anio_certificado");
+                        int NroSucursal = dr.GetOrdinal("Nro_Sucursal");
+                         int CodRubro = dr.GetOrdinal("cod_rubro");
+                        int DesCom = dr.GetOrdinal("des_com");
+                        int Emision = dr.GetOrdinal("Emision");
+                        int VtoCertificado = dr.GetOrdinal("Vto_certificado");
+                        int Url = dr.GetOrdinal("url");
+                        int Qr = dr.GetOrdinal("qr");
+
+                        while (dr.Read())
+                        {
+
+                            Certificado_habilitacionImp obj = new Certificado_habilitacionImp();
+                            if (!dr.IsDBNull(Legajo)) { obj.Legajo = dr.GetInt32(Legajo); }
+                            if (!dr.IsDBNull(Certificado)) { obj.Certificado = dr.GetString(Certificado); }
+                            if (!dr.IsDBNull(Nombre)) { obj.Nombre = dr.GetString(Nombre); }
+                            if (!dr.IsDBNull(Apellido)) { obj.Apellido = dr.GetString(Apellido); }
+                            if (!dr.IsDBNull(Nom_fantasia)) { obj.Nom_fantasia = dr.GetString(Nom_fantasia); }
+                            if (!dr.IsDBNull(Nro_cuit)) { obj.Nro_cuit = dr.GetString(Nro_cuit); }
+                            if (!dr.IsDBNull(Nombre_calle)) { obj.Nombre_calle = dr.GetString(Nombre_calle); }
+                            if (!dr.IsDBNull(Nro_domicilio)) { obj.Nro_domicilio = dr.GetInt32(Nro_domicilio); }
+                            if (!dr.IsDBNull(AnioCertificado)) { obj.Anio_certificado = dr.GetInt32(AnioCertificado); }
+                            if (!dr.IsDBNull(NroSucursal)) { obj.Nro_sucursal = dr.GetInt32(NroSucursal); }
+                            if (!dr.IsDBNull(CodRubro)) { obj.Cod_rubro = dr.GetInt32(CodRubro); }
+                            if (!dr.IsDBNull(DesCom)) { obj.Des_comercio = dr.GetString(DesCom); }
+                            if (!dr.IsDBNull(Emision)) { obj.Emision = dr.GetString(Emision); }
+                            if (!dr.IsDBNull(VtoCertificado)) { obj.VtoCertificado = dr.GetString(VtoCertificado); }
+                            if (!dr.IsDBNull(Url)) { obj.Url = dr.GetString(Url); }
+                            if (!dr.IsDBNull(Qr)) { obj.Qr = dr.GetString(Qr); }
+
+                            certificados.Add(obj);
+                        }
+                    }
+                }
+                return certificados;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
 
 

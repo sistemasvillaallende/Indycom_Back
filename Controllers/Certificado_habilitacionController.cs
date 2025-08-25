@@ -109,5 +109,29 @@ namespace Web_Api_IyC.Controllers
             }
         }
 
+
+        [HttpGet]
+        public ActionResult   GetCertificadoPrincipal(int legajo)
+        {
+            var lst = _Certificado_habilitacionServices.GetCertificadoPrincipal(legajo);
+            if (lst == null)
+            {
+                return NotFound(new { message = "No se encontraron datos!" });
+            }
+            return Ok(lst);
+        }
+
+
+        [HttpGet]
+        public ActionResult   GetCertificadoSucursal(int legajo)
+        {
+            var lst = _Certificado_habilitacionServices.GetCertificadoSucursal(legajo);
+            if (lst == null)
+            {
+                return NotFound(new { message = "No se encontraron datos!" });
+            }
+            return Ok(lst);
+        }
+
     }
 }

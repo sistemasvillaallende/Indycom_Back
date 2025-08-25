@@ -99,7 +99,7 @@ namespace Web_Api_IyC.Services
                             DateTime fechaEmision = DateTime.Now;
                             string certificado = CertificadoHelper.GenerarCodigoCertificado(maxNroCertificado + 1, fechaEmision.Year, 0);
                             string qr = CertificadoHelper.GenerarCodigoQR(maxNroCertificado + 1, fechaEmision.Year, 0);
-                            Certificado_habilitacion.insert(obj.legajo, maxNroCertificado + 1, fechaEmision.Year,obj.nro_sucursal,obj.cod_rubro, certificado, fechaEmision,obj.vecimiento,qr,con, trx);
+                            Certificado_habilitacion.insert(obj.legajo, maxNroCertificado + 1, fechaEmision.Year, obj.nro_sucursal, obj.cod_rubro, certificado, fechaEmision, obj.vecimiento, qr, con, trx);
 
                             AuditoriaD.InsertAuditoria(obj.auditoria, con, trx);
                             trx.Commit();
@@ -120,6 +120,35 @@ namespace Web_Api_IyC.Services
         }
 
 
+
+        public List<Certificado_habilitacionImp> GetCertificadoPrincipal(int legajo)
+        {
+            {
+                try
+                {
+                    return Certificado_habilitacion.GetCertificadoPrincipal(legajo);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
+
+
+        public List<Certificado_habilitacionImp> GetCertificadoSucursal(int legajo)
+        {
+            {
+                try
+                {
+                    return Certificado_habilitacion.GetCertificadoSucursal(legajo);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
 
     }
 }
