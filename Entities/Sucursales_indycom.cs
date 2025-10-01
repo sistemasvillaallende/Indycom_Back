@@ -365,7 +365,39 @@ namespace Web_Api_IyC.Entities
                 throw ex;
             }
         }
-        public static void Delete(int legajo,int nro_sucursal, SqlConnection con, SqlTransaction trx)
+        
+         public static void updateResolucion(int legajo, int nro_sucursal,DateTime fecha_habilitacion, string nro_res, SqlConnection con, SqlTransaction trx)
+        {
+            try
+            {
+                string sql = @"Update sucursales_indycom 
+                    set fecha_hab = @fecha_hab , nro_res= @nro_res
+                    Where legajo = @legajo and nro_sucursal= @nro_sucursal
+                    ";
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Transaction = trx;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql.ToString();
+                cmd.Parameters.AddWithValue("@legajo", legajo);
+                cmd.Parameters.AddWithValue("@nro_sucursal", nro_sucursal);
+                cmd.Parameters.AddWithValue("@fecha_hab", fecha_habilitacion);
+                cmd.Parameters.AddWithValue("@nro_res", nro_res);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected == 0)
+                {
+                    throw new Exception($"No se encontró la sucursal {nro_sucursal} para el legajo {legajo}");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static void Delete(int legajo, int nro_sucursal, SqlConnection con, SqlTransaction trx)
         {
             try
             {

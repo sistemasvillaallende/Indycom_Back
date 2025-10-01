@@ -173,6 +173,10 @@ namespace Web_Api_IyC.Services
                             obj.objAuditoria.proceso = "NUEVO INDYCOM";
                             obj.objAuditoria.detalle = "";
                             obj.objAuditoria.observaciones += string.Format("Fecha auditoria: {0}", DateTime.Now);
+
+                            int ultimoLegajo = INDYCOM.ObtenerUltimoLegajo(con,trx);
+                            obj.legajo = ultimoLegajo + 1;
+
                             Entities.INDYCOM.InsertDatosGeneral(obj, con, trx);
                             AuditoriaD.InsertAuditoria(obj.objAuditoria, con, trx);
                             trx.Commit();

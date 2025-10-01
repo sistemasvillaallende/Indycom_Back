@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.JSInterop;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -17,7 +19,15 @@ namespace Web_Api_IyC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            //services.AddControllers();
+            services.AddControllers()
+                            .AddJsonOptions(options =>
+                            {
+                                options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
+                                options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                                options.JsonSerializerOptions.WriteIndented = true;
+                            });
+                            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mi API", Version = "v1" });
@@ -32,6 +42,7 @@ namespace Web_Api_IyC
             services.AddScoped<IConceptos_iycService, Conceptos_iycService>();
             services.AddScoped<IDescadic_x_iycService, Descadic_x_iycService>();
             services.AddScoped<ICertificado_habilitacionService, Certificado_habilitacionService>();
+            services.AddScoped<IResolucion_habilitacionService, Resolucion_habilitacionService>();
             //
             services.AddCors();
 

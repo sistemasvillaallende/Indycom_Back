@@ -658,6 +658,15 @@ namespace Web_Api_IyC.Entities
                 throw;
             }
         }
+
+
+        public static int ObtenerUltimoLegajo(SqlConnection con, SqlTransaction trx)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT ISNULL(MAX(legajo), 0) FROM  INDYCOM ", con, trx);
+            return (int)cmd.ExecuteScalar();
+        }
+
+
         public static int InsertDatosGeneral(INDYCOM obj, SqlConnection con, SqlTransaction trx)
         {
             try
